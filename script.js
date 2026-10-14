@@ -341,7 +341,7 @@
   var input = document.getElementById('aiwInput');
   if (!fab || !widget) return;
 
-  var WA_LINK = 'https://wa.me/923007777777?text=' + encodeURIComponent('Assalam-o-Alaikum! Mujhe shopcos soft ke baare mein maloomat chahiye.');
+  var WA_LINK = 'https://wa.me/923264025618?text=' + encodeURIComponent('Assalam-o-Alaikum! Mujhe shopcos soft ke baare mein maloomat chahiye.');
 
   var ANSWERS = [
     { k: ['price', 'qemat', 'qeemat', 'cost', 'paisa', 'kitne ka', 'rate'], a: '💰 <strong>$145 USD</strong> lifetime (Rs 40,000 PKR) — ek dafa payment, hamesha aapka! 7-day <strong>free trial</strong>, koi monthly fee nahi. 🚀' },
@@ -352,7 +352,7 @@
     { k: ['khata', 'udhar', 'credit', 'udhaar'], a: '📒 <strong>Khata/Udhar management</strong> built-in hai! Har customer ka balance, history aur credit limit track karein. Risky debtors ke alerts bhi! 💪' },
     { k: ['offline', 'internet', 'net'], a: '📴 <strong>100% offline</strong> kaam karta hai! Internet ki zaroorat nahi — bijli/internet jaye, dukaan chalti rahe! ⚡' },
     { k: ['feature', 'kya kya', 'facilities'], a: '✨ <strong>Key features:</strong><br>• ⚡ Barcode billing<br>• 📦 Smart stock + expiry alerts<br>• 📒 Khata/udhar<br>• 🤖 AI insights + Voice billing<br>• 👥 Staff roles<br>• 💾 Daily backup + Google Drive<br>• 🗣️ Urdu + English' },
-    { k: ['support', 'madad', 'help', 'contact', 'rabta'], a: '💬 Hum se <strong>WhatsApp</strong> par rabta karein — Urdu ya English mein! <a href="' + WA_LINK + '" target="_blank" style="color:#ffd97a">Chat karein →</a>' },
+    { k: ['support', 'madad', 'help', 'contact', 'rabta', 'number', 'phone', 'whatsapp'], a: '💬 <strong>COS — Developer</strong><br>📱 WhatsApp: <a href="' + WA_LINK + '" target="_blank" style="color:#ffd97a"><strong>+92 326 4025618</strong></a><br>Rabta karein — Urdu ya English mein! 😊' },
     { k: ['download', 'software', 'install'], a: '💻 <strong>Windows portable</strong> — no installation, bas unzip karke chalao! Sign up ke baad dashboard se download karein. 📥' },
     { k: ['language', 'urdu', 'zuban', 'bhasha'], a: '🗣️ <strong>Urdu + English</strong> dono! 28 currencies aur 31 countries supported — poori duniya ke liye! 🌍' },
     { k: ['nam', 'name', 'kaun ho', 'who are you', 'tum kaun'], a: '🤖 Main <strong>shopcos AI Assistant</strong> hoon! Software, pricing ya features ke baare mein kuch bhi poochein! 😊' },
