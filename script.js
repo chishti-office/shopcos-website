@@ -227,7 +227,7 @@
       setTimeout(initGoogle, 500); return;
     }
     google.accounts.id.initialize({
-      client_id: 'YOUR_GOOGLE_CLIENT_ID',
+      client_id: '5145903963-im5rmn882upqiar20ajsnp9kbe0q2mnc.apps.googleusercontent.com',
       callback: async function(resp) {
         try {
           var r = await api('gauth', { idToken: resp.credential });
