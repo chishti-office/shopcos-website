@@ -417,6 +417,16 @@
   fab.addEventListener('click', openWidget);
   document.getElementById('aiwClose').addEventListener('click', closeWidget);
 
+  // Auto-open AI chat for first-time visitors (AI first!)
+  try {
+    if (!localStorage.getItem('shopcos_ai_seen')) {
+      setTimeout(function(){
+        openWidget();
+        localStorage.setItem('shopcos_ai_seen', '1');
+      }, 3000);
+    }
+  } catch(e) {}
+
   function send(){
     var q = input.value.trim();
     if (!q) return;
