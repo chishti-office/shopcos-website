@@ -356,21 +356,28 @@
   var WA_LINK = 'https://wa.me/923264025618?text=' + encodeURIComponent('Assalam-o-Alaikum! Mujhe shopcos soft ke baare mein maloomat chahiye.');
 
   var ANSWERS = [
-    { k: ['price', 'qemat', 'qeemat', 'cost', 'paisa', 'kitne ka', 'rate'], a: '💰 <strong>$145 USD</strong> lifetime (Rs 40,000 PKR) — ek dafa payment, hamesha aapka! 7-day <strong>free trial</strong>, koi monthly fee nahi. 🚀' },
-    { k: ['trial', 'free', 'muft', 'azma'], a: '🆓 <strong>7-day free trial</strong> — koi card nahi chahiye! Sign up karein aur trial auto-start ho jayega. Sab 15 features unlocked! ✨' },
+    { k: ['price', 'qemat', 'qeemat', 'cost', 'paisa', 'kitne ka', 'rate', 'plan'], a: '💰 <strong>4 Plans:</strong><br>• <strong>$90</strong> Starter (Rs 25,000) — 1 Admin<br>• <strong>$145</strong> Business ⭐ (Rs 40,000) — 1 Admin + 1 Editor + 2 Users<br>• <strong>$290</strong> Professional (Rs 80,000) — 1 Admin + 2 Editors + 10 Users<br>• <strong>$545</strong> Enterprise (Rs 150,000) — 1 Admin + 5 Editors + Unlimited Users<br><br>Lifetime license, no monthly fee! 🚀' },
+    { k: ['trial', 'free', 'muft', 'azma'], a: '🆓 <strong>7-day free trial</strong> — koi card nahi chahiye! Sign up karein aur trial auto-start ho jayega. Trial mein <strong>Business plan</strong> unlocked (1 Editor + 2 Users)! ✨' },
     { k: ['apk', 'android', 'mobile', 'app'], a: '📱 <strong>Android APK</strong> available hai! Shop ke WiFi se connect karke mobile se billing karein. Dashboard se download karein! 📥' },
     { k: ['medical', 'pharmacy', 'dawai', 'medicine', 'doctor'], a: '💊 Ji haan! <strong>Medical store</strong> ke liye perfect — batch number, generic name, expiry tracking aur expiry alerts sab included! 🏥' },
     { k: ['kiryana', 'grocery', 'general store'], a: '🏪 Kiryana/general store ke liye ideal! Fast barcode billing, stock alerts, khata/udhar management — sab kuch ek screen par! ⚡' },
-    { k: ['khata', 'udhar', 'credit', 'udhaar'], a: '📒 <strong>Khata/Udhar management</strong> built-in hai! Har customer ka balance, history aur credit limit track karein. Risky debtors ke alerts bhi! 💪' },
-    { k: ['offline', 'internet', 'net'], a: '📴 <strong>100% offline</strong> kaam karta hai! Internet ki zaroorat nahi — bijli/internet jaye, dukaan chalti rahe! ⚡' },
-    { k: ['feature', 'kya kya', 'facilities'], a: '✨ <strong>Key features:</strong><br>• ⚡ Barcode billing<br>• 📦 Smart stock + expiry alerts<br>• 📒 Khata/udhar<br>• 🤖 AI insights + Voice billing<br>• 👥 Staff roles<br>• 💾 Daily backup + Google Drive<br>• 🗣️ Urdu + English' },
+    { k: ['khata', 'udhar', 'credit', 'udhaar', 'ledger'], a: '📒 <strong>Khata/Udhar management</strong> built-in hai! Har customer ka balance, history aur credit limit track karein. Risky debtors ke alerts bhi! 💪' },
+    { k: ['offline', 'internet', 'net'], a: '📴 <strong>100% offline</strong> kaam karta hai! Internet ki zaroorat nahi — bijli/internet jaye, dukaan chalti rahe! Net aye to auto cloud sync! ☁️⚡' },
+    { k: ['feature', 'kya kya', 'facilities'], a: '✨ <strong>Key features:</strong><br>• ⚡ Barcode billing<br>• 📦 Smart stock + expiry alerts<br>• 📒 Khata/udhar<br>• 🤖 AI assistant (sawal jawab + mashwaray)<br>• 🎤 Voice billing<br>• 👥 Admin/Editor/User roles<br>• ☁️ Cloud sync + offline<br>• 💾 Daily backup + Google Drive<br>• 🗣️ Urdu + English, 28 currencies' },
     { k: ['support', 'madad', 'help', 'contact', 'rabta', 'number', 'phone', 'whatsapp'], a: '💬 <strong>COS — Developer</strong><br>📱 WhatsApp: <a href="' + WA_LINK + '" target="_blank" style="color:#ffd97a"><strong>+92 326 4025618</strong></a><br>Rabta karein — Urdu ya English mein! 😊' },
     { k: ['download', 'software', 'install'], a: '💻 <strong>Windows portable</strong> — no installation, bas unzip karke chalao! Sign up ke baad dashboard se download karein. 📥' },
-    { k: ['language', 'urdu', 'zuban', 'bhasha'], a: '🗣️ <strong>Urdu + English</strong> dono! 28 currencies aur 31 countries supported — poori duniya ke liye! 🌍' },
+    { k: ['language', 'urdu', 'zuban', 'bhasha', 'currency', 'country'], a: '🗣️ <strong>Urdu + English</strong> dono! 28 currencies aur 31 countries supported — poori duniya ke liye! 🌍' },
+    { k: ['ai', 'artificial', 'bot', 'robot', 'chat'], a: '🤖 <strong>shopcos AI Assistant</strong> — aapka smart munshi! Poochein "aaj kitni sale hui?", ya kahein "Faizan se 500 lene hain" — wo yaad rakhega, khate mein update karega, aur reminder bhi dega! 💡' },
+    { k: ['voice', 'awaz', 'bol'], a: '🎤 <strong>Voice billing</strong> — bas bolein "Cheeni 2, Oil 1" aur bill khud ban jayega! Haath se type karne ki zaroorat nahi! ⚡' },
+    { k: ['backup'], a: '💾 <strong>Daily auto-backup</strong> + Google Drive sync! Aapka data kabhi nahi khoyega. Settings se manual backup bhi le sakte hain! ✅' },
+    { k: ['cloud', 'sync'], a: '☁️ <strong>Cloud sync</strong> — net ho to auto-sync, net jaye to offline kaam jari! Wapas aye to sab sync ho jayega. Phone + computer par same data! 📱💻' },
+    { k: ['staff', 'user', 'editor', 'role', 'admin'], a: '👥 <strong>3 Roles:</strong><br>👑 <strong>Admin</strong> — full access, users banaye<br>✏️ <strong>Editor</strong> — products, stock, rates (no AI)<br>🧾 <strong>User</strong> — sirf billing, sirf sale rate<br><br>Plan ke hisab se limits! 🔒' },
+    { k: ['barcode'], a: '📊 <strong>Barcode</strong> support built-in! Scanner se scan karein ya manual entry — dono kaam karte hain. Labels bhi print kar sakte hain! 🏷️' },
+    { k: ['report'], a: '📈 <strong>Reports</strong> — daily/weekly/monthly sales, profit analysis, stock reports, khata statements. PDF/CSV mein export karein! 📊' },
     { k: ['nam', 'name', 'kaun ho', 'who are you', 'tum kaun'], a: '🤖 Main <strong>shopcos AI Assistant</strong> hoon! Software, pricing ya features ke baare mein kuch bhi poochein! 😊' },
     { k: ['salam', 'assalam', 'hello', 'hi ', 'hey'], a: 'Walaikum Assalam! 👋 Main shopcos AI hoon. Software, price ya trial ke baare mein poochein! 😊' }
   ];
-  var DEFAULT_A = 'Aapke sawal ka jawab jald aa raha hai! 😊 Tab tak <strong>WhatsApp</strong> par poochein: <a href="' + WA_LINK + '" target="_blank" style="color:#ffd97a">Chat karein →</a><br><br>Ya neeche chips par click karein! 👇';
+  var DEFAULT_A = 'Hmm, is bare mein thoda aur batayein? 🤔 Main aapki madad kar sakta hoon:<br><br>💰 <strong>Price</strong> — kitne ka hai?<br>🆓 <strong>Free trial</strong> — kaise shuru karein?<br>✨ <strong>Features</strong> — kya kya hai?<br>📱 <strong>APK</strong> — mobile app<br>💊 <strong>Medical store</strong> ke liye?<br><br>Ya phir apna sawal dobara likhein! 😊';
 
   function scrollBottom(){ msgs.scrollTop = msgs.scrollHeight; }
   function addMsg(html, who){
