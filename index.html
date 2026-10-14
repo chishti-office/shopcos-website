@@ -523,5 +523,34 @@
 </div>
 
 <script src="script.js"></script>
+
+<!-- ============ CHAT WITH shopcos AI ============ -->
+<button id="aiFab" aria-label="Chat with shopcos AI" title="Chat with shopcos AI">
+  <span class="ai-fab-icon">🤖</span>
+  <span class="ai-fab-pulse"></span>
+</button>
+<div id="aiWidget" style="display:none" role="dialog" aria-label="shopcos AI Assistant">
+  <div class="aiw-header">
+    <div class="aiw-title">
+      <span class="aiw-avatar">🤖</span>
+      <div>
+        <strong>shopcos AI Assistant</strong>
+        <span class="aiw-status"><i></i> Online</span>
+      </div>
+    </div>
+    <button id="aiwClose" aria-label="Close chat">✕</button>
+  </div>
+  <div id="aiwMsgs"></div>
+  <div class="aiw-chips" id="aiwChips">
+    <button data-q="price">💰 Price kya hai?</button>
+    <button data-q="trial">🆓 Free trial?</button>
+    <button data-q="apk">📱 APK hai?</button>
+    <button data-q="medical">💊 Medical store ke liye?</button>
+  </div>
+  <div class="aiw-inputbar">
+    <input type="text" id="aiwInput" placeholder="Apna sawal likhein..." maxlength="500" autocomplete="off">
+    <button id="aiwSend" aria-label="Send">➤</button>
+  </div>
+</div>
 </body>
 </html>

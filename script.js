@@ -331,3 +331,98 @@
     }
   });
 })();
+
+// ============ AI Chat Widget (shopcos AI Assistant) ============
+(function(){
+  'use strict';
+  var fab = document.getElementById('aiFab');
+  var widget = document.getElementById('aiWidget');
+  var msgs = document.getElementById('aiwMsgs');
+  var input = document.getElementById('aiwInput');
+  if (!fab || !widget) return;
+
+  var WA_LINK = 'https://wa.me/923007777777?text=' + encodeURIComponent('Assalam-o-Alaikum! Mujhe shopcos soft ke baare mein maloomat chahiye.');
+
+  var ANSWERS = [
+    { k: ['price', 'qemat', 'qeemat', 'cost', 'paisa', 'kitne ka', 'rate'], a: '💰 <strong>$145 USD</strong> lifetime (Rs 40,000 PKR) — ek dafa payment, hamesha aapka! 7-day <strong>free trial</strong>, koi monthly fee nahi. 🚀' },
+    { k: ['trial', 'free', 'muft', 'azma'], a: '🆓 <strong>7-day free trial</strong> — koi card nahi chahiye! Sign up karein aur trial auto-start ho jayega. Sab 15 features unlocked! ✨' },
+    { k: ['apk', 'android', 'mobile', 'app'], a: '📱 <strong>Android APK</strong> available hai! Shop ke WiFi se connect karke mobile se billing karein. Dashboard se download karein! 📥' },
+    { k: ['medical', 'pharmacy', 'dawai', 'medicine', 'doctor'], a: '💊 Ji haan! <strong>Medical store</strong> ke liye perfect — batch number, generic name, expiry tracking aur expiry alerts sab included! 🏥' },
+    { k: ['kiryana', 'grocery', 'general store'], a: '🏪 Kiryana/general store ke liye ideal! Fast barcode billing, stock alerts, khata/udhar management — sab kuch ek screen par! ⚡' },
+    { k: ['khata', 'udhar', 'credit', 'udhaar'], a: '📒 <strong>Khata/Udhar management</strong> built-in hai! Har customer ka balance, history aur credit limit track karein. Risky debtors ke alerts bhi! 💪' },
+    { k: ['offline', 'internet', 'net'], a: '📴 <strong>100% offline</strong> kaam karta hai! Internet ki zaroorat nahi — bijli/internet jaye, dukaan chalti rahe! ⚡' },
+    { k: ['feature', 'kya kya', 'facilities'], a: '✨ <strong>Key features:</strong><br>• ⚡ Barcode billing<br>• 📦 Smart stock + expiry alerts<br>• 📒 Khata/udhar<br>• 🤖 AI insights + Voice billing<br>• 👥 Staff roles<br>• 💾 Daily backup + Google Drive<br>• 🗣️ Urdu + English' },
+    { k: ['support', 'madad', 'help', 'contact', 'rabta'], a: '💬 Hum se <strong>WhatsApp</strong> par rabta karein — Urdu ya English mein! <a href="' + WA_LINK + '" target="_blank" style="color:#ffd97a">Chat karein →</a>' },
+    { k: ['download', 'software', 'install'], a: '💻 <strong>Windows portable</strong> — no installation, bas unzip karke chalao! Sign up ke baad dashboard se download karein. 📥' },
+    { k: ['language', 'urdu', 'zuban', 'bhasha'], a: '🗣️ <strong>Urdu + English</strong> dono! 28 currencies aur 31 countries supported — poori duniya ke liye! 🌍' },
+    { k: ['nam', 'name', 'kaun ho', 'who are you', 'tum kaun'], a: '🤖 Main <strong>shopcos AI Assistant</strong> hoon! Software, pricing ya features ke baare mein kuch bhi poochein! 😊' },
+    { k: ['salam', 'assalam', 'hello', 'hi ', 'hey'], a: 'Walaikum Assalam! 👋 Main shopcos AI hoon. Software, price ya trial ke baare mein poochein! 😊' }
+  ];
+  var DEFAULT_A = 'Aapke sawal ka jawab jald aa raha hai! 😊 Tab tak <strong>WhatsApp</strong> par poochein: <a href="' + WA_LINK + '" target="_blank" style="color:#ffd97a">Chat karein →</a><br><br>Ya neeche chips par click karein! 👇';
+
+  function scrollBottom(){ msgs.scrollTop = msgs.scrollHeight; }
+  function addMsg(html, who){
+    var d = document.createElement('div');
+    d.className = 'aiw-msg ' + who;
+    d.innerHTML = html;
+    msgs.appendChild(d);
+    scrollBottom();
+  }
+  function findAnswer(q){
+    q = ' ' + q.toLowerCase() + ' ';
+    for (var i = 0; i < ANSWERS.length; i++){
+      var keys = ANSWERS[i].k;
+      for (var j = 0; j < keys.length; j++){
+        if (q.indexOf(keys[j]) !== -1) return ANSWERS[i].a;
+      }
+    }
+    return DEFAULT_A;
+  }
+  var opened = false;
+  function openWidget(){
+    widget.style.display = 'flex';
+    fab.style.display = 'none';
+    if (!opened){
+      opened = true;
+      setTimeout(function(){
+        addMsg('Assalam-o-Alaikum! 👋 Main <strong>shopcos AI</strong> hoon.<br>Software, pricing, ya features ke baare mein poochein!', 'bot');
+      }, 300);
+    }
+    setTimeout(function(){ input.focus(); }, 100);
+  }
+  function closeWidget(){
+    widget.style.display = 'none';
+    fab.style.display = 'flex';
+  }
+  fab.addEventListener('click', openWidget);
+  document.getElementById('aiwClose').addEventListener('click', closeWidget);
+
+  function send(){
+    var q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    addMsg(q.replace(/</g, '&lt;'), 'user');
+    var tp = document.createElement('div');
+    tp.className = 'aiw-msg bot typing';
+    tp.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(tp);
+    scrollBottom();
+    setTimeout(function(){
+      tp.remove();
+      addMsg(findAnswer(q), 'bot');
+    }, 700 + Math.random() * 500);
+  }
+  document.getElementById('aiwSend').addEventListener('click', send);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') send(); });
+  document.getElementById('aiwChips').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if (!b) return;
+    var map = { price: 'Price kya hai?', trial: 'Free trial hai?', apk: 'APK available hai?', medical: 'Medical store ke liye use ho sakta?' };
+    input.value = map[b.getAttribute('data-q')] || '';
+    send();
+  });
+  // Escape closes widget
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && widget.style.display === 'flex') closeWidget();
+  });
+})();
