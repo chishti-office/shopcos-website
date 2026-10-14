@@ -632,3 +632,10 @@ img.aiw-avatar { width: 36px; height: 36px; }
 .aiw-chips button { font-size: .82rem; padding: 8px 14px; }
 .aiw-inputbar { padding: 14px 16px; gap: 10px; }
 .aiw-inputbar input { padding: 12px 16px; font-size: .95rem; border-radius: 24px; }
+
+/* ============ Language & Currency selectors ============ */
+.nav-select{background:rgba(245,183,63,.08);border:1px solid rgba(245,183,63,.3);color:#ffd97a;font-size:.82rem;font-weight:600;padding:8px 10px;border-radius:10px;cursor:pointer;outline:none;transition:.2s;max-width:110px}
+.nav-select:hover{background:rgba(245,183,63,.18);border-color:rgba(245,183,63,.55)}
+.nav-select option{background:#0a0f24;color:#fff}
+.mobile-selects{display:flex;gap:10px;margin:10px 0}
+.mobile-selects .nav-select{flex:1;max-width:none;padding:12px;font-size:.9rem}

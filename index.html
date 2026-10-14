@@ -38,26 +38,56 @@
       <span class="brand-name">shopcos <em>soft</em></span>
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#features">Features</a>
-      <a href="#how">How it works</a>
-      <a href="blog/">Blog</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#how" data-i18n="nav_how">How it works</a>
+      <a href="blog/" data-i18n="nav_blog">Blog</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
     </nav>
     <div class="nav-cta">
+      <select class="nav-select" id="langSelect" aria-label="Language">
+        <option value="en">🌍 EN</option>
+        <option value="ur">🌍 اردو</option>
+      </select>
+      <select class="nav-select" id="curSelect" aria-label="Currency">
+        <option value="USD">💱 USD $</option>
+        <option value="PKR">💱 PKR ₨</option>
+        <option value="EUR">💱 EUR €</option>
+        <option value="GBP">💱 GBP £</option>
+        <option value="INR">💱 INR ₹</option>
+        <option value="AED">💱 AED</option>
+        <option value="SAR">💱 SAR</option>
+        <option value="BDT">💱 BDT</option>
+      </select>
       <button class="btn btn-ghost sc-cart-btn" data-open-cart aria-label="Open cart">🛒 <span class="cart-badge sc-cart-badge zero" id="cartCount">0</span></button>
-      <button class="btn btn-ghost" id="loginBtn">Login</button>
-      <button class="btn btn-primary btn-sm" id="signupBtn">Sign Up</button>
+      <button class="btn btn-ghost" id="loginBtn" data-i18n="login">Login</button>
+      <button class="btn btn-primary btn-sm" id="signupBtn" data-i18n="signup">Sign Up</button>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#features">Features</a>
-    <a href="#how">How it works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
+    <a href="#features" data-i18n="nav_features">Features</a>
+    <a href="#how" data-i18n="nav_how">How it works</a>
+    <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+    <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    <div class="mobile-selects">
+      <select class="nav-select" id="langSelectM" aria-label="Language">
+        <option value="en">🌍 EN</option>
+        <option value="ur">🌍 اردو</option>
+      </select>
+      <select class="nav-select" id="curSelectM" aria-label="Currency">
+        <option value="USD">💱 USD $</option>
+        <option value="PKR">💱 PKR ₨</option>
+        <option value="EUR">💱 EUR €</option>
+        <option value="GBP">💱 GBP £</option>
+        <option value="INR">💱 INR ₹</option>
+        <option value="AED">💱 AED</option>
+        <option value="SAR">💱 SAR</option>
+        <option value="BDT">💱 BDT</option>
+      </select>
+    </div>
     <a class="btn btn-primary" data-open-cart href="#">🛒 View Cart</a>
   </div>
 </header>
@@ -68,17 +98,17 @@
   <div class="urdu-watermark" aria-hidden="true">دکان</div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <div class="eyebrow reveal"><span class="pulse-dot"></span> 🤖 shopcos AI — Shop Software for 31 Countries · POS Billing · 100% Offline</div>
-      <h1 class="reveal">🤖 Talk to Your Shop. <span class="grad">Your Entire Business, In Your Pocket.</span></h1>
-      <p class="hero-sub reveal">Meet <strong>shopcos AI</strong> — ask <em>"how much did I sell today?"</em> and get instant answers. Billing, stock, credit ledger, reports — on your computer <strong>AND</strong> phone, wherever you are. 28 currencies, 31 countries. No internet needed. No monthly fees. <span class="seo-kw">Best shop software &amp; point of sale (POS) billing software for retail shops, pharmacies &amp; small businesses worldwide.</span></p>
+      <div class="eyebrow reveal" data-i18n="hero_eyebrow"><span class="pulse-dot"></span> 🤖 shopcos AI — Shop Software for 31 Countries · POS Billing · 100% Offline</div>
+      <h1 class="reveal" data-i18n="hero_h1">🤖 Talk to Your Shop. <span class="grad">Your Entire Business, In Your Pocket.</span></h1>
+      <p class="hero-sub reveal" data-i18n="hero_sub">Meet <strong>shopcos AI</strong> — ask <em>"how much did I sell today?"</em> and get instant answers. Billing, stock, credit ledger, reports — on your computer <strong>AND</strong> phone, wherever you are. 28 currencies, 31 countries. No internet needed. No monthly fees. <span class="seo-kw">Best shop software &amp; point of sale (POS) billing software for retail shops, pharmacies &amp; small businesses worldwide.</span></p>
       <div class="hero-ctas reveal">
-        <a class="btn btn-primary btn-lg require-auth" href="#pricing">⚡ Start 7-Day Free Trial</a>
-        <button class="btn btn-gold-glow btn-lg" id="tryAiLive">🤖 Try AI Live</button>
+        <a class="btn btn-primary btn-lg require-auth" href="#pricing" data-i18n="cta_trial">⚡ Start 7-Day Free Trial</a>
+        <button class="btn btn-gold-glow btn-lg" id="tryAiLive" data-i18n="cta_ai">🤖 Try AI Live</button>
       </div>
       <div class="trust-row reveal">
-        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> No card required</div>
-        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Works fully offline</div>
-        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Urdu + English</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="trust_1">No card required</span></div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="trust_2">Works fully offline</span></div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="trust_3">Urdu + English</span></div>
       </div>
       <div class="social-proof reveal">
         <div class="proof-avatars"><span>🏪</span><span>💊</span><span>📱</span><span>👕</span><span>🍰</span></div>
@@ -382,15 +412,15 @@
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="kicker">Pricing</span>
-      <h2>One payment. <span class="grad">Yours forever.</span></h2>
-      <p>No subscriptions. No hidden charges. No monthly fees.</p>
+      <span class="kicker" data-i18n="pricing_kicker">Pricing</span>
+      <h2 data-i18n="pricing_h2">One payment. <span class="grad">Yours forever.</span></h2>
+      <p data-i18n="pricing_sub">No subscriptions. No hidden charges. No monthly fees.</p>
     </div>
     <div class="price-grid reveal">
       <!-- TIER 1: STARTER -->
       <div class="price-card">
         <h3>Starter</h3>
-        <div class="price"><span class="cur">$</span>90 <span class="usd">USD</span></div><div class="price-pkr">Rs 25,000 PKR</div>
+        <div class="price" data-usd="90"><span class="cur">$</span>90 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="25000">Rs 25,000 PKR</div>
         <p class="price-note">Single shop · Lifetime license</p>
         <ul class="check-list">
           <li><strong>1 Admin</strong> — full access</li>
@@ -400,14 +430,14 @@
           <li>Daily auto-backup</li>
           <li>WhatsApp support</li>
         </ul>
-        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="starter">🛒 Add to Cart</button>
+        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="starter" data-i18n="add_cart">🛒 Add to Cart</button>
       </div>
       <!-- TIER 2: BUSINESS -->
       <div class="price-card featured">
         <div class="pop-badge">MOST POPULAR</div>
         <div class="trial-chip">7-Day FREE Trial — no card required</div>
         <h3>Business</h3>
-        <div class="price"><span class="cur">$</span>145 <span class="usd">USD</span></div><div class="price-pkr">Rs 40,000 PKR</div>
+        <div class="price" data-usd="145"><span class="cur">$</span>145 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="40000">Rs 40,000 PKR</div>
         <p class="price-note">Single shop · Lifetime license</p>
         <ul class="check-list">
           <li><strong>1 Admin</strong> — full access</li>
@@ -418,7 +448,7 @@
           <li>Google Drive backup</li>
           <li>Priority WhatsApp support</li>
         </ul>
-        <button class="btn btn-primary btn-lg btn-block" data-add-cart="business">🛒 Add to Cart</button>
+        <button class="btn btn-primary btn-lg btn-block" data-add-cart="business" data-i18n="add_cart">🛒 Add to Cart</button>
         <div class="pay-methods">
           <span>We accept</span>
           <div class="pay-pills"><em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em></div>
@@ -427,7 +457,7 @@
       <!-- TIER 3: PROFESSIONAL -->
       <div class="price-card">
         <h3>Professional</h3>
-        <div class="price"><span class="cur">$</span>290 <span class="usd">USD</span></div><div class="price-pkr">Rs 80,000 PKR · 290 USDT</div>
+        <div class="price" data-usd="290"><span class="cur">$</span>290 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="80000">Rs 80,000 PKR · 290 USDT</div>
         <p class="price-note">Single shop · Lifetime license</p>
         <ul class="check-list">
           <li><strong>1 Admin</strong> — full access</li>
@@ -437,12 +467,12 @@
           <li>Multi-terminal support</li>
           <li>Advanced reports</li>
         </ul>
-        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="professional">🛒 Add to Cart</button>
+        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="professional" data-i18n="add_cart">🛒 Add to Cart</button>
       </div>
       <!-- TIER 4: ENTERPRISE -->
       <div class="price-card">
         <h3>Enterprise</h3>
-        <div class="price"><span class="cur">$</span>545 <span class="usd">USD</span></div><div class="price-pkr">Rs 150,000 PKR</div>
+        <div class="price" data-usd="545"><span class="cur">$</span>545 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="150000">Rs 150,000 PKR</div>
         <p class="price-note">Single shop · Lifetime license</p>
         <ul class="check-list">
           <li><strong>1 Admin</strong> — full access</li>
@@ -452,7 +482,7 @@
           <li>Dedicated support</li>
           <li>Custom training session</li>
         </ul>
-        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="enterprise">🛒 Add to Cart</button>
+        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="enterprise" data-i18n="add_cart">🛒 Add to Cart</button>
       </div>
     </div>
     <!-- ROLE EXPLAINER -->
@@ -502,7 +532,7 @@
       </div>
       <div class="faq-item reveal reveal-d5">
         <button class="faq-q">Is the license really lifetime? Any renewal?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>Yes — one payment of $145 (or equivalent in your currency) per shop, and it's yours forever including free updates. The key validates once online, then the software works offline indefinitely.</p></div>
+        <div class="faq-a"><p>Yes — one payment of <span data-usd-inline="145">$145</span> (or equivalent in your currency) per shop, and it's yours forever including free updates. The key validates once online, then the software works offline indefinitely.</p></div>
       </div>
       <div class="faq-item reveal reveal-d5">
         <button class="faq-q">How do I get support?<span class="faq-x">+</span></button>
@@ -518,11 +548,11 @@
   <div class="urdu-watermark urdu-watermark-sm" aria-hidden="true">ترقی</div>
   <div class="container">
     <div class="cta-inner reveal">
-      <h2>Stop managing your shop<br>from a <span class="grad">paper register.</span></h2>
-      <p>Join the shop owners who bill faster, never run out of stock, and recover every rupee of udhar.</p>
+      <h2 data-i18n="cta_h2">Stop managing your shop<br>from a <span class="grad">paper register.</span></h2>
+      <p data-i18n="cta_p">Join the shop owners who bill faster, never run out of stock, and recover every rupee of udhar.</p>
       <div class="hero-ctas center">
-        <a class="btn btn-white btn-lg" href="#pricing">Start 7-Day Free Trial</a>
-        <a class="btn btn-outline-w btn-lg" href="#pricing">💎 Buy Now — Lifetime License</a>
+        <a class="btn btn-white btn-lg" href="#pricing" data-i18n="cta_trial2">Start 7-Day Free Trial</a>
+        <a class="btn btn-outline-w btn-lg" href="#pricing" data-i18n="cta_buy">💎 Buy Now — Lifetime License</a>
       </div>
     </div>
   </div>

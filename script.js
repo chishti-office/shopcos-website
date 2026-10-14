@@ -618,3 +618,126 @@
 
   // ---- Nav CTA pulse is handled via CSS (.nav-cta .btn-primary) ----
 })();
+
+// ============ Language & Currency selectors ============
+(function(){
+  'use strict';
+
+  // ---- i18n dictionary ----
+  var I18N = {
+    en: {
+      nav_features: 'Features', nav_how: 'How it works', nav_blog: 'Blog', nav_pricing: 'Pricing', nav_faq: 'FAQ',
+      login: 'Login', signup: 'Sign Up',
+      hero_eyebrow: '<span class="pulse-dot"></span> 🤖 shopcos AI — Shop Software for 31 Countries · POS Billing · 100% Offline',
+      hero_h1: '🤖 Talk to Your Shop. <span class="grad">Your Entire Business, In Your Pocket.</span>',
+      hero_sub: 'Meet <strong>shopcos AI</strong> — ask <em>"how much did I sell today?"</em> and get instant answers. Billing, stock, credit ledger, reports — on your computer <strong>AND</strong> phone, wherever you are. 28 currencies, 31 countries. No internet needed. No monthly fees. <span class="seo-kw">Best shop software &amp; point of sale (POS) billing software for retail shops, pharmacies &amp; small businesses worldwide.</span>',
+      cta_trial: '⚡ Start 7-Day Free Trial', cta_trial2: 'Start 7-Day Free Trial',
+      cta_ai: '🤖 Try AI Live',
+      cta_buy: '💎 Buy Now — Lifetime License',
+      cta_h2: 'Stop managing your shop<br>from a <span class="grad">paper register.</span>',
+      cta_p: 'Join the shop owners who bill faster, never run out of stock, and recover every rupee of udhar.',
+      trust_1: 'No card required', trust_2: 'Works fully offline', trust_3: 'Urdu + English',
+      pricing_kicker: 'Pricing',
+      pricing_h2: 'One payment. <span class="grad">Yours forever.</span>',
+      pricing_sub: 'No subscriptions. No hidden charges. No monthly fees.',
+      add_cart: '🛒 Add to Cart'
+    },
+    ur: {
+      nav_features: 'فیچرز', nav_how: 'طریقہ کار', nav_blog: 'بلاگ', nav_pricing: 'قیمت', nav_faq: 'سوالات',
+      login: 'لاگ اِن', signup: 'سائن اپ',
+      hero_eyebrow: '<span class="pulse-dot"></span> 🤖 shopcos AI — 31 ممالک کے لیے شاپ سافٹ ویئر · POS بلنگ · 100% آف لائن',
+      hero_h1: '🤖 اپنی دکان سے بات کریں۔ <span class="grad">آپ کا پورا کاروبار، آپ کی جیب میں۔</span>',
+      hero_sub: '<strong>shopcos AI</strong> سے ملیں — پوچھیں <em>"آج کتنی سیل ہوئی؟"</em> اور فوری جواب پائیں۔ بلنگ، اسٹاک، کھاتہ، رپورٹس — آپ کے کمپیوٹر <strong>اور</strong> فون پر، جہاں بھی آپ ہوں۔ 28 کرنسیاں، 31 ممالک۔ انٹرنیٹ کی ضرورت نہیں۔ کوئی ماہانہ فیس نہیں۔',
+      cta_trial: '⚡ 7 دن کا مفت ٹرائل شروع کریں', cta_trial2: '7 دن کا مفت ٹرائل شروع کریں',
+      cta_ai: '🤖 AI لائیو آزمائیں',
+      cta_buy: '💎 ابھی خریدیں — لائف ٹائم لائسنس',
+      cta_h2: 'اپنی دکان کاغذی رجسٹر<br>سے چلانا <span class="grad">بند کریں۔</span>',
+      cta_p: 'ان دکان مالکان کے ساتھ شامل ہوں جو تیز بلنگ کرتے ہیں، اسٹاک کبھی ختم نہیں ہونے دیتے، اور ادھار کی ہر روپیہ وصول کرتے ہیں۔',
+      trust_1: 'کارڈ کی ضرورت نہیں', trust_2: 'مکمل آف لائن کام کرتا ہے', trust_3: 'اردو + انگریزی',
+      pricing_kicker: 'قیمت',
+      pricing_h2: 'ایک بار ادائیگی۔ <span class="grad">ہمیشہ آپ کی۔</span>',
+      pricing_sub: 'کوئی سبسکرپشن نہیں۔ کوئی چھپی فیس نہیں۔ کوئی ماہانہ چارجز نہیں۔',
+      add_cart: '🛒 کارٹ میں ڈالیں'
+    }
+  };
+
+  function setLang(l){
+    if (!I18N[l]) l = 'en';
+    try { localStorage.setItem('shopcos_lang', l); } catch(e){}
+    var dict = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    document.documentElement.setAttribute('lang', l === 'ur' ? 'ur' : 'en');
+    ['langSelect','langSelectM'].forEach(function(id){
+      var s = document.getElementById(id);
+      if (s) s.value = l;
+    });
+  }
+
+  // ---- Currency ----
+  var CURS = {
+    USD: { rate: 1,    sym: '$', code: 'USD' },
+    PKR: { rate: 278,  sym: '₨', code: 'PKR' },
+    EUR: { rate: 0.92, sym: '€', code: 'EUR' },
+    GBP: { rate: 0.79, sym: '£', code: 'GBP' },
+    INR: { rate: 84,   sym: '₹', code: 'INR' },
+    AED: { rate: 3.67, sym: 'د.إ', code: 'AED' },
+    SAR: { rate: 3.75, sym: 'ر.س', code: 'SAR' },
+    BDT: { rate: 119,  sym: '৳', code: 'BDT' }
+  };
+  function fmt(n){ return Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+
+  function setCurrency(c){
+    if (!CURS[c]) c = 'USD';
+    try { localStorage.setItem('shopcos_cur', c); } catch(e){}
+    var cur = CURS[c];
+    // Big price cards: data-usd on .price, data-pkr on .price-pkr
+    document.querySelectorAll('.price[data-usd]').forEach(function(el){
+      var usd = parseFloat(el.getAttribute('data-usd'));
+      var card = el.closest('.price-card');
+      var sub = card ? card.querySelector('.price-pkr') : null;
+      var pkr = sub ? parseFloat(sub.getAttribute('data-pkr')) : Math.round(usd * CURS.PKR.rate);
+      if (c === 'USD') {
+        el.innerHTML = '<span class="cur">$</span>' + usd + ' <span class="usd">USD</span>';
+        if (sub) sub.textContent = 'Rs ' + fmt(pkr) + ' PKR';
+      } else if (c === 'PKR') {
+        el.innerHTML = '<span class="cur">₨</span> ' + fmt(pkr) + ' <span class="usd">PKR</span>';
+        if (sub) sub.textContent = '$' + usd + ' USD';
+      } else {
+        var v = Math.round(usd * cur.rate);
+        el.innerHTML = '<span class="cur">' + cur.sym + '</span> ' + fmt(v) + ' <span class="usd">' + cur.code + '</span>';
+        if (sub) sub.textContent = '$' + usd + ' USD';
+      }
+    });
+    // Inline amounts: <span data-usd-inline="145">$145</span>
+    document.querySelectorAll('[data-usd-inline]').forEach(function(el){
+      var usd = parseFloat(el.getAttribute('data-usd-inline'));
+      el.textContent = cur.sym + fmt(Math.round(usd * cur.rate));
+    });
+    ['curSelect','curSelectM'].forEach(function(id){
+      var s = document.getElementById(id);
+      if (s) s.value = c;
+    });
+  }
+
+  // ---- Init from localStorage ----
+  var savedLang = 'en', savedCur = 'USD';
+  try {
+    savedLang = localStorage.getItem('shopcos_lang') || 'en';
+    savedCur = localStorage.getItem('shopcos_cur') || 'USD';
+  } catch(e){}
+  setLang(savedLang);
+  setCurrency(savedCur);
+
+  // ---- Events ----
+  ['langSelect','langSelectM'].forEach(function(id){
+    var s = document.getElementById(id);
+    if (s) s.addEventListener('change', function(){ setLang(s.value); });
+  });
+  ['curSelect','curSelectM'].forEach(function(id){
+    var s = document.getElementById(id);
+    if (s) s.addEventListener('change', function(){ setCurrency(s.value); });
+  });
+})();
