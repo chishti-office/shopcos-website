@@ -336,3 +336,9 @@ section{padding:96px 0;position:relative}
   .fc-1{top:-16px}.fc-2{bottom:-16px}
   .urdu-watermark{font-size:8rem;top:20px}
 }
+
+/* ============ Shop types ============ */
+.shoptypes{padding:90px 0;text-align:center}
+.type-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;max-width:900px;margin:40px auto 0}
+.type-chip{background:rgba(255,255,255,.04);border:1px solid rgba(255,217,122,.25);color:#fff;padding:14px 24px;border-radius:50px;font-size:1rem;font-weight:600;transition:.3s;cursor:default}
+.type-chip:hover{border-color:var(--gold);background:rgba(255,217,122,.1);transform:translateY(-3px);box-shadow:0 8px 24px rgba(224,138,30,.25)}
