@@ -426,3 +426,75 @@
     if (e.key === 'Escape' && widget.style.display === 'flex') closeWidget();
   });
 })();
+
+// ============ Hero AI Demo — auto-playing chat loop ============
+(function(){
+  'use strict';
+  var body = document.getElementById('aiDemoBody');
+  if (!body) return;
+
+  var SCRIPT = [
+    { who: 'user', text: 'Aaj kitni sale hui? 💰' },
+    { who: 'bot',  text: 'Aaj ki sale: <strong>Rs 24,500!</strong> 🎉 32 bills, profit Rs 6,200. Zabardast ja rahe ho!' },
+    { who: 'user', text: 'Ali ka udhar? 🤔' },
+    { who: 'bot',  text: 'Ali ka balance: <strong>Rs 3,200</strong>. 💡 15 din se pending hai — ek reminder bhej dein?' },
+    { who: 'user', text: 'Cheeni ka stock? 📦' },
+    { who: 'bot',  text: 'Cheeni: <strong>12 bags</strong> bache — 4 din ka stock! ⚠️ Kal order kar dein?' }
+  ];
+
+  function addMsg(who, html){
+    var d = document.createElement('div');
+    d.className = 'ai-dmsg ' + who;
+    d.innerHTML = html;
+    body.appendChild(d);
+  }
+  function showTyping(){
+    var t = document.createElement('div');
+    t.className = 'ai-dtyping';
+    t.innerHTML = '<i></i><i></i><i></i>';
+    body.appendChild(t);
+    return t;
+  }
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+
+  var running = true;
+  document.addEventListener('visibilitychange', function(){
+    running = !document.hidden;
+  });
+
+  async function playLoop(){
+    var i = 0;
+    // small initial delay so hero settles first
+    await sleep(1200);
+    while (true){
+      if (!running){ await sleep(800); continue; }
+      var step = SCRIPT[i % SCRIPT.length];
+      // clear and restart loop
+      if (i > 0 && i % SCRIPT.length === 0){
+        await sleep(3500);
+        body.innerHTML = '';
+      }
+      if (step.who === 'bot'){
+        var tp = showTyping();
+        await sleep(1100);
+        tp.remove();
+      } else {
+        await sleep(700);
+      }
+      addMsg(step.who, step.text);
+      i++;
+      await sleep(step.who === 'bot' ? 2100 : 600);
+    }
+  }
+  playLoop();
+
+  // "Try it live" buttons → open the real AI chat widget
+  function openRealAi(){
+    var fab = document.getElementById('aiFab');
+    if (fab) fab.click();
+  }
+  var b1 = document.getElementById('tryAiLive');
+  var b2 = document.getElementById('aiDemoTry');
+  if (b1) b1.addEventListener('click', openRealAi);
+  if (b2) b2.addEventListener('click', openRealAi);
+})();

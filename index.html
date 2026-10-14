@@ -55,17 +55,21 @@
   <div class="urdu-watermark" aria-hidden="true">دکان</div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <div class="eyebrow reveal"><span class="pulse-dot"></span> Built for Pakistani shops · 100% offline</div>
-      <h1 class="reveal">Pakistan's Best <span class="grad">Shop Software</span> — POS Billing for Every Dukaan</h1>
-      <p class="hero-sub reveal">Billing, stock, khata&nbsp;/&nbsp;udhar, suppliers, reports — plus AI that predicts stock-outs and voice billing that types for you. No internet needed. No monthly fees. Ever.</p>
+      <div class="eyebrow reveal"><span class="pulse-dot"></span> 🤖 shopcos AI — Shop Software Pakistan · POS Billing · 100% Offline</div>
+      <h1 class="reveal">🤖 Talk to Your Shop. <span class="grad">Your Entire Hisab, In Your Pocket.</span></h1>
+      <p class="hero-sub reveal">Meet <strong>shopcos AI</strong> — ask <em>"aaj kitni sale hui?"</em> and get instant answers. Billing, stock, khata, reports — on your computer <strong>AND</strong> phone, wherever you are. No internet needed. No monthly fees. <span class="seo-kw">Best shop software &amp; point of sale (POS) billing software for kiryana, medical store, garments &amp; retail shops in Pakistan.</span></p>
       <div class="hero-ctas reveal">
-        <a class="btn btn-primary btn-lg require-auth" href="#pricing">Start 7-Day Free Trial</a>
-        <a class="btn btn-ghost btn-lg" href="#features">Explore Features</a>
+        <a class="btn btn-primary btn-lg require-auth" href="#pricing">⚡ Start 7-Day Free Trial</a>
+        <button class="btn btn-gold-glow btn-lg" id="tryAiLive">🤖 Try AI Live</button>
       </div>
       <div class="trust-row reveal">
         <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> No card required</div>
         <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Works fully offline</div>
         <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Urdu + English</div>
+      </div>
+      <div class="social-proof reveal">
+        <div class="proof-avatars"><span>🏪</span><span>💊</span><span>📱</span><span>👕</span><span>🍰</span></div>
+        <p><strong>Join 500+ shop owners</strong> who ditched the paper register</p>
       </div>
       <div class="stats reveal">
         <div class="stat"><span class="stat-num" data-count="15">0</span><span class="stat-plus">+</span><span class="stat-label">Powerful features</span></div>
@@ -76,38 +80,66 @@
     </div>
 
     <div class="hero-visual reveal">
-      <!-- CSS-built product mockup -->
-      <div class="mockup">
-        <div class="mockup-bar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="mockup-url">shopcos soft · New Bill</span>
+      <!-- Live AI chat demo -->
+      <div class="ai-demo" id="aiDemo">
+        <div class="ai-demo-head">
+          <span class="ai-demo-avatar">🤖</span>
+          <div>
+            <strong>shopcos AI agent</strong>
+            <small><span class="ai-online-dot"></span> online — live demo</small>
+          </div>
+          <span class="ai-demo-badge">LIVE</span>
         </div>
-        <div class="mockup-body">
-          <div class="mockup-side">
-            <img src="img/shopcos-logo-transparent.png" alt="shopcos" class="mockup-logo">
-            <span class="ms-ic active"></span><span class="ms-ic"></span><span class="ms-ic"></span><span class="ms-ic"></span><span class="ms-ic"></span>
-          </div>
-          <div class="mockup-main">
-            <div class="mockup-head">
-              <div><strong>New Bill</strong><small>Cashier: Ahmed · Bill #1042</small></div>
-              <div class="mockup-search">Scan or type item…</div>
-            </div>
-            <div class="mockup-row"><span>Sugar 1kg</span><em>2 × 145</em><b>290</b></div>
-            <div class="mockup-row"><span>Cooking Oil 1L</span><em>1 × 520</em><b>520</b></div>
-            <div class="mockup-row"><span>Tea 950g</span><em>3 × 1,850</em><b>5,550</b></div>
-            <div class="mockup-total"><span>Total</span><strong>Rs 6,360</strong></div>
-            <div class="mockup-btn">Complete Sale →</div>
-          </div>
+        <div class="ai-demo-body" id="aiDemoBody">
+          <!-- messages injected by JS -->
+        </div>
+        <div class="ai-demo-foot">
+          <button class="btn btn-primary btn-sm" id="aiDemoTry">Try it live →</button>
+          <span class="ai-demo-hint">⚡ 30-second demo</span>
         </div>
       </div>
-      <!-- Floating cards -->
+      <!-- Floating device badges -->
       <div class="float-card fc-1">
-        <span class="fc-ic warn">!</span>
-        <div><strong>Low stock alert</strong><small>Sugar · 3 days left</small></div>
+        <span class="fc-ic">📱</span>
+        <div><strong>Phone</strong><small>Same data, everywhere</small></div>
       </div>
       <div class="float-card fc-2">
-        <span class="fc-ic good">↗</span>
-        <div><strong>AI Insight</strong><small>Profit up 18% this week</small></div>
+        <span class="fc-ic">💻</span>
+        <div><strong>Computer</strong><small>100% offline billing</small></div>
+      </div>
+      <div class="float-card fc-3">
+        <span class="fc-ic good">☁️</span>
+        <div><strong>Cloud Sync</strong><small>Auto-sync when online</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use-case strip -->
+  <div class="container">
+    <div class="usecase-strip reveal">
+      <div class="usecase-card">
+        <span class="uc-ic">💊</span>
+        <div><strong>Medical Store</strong><small>"Dolo ki expiry kab hai?"</small></div>
+      </div>
+      <div class="usecase-card">
+        <span class="uc-ic">🏪</span>
+        <div><strong>Kiryana</strong><small>"Cheeni ka stock kitna?"</small></div>
+      </div>
+      <div class="usecase-card">
+        <span class="uc-ic">📱</span>
+        <div><strong>Mobile Shop</strong><small>"Aaj kitni sale hui?"</small></div>
+      </div>
+      <div class="usecase-card">
+        <span class="uc-ic">🔌</span>
+        <div><strong>Electronics</strong><small>"Supplier ko kitna dena?"</small></div>
+      </div>
+      <div class="usecase-card">
+        <span class="uc-ic">👕</span>
+        <div><strong>Garments</strong><small>"Top selling item kaunsa?"</small></div>
+      </div>
+      <div class="usecase-card">
+        <span class="uc-ic">🍰</span>
+        <div><strong>Bakery</strong><small>"Kal ka profit batao"</small></div>
       </div>
     </div>
   </div>
