@@ -620,3 +620,15 @@ img.ai-demo-avatar, img.ai-fab-icon, img.aiw-avatar { border-radius: 50%; object
 img.ai-demo-avatar { width: 40px; height: 40px; }
 img.ai-fab-icon { width: 32px; height: 32px; }
 img.aiw-avatar { width: 36px; height: 36px; }
+
+/* ============ CHAT WIDGET CLEANUP (spacious, clear) ============ */
+#aiWidget { width: 400px; height: 600px; border-radius: 20px; }
+.aiw-header { padding: 16px 20px; }
+.aiw-title strong { font-size: 1.05rem; }
+.aiw-msgs { padding: 20px 16px; gap: 14px; display: flex; flex-direction: column; overflow-y: auto; }
+.aiw-msg { max-width: 82%; padding: 12px 16px; border-radius: 16px; font-size: .95rem; line-height: 1.65; }
+.aiw-msg.bot { background: rgba(255,255,255,.06); border: 1px solid rgba(245,183,63,.15); }
+.aiw-chips { padding: 4px 16px 12px; gap: 8px; }
+.aiw-chips button { font-size: .82rem; padding: 8px 14px; }
+.aiw-inputbar { padding: 14px 16px; gap: 10px; }
+.aiw-inputbar input { padding: 12px 16px; font-size: .95rem; border-radius: 24px; }
