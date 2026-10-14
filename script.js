@@ -498,3 +498,93 @@
   if (b1) b1.addEventListener('click', openRealAi);
   if (b2) b2.addEventListener('click', openRealAi);
 })();
+
+// ============ WOWWW OVERHAUL — micro-interactions ============
+(function(){
+  'use strict';
+
+  // ---- Preloader (fast hide) ----
+  function hidePre(){
+    var p = document.getElementById('preloader');
+    if(p) p.classList.add('done');
+  }
+  window.addEventListener('load', function(){ setTimeout(hidePre, 500); });
+  // safety: never trap the user
+  setTimeout(hidePre, 2500);
+
+  // ---- 3D tilt on cards (desktop only) ----
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.querySelectorAll('.tilt').forEach(function(card){
+      var raf = null;
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - .5;
+        var y = (e.clientY - r.top) / r.height - .5;
+        if(raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function(){
+          card.style.transform = 'perspective(900px) rotateY(' + (x*7).toFixed(2) + 'deg) rotateX(' + (-y*7).toFixed(2) + 'deg) translateY(-6px)';
+        });
+      });
+      card.addEventListener('mouseleave', function(){
+        if(raf) cancelAnimationFrame(raf);
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // ---- Button click ripple ----
+  document.querySelectorAll('.btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      var rect = btn.getBoundingClientRect();
+      var rip = document.createElement('span');
+      rip.className = 'ripple';
+      var size = Math.max(rect.width, rect.height);
+      rip.style.width = rip.style.height = size + 'px';
+      rip.style.left = (e.clientX - rect.left - size/2) + 'px';
+      rip.style.top = (e.clientY - rect.top - size/2) + 'px';
+      btn.appendChild(rip);
+      setTimeout(function(){ rip.remove(); }, 650);
+    });
+  });
+
+  // ---- Back-to-top with scroll progress ring ----
+  var toTop = document.getElementById('toTop');
+  var fg = document.getElementById('toTopFg');
+  var CIRC = 2 * Math.PI * 23; // r=23
+  if(toTop && fg){
+    fg.style.strokeDasharray = CIRC;
+    fg.style.strokeDashoffset = CIRC;
+    function onScrollTop(){
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var p = max > 0 ? (h.scrollTop || document.body.scrollTop) / max : 0;
+      fg.style.strokeDashoffset = CIRC * (1 - p);
+      toTop.classList.toggle('show', (h.scrollTop || 0) > 600);
+    }
+    window.addEventListener('scroll', onScrollTop, {passive:true});
+    onScrollTop();
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  // ---- Hero parallax on scroll (subtle) ----
+  var hero = document.querySelector('.hero');
+  var hp = document.querySelector('.hero-parallax');
+  if(hero && hp){
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY;
+        if(y < window.innerHeight){
+          hp.style.transform = 'translateY(' + (y * .18).toFixed(1) + 'px)';
+        }
+        ticking = false;
+      });
+    }, {passive:true});
+  }
+
+  // ---- Nav CTA pulse is handled via CSS (.nav-cta .btn-primary) ----
+})();

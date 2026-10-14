@@ -15,6 +15,17 @@
 <body>
 
 <!-- Ambient background glows -->
+<body>
+<!-- Preloader -->
+<div id="preloader" aria-hidden="true">
+  <img src="img/shopcos-logo-transparent.png" alt="" class="pre-logo">
+  <div class="pre-bar"><i></i></div>
+  <div class="pre-text">shopcos</div>
+</div>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 <div class="glow glow-a"></div>
 <div class="glow glow-b"></div>
 <div class="glow glow-c"></div>
@@ -52,6 +63,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
+  <div class="hero-parallax" aria-hidden="true"><div class="hp-orb hp-1"></div><div class="hp-orb hp-2"></div></div>
   <div class="urdu-watermark" aria-hidden="true">دکان</div>
   <div class="container hero-grid">
     <div class="hero-copy">
@@ -117,27 +129,27 @@
   <!-- Use-case strip -->
   <div class="container">
     <div class="usecase-strip reveal">
-      <div class="usecase-card">
+      <div class="usecase-card reveal reveal-d1">
         <span class="uc-ic">💊</span>
         <div><strong>Medical Store</strong><small>"Dolo ki expiry kab hai?"</small></div>
       </div>
-      <div class="usecase-card">
+      <div class="usecase-card reveal reveal-d2">
         <span class="uc-ic">🏪</span>
         <div><strong>Kiryana</strong><small>"Cheeni ka stock kitna?"</small></div>
       </div>
-      <div class="usecase-card">
+      <div class="usecase-card reveal reveal-d3">
         <span class="uc-ic">📱</span>
         <div><strong>Mobile Shop</strong><small>"Aaj kitni sale hui?"</small></div>
       </div>
-      <div class="usecase-card">
+      <div class="usecase-card reveal reveal-d4">
         <span class="uc-ic">🔌</span>
         <div><strong>Electronics</strong><small>"Supplier ko kitna dena?"</small></div>
       </div>
-      <div class="usecase-card">
+      <div class="usecase-card reveal reveal-d5">
         <span class="uc-ic">👕</span>
         <div><strong>Garments</strong><small>"Top selling item kaunsa?"</small></div>
       </div>
-      <div class="usecase-card">
+      <div class="usecase-card reveal reveal-d5">
         <span class="uc-ic">🍰</span>
         <div><strong>Bakery</strong><small>"Kal ka profit batao"</small></div>
       </div>
@@ -170,7 +182,7 @@
 
     <div class="bento">
       <!-- Large: AI -->
-      <div class="bento-card span-6 pattern-card reveal">
+      <div class="bento-card span-6 pattern-card reveal tilt">
         <div class="bento-ic grad-bg">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.2-2.6 5.6-.9.9-1.4 2-1.4 3.4H9c0-1.4-.5-2.5-1.4-3.4C6.2 13.2 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg>
         </div>
@@ -179,7 +191,7 @@
         <div class="bento-tags"><span>Stock-out prediction</span><span>Debtor alerts</span><span>Expiry warnings</span></div>
       </div>
       <!-- Large: Voice -->
-      <div class="bento-card span-6 pattern-card reveal">
+      <div class="bento-card span-6 pattern-card reveal tilt reveal-d1">
         <div class="bento-ic grad-bg">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 19v3"/></svg>
         </div>
@@ -188,25 +200,25 @@
         <div class="bento-tags"><span>Urdu voice</span><span>English voice</span><span>Hands-free</span></div>
       </div>
       <!-- Small 1 -->
-      <div class="bento-card span-3 reveal">
+      <div class="bento-card span-3 reveal tilt reveal-d1">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v10H4z"/><path d="M4 10h16M8 7V5h8v2"/></svg></div>
         <h3>Lightning Billing</h3>
         <p>Barcode-scan billing with discounts, cash &amp; udhar sales in seconds.</p>
       </div>
       <!-- Small 2 -->
-      <div class="bento-card span-3 reveal">
+      <div class="bento-card span-3 reveal tilt reveal-d2">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
         <h3>Smart Stock</h3>
         <p>Purchases, levels, expiry dates and low-stock alerts — automatic.</p>
       </div>
       <!-- Small 3 -->
-      <div class="bento-card span-3 reveal">
+      <div class="bento-card span-3 reveal tilt reveal-d3">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v12H5z"/><path d="M5 8h14M9 12h6"/></svg></div>
         <h3>Khata / Udhar</h3>
         <p>Customer credit accounts with full history and balance tracking.</p>
       </div>
       <!-- Small 4 -->
-      <div class="bento-card span-3 reveal">
+      <div class="bento-card span-3 reveal tilt reveal-d4">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 4-7"/></svg></div>
         <h3>Reports &amp; Charts</h3>
         <p>Sales charts, top-5 products, profit reports — print or export.</p>
@@ -248,31 +260,33 @@
 <section class="seo-content">
   <div class="container" style="max-width:900px">
     <div class="reveal">
-      <h2>Best Shop Software in Pakistan — Point of Sale (POS) Billing Software for Every Business</h2>
-      <p>Looking for <strong>shop software in Pakistan</strong>? shopcos soft is the complete <strong>point of sale (POS) software</strong> designed for Pakistani retailers. Whether you run a kiryana store, medical store/pharmacy, garment shop, or any retail business — our <strong>billing software</strong> handles everything from fast barcode billing to khata/udhar management.</p>
+      <h2>Best Shop Software — Point of Sale (POS) Billing Software for Every Business Worldwide</h2>
+      <p>Looking for <strong>shop software</strong>? shopcos soft is the complete <strong>point of sale (POS) software</strong> designed for retailers in 31 countries. Whether you run a grocery store, pharmacy, garment shop, mobile shop, electronics store, or any retail business — our <strong>billing software</strong> handles everything from fast barcode billing to customer credit management. Available in 28 currencies with multi-language support.</p>
       
       <h3>Point of Sale Software That Actually Works Offline</h3>
-      <p>Unlike cloud-based <strong>POS software</strong> that stops working without internet, shopcos soft runs 100% on your shop computer. Your <strong>shop billing software</strong> keeps working during load-shedding, internet outages, and slow connections. Every bill, every stock update, every khata entry — saved locally, always accessible.</p>
+      <p>Unlike cloud-based <strong>POS software</strong> that stops working without internet, shopcos soft runs 100% on your shop computer. Your <strong>shop billing software</strong> keeps working during power outages, internet disruptions, and slow connections. Every bill, every stock update, every credit entry — saved locally, always accessible. When internet returns, everything syncs to the cloud automatically.</p>
       
-      <h3>Medical Store Software with Batch & Expiry Tracking</h3>
-      <p>Running a pharmacy? Our <strong>medical store software</strong> tracks batch numbers, generic names, and expiry dates automatically. Get alerts before medicines expire, manage supplier accounts, and never lose money on dead stock again. The best <strong>pharmacy software in Pakistan</strong> for independent medical stores.</p>
+      <h3>Pharmacy Software with Batch & Expiry Tracking</h3>
+      <p>Running a pharmacy or medical store? Our <strong>pharmacy software</strong> tracks batch numbers, generic names, and expiry dates automatically. Get alerts before medicines expire, manage supplier accounts, and never lose money on dead stock again. The best <strong>medical store software</strong> for independent pharmacies — from Pakistan to Nigeria to the Philippines.</p>
       
-      <h3>Shop Khata Software — Udhar Management Made Simple</h3>
-      <p>Stop losing money on unrecovered credit. Our <strong>shop khata software</strong> tracks every customer's udhar balance, payment history, and credit limits. See who owes what at a glance, get alerts for risky debtors, and recover every rupee with professional khata management.</p>
+      <h3>Credit Ledger Software — Customer Account Management Made Simple</h3>
+      <p>Stop losing money on unrecovered credit. Our <strong>shop credit management</strong> tracks every customer's balance, payment history, and credit limits. See who owes what at a glance, get AI-powered alerts for risky debtors, and recover every penny with professional ledger management. Called "khata/udhar" in South Asia — the concept works everywhere.</p>
       
-      <h3>Kiryana Store Software with Smart Stock Control</h3>
-      <p><strong>Kiryana store software</strong> needs to handle thousands of small items. shopcos soft manages stock levels, purchase rates, expiry dates, and low-stock alerts automatically. The AI predicts stock-outs before they happen, so you never lose a sale.</p>
+      <h3>Grocery Store Software with Smart Stock Control</h3>
+      <p><strong>Retail shop software</strong> needs to handle thousands of items. shopcos soft manages stock levels, purchase rates, expiry dates, and low-stock alerts automatically. The AI predicts stock-outs before they happen, so you never lose a sale — whether you sell rice in Karachi, medicine in Lagos, or electronics in Manila.</p>
       
-      <h3>Why shopcos soft is Pakistan's Best Retail POS Software</h3>
+      <h3>Why shopcos soft is the World's Smartest Retail POS Software</h3>
       <ul>
-        <li><strong>One-time payment</strong> — no monthly fees unlike other POS software in Pakistan</li>
-        <li><strong>Urdu + English</strong> — staff learns in one day</li>
-        <li><strong>Voice billing</strong> — say "Cheeni 2, Oil 1" and the bill builds itself</li>
-        <li><strong>AI insights</strong> — stock predictions, debtor alerts, profit analysis</li>
+        <li><strong>One-time payment</strong> — no monthly fees, lifetime license</li>
+        <li><strong>31 countries, 28 currencies</strong> — truly international</li>
+        <li><strong>Multi-language</strong> — staff learns in one day</li>
+        <li><strong>Voice billing</strong> — speak items and the bill builds itself</li>
+        <li><strong>AI assistant</strong> — stock predictions, debtor alerts, profit analysis, smart reminders</li>
         <li><strong>Staff privacy</strong> — workers never see buying rates or profits</li>
         <li><strong>Works offline</strong> — no internet needed for daily operations</li>
+        <li><strong>Cloud sync</strong> — access your data from phone or computer, anywhere</li>
       </ul>
-      <p>Join hundreds of shop owners across Pakistan who switched from paper registers to shopcos soft — the <strong>best shop management software</strong> for small and medium retail businesses.</p>
+      <p>Join shop owners across 31 countries who switched from paper registers to shopcos soft — the <strong>best shop management software</strong> for small and medium retail businesses worldwide. Popular in Pakistan, India, Bangladesh, Nigeria, Kenya, Philippines, UAE, Saudi Arabia and beyond.</p>
     </div>
   </div>
 </section>
@@ -312,17 +326,17 @@
       <h2>Shopkeepers <span class="grad">swear by it.</span></h2>
     </div>
     <div class="t-grid">
-      <div class="t-card reveal">
+      <div class="t-card reveal reveal-d1">
         <div class="t-stars">★★★★★</div>
         <p>"I used to close my shop for an hour every night to count stock in a register. Now day closing takes two minutes and the AI tells me what to order before I run out. Worth every rupee."</p>
         <div class="t-who"><div class="t-av">AR</div><div><strong>Ahmed Raza</strong><small>Raza General Store · Lahore</small></div></div>
       </div>
-      <div class="t-card reveal">
+      <div class="t-card reveal reveal-d2">
         <div class="t-stars">★★★★★</div>
         <p>"My staff learned billing in one day — it's that simple. And they can never see my buying rates, which was my biggest worry with computer software. Brilliant thinking."</p>
         <div class="t-who"><div class="t-av">MI</div><div><strong>Muhammad Imran</strong><small>Imran Kiryana Store · Faisalabad</small></div></div>
       </div>
-      <div class="t-card reveal">
+      <div class="t-card reveal reveal-d3">
         <div class="t-stars">★★★★★</div>
         <p>"Udhar recovery used to be guesswork. Now I open khata, see exactly who owes what, and the software even warns me about risky customers. My pending payments dropped by half."</p>
         <div class="t-who"><div class="t-av">BH</div><div><strong>Bilal Hussain</strong><small>City Super Mart · Karachi</small></div></div>
@@ -340,19 +354,19 @@
       <p>Start your 7-day free trial today — no card required.</p>
     </div>
     <div class="dl-grid">
-      <a href="#" class="dl-card reveal">
+      <a href="#" class="dl-card reveal reveal-d1">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5L10.5 4.5v7H3zM11.5 4.3L21 3v8.5h-9.5zM3 13h7.5v7L3 18.5zM11.5 13H21v8l-9.5-1.3z"/></svg></div>
         <h3>Windows</h3>
         <p>Portable package — unzip and run on your shop PC. No installation.</p>
         <span class="dl-link">Download for Windows →</span>
       </a>
-      <a href="#" class="dl-card reveal">
+      <a href="#" class="dl-card reveal reveal-d2">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
         <h3>Android App</h3>
         <p>Companion app for mobiles — connects to your shop PC over Wi-Fi.</p>
         <span class="dl-link">Download APK →</span>
       </a>
-      <a href="#" class="dl-card reveal">
+      <a href="#" class="dl-card reveal reveal-d3">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
         <h3>Guide Book</h3>
         <p>Complete user guide (PDF) — learn every feature step by step.</p>
@@ -413,27 +427,27 @@
       <h2>Questions, <span class="grad">answered.</span></h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item reveal">
+      <div class="faq-item reveal reveal-d1">
         <button class="faq-q">Does it work without internet?<span class="faq-x">+</span></button>
         <div class="faq-a"><p>Yes — 100%. Billing, stock, khata, reports, printing and even the AI all run locally on your shop PC. Internet is only needed for optional Google Drive backup and WhatsApp bill sharing.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal reveal-d2">
         <button class="faq-q">How does the 7-day free trial work?<span class="faq-x">+</span></button>
         <div class="faq-a"><p>Install the software and every feature unlocks automatically for 7 days — no card, no payment, no catch. After the trial, enter your lifetime license key (sent on WhatsApp after purchase) to continue.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal reveal-d3">
         <button class="faq-q">Can my staff see buying rates or profits?<span class="faq-x">+</span></button>
         <div class="faq-a"><p>Never. Staff accounts can only create bills. Buying rates, profit reports, expenses and the AI assistant are admin-only — the software enforces this at every level.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal reveal-d4">
         <button class="faq-q">What if my computer breaks? Is my data safe?<span class="faq-x">+</span></button>
         <div class="faq-a"><p>The software takes an automatic backup every single day and keeps 30 days of history. Connect your own Google account once and backups also upload to your Google Drive automatically.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal reveal-d5">
         <button class="faq-q">Is the license really lifetime? Any renewal?<span class="faq-x">+</span></button>
         <div class="faq-a"><p>Yes — one payment of $145 (or equivalent in your currency) per shop, and it's yours forever including free updates. The key validates once online, then the software works offline indefinitely.</p></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal reveal-d5">
         <button class="faq-q">How do I get support?<span class="faq-x">+</span></button>
         <div class="faq-a"><p>Direct WhatsApp support is included with your license. Message us anytime and the COS team will help you — in Urdu or English, whichever you prefer.</p></div>
       </div>
@@ -467,6 +481,12 @@
           <span class="brand-name">shopcos <em>soft</em></span>
         </a>
         <p>Smart Shop Management Software — billing, stock, credit ledger and AI insights for the modern retail shop, in 31 countries.</p>
+        <div class="foot-social">
+          <a href="https://wa.me/923007777777" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg></a>
+          <a href="https://facebook.com/shopcossoft" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07"/></svg></a>
+          <a href="https://youtube.com/@shopcossoft" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81M9.55 15.57V8.43L15.82 12l-6.27 3.57"/></svg></a>
+          <a href="mailto:chishtioffice2@gmail.com" aria-label="Email" title="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        </div>
       </div>
       <div class="foot-col">
         <h4>Product</h4>
@@ -557,6 +577,15 @@
 <script src="script.js"></script>
 
 <!-- ============ CHAT WITH shopcos AI ============ -->
+<!-- Floating WhatsApp -->
+<a id="waFloat" href="https://wa.me/923007777777?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20ke%20baare%20mein%20maloomat%20chahiye." target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg>
+</a>
+<!-- Back to top with progress ring -->
+<button id="toTop" aria-label="Back to top" title="Back to top">
+  <svg class="ring" viewBox="0 0 52 52"><circle class="bg" cx="26" cy="26" r="23"/><circle class="fg" id="toTopFg" cx="26" cy="26" r="23"/></svg>
+  <span class="arr">↑</span>
+</button>
 <button id="aiFab" aria-label="Chat with shopcos AI" title="Chat with shopcos AI">
   <span class="ai-fab-icon">🤖</span>
   <span class="ai-fab-pulse"></span>
