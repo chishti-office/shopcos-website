@@ -134,6 +134,69 @@ a{color:inherit;text-decoration:none}
 
 .foot{text-align:center;color:var(--muted-2);font-size:.82rem;padding:26px 0 10px}
 .foot img{height:22px;vertical-align:middle;margin-right:6px}
+
+/* ---------- tab navigation ---------- */
+.tabbar{position:sticky;top:64px;z-index:40;background:rgba(7,11,28,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.tabbar-inner{max-width:1100px;margin:0 auto;padding:0 22px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabbar-inner::-webkit-scrollbar{display:none}
+.tab-btn{display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--muted);font-family:var(--font-b);font-weight:600;font-size:.92rem;padding:15px 18px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s;flex-shrink:0}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--gold-lt);border-bottom-color:var(--gold)}
+.tab-pane{display:none}
+.tab-pane.active{display:block;animation:tabIn .25s ease}
+@keyframes tabIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:640px){.tabbar{top:0}.tab-btn{padding:13px 14px;font-size:.85rem}}
+
+/* ---------- one-time lock badge ---------- */
+.lock-badge{display:inline-flex;align-items:center;font-size:.72rem;font-weight:700;color:var(--gold-lt);background:rgba(245,183,63,.12);border:1px solid rgba(245,183,63,.35);border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:middle}
+.input:disabled{opacity:.55;cursor:not-allowed}
+
+/* ---------- embedded AI chat ---------- */
+.dash-chat{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:rgba(0,0,0,.22)}
+.dash-chat-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:linear-gradient(120deg,rgba(245,183,63,.15),rgba(245,183,63,.05));border-bottom:1px solid rgba(245,183,63,.2)}
+.dash-chat-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;background:rgba(245,183,63,.15)}
+.dash-chat-title b{display:block;font-size:1rem}
+.dash-chat-status{font-size:.78rem;color:#7ee2a8;display:flex;align-items:center;gap:6px}
+.dash-chat-status i{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:twinkle 2s infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.4}}
+.dash-chat-msgs{height:340px;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:12px}
+.dash-chat-msg{max-width:85%;padding:11px 15px;border-radius:14px;font-size:.92rem;line-height:1.6;animation:tabIn .2s ease}
+.dash-chat-msg.bot{align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(245,183,63,.18);color:#e8eaf5;border-bottom-left-radius:4px}
+.dash-chat-msg.user{align-self:flex-end;background:linear-gradient(135deg,#f5b73f,#e08a1e);color:#1a1a2e;font-weight:500;border-bottom-right-radius:4px}
+.dash-chat-msg.typing span{width:7px;height:7px;border-radius:50%;background:#f5b73f;display:inline-block;margin-right:4px;animation:aiwBounce 1.2s infinite}
+.dash-chat-msg.typing span:nth-child(2){animation-delay:.15s}
+.dash-chat-msg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes aiwBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.dash-chat-chips{display:flex;gap:8px;flex-wrap:wrap;padding:2px 16px 12px}
+.dash-chat-chips button{background:rgba(245,183,63,.08);border:1px solid rgba(245,183,63,.3);color:#ffd97a;font-size:.8rem;padding:8px 14px;border-radius:20px;cursor:pointer;transition:.2s;font-family:var(--font-b)}
+.dash-chat-chips button:hover{background:rgba(245,183,63,.2)}
+.dash-chat-input{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--border)}
+.dash-chat-input .input{flex:1}
+
+/* ---------- access keys ---------- */
+.key-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.02);flex-wrap:wrap}
+.key-row .key-code{flex:1;min-width:170px;text-align:center}
+.tier-limits{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 14px}
+
+/* ---------- active plan banner ---------- */
+.plan-banner{display:flex;align-items:center;gap:16px;border-radius:18px;padding:18px 22px;margin-bottom:22px;border:1px solid var(--border);flex-wrap:wrap;animation:tabIn .3s ease}
+.plan-banner.trial{background:linear-gradient(120deg,rgba(59,130,246,.18),rgba(59,130,246,.05));border-color:rgba(59,130,246,.45)}
+.plan-banner.paid{background:linear-gradient(120deg,rgba(245,183,63,.16),rgba(245,183,63,.04));border-color:rgba(245,183,63,.5)}
+.plan-banner.none{background:rgba(255,255,255,.03)}
+.plan-banner.expired{background:linear-gradient(120deg,rgba(248,113,113,.14),rgba(248,113,113,.04));border-color:rgba(248,113,113,.45)}
+.pb-icon{font-size:2.2rem;line-height:1}
+.pb-text{flex:1;min-width:200px}
+.pb-text b{display:block;font-size:1.12rem;font-family:var(--font-d);margin-bottom:6px}
+.pb-text span.pb-sub{font-size:.88rem;color:var(--muted)}
+.pb-progress{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:10px;max-width:340px}
+.pb-progress i{display:block;height:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:99px;transition:width .5s}
+.pb-key{display:inline-block;margin-top:8px;font-size:.85rem;cursor:pointer}
+
+/* ---------- upgrade ---------- */
+.btn-upgrade{background:var(--grad)!important;color:#1a1005!important;animation:btnPulse 2s ease-in-out infinite;border:none}
+@keyframes btnPulse{0%,100%{box-shadow:0 4px 18px rgba(245,183,63,.35)}50%{box-shadow:0 4px 34px rgba(245,183,63,.7)}}
+.plan-card.upgrade-glow{border-color:var(--gold)!important;animation:upgradePulse 1.6s ease-in-out infinite}
+@keyframes upgradePulse{0%,100%{box-shadow:0 0 0 2px rgba(245,183,63,.5),0 12px 40px rgba(245,183,63,.25)}50%{box-shadow:0 0 0 4px rgba(245,183,63,.85),0 12px 50px rgba(245,183,63,.5)}}
 </style>
 </head>
 <body>
@@ -158,13 +221,28 @@ a{color:inherit;text-decoration:none}
     </div>
   </header>
 
+  <nav class="tabbar" aria-label="Dashboard sections">
+    <div class="tabbar-inner">
+      <button class="tab-btn active" data-tab="plans">💎 Plans</button>
+      <button class="tab-btn" data-tab="access">🔑 Software Access</button>
+      <button class="tab-btn" data-tab="wallet">👛 Wallet</button>
+      <button class="tab-btn" data-tab="company">🏪 Company</button>
+      <button class="tab-btn" data-tab="aichat">🤖 AI Chat</button>
+      <button class="tab-btn" data-tab="profile">👤 Profile</button>
+    </div>
+  </nav>
+
   <main class="wrap">
     <div class="page-head">
       <h1>My <span class="grad">Dashboard</span></h1>
-      <p>Manage your license, wallet, downloads and account — all in one place.</p>
+      <p>Plans, wallet, company, AI chat and profile — neatly organized in tabs.</p>
     </div>
 
-    <div class="grid">
+    <!-- Active plan banner -->
+    <div class="plan-banner" id="planBanner" style="display:none"></div>
+
+    <!-- ============ TAB: Plans (Subscription) ============ -->
+    <div class="tab-pane active" id="tab-plans">
       <!-- License status -->
       <section class="card">
         <h2>🔑 License Status</h2>
@@ -181,23 +259,8 @@ a{color:inherit;text-decoration:none}
         </div>
       </section>
 
-      <!-- Wallet -->
-      <section class="card">
-        <h2>👛 My Wallet</h2>
-        <p class="sub">Top up once, pay for anything later</p>
-        <div class="wallet-balance"><small>$</small> <span id="walletBal">0.00</span></div>
-        <p class="note" style="margin-top:2px">Available balance · USD</p>
-        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-          <a class="btn btn-primary btn-sm" id="addFundsBtn" href="#" target="_blank" rel="noopener">➕ Add Funds</a>
-          <button class="btn btn-ghost btn-sm" id="refreshWalletBtn">🔄 Refresh</button>
-        </div>
-        <h3 style="font-size:.95rem;margin:20px 0 6px">Recent transactions</h3>
-        <div class="empty-state" id="txList">No transactions yet.<br>Your top-ups and purchases will appear here.</div>
-        <p class="note">💡 Wallet top-ups are currently handled manually via WhatsApp. Send us your payment receipt and your balance will be updated here.</p>
-      </section>
-
       <!-- Buy now -->
-      <section class="card" style="grid-column:1/-1">
+      <section class="card" style="margin-top:20px">
         <h2>💎 Choose Your Plan</h2>
         <p class="sub">One payment. Yours forever. No subscriptions.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px" id="planGrid">
@@ -227,21 +290,18 @@ a{color:inherit;text-decoration:none}
             <button class="btn btn-ghost btn-block" data-add-cart="enterprise">🛒 Add to Cart</button>
           </div>
         </div>
-        <div class="pay-pills" style="margin-top:14px">
-          <em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em>
-        </div>
         <p class="note">Add a plan to your cart and check out securely — your lifetime license is usually activated within a few hours.</p>
       </section>
 
       <!-- My orders -->
-      <section class="card" style="grid-column:1/-1">
+      <section class="card" style="margin-top:20px">
         <h2>🧾 My Orders</h2>
         <p class="sub">Track your purchases and license activation</p>
         <div id="ordersList"><div class="empty-state">Loading orders…</div></div>
       </section>
 
       <!-- Downloads -->
-      <section class="card">
+      <section class="card" style="margin-top:20px">
         <h2>⬇️ Downloads</h2>
         <p class="sub" id="dlSub">Get shopcos soft on your devices</p>
         <div id="dlList">
@@ -263,11 +323,66 @@ a{color:inherit;text-decoration:none}
         </div>
         <p class="note" id="dlNote"></p>
       </section>
+    </div><!-- /tab-plans -->
 
-      <!-- Profile -->
-      <section class="card full">
-        <h2>👤 My Profile</h2>
-        <p class="sub">Your business profile — used on your license, receipts and support requests</p>
+    <!-- ============ TAB: Software Access ============ -->
+    <div class="tab-pane" id="tab-access">
+      <section class="card">
+        <h2>👑 Admin Access</h2>
+        <p class="sub">You are the Admin — full control of your shop</p>
+        <div class="kv"><span class="k">Role</span><span class="v">👑 Admin <span class="badge green">Owner</span></span></div>
+        <div class="kv"><span class="k">License key</span><span class="v"><span class="key-code" id="adminLicKey" title="Click to copy">—</span></span></div>
+        <p class="note">💡 Login to the software with your account email (<b id="adminEmailHint">—</b>). Your team uses access keys below — <b>no passwords needed</b>, just share the key!</p>
+      </section>
+
+      <section class="card" style="margin-top:20px">
+        <h2>✏️ Editor Keys</h2>
+        <p class="sub">Editors can add products, manage stock &amp; set buying rates (no AI, no admin access)</p>
+        <div class="tier-limits"><span class="badge gray" id="edtPlanBadge">Plan: —</span><span class="badge gray" id="edtCount">— editors</span></div>
+        <div id="edtKeysBox"><div class="empty-state">Loading keys…</div></div>
+        <button class="btn btn-primary btn-sm" id="genEdtBtn" style="margin-top:12px">✏️ Generate Editor Key</button>
+      </section>
+
+      <section class="card" style="margin-top:20px">
+        <h2>🧾 Salesman Keys</h2>
+        <p class="sub">Salesmen do billing only — they see sale rates &amp; stock, never buying rates</p>
+        <div class="tier-limits"><span class="badge gray" id="salPlanBadge">Plan: —</span><span class="badge gray" id="salCount">— salesmen</span></div>
+        <div id="salKeysBox"><div class="empty-state">Loading keys…</div></div>
+        <button class="btn btn-primary btn-sm" id="genSalBtn" style="margin-top:12px">🧾 Generate Salesman Key</button>
+      </section>
+    </div><!-- /tab-access -->
+
+    <!-- ============ TAB: Wallet ============ -->
+    <div class="tab-pane" id="tab-wallet">
+      <section class="card">
+        <h2>👛 My Wallet</h2>
+        <p class="sub">Top up once, pay for anything later</p>
+        <div class="wallet-balance"><small>$</small> <span id="walletBal">0.00</span></div>
+        <p class="note" style="margin-top:2px">Available balance · USD</p>
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+          <a class="btn btn-primary btn-sm" id="addFundsBtn" href="#" target="_blank" rel="noopener">➕ Add Money</a>
+          <button class="btn btn-ghost btn-sm" id="refreshWalletBtn">🔄 Refresh</button>
+        </div>
+        <h3 style="font-size:.95rem;margin:20px 0 6px">Recent transactions</h3>
+        <div class="empty-state" id="txList">No transactions yet.<br>Your top-ups and purchases will appear here.</div>
+        <p class="note">💡 Wallet top-ups are currently handled manually via WhatsApp. Send us your payment receipt and your balance will be updated here.</p>
+      </section>
+
+      <section class="card" style="margin-top:20px">
+        <h2>💳 Payment Methods</h2>
+        <p class="sub">Ways to add money to your wallet or pay for plans</p>
+        <div class="pay-pills">
+          <em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em>
+        </div>
+        <p class="note">Message us on WhatsApp with your chosen method and we'll guide you through the payment.</p>
+      </section>
+    </div><!-- /tab-wallet -->
+
+    <!-- ============ TAB: Company ============ -->
+    <div class="tab-pane" id="tab-company">
+      <section class="card">
+        <h2>🏪 Company Settings</h2>
+        <p class="sub">Your business identity — shown on your license, receipts and support requests</p>
         <div class="profile-preview" id="profilePreview">
           <div class="pp-logo"><img id="ppLogoImg" src="../img/shopcos-logo-transparent.png" alt="Business logo"></div>
           <div class="pp-meta">
@@ -278,16 +393,8 @@ a{color:inherit;text-decoration:none}
         </div>
         <div class="form-grid">
           <div class="form-group">
-            <label for="profBiz">🏪 Business Name</label>
-            <input type="text" class="input" id="profBiz" placeholder="e.g. Ahmed General Store" maxlength="80">
-          </div>
-          <div class="form-group">
-            <label for="profOwner">🧑‍💼 Owner Name</label>
-            <input type="text" class="input" id="profOwner" placeholder="e.g. Ahmed Khan" maxlength="80">
-          </div>
-          <div class="form-group">
-            <label for="profMobile">📱 Mobile Number</label>
-            <input type="tel" class="input" id="profMobile" placeholder="+92 300 0000000" maxlength="20">
+            <label for="bizName">🏪 Business Name</label>
+            <input type="text" class="input" id="bizName" placeholder="e.g. Ahmed General Store" maxlength="80">
           </div>
           <div class="form-group">
             <label>🖼️ Business Logo</label>
@@ -301,17 +408,69 @@ a{color:inherit;text-decoration:none}
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" id="saveProfileBtn">💾 Save Profile</button>
-        <p class="form-msg" id="profileMsg"></p>
+        <button class="btn btn-primary" id="saveCompanyBtn">💾 Save Company</button>
+        <p class="form-msg" id="companyMsg"></p>
+      </section>
+    </div><!-- /tab-company -->
+
+    <!-- ============ TAB: AI Chat ============ -->
+    <div class="tab-pane" id="tab-aichat">
+      <section class="card">
+        <h2>🤖 Chat with shopcos AI</h2>
+        <p class="sub">Ask about software, plans and features — instant answers</p>
+        <div class="dash-chat">
+          <div class="dash-chat-head">
+            <img src="../img/shopcos-ai-avatar.webp" alt="shopcos AI" class="dash-chat-avatar" onerror="this.style.display='none'">
+            <div class="dash-chat-title">
+              <b>shopcos AI Assistant</b>
+              <span class="dash-chat-status"><i></i> Online</span>
+            </div>
+          </div>
+          <div class="dash-chat-msgs" id="dashChatMsgs"></div>
+          <div class="dash-chat-chips" id="dashChatChips">
+            <button data-q="price">💰 Price kya hai?</button>
+            <button data-q="trial">🆓 Free trial?</button>
+            <button data-q="apk">📱 APK hai?</button>
+            <button data-q="medical">💊 Medical store?</button>
+          </div>
+          <div class="dash-chat-input">
+            <input type="text" class="input" id="dashChatInput" placeholder="Apna sawal likhein…" maxlength="300" autocomplete="off">
+            <button class="btn btn-primary" id="dashChatSend">Send ➤</button>
+          </div>
+        </div>
+      </section>
+    </div><!-- /tab-aichat -->
+
+    <!-- ============ TAB: Profile ============ -->
+    <div class="tab-pane" id="tab-profile">
+      <section class="card">
+        <h2>👤 Profile Settings</h2>
+        <p class="sub">Your personal account identity</p>
+        <p class="note" style="margin-bottom:16px">⚠️ <b>Name, mobile number aur email ek baar set hone ke baad change nahi ho sakte.</b> Please double-check before saving.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="profName">🧑‍💼 Your Name <span class="lock-badge" id="profNameLock" style="display:none">🔒 Locked</span></label>
+            <input type="text" class="input" id="profName" placeholder="e.g. Ahmed Khan" maxlength="80">
+          </div>
+          <div class="form-group">
+            <label for="profMobile">📱 Mobile Number <span class="lock-badge" id="profMobileLock" style="display:none">🔒 Locked</span></label>
+            <input type="tel" class="input" id="profMobile" placeholder="+92 300 0000000" maxlength="20">
+          </div>
+          <div class="form-group">
+            <label for="profEmail">📧 Email <span class="lock-badge">🔒 Locked</span></label>
+            <input type="email" class="input" id="profEmail" disabled>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="saveIdentityBtn">💾 Save</button>
+        <p class="form-msg" id="identityMsg"></p>
         <div style="margin-top:18px">
-          <div class="kv"><span class="k">Email</span><span class="v" id="acctEmail">—</span></div>
           <div class="kv"><span class="k">Member since</span><span class="v" id="acctSince">—</span></div>
           <div class="kv"><span class="k">User ID</span><span class="v" id="acctId" style="font-size:.78rem;color:var(--muted-2)">—</span></div>
         </div>
       </section>
 
       <!-- Security: change password -->
-      <section class="card">
+      <section class="card" style="margin-top:20px">
         <h2>🔐 Change Password</h2>
         <p class="sub">Verify your current password, then set a new one</p>
         <div class="form-group">
@@ -331,7 +490,7 @@ a{color:inherit;text-decoration:none}
       </section>
 
       <!-- Two-factor authentication -->
-      <section class="card">
+      <section class="card" style="margin-top:20px">
         <h2>🛡️ Two-Factor Authentication</h2>
         <p class="sub">Add an extra layer of security with an authenticator app</p>
         <div id="mfaBody">
@@ -350,7 +509,7 @@ a{color:inherit;text-decoration:none}
           <p class="form-msg" id="mfaMsg"></p>
         </div>
       </section>
-    </div>
+    </div><!-- /tab-profile -->
 
     <div class="foot">
       <img src="../img/cos-logo.png" alt="COS"> Developed by <strong>COS</strong> · Chishti Office Samundri
@@ -435,6 +594,7 @@ a{color:inherit;text-decoration:none}
       if (res.error) throw res.error;
       license = res.data[0];
       renderLicense();
+      renderPlanBanner();
       toast('🎉 7-day free trial activated!');
     } catch(e) {
       toast('⚠️ ' + (e.message || 'Could not activate trial'));
@@ -515,6 +675,7 @@ a{color:inherit;text-decoration:none}
       var res = await sb.from('orders').select('*').eq('user_id', user.id).order('created_at', { ascending: false });
       if (res.error) throw res.error;
       var orders = res.data || [];
+      allOrders = orders;
       if (!orders.length) {
         box.innerHTML = '<div class="empty-state">No orders yet.<br>Add a plan to your cart and check out to get your lifetime license.</div>';
         return;
@@ -550,7 +711,7 @@ a{color:inherit;text-decoration:none}
     });
   });
 
-  /* ---------- profile ---------- */
+  /* ---------- company + identity profile ---------- */
   var profile = null, pendingLogoFile = null;
 
   function setMsg(id, ok, text) {
@@ -573,15 +734,34 @@ a{color:inherit;text-decoration:none}
     }
   }
 
+  /* One-time lock: name & mobile can only be set ONCE */
+  function applyIdentityLocks() {
+    var nameLocked = !!(profile && profile.owner_name);
+    var mobLocked = !!(profile && profile.mobile);
+    var nameEl = document.getElementById('profName');
+    var mobEl = document.getElementById('profMobile');
+    nameEl.disabled = nameLocked;
+    mobEl.disabled = mobLocked;
+    document.getElementById('profNameLock').style.display = nameLocked ? 'inline-flex' : 'none';
+    document.getElementById('profMobileLock').style.display = mobLocked ? 'inline-flex' : 'none';
+    var saveBtn = document.getElementById('saveIdentityBtn');
+    if (nameLocked && mobLocked) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = '✅ Identity Verified & Locked';
+      setMsg('identityMsg', true, 'Your identity is verified and locked. Contact support if you need changes.');
+    }
+  }
+
   async function fetchProfile() {
     var res = await sb.from('profiles').select('*').eq('user_id', user.id).limit(1);
     if (res.error) throw res.error;
     profile = (res.data && res.data[0]) || null;
     if (profile) {
-      document.getElementById('profBiz').value = profile.business_name || '';
-      document.getElementById('profOwner').value = profile.owner_name || '';
+      document.getElementById('bizName').value = profile.business_name || '';
+      document.getElementById('profName').value = profile.owner_name || '';
       document.getElementById('profMobile').value = profile.mobile || '';
     }
+    applyIdentityLocks();
     renderProfilePreview();
   }
 
@@ -618,7 +798,7 @@ a{color:inherit;text-decoration:none}
       var blob = await resizeImage(f, 500);
       pendingLogoFile = new File([blob], 'logo.png', { type: 'image/png' });
       document.getElementById('logoPreview').src = URL.createObjectURL(pendingLogoFile);
-      toast('📷 Logo ready — click Save Profile to upload');
+      toast('📷 Logo ready — click Save Company to upload');
     } catch(e) {
       toast('⚠️ Could not read image');
     }
@@ -634,17 +814,16 @@ a{color:inherit;text-decoration:none}
     return pub.data.publicUrl + '?t=' + Date.now();
   }
 
-  document.getElementById('saveProfileBtn').addEventListener('click', async function(){
+  /* Company tab: business name + logo (editable anytime) */
+  document.getElementById('saveCompanyBtn').addEventListener('click', async function(){
     var btn = this;
-    setMsg('profileMsg', null, 'Saving…');
+    setMsg('companyMsg', null, 'Saving…');
     btn.disabled = true;
     try {
       var logoUrl = await uploadLogo();
       var row = {
         user_id: user.id,
-        business_name: document.getElementById('profBiz').value.trim() || null,
-        owner_name: document.getElementById('profOwner').value.trim() || null,
-        mobile: document.getElementById('profMobile').value.trim() || null,
+        business_name: document.getElementById('bizName').value.trim() || null,
         logo_url: logoUrl || (profile && profile.logo_url) || null,
         updated_at: new Date().toISOString()
       };
@@ -652,17 +831,47 @@ a{color:inherit;text-decoration:none}
       if (res.error) throw res.error;
       profile = res.data[0];
       renderProfilePreview();
-      setMsg('profileMsg', true, '✅ Profile saved!');
-      toast('✅ Profile updated');
+      setMsg('companyMsg', true, '✅ Company saved!');
+      toast('✅ Company updated');
     } catch(e) {
-      setMsg('profileMsg', false, '⚠️ ' + (e.message || 'Could not save profile'));
+      setMsg('companyMsg', false, '⚠️ ' + (e.message || 'Could not save company'));
     }
     btn.disabled = false;
   });
 
+  /* Profile tab: name + mobile — ONE TIME ONLY */
+  document.getElementById('saveIdentityBtn').addEventListener('click', async function(){
+    var btn = this;
+    var nameLocked = !!(profile && profile.owner_name);
+    var mobLocked = !!(profile && profile.mobile);
+    if (nameLocked && mobLocked) return;
+    var nameVal = document.getElementById('profName').value.trim();
+    var mobVal = document.getElementById('profMobile').value.trim();
+    if (!nameLocked && !nameVal) { setMsg('identityMsg', false, 'Please enter your name.'); return; }
+    if (!mobLocked && !mobVal) { setMsg('identityMsg', false, 'Please enter your mobile number.'); return; }
+    if (!confirm('⚠️ Name aur mobile number ek baar save hone ke baad change NAHI ho sakte. Continue?')) return;
+    setMsg('identityMsg', null, 'Saving…');
+    btn.disabled = true;
+    try {
+      var row = { user_id: user.id, updated_at: new Date().toISOString() };
+      if (!nameLocked) row.owner_name = nameVal;
+      if (!mobLocked) row.mobile = mobVal;
+      var res = await sb.from('profiles').upsert(row, { onConflict: 'user_id' }).select();
+      if (res.error) throw res.error;
+      profile = res.data[0];
+      applyIdentityLocks();
+      renderProfilePreview();
+      setMsg('identityMsg', true, '✅ Identity saved & locked!');
+      toast('✅ Identity saved');
+    } catch(e) {
+      setMsg('identityMsg', false, '⚠️ ' + (e.message || 'Could not save identity'));
+      btn.disabled = false;
+    }
+  });
+
   /* ---------- account info ---------- */
   function renderAccount() {
-    document.getElementById('acctEmail').textContent = user.email;
+    document.getElementById('profEmail').value = user.email;
     if (!profile || !profile.business_name) {
       document.getElementById('chipEmail').textContent = user.email;
     }
@@ -822,6 +1031,318 @@ a{color:inherit;text-decoration:none}
     toast('🔄 Wallet refreshed.');
   });
 
+  /* ---------- tab navigation ---------- */
+  function activateTab(name, pushHash) {
+    var btn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+    var pane = document.getElementById('tab-' + name);
+    if (!btn || !pane) return;
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.tab-pane').forEach(function(p){ p.classList.remove('active'); });
+    btn.classList.add('active');
+    pane.classList.add('active');
+    if (pushHash !== false) { try { history.replaceState(null, '', '#' + name); } catch(e) {} }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ activateTab(btn.getAttribute('data-tab')); });
+  });
+
+  /* ---------- active plan banner + upgrade ---------- */
+  var PLAN_ORDER = ['starter', 'business', 'professional', 'enterprise'];
+
+  function highlightUpgradePlans(fromPlan) {
+    var idx = PLAN_ORDER.indexOf(fromPlan);
+    document.querySelectorAll('#planGrid .plan-card').forEach(function(c){ c.classList.remove('upgrade-glow'); });
+    document.querySelectorAll('#planGrid [data-add-cart]').forEach(function(btn){
+      var p = btn.getAttribute('data-add-cart');
+      if (idx < 0 || PLAN_ORDER.indexOf(p) > idx) {
+        var card = btn.closest('.plan-card');
+        if (card) card.classList.add('upgrade-glow');
+      }
+    });
+  }
+  function goUpgrade(fromPlan) {
+    activateTab('plans');
+    setTimeout(function(){
+      highlightUpgradePlans(fromPlan);
+      var g = document.getElementById('planGrid');
+      if (g) g.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
+  }
+
+  function renderPlanBanner() {
+    var b = document.getElementById('planBanner');
+    var st = licenseState(license);
+    var copyKey = function(text) {
+      var done = function(){ toast('📋 License key copied!'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, done);
+      else done();
+    };
+    if (!license) {
+      b.className = 'plan-banner none';
+      b.innerHTML = '<div class="pb-icon">📦</div>' +
+        '<div class="pb-text"><b>No active plan</b><span class="pb-sub">Start your 7-day free trial — no card required.</span></div>' +
+        '<button class="btn btn-primary btn-sm" id="pbTrialBtn">🎁 Start Free Trial</button>';
+      b.style.display = 'flex';
+      document.getElementById('pbTrialBtn').onclick = function(){ activateTrial(this); };
+      return;
+    }
+    if (license.type === 'trial' && license.status === 'active' && st.days > 0) {
+      var total = 7, left = st.days;
+      var pct = Math.max(0, Math.min(100, Math.round(left / total * 100)));
+      b.className = 'plan-banner trial';
+      b.innerHTML = '<div class="pb-icon">🎁</div>' +
+        '<div class="pb-text"><b>Trial Active — 💼 Business plan unlocked! ' + left + ' day' + (left === 1 ? '' : 's') + ' remaining</b>' +
+        '<span class="pb-sub">Full Business features: 1 editor key + 2 salesman keys. Upgrade anytime to keep it forever.</span>' +
+        '<div class="pb-progress"><i style="width:' + pct + '%"></i></div></div>' +
+        '<button class="btn btn-upgrade btn-sm" id="pbUpgradeBtn">⬆️ Upgrade to Lifetime</button>';
+      b.style.display = 'flex';
+      document.getElementById('pbUpgradeBtn').onclick = function(){ goUpgrade('trial'); };
+      return;
+    }
+    if (license.type === 'lifetime' && license.status === 'active') {
+      var plan = getEffectivePlan();
+      var lim = TIER_LIMITS[plan] || TIER_LIMITS.business;
+      var idx = PLAN_ORDER.indexOf(plan);
+      var upgradeHtml;
+      if (idx >= 0 && idx < PLAN_ORDER.length - 1) {
+        upgradeHtml = '<button class="btn btn-upgrade btn-sm" id="pbUpgradeBtn" style="margin-top:10px">⬆️ Upgrade Plan</button>';
+      } else if (idx === PLAN_ORDER.length - 1) {
+        upgradeHtml = '<span class="badge green" style="margin-top:10px">✅ Highest Plan</span>';
+      } else {
+        upgradeHtml = '<button class="btn btn-upgrade btn-sm" id="pbUpgradeBtn" style="margin-top:10px">⬆️ Upgrade Plan</button>';
+      }
+      b.className = 'plan-banner paid';
+      b.innerHTML = '<div class="pb-icon">' + lim.label.split(' ')[0] + '</div>' +
+        '<div class="pb-text"><b>' + esc(lim.label) + ' — Lifetime License ✅</b><br>' +
+        '<span class="key-code pb-key" id="pbLicKey" title="Click to copy">' + esc(license.license_key || '—') + '</span><br>' +
+        upgradeHtml + '</div>';
+      b.style.display = 'flex';
+      document.getElementById('pbLicKey').onclick = function(){ copyKey(license.license_key || ''); };
+      var upBtn = document.getElementById('pbUpgradeBtn');
+      if (upBtn) upBtn.onclick = function(){ goUpgrade(plan); };
+      return;
+    }
+    // expired / revoked
+    b.className = 'plan-banner expired';
+    b.innerHTML = '<div class="pb-icon">⏰</div>' +
+      '<div class="pb-text"><b>' + esc(st.label === 'Revoked' ? 'License revoked' : 'Trial expired') + '</b>' +
+      '<span class="pb-sub">Your software is locked. Upgrade to a lifetime plan to unlock it again.</span></div>' +
+      '<button class="btn btn-upgrade btn-sm" id="pbUpgradeBtn2">⬆️ Upgrade to Lifetime</button>';
+    b.style.display = 'flex';
+    document.getElementById('pbUpgradeBtn2').onclick = function(){ goUpgrade('trial'); };
+  }
+
+  /* ---------- software access keys ---------- */
+  var TIER_LIMITS = {
+    trial:        { editors: 1,  users: 2,  label: '🎁 Trial · Business' },
+    starter:      { editors: 0,  users: 0,  label: '🌱 Starter' },
+    business:     { editors: 1,  users: 2,  label: '💼 Business' },
+    professional: { editors: 2,  users: 10, label: '🚀 Professional' },
+    enterprise:   { editors: 5,  users: -1, label: '🏢 Enterprise' }
+  };
+  var accessKeys = [], effectivePlan = 'trial', allOrders = [];
+
+  function genAccessKey(prefix) {
+    var chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', s = prefix + '-';
+    for (var g = 0; g < 2; g++) {
+      for (var i = 0; i < 4; i++) s += chars[Math.floor(Math.random() * chars.length)];
+      if (g === 0) s += '-';
+    }
+    return s;
+  }
+
+  function getEffectivePlan() {
+    // 1. future-proof: explicit tier on the license row (if column exists)
+    if (license && license.license_tier && TIER_LIMITS[license.license_tier]) return license.license_tier;
+    // 2. latest activated/paid order wins (a purchase overrides trial limits)
+    var ord = null;
+    for (var i = 0; i < allOrders.length; i++) {
+      var o = allOrders[i];
+      if ((o.status === 'activated' || o.status === 'paid') && o.plan) { ord = o; break; }
+    }
+    if (ord) return ord.plan;
+    // 3. active trial unlocks FULL Business plan features
+    if (license && license.type === 'trial' && license.status === 'active') return 'trial';
+    if (license && license.type === 'lifetime') return 'business';
+    return 'trial';
+  }
+
+  function activeKeys(role) {
+    return (accessKeys || []).filter(function(k){ return k.role === role && k.active; });
+  }
+
+  function renderKeyList(role) {
+    var lim = TIER_LIMITS[effectivePlan] || TIER_LIMITS.trial;
+    var max = role === 'editor' ? lim.editors : lim.users;
+    var keys = activeKeys(role);
+    var isEdt = role === 'editor';
+    var boxId = isEdt ? 'edtKeysBox' : 'salKeysBox';
+    var countId = isEdt ? 'edtCount' : 'salCount';
+    var btnId = isEdt ? 'genEdtBtn' : 'genSalBtn';
+    var planBadgeId = isEdt ? 'edtPlanBadge' : 'salPlanBadge';
+    var maxLabel = max < 0 ? '∞' : String(max);
+    document.getElementById(countId).textContent = keys.length + '/' + maxLabel + (isEdt ? ' editors' : ' salesmen');
+    document.getElementById(planBadgeId).textContent = 'Plan: ' + lim.label;
+    var btn = document.getElementById(btnId);
+    var canAdd = max < 0 || keys.length < max;
+    btn.disabled = !canAdd;
+    btn.textContent = canAdd ? (isEdt ? '✏️ Generate Editor Key' : '🧾 Generate Salesman Key') : 'Limit reached';
+    var box = document.getElementById(boxId);
+    if (!keys.length) {
+      box.innerHTML = '<div class="empty-state">No ' + (isEdt ? 'editor' : 'salesman') + ' keys yet.<br>Generate one and share it with your team member — no password needed!</div>';
+      return;
+    }
+    box.innerHTML = keys.map(function(k){
+      return '<div class="key-row"><span class="key-code" title="Click to copy" data-copy-key="' + esc(k.key_code) + '">' + esc(k.key_code) + '</span>' +
+        '<button class="btn btn-ghost btn-sm" data-copy-key="' + esc(k.key_code) + '">📋 Copy</button>' +
+        '<button class="btn btn-ghost btn-sm" data-revoke-key="' + k.id + '">🗑 Revoke</button></div>';
+    }).join('');
+  }
+
+  function renderAccessKeys() {
+    document.getElementById('adminLicKey').textContent = (license && license.license_key) || '—';
+    document.getElementById('adminEmailHint').textContent = user.email;
+    if (accessKeys === null) {
+      var setup = '<div class="empty-state">⚠️ Access keys table not set up yet.<br><small>Ask support to enable team access keys.</small></div>';
+      document.getElementById('edtKeysBox').innerHTML = setup;
+      document.getElementById('salKeysBox').innerHTML = setup;
+      document.getElementById('edtCount').textContent = '—';
+      document.getElementById('salCount').textContent = '—';
+      document.getElementById('genEdtBtn').disabled = true;
+      document.getElementById('genSalBtn').disabled = true;
+      return;
+    }
+    renderKeyList('editor');
+    renderKeyList('salesman');
+  }
+
+  async function fetchAccessKeys() {
+    effectivePlan = getEffectivePlan();
+    try {
+      var res = await sb.from('access_keys').select('*').eq('user_id', user.id).order('created_at', { ascending: false });
+      if (res.error) throw res.error;
+      accessKeys = res.data || [];
+    } catch(e) { accessKeys = null; }
+    renderAccessKeys();
+  }
+
+  async function generateAccessKey(role) {
+    var prefix = role === 'editor' ? 'EDT' : 'SAL';
+    var code = genAccessKey(prefix);
+    try {
+      var res = await sb.from('access_keys').insert({ user_id: user.id, key_code: code, role: role, active: true }).select();
+      if (res.error) throw res.error;
+      toast('✅ ' + (role === 'editor' ? 'Editor' : 'Salesman') + ' key generated! Share: ' + code);
+      fetchAccessKeys();
+    } catch(e) {
+      toast('⚠️ ' + (e.message || 'Could not generate key'));
+    }
+  }
+  document.getElementById('genEdtBtn').addEventListener('click', function(){ generateAccessKey('editor'); });
+  document.getElementById('genSalBtn').addEventListener('click', function(){ generateAccessKey('salesman'); });
+
+  document.getElementById('tab-access').addEventListener('click', async function(e){
+    var cp = e.target.closest('[data-copy-key]');
+    if (cp) {
+      var k = cp.getAttribute('data-copy-key');
+      var done = function(){ toast('📋 Key copied: ' + k); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(k).then(done, done);
+      else done();
+      return;
+    }
+    var rv = e.target.closest('[data-revoke-key]');
+    if (rv) {
+      if (!confirm('Revoke this key? The team member will lose software access immediately.')) return;
+      try {
+        var res = await sb.from('access_keys').update({ active: false }).eq('id', rv.getAttribute('data-revoke-key'));
+        if (res.error) throw res.error;
+        toast('🗑 Key revoked');
+        fetchAccessKeys();
+      } catch(err) { toast('⚠️ ' + (err.message || 'Could not revoke key')); }
+    }
+  });
+  document.getElementById('adminLicKey').addEventListener('click', function(){
+    var k = this.textContent.trim();
+    if (!k || k === '—') return;
+    var done = function(){ toast('📋 License key copied!'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(k).then(done, done);
+    else done();
+  });
+
+  /* ---------- embedded AI chat ---------- */
+  var DASH_WA = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Assalam-o-Alaikum! Mujhe shopcos soft ke baare mein maloomat chahiye.');
+  var DASH_ANSWERS = [
+    { k: ['price', 'qemat', 'qeemat', 'cost', 'paisa', 'kitne ka', 'rate', 'plan'], a: '💰 <strong>Plans (lifetime):</strong><br>🌱 Starter — <strong>$90</strong><br>💼 Business — <strong>$145</strong> ⭐<br>🚀 Professional — <strong>$289</strong><br>🏢 Enterprise — <strong>$542</strong><br><br>7-day <strong>free trial</strong>, koi monthly fee nahi! 🚀' },
+    { k: ['trial', 'free', 'muft', 'azma'], a: '🆓 <strong>7-day free trial</strong> — koi card nahi chahiye! Sab features unlocked! ✨' },
+    { k: ['apk', 'android', 'mobile', 'app'], a: '📱 <strong>Android APK</strong> available hai! Shop ke WiFi se connect karke mobile se billing karein. Plans tab → Downloads se download karein! 📥' },
+    { k: ['medical', 'pharmacy', 'dawai', 'medicine', 'doctor'], a: '💊 Ji haan! <strong>Medical store</strong> ke liye perfect — batch number, generic name, expiry tracking aur expiry alerts sab included! 🏥' },
+    { k: ['kiryana', 'grocery', 'general store'], a: '🏪 Kiryana/general store ke liye ideal! Fast barcode billing, stock alerts, khata/udhar management — sab kuch ek screen par! ⚡' },
+    { k: ['khata', 'udhar', 'credit', 'udhaar'], a: '📒 <strong>Khata/Udhar management</strong> built-in hai! Har customer ka balance, history aur credit limit track karein. Risky debtors ke alerts bhi! 💪' },
+    { k: ['offline', 'internet', 'net'], a: '📴 <strong>100% offline</strong> kaam karta hai! Internet ki zaroorat nahi — bijli/internet jaye, dukaan chalti rahe! ⚡' },
+    { k: ['feature', 'kya kya', 'facilities'], a: '✨ <strong>Key features:</strong><br>• ⚡ Barcode billing<br>• 📦 Smart stock + expiry alerts<br>• 📒 Khata/udhar<br>• 🤖 AI insights + Voice billing<br>• 👥 Admin / Editor / Salesman roles<br>• 🔑 Team access keys<br>• 💾 Daily backup + Google Drive<br>• 🗣️ Urdu + English' },
+    { k: ['key', 'access', 'team', 'staff', 'salesman', 'editor'], a: '🔑 <strong>Software Access</strong> tab mein ja kar Editor aur Salesman keys generate karein — team ko sirf key share karni hai, password nahi! 👥' },
+    { k: ['support', 'madad', 'help', 'contact', 'rabta', 'number', 'phone', 'whatsapp'], a: '💬 <strong>COS — Developer</strong><br>📱 WhatsApp: <a href="' + DASH_WA + '" target="_blank" style="color:#ffd97a"><strong>+92 326 4025618</strong></a><br>Rabta karein — Urdu ya English mein! 😊' },
+    { k: ['download', 'software', 'install'], a: '💻 <strong>Windows portable</strong> — no installation, bas unzip karke chalao! Plans tab → Downloads se download karein. 📥' },
+    { k: ['language', 'urdu', 'zuban', 'bhasha'], a: '🗣️ <strong>Urdu + English</strong> dono! 28 currencies aur 31 countries supported — poori duniya ke liye! 🌍' },
+    { k: ['nam', 'name', 'kaun ho', 'who are you', 'tum kaun'], a: '🤖 Main <strong>shopcos AI Assistant</strong> hoon! Software, plans ya features ke baare mein kuch bhi poochein! 😊' },
+    { k: ['salam', 'assalam', 'hello', 'hi ', 'hey'], a: 'Walaikum Assalam! 👋 Main shopcos AI hoon. Software, plans ya features ke baare mein poochein! 😊' }
+  ];
+  var DASH_DEFAULT_A = 'Is sawal ka jawab jald aa raha hai! 😊 Tab tak <strong>WhatsApp</strong> par poochein: <a href="' + DASH_WA + '" target="_blank" style="color:#ffd97a">Chat karein →</a><br><br>Ya upar chips try karein! 👆';
+  var dashChatOpened = false;
+
+  function dashChatScroll() {
+    var m = document.getElementById('dashChatMsgs');
+    m.scrollTop = m.scrollHeight;
+  }
+  function dashChatAdd(html, who) {
+    var d = document.createElement('div');
+    d.className = 'dash-chat-msg ' + who;
+    d.innerHTML = html;
+    document.getElementById('dashChatMsgs').appendChild(d);
+    dashChatScroll();
+  }
+  function dashChatFind(q) {
+    q = ' ' + q.toLowerCase() + ' ';
+    for (var i = 0; i < DASH_ANSWERS.length; i++) {
+      var keys = DASH_ANSWERS[i].k;
+      for (var j = 0; j < keys.length; j++) {
+        if (q.indexOf(keys[j]) !== -1) return DASH_ANSWERS[i].a;
+      }
+    }
+    return DASH_DEFAULT_A;
+  }
+  function dashChatWelcome() {
+    if (dashChatOpened) return;
+    dashChatOpened = true;
+    dashChatAdd('Assalam-o-Alaikum! 👋 Main <strong>shopcos AI</strong> hoon.<br>Plans, software ya features ke baare mein poochein!', 'bot');
+  }
+  function dashChatSend() {
+    var input = document.getElementById('dashChatInput');
+    var q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    dashChatAdd(q.replace(/</g, '&lt;'), 'user');
+    var tp = document.createElement('div');
+    tp.className = 'dash-chat-msg bot typing';
+    tp.innerHTML = '<span></span><span></span><span></span>';
+    document.getElementById('dashChatMsgs').appendChild(tp);
+    dashChatScroll();
+    setTimeout(function(){
+      tp.remove();
+      dashChatAdd(dashChatFind(q), 'bot');
+    }, 700 + Math.random() * 500);
+  }
+  document.getElementById('dashChatSend').addEventListener('click', dashChatSend);
+  document.getElementById('dashChatInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') dashChatSend(); });
+  document.getElementById('dashChatChips').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if (!b) return;
+    var map = { price: 'Price kya hai?', trial: 'Free trial hai?', apk: 'APK available hai?', medical: 'Medical store ke liye use ho sakta?' };
+    document.getElementById('dashChatInput').value = map[b.getAttribute('data-q')] || '';
+    dashChatSend();
+  });
+
   /* ---------- init ---------- */
   async function init() {
     if (typeof supabase === 'undefined') { setTimeout(init, 300); return; }
@@ -841,12 +1362,18 @@ a{color:inherit;text-decoration:none}
     catch(e) { /* RLS/network issue — show graceful empty state */ license = null; }
     renderLicense();
     renderWallet();
-    renderOrders();
+    await renderOrders();
+    renderPlanBanner();
     renderAccount();
     try { await fetchProfile(); }
     catch(e) { /* profiles table may not exist yet — preview shows defaults */ }
     renderProfilePreview();
+    try { await fetchAccessKeys(); } catch(e) { /* access_keys table may not exist yet */ }
     try { await refreshMfa(); } catch(e) { /* MFA unavailable */ }
+    dashChatWelcome();
+    // deep-link: #plans #access #wallet #company #aichat #profile
+    var h = (location.hash || '').replace('#', '');
+    if (h) activateTab(h, false);
     document.getElementById('loader').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   }
