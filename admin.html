@@ -96,6 +96,10 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 .b-active{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
 .b-revoked{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
 .b-expired{background:rgba(163,173,201,.13);color:var(--muted);border:1px solid rgba(163,173,201,.3)}
+.badge.green{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+.badge.red{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
+.badge.blue{background:rgba(59,130,246,.14);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
+.badge.yellow{background:rgba(251,191,36,.13);color:#fbbf24;border:1px solid rgba(251,191,36,.35)}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
 .empty{padding:50px 20px;text-align:center;color:var(--muted)}
 .warn-banner{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:16px 20px;margin-bottom:24px;font-size:.9rem;color:#fca5a5}
@@ -173,6 +177,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
       </div>
     </div>
     <div class="nav-link active" data-sec="dashboard"><span class="ico">📊</span><span class="txt">Dashboard</span></div>
+    <div class="nav-link" data-sec="orders"><span class="ico">🧾</span><span class="txt">Orders</span></div>
     <div class="nav-link" data-sec="users"><span class="ico">👥</span><span class="txt">Users &amp; Licenses</span></div>
     <div class="nav-link" data-sec="create"><span class="ico">🔑</span><span class="txt">Create License</span></div>
     <div class="side-foot">
@@ -210,6 +215,30 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         <div class="table-wrap"><table>
           <thead><tr><th>Email</th><th>Signed up</th><th>Type</th><th>Status</th></tr></thead>
           <tbody id="recentBody"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="section" id="sec-orders">
+      <div class="card">
+        <h2>🧾 Customer orders</h2>
+        <p style="color:var(--muted);font-size:.92rem;margin-bottom:18px">Orders placed through the website checkout. Verify the payment, then activate the lifetime license.</p>
+        <div class="toolbar">
+          <select class="filter" id="orderStatusFilter">
+            <option value="pending">Pending</option>
+            <option value="">All statuses</option>
+            <option value="paid">Paid</option>
+            <option value="activated">Activated</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" id="ordersRefresh">↻ Refresh</button>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>Order</th><th>Customer</th><th>Plan</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="ordersBody"><tr><td colspan="8" class="empty">Loading…</td></tr></tbody>
         </table></div>
       </div>
     </div>
@@ -357,7 +386,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
   function enterApp(user){
     hide('gate'); el('app').style.display = 'block';
     el('adminEmailShow').textContent = user.email;
-    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindLogout();
+    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindLogout();
     loadData();
   }
 
@@ -383,6 +412,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     renderStats();
     renderRecent();
     renderUsers();
+    loadOrders();
   }
 
   function renderStats(){
@@ -525,9 +555,120 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     loadData();
   }
 
+  /* ---------- orders ---------- */
+  var ORDER_PLANS = { starter:'🌱 Starter', business:'💼 Business', professional:'🚀 Professional', enterprise:'🏢 Enterprise' };
+  var ORDER_METHODS = { card:'💳 Card', crypto:'🪙 Crypto', bank:'🏦 Bank', easypaisa:'📱 Easypaisa', jazzcash:'📱 JazzCash' };
+  var allOrders = [];
+
+  async function loadOrders(){
+    var body = el('ordersBody');
+    try {
+      var res = await sb.from('orders').select('*').order('created_at', {ascending:false});
+      if (res.error) throw res.error;
+      allOrders = res.data || [];
+    } catch(e) {
+      allOrders = [];
+      body.innerHTML = '<tr><td colspan="8" class="empty">Could not load orders — run db/orders-schema.sql in Supabase first.</td></tr>';
+      return;
+    }
+    renderOrders();
+  }
+
+  function orderStatusBadge(st){
+    if (st === 'activated') return '<span class="badge green">✅ Activated</span>';
+    if (st === 'rejected') return '<span class="badge red">❌ Rejected</span>';
+    if (st === 'paid') return '<span class="badge blue">💰 Paid</span>';
+    return '<span class="badge yellow">⏳ Pending</span>';
+  }
+
+  function renderOrders(){
+    var body = el('ordersBody');
+    var f = el('orderStatusFilter').value;
+    var rows = f ? allOrders.filter(function(o){ return o.status === f; }) : allOrders;
+    if (!rows.length){
+      body.innerHTML = '<tr><td colspan="8" class="empty">No orders found.</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map(function(o){
+      var shortId = String(o.id).slice(0, 8) + '…';
+      var proof = o.proof_url
+        ? '<a href="#" class="proof-link" data-proof="' + esc(o.proof_url) + '" style="color:var(--gold-lt)">View</a>'
+        : '<span style="color:var(--muted-2)">—</span>';
+      var actions = (o.status === 'pending' || o.status === 'paid')
+        ? '<button class="btn btn-primary btn-sm" data-activate="' + o.id + '">✅ Activate</button> ' +
+          '<button class="btn btn-danger btn-sm" data-reject="' + o.id + '">Reject</button>'
+        : '<span style="color:var(--muted-2)">—</span>';
+      return '<tr>' +
+        '<td title="' + esc(o.id) + '"><code style="font-size:.78rem">' + esc(shortId) + '</code><br>' + proof + '</td>' +
+        '<td>' + esc(o.user_email) + '</td>' +
+        '<td>' + esc(ORDER_PLANS[o.plan] || o.plan) + '</td>' +
+        '<td><b>$' + Number(o.amount_usd).toFixed(0) + '</b><br><small style="color:var(--muted-2)">Rs ' + Number(o.amount_pkr).toLocaleString() + '</small></td>' +
+        '<td>' + esc(ORDER_METHODS[o.payment_method] || o.payment_method) + '</td>' +
+        '<td>' + orderStatusBadge(o.status) + '</td>' +
+        '<td>' + fmtDate(o.created_at) + '</td>' +
+        '<td style="white-space:nowrap">' + actions + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  async function activateOrder(orderId){
+    var o = null;
+    for (var i = 0; i < allOrders.length; i++) if (allOrders[i].id === orderId) o = allOrders[i];
+    if (!o) return;
+    if (!confirm('Activate lifetime license for ' + o.user_email + ' (' + (ORDER_PLANS[o.plan] || o.plan) + ')?')) return;
+    try {
+      // 1. create / upgrade the customer's license to lifetime
+      var key = genKey();
+      var licRes = await sb.from('licenses').select('id').eq('user_id', o.user_id).limit(1);
+      if (licRes.error) throw licRes.error;
+      if (licRes.data && licRes.data.length) {
+        var up = await sb.from('licenses').update({ type: 'lifetime', status: 'active', license_key: key, trial_ends_at: null }).eq('id', licRes.data[0].id);
+        if (up.error) throw up.error;
+      } else {
+        var ins = await sb.from('licenses').insert({ user_id: o.user_id, email: o.user_email, type: 'lifetime', status: 'active', license_key: key, trial_ends_at: null });
+        if (ins.error) throw ins.error;
+      }
+      // 2. mark order activated
+      var or = await sb.from('orders').update({ status: 'activated' }).eq('id', orderId);
+      if (or.error) throw or.error;
+      alert('✅ License activated!\n\nKey: ' + key + '\n\nSend this key to the customer.');
+      loadOrders(); loadData();
+    } catch(e) {
+      alert('❌ Activation failed: ' + e.message);
+    }
+  }
+
+  async function rejectOrder(orderId){
+    if (!confirm('Reject this order? The customer will need to contact support.')) return;
+    var res = await sb.from('orders').update({ status: 'rejected' }).eq('id', orderId);
+    if (res.error) alert('❌ ' + res.error.message);
+    else { alert('Order rejected.'); loadOrders(); }
+  }
+
+  function bindOrders(){
+    el('orderStatusFilter').addEventListener('change', renderOrders);
+    el('ordersRefresh').addEventListener('click', loadOrders);
+    el('ordersBody').addEventListener('click', function(e){
+      var a = e.target.closest('[data-activate]');
+      if (a) { activateOrder(a.getAttribute('data-activate')); return; }
+      var r = e.target.closest('[data-reject]');
+      if (r) { rejectOrder(r.getAttribute('data-reject')); return; }
+      var p = e.target.closest('[data-proof]');
+      if (p) {
+        e.preventDefault();
+        var path = p.getAttribute('data-proof');
+        sb.storage.from('payment-proofs').createSignedUrl(path, 3600).then(function(res){
+          if (res.error) { alert('Could not load receipt: ' + res.error.message); return; }
+          window.open(res.data.signedUrl, '_blank');
+        });
+      }
+    });
+  }
+
   /* ---------- bindings ---------- */
   var TITLES = {
     dashboard: ['Admin <span class="grad">Dashboard</span>', 'Overview of users and licenses.'],
+    orders: ['Customer <span class="grad">Orders</span>', 'Verify payments and activate licenses.'],
     users: ['Users &amp; <span class="grad">Licenses</span>', 'Search, filter and manage every account.'],
     create: ['Create <span class="grad">License</span>', 'Issue a new license key for a customer.']
   };

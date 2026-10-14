@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — shopcos soft</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="img/shopcos-logo-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b1c; --bg-2:#0b1130; --surface:rgba(255,255,255,.035);
+  --border:rgba(255,255,255,.09); --text:#f2f4fb; --muted:#a3adc9; --muted-2:#6d7694;
+  --gold:#f5b73f; --gold-lt:#ffd97a; --gold-dk:#c77f1a;
+  --green:#34d399; --red:#f87171; --blue:#3b82f6;
+  --grad:linear-gradient(120deg,#ffd97a 0%,#f5b73f 45%,#e08a1e 100%);
+  --font-d:'Bricolage Grotesque',system-ui,sans-serif; --font-b:'Inter',system-ui,sans-serif;
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(1200px 600px at 80% -10%,rgba(245,183,63,.07),transparent 60%),var(--bg);color:var(--text);font-family:var(--font-b);line-height:1.6;min-height:100vh}
+h1,h2,h3{font-family:var(--font-d);letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(7,11,28,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.topbar-inner{max-width:1000px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-d);font-weight:800;font-size:1.25rem}
+.brand img{width:38px;height:38px;object-fit:contain}
+.brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topbar-spacer{flex:1}
+
+.wrap{max-width:1000px;margin:0 auto;padding:36px 22px 80px}
+.page-head{text-align:center;margin-bottom:30px}
+.page-head h1{font-size:2.1rem;margin-bottom:8px}
+.page-head h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.page-head p{color:var(--muted)}
+
+/* steps */
+.steps{display:flex;justify-content:center;gap:0;margin:0 auto 36px;max-width:640px}
+.step{flex:1;text-align:center;position:relative;padding-top:34px;font-size:.82rem;color:var(--muted-2);font-weight:600}
+.step::before{content:attr(data-n);position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:var(--muted)}
+.step::after{content:'';position:absolute;top:15px;left:calc(-50% + 20px);right:calc(50% + 20px);height:2px;background:var(--border)}
+.step:first-child::after{display:none}
+.step.done{color:var(--green)}
+.step.done::before{background:rgba(52,211,153,.15);border-color:var(--green);color:var(--green);content:'✓'}
+.step.done::after{background:var(--green)}
+.step.active{color:var(--gold-lt)}
+.step.active::before{background:var(--grad);border-color:var(--gold);color:#1a1005;box-shadow:0 0 18px rgba(245,183,63,.5)}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
+.card h2{font-size:1.3rem;margin-bottom:6px}
+.card .sub{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+.step-pane{display:none}
+.step-pane.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* order summary */
+.order-item{display:flex;align-items:center;gap:16px;background:rgba(245,183,63,.06);border:1px solid rgba(245,183,63,.25);border-radius:14px;padding:20px;margin-bottom:16px}
+.order-item .tag{font-size:2.4rem}
+.order-item .info{flex:1}
+.order-item .info h3{font-size:1.2rem}
+.order-item .info p{font-size:.85rem;color:var(--muted)}
+.order-price{text-align:right}
+.order-price .usd{font-family:var(--font-d);font-size:1.9rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.order-price .pkr{font-size:.85rem;color:var(--muted)}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:16px 4px 0;border-top:1px dashed var(--border);margin-top:8px}
+.total-row .t{color:var(--muted)}
+.total-row .v{font-family:var(--font-d);font-size:1.5rem;font-weight:800;color:var(--gold-lt)}
+.total-row .v small{display:block;font-size:.78rem;color:var(--muted);font-weight:400;font-family:var(--font-b);text-align:right}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:12px;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:.2s;font-family:var(--font-b);text-decoration:none}
+.btn-primary{background:var(--grad);color:#1a1005}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,183,63,.35)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--gold)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn-row .btn{flex:1;min-width:160px}
+
+/* forms */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:7px}
+.field input,.field select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:12px 15px;color:var(--text);font-size:.95rem;font-family:var(--font-b)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold)}
+.field input::placeholder{color:var(--muted-2)}
+.form-msg{font-size:.88rem;margin-top:10px;min-height:22px}
+.form-msg.err{color:var(--red)}
+.form-msg.ok{color:var(--green)}
+.auth-toggle{text-align:center;margin-top:14px;font-size:.88rem;color:var(--muted)}
+.auth-toggle a{color:var(--gold-lt);font-weight:600;cursor:pointer}
+
+/* payment methods */
+.pay-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.pay-tab{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:.2s;font-size:.82rem;font-weight:600;color:var(--muted)}
+.pay-tab .ic{font-size:1.6rem;display:block;margin-bottom:6px}
+.pay-tab:hover{border-color:var(--gold)}
+.pay-tab.active{border-color:var(--gold);background:rgba(245,183,63,.1);color:var(--gold-lt);box-shadow:0 0 20px rgba(245,183,63,.15)}
+.pay-pane{display:none}
+.pay-pane.active{display:block;animation:fadeIn .3s ease}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.07);font-size:.92rem}
+.kv .k{color:var(--muted)}
+.kv .v{font-weight:600;text-align:right;word-break:break-all}
+.copy-btn{background:rgba(245,183,63,.12);border:1px solid rgba(245,183,63,.4);color:var(--gold-lt);border-radius:8px;padding:4px 12px;font-size:.78rem;cursor:pointer;margin-left:8px;font-family:var(--font-b)}
+.copy-btn:hover{background:rgba(245,183,63,.22)}
+.note{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--muted);margin:16px 0}
+.note strong{color:var(--text)}
+.warn-note{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--muted);margin:16px 0}
+.file-row{margin:16px 0}
+.file-row input[type=file]{width:100%;background:rgba(255,255,255,.05);border:1px dashed var(--border);border-radius:10px;padding:14px;color:var(--muted);font-size:.88rem;font-family:var(--font-b);cursor:pointer}
+.file-row input[type=file]:hover{border-color:var(--gold)}
+.file-hint{font-size:.8rem;color:var(--muted-2);margin-top:6px}
+
+/* confirmation */
+.confirm-hero{text-align:center;padding:20px 0 10px}
+.confirm-hero .big{font-size:4rem;margin-bottom:10px}
+.confirm-hero h2{font-size:1.7rem;margin-bottom:8px}
+.confirm-hero p{color:var(--muted);max-width:480px;margin:0 auto}
+.order-id-box{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.35);border-radius:12px;padding:16px;text-align:center;margin:20px 0}
+.order-id-box .lbl{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.order-id-box .val{font-family:var(--font-d);font-size:1.3rem;font-weight:800;color:var(--green);word-break:break-all}
+.status-badge{display:inline-block;padding:6px 16px;border-radius:999px;font-size:.82rem;font-weight:700}
+.status-badge.pending{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.4);color:#fbbf24}
+
+.empty-state{text-align:center;padding:60px 20px}
+.empty-state .big{font-size:4rem;margin-bottom:14px}
+.empty-state h2{margin-bottom:8px}
+.empty-state p{color:var(--muted);margin-bottom:22px}
+
+#coToast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);z-index:3000;background:#101736;
+  border:1px solid rgba(245,183,63,.4);color:#f2f4fb;padding:13px 22px;border-radius:14px;font-size:.9rem;font-weight:600;
+  box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;transition:.3s;pointer-events:none;max-width:90vw;text-align:center}
+#coToast.show{opacity:1;transform:translate(-50%,0)}
+.spinner{width:20px;height:20px;border:2px solid rgba(0,0,0,.25);border-top-color:#1a1005;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:-4px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.foot{margin-top:50px;text-align:center;color:var(--muted-2);font-size:.82rem}
+.foot img{width:30px;vertical-align:-8px;margin-right:6px}
+
+@media(max-width:640px){
+  .pay-tabs{grid-template-columns:repeat(2,1fr)}
+  .step{font-size:.7rem}
+  .card{padding:20px}
+  .order-item{flex-direction:column;text-align:center}
+  .order-price{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <img src="img/shopcos-logo-transparent.png" alt="shopcos soft logo">
+      <span>shopcos <em>soft</em></span>
+    </a>
+    <div class="topbar-spacer"></div>
+    <button class="btn btn-ghost sc-cart-btn" data-open-cart aria-label="Open cart" style="padding:10px 16px">🛒 <span class="cart-badge sc-cart-badge zero" id="cartCount">0</span></button>
+    <a href="index.html" class="btn btn-ghost" style="padding:10px 16px">🏠 Home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Secure <span class="grad">Checkout</span></h1>
+    <p>One payment. Yours forever. No subscriptions.</p>
+  </div>
+
+  <div class="steps" id="stepsBar">
+    <div class="step active" data-n="1" data-s="plan">Plan</div>
+    <div class="step" data-n="2" data-s="account">Account</div>
+    <div class="step" data-n="3" data-s="payment">Payment</div>
+    <div class="step" data-n="4" data-s="done">Done</div>
+  </div>
+
+  <div id="emptyCart" class="card" style="display:none">
+    <div class="empty-state">
+      <div class="big">🛒</div>
+      <h2>Your cart is empty</h2>
+      <p>Pick a lifetime plan to continue with checkout.</p>
+      <a href="index.html#pricing" class="btn btn-primary">View Plans →</a>
+    </div>
+  </div>
+
+  <div id="checkoutFlow" style="display:none">
+
+    <!-- STEP 1: PLAN -->
+    <div class="step-pane active" id="pane-plan">
+      <div class="card">
+        <h2>1️⃣ Review your plan</h2>
+        <p class="sub">Confirm the license you're purchasing.</p>
+        <div class="order-item">
+          <span class="tag" id="planTag">💼</span>
+          <div class="info">
+            <h3><span id="planName">Business</span> Plan</h3>
+            <p>Lifetime license · Single shop · One-time payment</p>
+          </div>
+          <div class="order-price">
+            <div class="usd">$<span id="planUsd">145</span> <span style="font-size:1rem">USD</span></div>
+            <div class="pkr">Rs <span id="planPkr">40,000</span> PKR</div>
+          </div>
+        </div>
+        <div class="total-row">
+          <span class="t">Total due today (one-time)</span>
+          <span class="v">$<span id="totalUsd">145</span><small>Rs <span id="totalPkr">40,000</span> PKR</small></span>
+        </div>
+        <div class="btn-row">
+          <a href="index.html#pricing" class="btn btn-ghost">← Change plan</a>
+          <button class="btn btn-primary" id="toAccount">Continue →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: ACCOUNT -->
+    <div class="step-pane" id="pane-account">
+      <div class="card">
+        <h2>2️⃣ Your account</h2>
+        <p class="sub">Your license will be linked to this account.</p>
+        <div id="acctLoggedIn" style="display:none">
+          <div class="order-item">
+            <span class="tag">👤</span>
+            <div class="info">
+              <h3 id="acctEmailShow">—</h3>
+              <p>✅ You're signed in. Your license will be activated on this account.</p>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-ghost" id="backToPlan1">← Back</button>
+            <button class="btn btn-primary" id="toPayment">Continue to Payment →</button>
+          </div>
+        </div>
+        <div id="acctLoginForm">
+          <div class="note">🔒 Please <strong>log in or create an account</strong> to continue. Your license key is tied to your account.</div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="coEmail" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="coPass" placeholder="••••••••" autocomplete="current-password">
+          </div>
+          <div class="form-msg" id="coAuthMsg"></div>
+          <div class="btn-row">
+            <button class="btn btn-ghost" id="backToPlan2">← Back</button>
+            <button class="btn btn-primary" id="coLoginBtn">Login</button>
+          </div>
+          <div class="auth-toggle">New here? <a id="coGoSignup">Create a free account</a></div>
+          <div class="btn-row" style="margin-top:14px">
+            <button class="btn btn-ghost" id="coGoogleBtn">🔵 Continue with Google</button>
+          </div>
+        </div>
+        <div id="acctSignupForm" style="display:none">
+          <div class="note">🎉 Create your free account — includes a <strong>7-day free trial</strong>, no card required.</div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="coSuEmail" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="coSuPass" placeholder="Min. 6 characters" autocomplete="new-password">
+          </div>
+          <div class="form-msg" id="coSuMsg"></div>
+          <div class="btn-row">
+            <button class="btn btn-ghost" id="backToPlan3">← Back</button>
+            <button class="btn btn-primary" id="coSignupBtn">Create Account</button>
+          </div>
+          <div class="auth-toggle">Already have an account? <a id="coGoLogin">Login</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: PAYMENT -->
+    <div class="step-pane" id="pane-payment">
+      <div class="card">
+        <h2>3️⃣ Payment</h2>
+        <p class="sub">Choose how you'd like to pay <strong>$<span id="payUsd">145</span> USD</strong> <span style="color:var(--muted-2)">(Rs <span id="payPkr">40,000</span> PKR)</span>.</p>
+
+        <div class="pay-tabs">
+          <div class="pay-tab active" data-pay="card"><span class="ic">💳</span>Card</div>
+          <div class="pay-tab" data-pay="crypto"><span class="ic">🪙</span>Crypto</div>
+          <div class="pay-tab" data-pay="bank"><span class="ic">🏦</span>Bank</div>
+          <div class="pay-tab" data-pay="mobile"><span class="ic">📱</span>Easypaisa /<br>JazzCash</div>
+        </div>
+
+        <!-- CARD -->
+        <div class="pay-pane active" id="pay-card">
+          <div class="note">💳 Pay securely by <strong>credit/debit card</strong> — best for international customers.</div>
+          <div class="warn-note">⚙️ <strong>Setup needed:</strong> Stripe Payment Links are not connected yet.<br>
+            <span style="font-size:.82rem">hina: create a Stripe Payment Link per plan in the Stripe Dashboard, then paste the URLs into <code>STRIPE_LINKS</code> in this file.</span></div>
+          <button class="btn btn-primary" id="stripePayBtn" style="width:100%">💳 Pay $<span class="payUsdEcho">145</span> with Card</button>
+          <p class="file-hint" style="text-align:center;margin-top:10px">You'll be redirected to Stripe's secure checkout page.</p>
+        </div>
+
+        <!-- CRYPTO -->
+        <div class="pay-pane" id="pay-crypto">
+          <div class="note">🪙 Send <strong><span class="payUsdEcho">145</span> USDT</strong> to the wallet below, then confirm.</div>
+          <div class="kv"><span class="k">Network</span><span class="v">TRC20 (Tron)</span></div>
+          <div class="kv"><span class="k">Amount</span><span class="v"><span class="payUsdEcho">145</span> USDT</span></div>
+          <div class="kv"><span class="k">Wallet address</span><span class="v"><code id="usdtAddr" style="font-size:.8rem">TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code><button class="copy-btn" data-copy="usdtAddr">Copy</button></span></div>
+          <div class="warn-note" style="margin-top:14px">⚙️ <span style="font-size:.82rem">hina: replace the placeholder USDT address above with your real wallet address.</span></div>
+          <button class="btn btn-primary" id="cryptoDoneBtn" style="width:100%;margin-top:8px">✅ I've sent the payment</button>
+        </div>
+
+        <!-- BANK -->
+        <div class="pay-pane" id="pay-bank">
+          <div class="note">🏦 Transfer <strong>Rs <span class="payPkrEcho">40,000</span></strong> to the account below, then upload your receipt.</div>
+          <div class="kv"><span class="k">Bank</span><span class="v">— placeholder —</span></div>
+          <div class="kv"><span class="k">Account title</span><span class="v">— placeholder —</span></div>
+          <div class="kv"><span class="k">Account number</span><span class="v">— placeholder —</span></div>
+          <div class="kv"><span class="k">IBAN</span><span class="v">— placeholder —</span></div>
+          <div class="warn-note" style="margin-top:14px">⚙️ <span style="font-size:.82rem">hina: replace the placeholder bank details above with your real account details.</span></div>
+          <div class="file-row">
+            <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px">📤 Upload payment receipt (screenshot / PDF)</label>
+            <input type="file" id="bankProof" accept="image/*,.pdf">
+            <div class="file-hint">JPG, PNG or PDF · max 5 MB</div>
+          </div>
+          <button class="btn btn-primary" id="bankDoneBtn" style="width:100%">✅ I've sent the payment</button>
+        </div>
+
+        <!-- MOBILE MONEY -->
+        <div class="pay-pane" id="pay-mobile">
+          <div class="note">📱 Send <strong>Rs <span class="payPkrEcho">40,000</span></strong> via Easypaisa or JazzCash, then upload your receipt.</div>
+          <div class="field">
+            <label>Choose provider</label>
+            <select id="mobileProvider">
+              <option value="easypaisa">Easypaisa</option>
+              <option value="jazzcash">JazzCash</option>
+            </select>
+          </div>
+          <div class="kv"><span class="k">Easypaisa number</span><span class="v">03XX-XXXXXXX <span style="color:var(--muted-2)">(placeholder)</span></span></div>
+          <div class="kv"><span class="k">JazzCash number</span><span class="v">03XX-XXXXXXX <span style="color:var(--muted-2)">(placeholder)</span></span></div>
+          <div class="kv"><span class="k">Account title</span><span class="v">— placeholder —</span></div>
+          <div class="warn-note" style="margin-top:14px">⚙️ <span style="font-size:.82rem">hina: replace the placeholder mobile numbers above with your real Easypaisa / JazzCash numbers.</span></div>
+          <div class="file-row">
+            <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px">📤 Upload payment receipt (screenshot)</label>
+            <input type="file" id="mobileProof" accept="image/*,.pdf">
+            <div class="file-hint">JPG, PNG or PDF · max 5 MB</div>
+          </div>
+          <button class="btn btn-primary" id="mobileDoneBtn" style="width:100%">✅ I've sent the payment</button>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" id="backToAccount">← Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: CONFIRMATION -->
+    <div class="step-pane" id="pane-done">
+      <div class="card">
+        <div class="confirm-hero">
+          <div class="big">🎉</div>
+          <h2>Order received!</h2>
+          <p>Thank you for your purchase. Our team will verify your payment and activate your lifetime license — usually within a few hours.</p>
+        </div>
+        <div class="order-id-box">
+          <div class="lbl">Order ID</div>
+          <div class="val" id="orderIdShow">—</div>
+        </div>
+        <div style="text-align:center;margin-bottom:8px"><span class="status-badge pending" id="orderStatusShow">⏳ Pending verification</span></div>
+        <div class="kv"><span class="k">Plan</span><span class="v" id="donePlan">—</span></div>
+        <div class="kv"><span class="k">Amount</span><span class="v" id="doneAmount">—</span></div>
+        <div class="kv"><span class="k">Payment method</span><span class="v" id="doneMethod">—</span></div>
+        <div class="note" style="margin-top:18px">📩 You'll receive your <strong>license key by email</strong> once the payment is verified. You can also track the status anytime in your <a href="dashboard.html" style="color:var(--gold-lt);font-weight:600">dashboard</a>.</div>
+        <div class="btn-row">
+          <a href="dashboard.html" class="btn btn-primary">Go to Dashboard →</a>
+          <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <img src="img/cos-logo.png" alt="COS"> Developed by <strong>COS</strong> · Chishti Office Samundri<br>
+    <span style="font-size:.75rem">🔒 Your payment details are never stored on our servers.</span>
+  </div>
+</main>
+
+<div id="coToast"></div>
+
+<script src="cart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ============ CONFIG (placeholders — hina: fill in real details) ============ */
+  var SUPABASE_URL = 'https://qqlgebbqhixbvyeotdkm.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxbGdlYmJxaGl4YnZ5ZW90ZGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5ODEyNzQsImV4cCI6MjEwNzU1NzI3NH0.2-7imtVkkH0NfxTMcC-eCGLiZN5tCkiRkNR6XRzfXns';
+
+  // hina: create one Stripe Payment Link per plan in the Stripe Dashboard,
+  // then paste the URLs here. Leave '#' until connected.
+  var STRIPE_LINKS = {
+    starter: '#',
+    business: '#',
+    professional: '#',
+    enterprise: '#'
+  };
+
+  // hina: replace with your real USDT (TRC20) wallet address
+  var USDT_ADDRESS = 'TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+
+  var sb = null, user = null, cart = null, currentPay = 'card', placing = false;
+
+  function el(id){ return document.getElementById(id); }
+  function fmt(n){ return Number(n).toLocaleString('en-US'); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  function toast(msg){
+    var t = el('coToast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+  }
+
+  function gotoStep(name){
+    document.querySelectorAll('.step-pane').forEach(function(p){ p.classList.remove('active'); });
+    el('pane-' + name).classList.add('active');
+    var order = ['plan','account','payment','done'];
+    var idx = order.indexOf(name);
+    document.querySelectorAll('#stepsBar .step').forEach(function(s){
+      var si = order.indexOf(s.getAttribute('data-s'));
+      s.classList.toggle('active', si === idx);
+      s.classList.toggle('done', si < idx);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ---------- init ---------- */
+  function init(){
+    cart = (window.ShopcosCart && ShopcosCart.get()) || null;
+    if (!cart) {
+      el('emptyCart').style.display = 'block';
+      el('checkoutFlow').style.display = 'none';
+      return;
+    }
+    el('emptyCart').style.display = 'none';
+    el('checkoutFlow').style.display = 'block';
+
+    // fill plan summary
+    el('planTag').textContent = cart.tag;
+    el('planName').textContent = cart.name;
+    el('planUsd').textContent = fmt(cart.usd);
+    el('planPkr').textContent = fmt(cart.pkr);
+    el('totalUsd').textContent = fmt(cart.usd);
+    el('totalPkr').textContent = fmt(cart.pkr);
+    el('payUsd').textContent = fmt(cart.usd);
+    el('payPkr').textContent = fmt(cart.pkr);
+    document.querySelectorAll('.payUsdEcho').forEach(function(s){ s.textContent = fmt(cart.usd); });
+    document.querySelectorAll('.payPkrEcho').forEach(function(s){ s.textContent = fmt(cart.pkr); });
+    el('usdtAddr').textContent = USDT_ADDRESS;
+
+    // supabase
+    if (typeof supabase === 'undefined') { setTimeout(init, 300); return; }
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    sb.auth.getSession().then(function(res){
+      user = res.data && res.data.session ? res.data.session.user : null;
+      renderAccount();
+    });
+    sb.auth.onAuthStateChange(function(ev, session){
+      user = session ? session.user : null;
+      renderAccount();
+    });
+
+    wireEvents();
+  }
+
+  function renderAccount(){
+    var logged = !!user;
+    el('acctLoggedIn').style.display = logged ? 'block' : 'none';
+    el('acctLoginForm').style.display = logged ? 'none' : 'block';
+    if (logged) el('acctEmailShow').textContent = user.email;
+  }
+
+  /* ---------- order placement ---------- */
+  async function uploadProof(file){
+    if (!file) return null;
+    if (file.size > 5 * 1024 * 1024) { toast('⚠️ File too large — max 5 MB.'); return 'TOO_LARGE'; }
+    try {
+      var path = user.id + '/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+      var up = await sb.storage.from('payment-proofs').upload(path, file);
+      if (up.error) throw up.error;
+      return path;
+    } catch(e) {
+      console.warn('proof upload failed', e);
+      return null; // graceful fallback — order still recorded
+    }
+  }
+
+  async function placeOrder(paymentMethod, proofFile){
+    if (placing) return;
+    if (!user) { toast('🔒 Please log in first.'); gotoStep('account'); return; }
+    if (!cart) { toast('🛒 Your cart is empty.'); return; }
+    placing = true;
+
+    var proofPath = null;
+    if (proofFile) {
+      toast('⏳ Uploading receipt…');
+      proofPath = await uploadProof(proofFile);
+      if (proofPath === 'TOO_LARGE') { placing = false; return; }
+    }
+
+    toast('⏳ Placing your order…');
+    var payload = {
+      user_id: user.id,
+      user_email: user.email,
+      plan: cart.planId,
+      amount_usd: cart.usd,
+      amount_pkr: cart.pkr,
+      payment_method: paymentMethod,
+      status: 'pending',
+      proof_url: proofPath,
+      notes: proofFile && !proofPath ? 'receipt upload failed — customer will send via support' : null
+    };
+    try {
+      var res = await sb.from('orders').insert(payload).select('id').single();
+      if (res.error) throw res.error;
+      var oid = res.data.id;
+      // clear cart
+      if (window.ShopcosCart) ShopcosCart.clear();
+      // confirmation
+      el('orderIdShow').textContent = oid;
+      el('donePlan').textContent = cart.tag + ' ' + cart.name + ' — Lifetime';
+      el('doneAmount').textContent = '$' + fmt(cart.usd) + ' USD (Rs ' + fmt(cart.pkr) + ' PKR)';
+      el('doneMethod').textContent = {card:'💳 Card',crypto:'🪙 Crypto (USDT)',bank:'🏦 Bank Transfer',easypaisa:'📱 Easypaisa',jazzcash:'📱 JazzCash'}[paymentMethod] || paymentMethod;
+      gotoStep('done');
+      toast('🎉 Order placed successfully!');
+    } catch(e) {
+      console.error(e);
+      toast('❌ Could not place order: ' + (e.message || 'try again'));
+    }
+    placing = false;
+  }
+
+  /* ---------- events ---------- */
+  function wireEvents(){
+    el('toAccount').addEventListener('click', function(){ gotoStep('account'); });
+    ['backToPlan1','backToPlan2','backToPlan3'].forEach(function(id){
+      el(id).addEventListener('click', function(){ gotoStep('plan'); });
+    });
+    el('toPayment').addEventListener('click', function(){
+      if (!user) { toast('🔒 Please log in first.'); return; }
+      gotoStep('payment');
+    });
+    el('backToAccount').addEventListener('click', function(){ gotoStep('account'); });
+
+    // auth toggle
+    el('coGoSignup').addEventListener('click', function(){
+      el('acctLoginForm').style.display = 'none'; el('acctSignupForm').style.display = 'block';
+    });
+    el('coGoLogin').addEventListener('click', function(){
+      el('acctSignupForm').style.display = 'none'; el('acctLoginForm').style.display = 'block';
+    });
+
+    // login
+    el('coLoginBtn').addEventListener('click', async function(){
+      var email = el('coEmail').value.trim(), pass = el('coPass').value;
+      var msg = el('coAuthMsg'); msg.className = 'form-msg'; msg.textContent = '';
+      if (!email || !pass) { msg.classList.add('err'); msg.textContent = 'Enter your email and password.'; return; }
+      msg.textContent = 'Logging in…';
+      var res = await sb.auth.signInWithPassword({ email: email, password: pass });
+      if (res.error) { msg.classList.add('err'); msg.textContent = res.error.message; }
+      else { msg.classList.add('ok'); msg.textContent = '✅ Welcome back!'; }
+    });
+
+    // signup
+    el('coSignupBtn').addEventListener('click', async function(){
+      var email = el('coSuEmail').value.trim(), pass = el('coSuPass').value;
+      var msg = el('coSuMsg'); msg.className = 'form-msg'; msg.textContent = '';
+      if (!email || pass.length < 6) { msg.classList.add('err'); msg.textContent = 'Enter a valid email and a 6+ character password.'; return; }
+      msg.textContent = 'Creating account…';
+      var res = await sb.auth.signUp({ email: email, password: pass });
+      if (res.error) { msg.classList.add('err'); msg.textContent = res.error.message; }
+      else {
+        msg.classList.add('ok'); msg.textContent = '✅ Account created! Check your email to verify.';
+        try {
+          var uid = res.data.user && res.data.user.id;
+          if (uid) {
+            await sb.from('licenses').insert({
+              user_id: uid, email: email, type: 'trial', status: 'active',
+              license_key: 'TRIAL-' + Math.random().toString(36).slice(2,10).toUpperCase(),
+              trial_ends_at: new Date(Date.now() + 7*86400000).toISOString()
+            });
+          }
+        } catch(e){ /* trial row optional — don't block */ }
+      }
+    });
+
+    // google
+    el('coGoogleBtn').addEventListener('click', async function(){
+      var res = await sb.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: window.location.origin + '/checkout.html' }
+      });
+      if (res.error) toast('❌ ' + res.error.message);
+    });
+
+    // pay tabs
+    document.querySelectorAll('.pay-tab').forEach(function(t){
+      t.addEventListener('click', function(){
+        document.querySelectorAll('.pay-tab').forEach(function(x){ x.classList.remove('active'); });
+        document.querySelectorAll('.pay-pane').forEach(function(x){ x.classList.remove('active'); });
+        t.classList.add('active');
+        currentPay = t.getAttribute('data-pay');
+        el('pay-' + currentPay).classList.add('active');
+      });
+    });
+
+    // copy buttons
+    document.querySelectorAll('[data-copy]').forEach(function(b){
+      b.addEventListener('click', function(){
+        var txt = el(b.getAttribute('data-copy')).textContent.trim();
+        var done = function(){ toast('📋 Copied!'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done);
+        else done();
+      });
+    });
+
+    // stripe
+    el('stripePayBtn').addEventListener('click', function(){
+      var link = STRIPE_LINKS[cart.planId];
+      if (!link || link === '#') {
+        toast('⚙️ Card payments go live soon — please choose Crypto, Bank or Mobile instead.');
+        return;
+      }
+      // record intent, then redirect
+      placeOrder('card', null).then(function(){
+        window.location.href = link;
+      });
+    });
+
+    // crypto
+    el('cryptoDoneBtn').addEventListener('click', function(){ placeOrder('crypto', null); });
+
+    // bank
+    el('bankDoneBtn').addEventListener('click', function(){
+      placeOrder('bank', el('bankProof').files[0] || null);
+    });
+
+    // mobile
+    el('mobileDoneBtn').addEventListener('click', function(){
+      placeOrder(el('mobileProvider').value, el('mobileProof').files[0] || null);
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+</body>
+</html>

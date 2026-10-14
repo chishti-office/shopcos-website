@@ -45,6 +45,7 @@
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
+      <button class="btn btn-ghost sc-cart-btn" data-open-cart aria-label="Open cart">🛒 <span class="cart-badge sc-cart-badge zero" id="cartCount">0</span></button>
       <button class="btn btn-ghost" id="loginBtn">Login</button>
       <button class="btn btn-primary btn-sm" id="signupBtn">Sign Up</button>
     </div>
@@ -57,7 +58,7 @@
     <a href="#how">How it works</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
-    <a class="btn btn-primary require-auth" href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20kharidna%20hai%20(40,000%20PKR)." target="_blank" rel="noopener">Order Now</a>
+    <a class="btn btn-primary" data-open-cart href="#">🛒 View Cart</a>
   </div>
 </header>
 
@@ -399,7 +400,7 @@
           <li>Daily auto-backup</li>
           <li>WhatsApp support</li>
         </ul>
-        <a class="btn btn-ghost btn-lg btn-block require-auth" href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20STARTER%20(25,000%20PKR)%20chahiye." target="_blank" rel="noopener">💬 Order Starter</a>
+        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="starter">🛒 Add to Cart</button>
       </div>
       <!-- TIER 2: BUSINESS -->
       <div class="price-card featured">
@@ -417,7 +418,7 @@
           <li>Google Drive backup</li>
           <li>Priority WhatsApp support</li>
         </ul>
-        <a class="btn btn-primary btn-lg btn-block require-auth" href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20BUSINESS%20(40,000%20PKR)%20chahiye." target="_blank" rel="noopener">💬 Order Business</a>
+        <button class="btn btn-primary btn-lg btn-block" data-add-cart="business">🛒 Add to Cart</button>
         <div class="pay-methods">
           <span>We accept</span>
           <div class="pay-pills"><em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em></div>
@@ -436,7 +437,7 @@
           <li>Multi-terminal support</li>
           <li>Advanced reports</li>
         </ul>
-        <a class="btn btn-ghost btn-lg btn-block require-auth" href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20PROFESSIONAL%20(80,000%20PKR)%20chahiye." target="_blank" rel="noopener">💬 Order Professional</a>
+        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="professional">🛒 Add to Cart</button>
       </div>
       <!-- TIER 4: ENTERPRISE -->
       <div class="price-card">
@@ -451,7 +452,7 @@
           <li>Dedicated support</li>
           <li>Custom training session</li>
         </ul>
-        <a class="btn btn-ghost btn-lg btn-block require-auth" href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20ENTERPRISE%20(150,000%20PKR)%20chahiye." target="_blank" rel="noopener">💬 Order Enterprise</a>
+        <button class="btn btn-ghost btn-lg btn-block" data-add-cart="enterprise">🛒 Add to Cart</button>
       </div>
     </div>
     <!-- ROLE EXPLAINER -->
@@ -521,7 +522,7 @@
       <p>Join the shop owners who bill faster, never run out of stock, and recover every rupee of udhar.</p>
       <div class="hero-ctas center">
         <a class="btn btn-white btn-lg" href="#pricing">Start 7-Day Free Trial</a>
-        <a class="btn btn-outline-w btn-lg" href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20kharidna%20hai%20(40,000%20PKR)." target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+        <a class="btn btn-outline-w btn-lg" href="#pricing">💎 Buy Now — Lifetime License</a>
       </div>
     </div>
   </div>
@@ -631,6 +632,7 @@
 </div>
 
 <script src="script.js"></script>
+<script src="cart.js"></script>
 
 <!-- ============ CHAT WITH shopcos AI ============ -->
 <!-- Floating WhatsApp -->

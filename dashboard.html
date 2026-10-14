@@ -117,6 +117,21 @@ a{color:inherit;text-decoration:none}
 #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:#141a36;border:1px solid rgba(245,183,63,.4);color:var(--text);padding:13px 22px;border-radius:12px;font-size:.9rem;z-index:200;opacity:0;transition:.3s;max-width:90vw;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.5)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* ---------- profile ---------- */
+.profile-preview{display:flex;align-items:center;gap:16px;background:rgba(245,183,63,.05);border:1px solid rgba(245,183,63,.25);border-radius:14px;padding:16px 18px;margin-bottom:20px}
+.pp-logo{width:64px;height:64px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.pp-logo img{width:100%;height:100%;object-fit:contain}
+.pp-meta b{display:block;font-size:1.05rem;font-family:var(--font-d)}
+.pp-meta span{display:block;font-size:.85rem;color:var(--muted)}
+.pp-mobile{color:var(--gold-lt)!important;font-weight:600}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-group label{font-size:.85rem;font-weight:600;color:var(--muted)}
+.form-group .input{width:100%}
+.logo-row{display:flex;align-items:center;gap:14px}
+.logo-thumb{width:72px;height:72px;border-radius:14px;object-fit:contain;background:rgba(255,255,255,.06);border:1px solid var(--border);flex-shrink:0}
+
 .foot{text-align:center;color:var(--muted-2);font-size:.82rem;padding:26px 0 10px}
 .foot img{height:22px;vertical-align:middle;margin-right:6px}
 </style>
@@ -137,6 +152,7 @@ a{color:inherit;text-decoration:none}
       </a>
       <div class="topbar-spacer"></div>
       <span class="user-chip">👋 <b id="chipEmail">…</b></span>
+      <button class="btn btn-ghost btn-sm sc-cart-btn" data-open-cart aria-label="Open cart">🛒 <span class="cart-badge sc-cart-badge zero" id="cartCount">0</span></button>
       <a href="index.html" class="btn btn-ghost btn-sm">🏠 Home</a>
       <button class="btn btn-ghost btn-sm" id="logoutBtn">Logout</button>
     </div>
@@ -189,32 +205,39 @@ a{color:inherit;text-decoration:none}
             <h3>🌱 Starter</h3>
             <div class="price-big"><span class="cur">Rs</span>25,000 <span class="per">≈ $90 USD</span></div>
             <ul><li>👑 1 Admin</li><li>✅ All core features</li><li>✅ Free updates</li></ul>
-            <a class="btn btn-ghost btn-block plan-buy" data-plan="Starter — Rs 25,000" href="#" target="_blank" rel="noopener">💬 Buy Starter</a>
+            <button class="btn btn-ghost btn-block" data-add-cart="starter">🛒 Add to Cart</button>
           </div>
           <div class="plan-card featured">
             <div class="plan-tag">MOST POPULAR</div>
             <h3>💼 Business</h3>
             <div class="price-big"><span class="cur">Rs</span>40,000 <span class="per">≈ $145 USD</span></div>
             <ul><li>👑 1 Admin</li><li>✏️ 1 Editor</li><li>🧾 2 Users</li><li>✅ All features + AI</li></ul>
-            <a class="btn btn-primary btn-block plan-buy" data-plan="Business — Rs 40,000" href="#" target="_blank" rel="noopener">💬 Buy Business</a>
+            <button class="btn btn-primary btn-block" data-add-cart="business">🛒 Add to Cart</button>
           </div>
           <div class="plan-card">
             <h3>🚀 Professional</h3>
             <div class="price-big"><span class="cur">Rs</span>80,000 <span class="per">≈ $289 USD</span></div>
             <ul><li>👑 1 Admin</li><li>✏️ 2 Editors</li><li>🧾 10 Users</li><li>✅ All features + AI</li></ul>
-            <a class="btn btn-ghost btn-block plan-buy" data-plan="Professional — Rs 80,000" href="#" target="_blank" rel="noopener">💬 Buy Professional</a>
+            <button class="btn btn-ghost btn-block" data-add-cart="professional">🛒 Add to Cart</button>
           </div>
           <div class="plan-card">
             <h3>🏢 Enterprise</h3>
             <div class="price-big"><span class="cur">Rs</span>150,000 <span class="per">≈ $542 USD</span></div>
             <ul><li>👑 1 Admin</li><li>✏️ 5 Editors</li><li>🧾 Unlimited Users</li><li>✅ Priority support</li></ul>
-            <a class="btn btn-ghost btn-block plan-buy" data-plan="Enterprise — Rs 150,000" href="#" target="_blank" rel="noopener">💬 Buy Enterprise</a>
+            <button class="btn btn-ghost btn-block" data-add-cart="enterprise">🛒 Add to Cart</button>
           </div>
         </div>
         <div class="pay-pills" style="margin-top:14px">
           <em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em>
         </div>
-        <p class="note">After payment, send your receipt on WhatsApp — your lifetime license is usually activated within a few hours.</p>
+        <p class="note">Add a plan to your cart and check out securely — your lifetime license is usually activated within a few hours.</p>
+      </section>
+
+      <!-- My orders -->
+      <section class="card" style="grid-column:1/-1">
+        <h2>🧾 My Orders</h2>
+        <p class="sub">Track your purchases and license activation</p>
+        <div id="ordersList"><div class="empty-state">Loading orders…</div></div>
       </section>
 
       <!-- Downloads -->
@@ -241,19 +264,91 @@ a{color:inherit;text-decoration:none}
         <p class="note" id="dlNote"></p>
       </section>
 
-      <!-- Account -->
+      <!-- Profile -->
       <section class="card full">
-        <h2>👤 Account Settings</h2>
-        <p class="sub">Your account information</p>
-        <div class="kv"><span class="k">Email</span><span class="v" id="acctEmail">—</span></div>
-        <div class="kv"><span class="k">Member since</span><span class="v" id="acctSince">—</span></div>
-        <div class="kv"><span class="k">User ID</span><span class="v" id="acctId" style="font-size:.78rem;color:var(--muted-2)">—</span></div>
-        <h3 style="font-size:1rem;margin:22px 0 4px">Change password</h3>
-        <div class="acct-form">
-          <input type="password" class="input" id="newPass" placeholder="New password (min 6 characters)" minlength="6">
-          <button class="btn btn-primary btn-sm" id="changePassBtn">Update Password</button>
+        <h2>👤 My Profile</h2>
+        <p class="sub">Your business profile — used on your license, receipts and support requests</p>
+        <div class="profile-preview" id="profilePreview">
+          <div class="pp-logo"><img id="ppLogoImg" src="img/shopcos-logo-transparent.png" alt="Business logo"></div>
+          <div class="pp-meta">
+            <b id="ppBiz">Your Business Name</b>
+            <span id="ppOwner">Owner name</span>
+            <span id="ppMobile" class="pp-mobile">—</span>
+          </div>
         </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="profBiz">🏪 Business Name</label>
+            <input type="text" class="input" id="profBiz" placeholder="e.g. Ahmed General Store" maxlength="80">
+          </div>
+          <div class="form-group">
+            <label for="profOwner">🧑‍💼 Owner Name</label>
+            <input type="text" class="input" id="profOwner" placeholder="e.g. Ahmed Khan" maxlength="80">
+          </div>
+          <div class="form-group">
+            <label for="profMobile">📱 Mobile Number</label>
+            <input type="tel" class="input" id="profMobile" placeholder="+92 300 0000000" maxlength="20">
+          </div>
+          <div class="form-group">
+            <label>🖼️ Business Logo</label>
+            <div class="logo-row">
+              <img id="logoPreview" class="logo-thumb" src="img/shopcos-logo-transparent.png" alt="Logo preview">
+              <div>
+                <input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp" hidden>
+                <button class="btn btn-ghost btn-sm" id="logoPickBtn">📷 Choose Logo</button>
+                <p class="note" style="margin:6px 0 0">Max 2MB · JPG / PNG / WebP · auto-resized to 500px</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="saveProfileBtn">💾 Save Profile</button>
+        <p class="form-msg" id="profileMsg"></p>
+        <div style="margin-top:18px">
+          <div class="kv"><span class="k">Email</span><span class="v" id="acctEmail">—</span></div>
+          <div class="kv"><span class="k">Member since</span><span class="v" id="acctSince">—</span></div>
+          <div class="kv"><span class="k">User ID</span><span class="v" id="acctId" style="font-size:.78rem;color:var(--muted-2)">—</span></div>
+        </div>
+      </section>
+
+      <!-- Security: change password -->
+      <section class="card">
+        <h2>🔐 Change Password</h2>
+        <p class="sub">Verify your current password, then set a new one</p>
+        <div class="form-group">
+          <label for="curPass">Current Password</label>
+          <input type="password" class="input" id="curPass" placeholder="Enter current password" autocomplete="current-password">
+        </div>
+        <div class="form-group">
+          <label for="newPass">New Password</label>
+          <input type="password" class="input" id="newPass" placeholder="Min 6 characters" minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label for="confirmPass">Confirm New Password</label>
+          <input type="password" class="input" id="confirmPass" placeholder="Repeat new password" autocomplete="new-password">
+        </div>
+        <button class="btn btn-primary btn-block" id="changePassBtn">Update Password</button>
         <p class="form-msg" id="passMsg"></p>
+      </section>
+
+      <!-- Two-factor authentication -->
+      <section class="card">
+        <h2>🛡️ Two-Factor Authentication</h2>
+        <p class="sub">Add an extra layer of security with an authenticator app</p>
+        <div id="mfaBody">
+          <div class="kv"><span class="k">Status</span><span class="v" id="mfaStatus"><span class="badge gray">Checking…</span></span></div>
+          <div id="mfaActions" style="margin-top:14px"></div>
+          <div id="mfaSetup" style="display:none;margin-top:14px">
+            <p class="note" style="margin-bottom:10px">📲 Scan this QR code with Google Authenticator / Authy, then enter the 6-digit code:</p>
+            <div id="mfaQr" style="text-align:center;background:#fff;border-radius:12px;padding:14px;display:inline-block"></div>
+            <p class="note" style="margin:10px 0">Or enter this secret manually: <code id="mfaSecret" style="color:var(--gold-lt);word-break:break-all"></code></p>
+            <div class="acct-form">
+              <input type="text" class="input" id="mfaCode" placeholder="6-digit code" maxlength="6" inputmode="numeric" style="max-width:180px">
+              <button class="btn btn-primary btn-sm" id="mfaVerifyBtn">Verify &amp; Enable</button>
+              <button class="btn btn-ghost btn-sm" id="mfaCancelBtn">Cancel</button>
+            </div>
+          </div>
+          <p class="form-msg" id="mfaMsg"></p>
+        </div>
       </section>
     </div>
 
@@ -265,6 +360,7 @@ a{color:inherit;text-decoration:none}
 
 <div id="toast"></div>
 
+<script src="cart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
@@ -410,14 +506,37 @@ a{color:inherit;text-decoration:none}
     document.getElementById('addFundsBtn').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   }
 
-  /* ---------- buy now (4 tiers) ---------- */
-  function renderBuy() {
-    document.querySelectorAll('.plan-buy').forEach(function(a){
-      var plan = a.getAttribute('data-plan');
-      var msg = 'Assalam-o-Alaikum! Mujhe shopcos soft ka [' + plan + '] plan chahiye. My account email: ' + user.email;
-      a.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
-    });
+  /* ---------- orders ---------- */
+  var PLAN_LABELS = { starter:'🌱 Starter', business:'💼 Business', professional:'🚀 Professional', enterprise:'🏢 Enterprise' };
+  var METHOD_LABELS = { card:'💳 Card', crypto:'🪙 Crypto (USDT)', bank:'🏦 Bank Transfer', easypaisa:'📱 Easypaisa', jazzcash:'📱 JazzCash' };
+  async function renderOrders() {
+    var box = document.getElementById('ordersList');
+    try {
+      var res = await sb.from('orders').select('*').eq('user_id', user.id).order('created_at', { ascending: false });
+      if (res.error) throw res.error;
+      var orders = res.data || [];
+      if (!orders.length) {
+        box.innerHTML = '<div class="empty-state">No orders yet.<br>Add a plan to your cart and check out to get your lifetime license.</div>';
+        return;
+      }
+      box.innerHTML = orders.map(function(o){
+        var st = o.status === 'activated' ? ['green','✅ Activated']
+          : o.status === 'rejected' ? ['red','❌ Rejected']
+          : o.status === 'paid' ? ['blue','💰 Paid — activating soon']
+          : ['yellow','⏳ Pending verification'];
+        var d = o.created_at ? new Date(o.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—';
+        return '<div class="kv"><span class="k"><b>' + esc(PLAN_LABELS[o.plan] || o.plan) + '</b><br>' +
+          '<small style="color:var(--muted-2)">' + esc(METHOD_LABELS[o.payment_method] || o.payment_method) + ' · ' + d + '</small></span>' +
+          '<span class="v">$' + Number(o.amount_usd).toFixed(2) + '<br>' + badge(st[0], st[1]) + '</span></div>';
+      }).join('');
+    } catch(e) {
+      box.innerHTML = '<div class="empty-state">Could not load orders.<br><small>Orders table may not be set up yet.</small></div>';
+    }
   }
+
+  /* ---------- buy now (4 tiers) ----------
+     Plans now use the shared cart (cart.js) — "Add to Cart" buttons
+     are wired automatically via [data-add-cart]. No JS needed here. */
 
   /* ---------- downloads ---------- */
   document.querySelectorAll('.dl-btn').forEach(function(btn){
@@ -431,24 +550,255 @@ a{color:inherit;text-decoration:none}
     });
   });
 
-  /* ---------- account ---------- */
+  /* ---------- profile ---------- */
+  var profile = null, pendingLogoFile = null;
+
+  function setMsg(id, ok, text) {
+    var m = document.getElementById(id);
+    m.className = 'form-msg' + (ok === true ? ' ok' : ok === false ? ' err' : '');
+    m.textContent = text || '';
+  }
+
+  function renderProfilePreview() {
+    document.getElementById('ppBiz').textContent = (profile && profile.business_name) || 'Your Business Name';
+    document.getElementById('ppOwner').textContent = (profile && profile.owner_name) || 'Owner name';
+    document.getElementById('ppMobile').textContent = (profile && profile.mobile) || '—';
+    var logo = (profile && profile.logo_url) || 'img/shopcos-logo-transparent.png';
+    document.getElementById('ppLogoImg').src = logo;
+    document.getElementById('logoPreview').src = logo;
+    // header chip: show business name if set
+    if (profile && profile.business_name) {
+      document.getElementById('chipEmail').textContent = profile.business_name;
+      document.getElementById('chipEmail').title = user.email;
+    }
+  }
+
+  async function fetchProfile() {
+    var res = await sb.from('profiles').select('*').eq('user_id', user.id).limit(1);
+    if (res.error) throw res.error;
+    profile = (res.data && res.data[0]) || null;
+    if (profile) {
+      document.getElementById('profBiz').value = profile.business_name || '';
+      document.getElementById('profOwner').value = profile.owner_name || '';
+      document.getElementById('profMobile').value = profile.mobile || '';
+    }
+    renderProfilePreview();
+  }
+
+  function resizeImage(file, maxDim) {
+    return new Promise(function(resolve, reject){
+      var img = new Image();
+      var url = URL.createObjectURL(file);
+      img.onload = function(){
+        URL.revokeObjectURL(url);
+        var w = img.width, h = img.height;
+        var scale = Math.min(1, maxDim / Math.max(w, h));
+        var cw = Math.round(w * scale), ch = Math.round(h * scale);
+        var c = document.createElement('canvas');
+        c.width = cw; c.height = ch;
+        c.getContext('2d').drawImage(img, 0, 0, cw, ch);
+        c.toBlob(function(blob){
+          if (blob) resolve(blob); else reject(new Error('Resize failed'));
+        }, 'image/png');
+      };
+      img.onerror = function(){ URL.revokeObjectURL(url); reject(new Error('Invalid image')); };
+      img.src = url;
+    });
+  }
+
+  document.getElementById('logoPickBtn').addEventListener('click', function(){
+    document.getElementById('logoFile').click();
+  });
+  document.getElementById('logoFile').addEventListener('change', async function(){
+    var f = this.files && this.files[0];
+    if (!f) return;
+    if (f.size > 2 * 1024 * 1024) { toast('⚠️ Logo must be under 2MB'); this.value = ''; return; }
+    if (!/^image\/(png|jpeg|webp)$/.test(f.type)) { toast('⚠️ Use JPG, PNG or WebP'); this.value = ''; return; }
+    try {
+      var blob = await resizeImage(f, 500);
+      pendingLogoFile = new File([blob], 'logo.png', { type: 'image/png' });
+      document.getElementById('logoPreview').src = URL.createObjectURL(pendingLogoFile);
+      toast('📷 Logo ready — click Save Profile to upload');
+    } catch(e) {
+      toast('⚠️ Could not read image');
+    }
+  });
+
+  async function uploadLogo() {
+    if (!pendingLogoFile) return profile ? profile.logo_url : null;
+    var path = user.id + '/logo.png';
+    var up = await sb.storage.from('logos').upload(path, pendingLogoFile, { upsert: true, contentType: 'image/png' });
+    if (up.error) throw up.error;
+    var pub = sb.storage.from('logos').getPublicUrl(path);
+    pendingLogoFile = null;
+    return pub.data.publicUrl + '?t=' + Date.now();
+  }
+
+  document.getElementById('saveProfileBtn').addEventListener('click', async function(){
+    var btn = this;
+    setMsg('profileMsg', null, 'Saving…');
+    btn.disabled = true;
+    try {
+      var logoUrl = await uploadLogo();
+      var row = {
+        user_id: user.id,
+        business_name: document.getElementById('profBiz').value.trim() || null,
+        owner_name: document.getElementById('profOwner').value.trim() || null,
+        mobile: document.getElementById('profMobile').value.trim() || null,
+        logo_url: logoUrl || (profile && profile.logo_url) || null,
+        updated_at: new Date().toISOString()
+      };
+      var res = await sb.from('profiles').upsert(row, { onConflict: 'user_id' }).select();
+      if (res.error) throw res.error;
+      profile = res.data[0];
+      renderProfilePreview();
+      setMsg('profileMsg', true, '✅ Profile saved!');
+      toast('✅ Profile updated');
+    } catch(e) {
+      setMsg('profileMsg', false, '⚠️ ' + (e.message || 'Could not save profile'));
+    }
+    btn.disabled = false;
+  });
+
+  /* ---------- account info ---------- */
   function renderAccount() {
     document.getElementById('acctEmail').textContent = user.email;
-    document.getElementById('chipEmail').textContent = user.email;
+    if (!profile || !profile.business_name) {
+      document.getElementById('chipEmail').textContent = user.email;
+    }
     document.getElementById('acctSince').textContent = user.created_at ?
       new Date(user.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '—';
     document.getElementById('acctId').textContent = user.id || '—';
   }
+
+  /* ---------- change password (with current-password verification) ---------- */
   document.getElementById('changePassBtn').addEventListener('click', async function(){
+    var cur = document.getElementById('curPass').value;
     var np = document.getElementById('newPass').value;
-    var msg = document.getElementById('passMsg');
-    msg.className = 'form-msg'; msg.textContent = '';
-    if (!np || np.length < 6) { msg.classList.add('err'); msg.textContent = 'Password must be at least 6 characters.'; return; }
-    msg.textContent = 'Updating…';
-    var res = await sb.auth.updateUser({ password: np });
-    if (res.error) { msg.classList.add('err'); msg.textContent = res.error.message; }
-    else { msg.classList.add('ok'); msg.textContent = '✅ Password updated!'; document.getElementById('newPass').value = ''; }
+    var cp = document.getElementById('confirmPass').value;
+    setMsg('passMsg', null, '');
+    if (!cur) { setMsg('passMsg', false, 'Enter your current password.'); return; }
+    if (!np || np.length < 6) { setMsg('passMsg', false, 'New password must be at least 6 characters.'); return; }
+    if (np !== cp) { setMsg('passMsg', false, 'New passwords do not match.'); return; }
+    setMsg('passMsg', null, 'Verifying…');
+    this.disabled = true;
+    try {
+      // verify current password by re-authenticating
+      var reauth = await sb.auth.signInWithPassword({ email: user.email, password: cur });
+      if (reauth.error) throw new Error('Current password is incorrect.');
+      var upd = await sb.auth.updateUser({ password: np });
+      if (upd.error) throw upd.error;
+      setMsg('passMsg', true, '✅ Password updated!');
+      document.getElementById('curPass').value = '';
+      document.getElementById('newPass').value = '';
+      document.getElementById('confirmPass').value = '';
+      toast('✅ Password changed');
+    } catch(e) {
+      setMsg('passMsg', false, '⚠️ ' + (e.message || 'Could not update password'));
+    }
+    this.disabled = false;
   });
+
+  /* ---------- two-factor authentication ---------- */
+  var mfaFactorId = null, mfaChallengeId = null;
+
+  async function refreshMfa() {
+    var statusEl = document.getElementById('mfaStatus');
+    var actionsEl = document.getElementById('mfaActions');
+    actionsEl.innerHTML = '';
+    try {
+      var res = await sb.auth.mfa.listFactors();
+      if (res.error) throw res.error;
+      var factors = ((res.data && res.data.totp) || []).filter(function(f){ return f.status === 'verified'; });
+      if (factors.length) {
+        mfaFactorId = factors[0].id;
+        statusEl.innerHTML = badge('green', '🔒 Enabled');
+        var off = document.createElement('button');
+        off.className = 'btn btn-ghost btn-sm'; off.textContent = 'Disable 2FA';
+        off.onclick = disableMfa;
+        actionsEl.appendChild(off);
+        var note = document.createElement('p');
+        note.className = 'note';
+        note.textContent = 'Your account is protected. You will be asked for a code from your authenticator app on new devices.';
+        actionsEl.appendChild(note);
+      } else {
+        mfaFactorId = null;
+        statusEl.innerHTML = badge('gray', 'Disabled');
+        var on = document.createElement('button');
+        on.className = 'btn btn-primary btn-sm'; on.textContent = '🔐 Enable 2FA';
+        on.onclick = startMfaEnroll;
+        actionsEl.appendChild(on);
+      }
+    } catch(e) {
+      statusEl.innerHTML = badge('yellow', 'Unavailable');
+      actionsEl.innerHTML = '<p class="note">2FA could not be checked right now (' + esc(e.message || 'error') + '). Please try again later.</p>';
+    }
+  }
+
+  async function startMfaEnroll() {
+    setMsg('mfaMsg', null, 'Setting up…');
+    try {
+      var res = await sb.auth.mfa.enroll();
+      if (res.error) throw res.error;
+      mfaFactorId = res.data.id;
+      document.getElementById('mfaSecret').textContent = res.data.totp.secret;
+      var qr = document.getElementById('mfaQr');
+      qr.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = res.data.totp.qr_code;
+      img.alt = '2FA QR code';
+      img.style.cssText = 'width:180px;height:180px;display:block';
+      qr.appendChild(img);
+      document.getElementById('mfaSetup').style.display = 'block';
+      setMsg('mfaMsg', null, '');
+    } catch(e) {
+      setMsg('mfaMsg', false, '⚠️ ' + (e.message || 'Could not start 2FA setup'));
+    }
+  }
+
+  document.getElementById('mfaCancelBtn').addEventListener('click', async function(){
+    document.getElementById('mfaSetup').style.display = 'none';
+    document.getElementById('mfaCode').value = '';
+    if (mfaFactorId) { try { await sb.auth.mfa.unenroll({ factorId: mfaFactorId }); } catch(e) {} }
+    mfaFactorId = null;
+    refreshMfa();
+  });
+
+  document.getElementById('mfaVerifyBtn').addEventListener('click', async function(){
+    var code = document.getElementById('mfaCode').value.trim();
+    if (!/^\d{6}$/.test(code)) { setMsg('mfaMsg', false, 'Enter the 6-digit code from your app.'); return; }
+    setMsg('mfaMsg', null, 'Verifying…');
+    try {
+      var ch = await sb.auth.mfa.challenge({ factorId: mfaFactorId });
+      if (ch.error) throw ch.error;
+      mfaChallengeId = ch.data.id;
+      var ver = await sb.auth.mfa.verify({ factorId: mfaFactorId, challengeId: mfaChallengeId, code: code });
+      if (ver.error) throw ver.error;
+      document.getElementById('mfaSetup').style.display = 'none';
+      document.getElementById('mfaCode').value = '';
+      setMsg('mfaMsg', true, '✅ 2FA enabled!');
+      toast('🔒 Two-factor authentication enabled');
+      refreshMfa();
+    } catch(e) {
+      setMsg('mfaMsg', false, '⚠️ ' + (e.message || 'Invalid code — try again'));
+    }
+  });
+
+  async function disableMfa() {
+    if (!mfaFactorId) return;
+    if (!confirm('Disable two-factor authentication?')) return;
+    setMsg('mfaMsg', null, 'Disabling…');
+    try {
+      var res = await sb.auth.mfa.unenroll({ factorId: mfaFactorId });
+      if (res.error) throw res.error;
+      mfaFactorId = null;
+      setMsg('mfaMsg', true, '2FA disabled.');
+      toast('2FA disabled');
+      refreshMfa();
+    } catch(e) {
+      setMsg('mfaMsg', false, '⚠️ ' + (e.message || 'Could not disable 2FA'));
+    }
+  }
 
   /* ---------- license key copy ---------- */
   document.getElementById('licKey').addEventListener('click', function(){
@@ -491,8 +841,12 @@ a{color:inherit;text-decoration:none}
     catch(e) { /* RLS/network issue — show graceful empty state */ license = null; }
     renderLicense();
     renderWallet();
-    renderBuy();
+    renderOrders();
     renderAccount();
+    try { await fetchProfile(); }
+    catch(e) { /* profiles table may not exist yet — preview shows defaults */ }
+    renderProfilePreview();
+    try { await refreshMfa(); } catch(e) { /* MFA unavailable */ }
     document.getElementById('loader').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   }
