@@ -639,3 +639,8 @@ img.aiw-avatar { width: 36px; height: 36px; }
 .nav-select option{background:#0a0f24;color:#fff}
 .mobile-selects{display:flex;gap:10px;margin:10px 0}
 .mobile-selects .nav-select{flex:1;max-width:none;padding:12px;font-size:.9rem}
+
+/* Version badge + System requirements */
+.ver-badge { font-size: .7rem; background: linear-gradient(135deg,#ffd97a,#f5b73f); color: #1a1a2e; padding: 3px 10px; border-radius: 12px; font-weight: 700; vertical-align: middle; margin-left: 6px; }
+.sys-req { display: flex; flex-direction: column; gap: 4px; margin: 12px 0; padding: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(245,183,63,.15); border-radius: 12px; font-size: .82rem; color: #c8cbe0; }
+.sys-req span:first-child { color: #ffd97a; margin-bottom: 2px; }
