@@ -152,7 +152,7 @@
     localStorage.setItem('shopcos_user', JSON.stringify({ email: user.email, id: user.id }));
     updateNav();
     // Take the user to their dashboard (separate page, not the landing page)
-    window.location.href = 'dashboard.html';
+    window.location.href = 'dashboard/';
   }
   async function checkSession() {
     var { data } = await sb.auth.getSession();
@@ -160,7 +160,7 @@
       localStorage.setItem('shopcos_user', JSON.stringify({ email: data.session.user.email, id: data.session.user.id }));
       updateNav();
     }
-    // Notice set by dashboard.html when a logged-out user lands there
+    // Notice set by dashboard/ when a logged-out user lands there
     var notice = null;
     try { notice = sessionStorage.getItem('shopcos_notice'); sessionStorage.removeItem('shopcos_notice'); } catch(e) {}
     if (notice && !(data.session && data.session.user)) {
@@ -174,7 +174,7 @@
     try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
     if (user && user.email) {
       loginBtn.textContent = user.email.split('@')[0];
-      loginBtn.onclick = function() { window.location.href = 'dashboard.html'; };
+      loginBtn.onclick = function() { window.location.href = 'dashboard/'; };
       loginBtn.title = 'Go to Dashboard';
       signupBtn.textContent = 'Logout';
       signupBtn.onclick = async function() {
@@ -186,7 +186,7 @@
       if (!document.getElementById('dashNavBtn')) {
         var db = document.createElement('a');
         db.id = 'dashNavBtn';
-        db.href = 'dashboard.html';
+        db.href = 'dashboard/';
         db.className = 'btn btn-primary';
         db.textContent = '📊 Dashboard';
         db.style.marginRight = '8px';
@@ -199,7 +199,7 @@
     var user = null;
     try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
     // Logged-in users go straight to their dashboard
-    if (user && user.email) window.location.href = 'dashboard.html';
+    if (user && user.email) window.location.href = 'dashboard/';
     else showAuth('login');
   });
   signupBtn.addEventListener('click', async function() {
@@ -273,7 +273,7 @@
   async function googleAuth() {
     var { error } = await sb.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: window.location.origin + '/dashboard.html' }
+      options: { redirectTo: window.location.origin + '/dashboard/' }
     });
     if (error) alert(error.message);
   }

@@ -2,7 +2,7 @@
    shopcos soft — Shared Shopping Cart
    localStorage-based, single-plan cart (license purchase).
    One plan per cart: adding a new plan replaces the old one.
-   Include on: index.html, dashboard.html, checkout.html
+   Include on: index.html, dashboard/, checkout/
    ============================================================ */
 (function(){
   'use strict';
@@ -164,7 +164,7 @@
     foot.innerHTML =
       '<div class="sc-d-total"><span class="t">Total (one-time)</span>' +
       '<span class="v">$' + fmt(c.usd) + '<small>Rs ' + fmt(c.pkr) + ' PKR</small></span></div>' +
-      '<a class="sc-btn sc-btn-gold" href="checkout.html">Proceed to Checkout →</a>' +
+      '<a class="sc-btn sc-btn-gold" href="checkout/">Proceed to Checkout →</a>' +
       '<button class="sc-btn sc-btn-ghost" id="scClearCart">Remove from cart</button>';
     var clr = document.getElementById('scClearCart');
     if (clr) clr.addEventListener('click', function(){ clear(); toast('🗑️ Cart cleared.'); });
