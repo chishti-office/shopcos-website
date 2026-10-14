@@ -149,17 +149,24 @@
   }
   async function showSuccess(user) {
     var lic = await ensureLicense(user);
-    ['formLogin','formSignup','formOTP'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
-    document.getElementById('formSuccess').style.display = 'block';
-    if (lic && lic.license_key) document.getElementById('userKey').textContent = lic.license_key;
     localStorage.setItem('shopcos_user', JSON.stringify({ email: user.email, id: user.id }));
     updateNav();
+    // Take the user to their dashboard (separate page, not the landing page)
+    window.location.href = 'dashboard.html';
   }
   async function checkSession() {
     var { data } = await sb.auth.getSession();
     if (data.session && data.session.user) {
       localStorage.setItem('shopcos_user', JSON.stringify({ email: data.session.user.email, id: data.session.user.id }));
       updateNav();
+    }
+    // Notice set by dashboard.html when a logged-out user lands there
+    var notice = null;
+    try { notice = sessionStorage.getItem('shopcos_notice'); sessionStorage.removeItem('shopcos_notice'); } catch(e) {}
+    if (notice && !(data.session && data.session.user)) {
+      showAuth('login');
+      var le = document.getElementById('loginError');
+      if (le) le.textContent = notice;
     }
   }
   function updateNav() {
@@ -176,7 +183,13 @@
     }
   }
 
-  loginBtn.addEventListener('click', function() { showAuth('login'); });
+  loginBtn.addEventListener('click', function() {
+    var user = null;
+    try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
+    // Logged-in users go straight to their dashboard
+    if (user && user.email) window.location.href = 'dashboard.html';
+    else showAuth('login');
+  });
   signupBtn.addEventListener('click', async function() {
     var user = null;
     try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
@@ -244,11 +257,11 @@
 
   document.getElementById('authDone').addEventListener('click', hideAuth);
 
-  // Google OAuth via Supabase
+  // Google OAuth via Supabase — land on the dashboard after sign-in
   async function googleAuth() {
     var { error } = await sb.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: window.location.origin }
+      options: { redirectTo: window.location.origin + '/dashboard.html' }
     });
     if (error) alert(error.message);
   }
