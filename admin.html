@@ -180,6 +180,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     <div class="nav-link" data-sec="orders"><span class="ico">🧾</span><span class="txt">Orders</span></div>
     <div class="nav-link" data-sec="users"><span class="ico">👥</span><span class="txt">Users &amp; Licenses</span></div>
     <div class="nav-link" data-sec="create"><span class="ico">🔑</span><span class="txt">Create License</span></div>
+    <div class="nav-link" data-sec="remote"><span class="ico">📢</span><span class="txt">Remote Config</span></div>
     <div class="side-foot">
       <div>Signed in as</div>
       <div class="admin-email" id="adminEmailShow"></div>
@@ -294,6 +295,56 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         </div>
       </div>
     </div>
+    <!-- REMOTE CONFIG -->
+    <div class="section" id="sec-remote">
+      <div class="card" style="max-width:640px">
+        <h2>📢 Remote Config</h2>
+        <p style="color:var(--muted);font-size:.92rem;margin-bottom:20px">Push announcements, receipt messages, billing notices &amp; feature toggles to shops. Software picks them up automatically within 5 minutes when online.</p>
+        <div class="field">
+          <label>Target</label>
+          <select id="rcTarget">
+            <option value="all">🌍 All shops</option>
+            <option value="shop">🎯 Specific shop (license key)</option>
+          </select>
+        </div>
+        <div class="field" id="rcKeyRow" style="display:none">
+          <label>Shop license key</label>
+          <input type="text" id="rcLicenseKey" placeholder="SCS-XXXX-XXXX-XXXX or shop UUID">
+        </div>
+        <div class="field">
+          <label>Config type</label>
+          <select id="rcType">
+            <option value="announcement">📢 Announcement banner</option>
+            <option value="receipt_message">🧾 Receipt message</option>
+            <option value="billing_notice">⚠️ Billing screen notice</option>
+            <option value="feature_toggle">🔧 Feature toggle</option>
+          </select>
+        </div>
+        <div class="field" id="rcTextRow">
+          <label>Message text</label>
+          <input type="text" id="rcText" placeholder="Eid Mubarak! 🎉">
+        </div>
+        <div class="field" id="rcToggleRow" style="display:none">
+          <label>Feature toggles</label>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:6px;font-weight:normal"><input type="checkbox" id="rcTglAi" checked> 🤖 AI chat</label>
+            <label style="display:flex;align-items:center;gap:6px;font-weight:normal"><input type="checkbox" id="rcTglVoice" checked> 🎤 Voice billing</label>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="rcPushBtn">📢 Push to shops</button>
+        <div id="rcMsg" style="margin-top:12px;font-size:.9rem"></div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h2>Active configs</h2>
+        <div class="toolbar">
+          <button class="btn btn-ghost btn-sm" id="rcRefresh">↻ Refresh</button>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Type</th><th>Target</th><th>Value</th><th>Created</th><th>Actions</th></tr></thead>
+          <tbody id="rcBody"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -386,7 +437,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
   function enterApp(user){
     hide('gate'); el('app').style.display = 'block';
     el('adminEmailShow').textContent = user.email;
-    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindLogout();
+    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindRemote(); bindLogout();
     loadData();
   }
 
@@ -665,12 +716,116 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     });
   }
 
+  /* ---------- remote config ---------- */
+  var rcRows = [];
+  function escHtml(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function bindRemote(){
+    el('rcTarget').addEventListener('change', function(){
+      el('rcKeyRow').style.display = this.value === 'shop' ? 'block' : 'none';
+    });
+    el('rcType').addEventListener('change', function(){
+      var isToggle = this.value === 'feature_toggle';
+      el('rcTextRow').style.display = isToggle ? 'none' : 'block';
+      el('rcToggleRow').style.display = isToggle ? 'block' : 'none';
+    });
+    el('rcPushBtn').addEventListener('click', pushRemoteConfig);
+    el('rcRefresh').addEventListener('click', loadRemoteConfigs);
+    el('rcBody').addEventListener('click', function(e){
+      var d = e.target.closest('[data-rc-deactivate]');
+      if (d) deactivateRemoteConfig(d.getAttribute('data-rc-deactivate'));
+    });
+    loadRemoteConfigs();
+  }
+
+  async function pushRemoteConfig(){
+    var msg = el('rcMsg');
+    msg.style.color = 'var(--muted)'; msg.textContent = 'Pushing…';
+    try {
+      var target = el('rcTarget').value;
+      var type = el('rcType').value;
+      var value;
+      if (type === 'feature_toggle') {
+        value = {
+          ai_chat: el('rcTglAi').checked,
+          voice_billing: el('rcTglVoice').checked
+        };
+      } else {
+        var text = el('rcText').value.trim();
+        if (!text) { msg.style.color = '#f87171'; msg.textContent = '⚠️ Please enter message text.'; return; }
+        value = { text: text };
+        if (type === 'announcement') value.dismissible = true;
+      }
+      var payload = {
+        license_key: target === 'shop' ? el('rcLicenseKey').value.trim() || null : null,
+        config_key: type,
+        config_value: value,
+        active: true,
+        created_by: (sbUser && sbUser.email) || 'admin'
+      };
+      if (target === 'shop' && !payload.license_key) {
+        msg.style.color = '#f87171'; msg.textContent = '⚠️ Enter the shop license key.'; return;
+      }
+      var res = await sb.from('remote_config').insert(payload).select();
+      if (res.error) throw res.error;
+      msg.style.color = '#4ade80';
+      msg.textContent = '✅ Pushed! Shops will receive it within 5 minutes (when online).';
+      el('rcText').value = '';
+      loadRemoteConfigs();
+    } catch(e) {
+      msg.style.color = '#f87171';
+      msg.textContent = '❌ ' + (e.message || 'Push failed. Did you run the SQL schema?');
+    }
+  }
+
+  async function loadRemoteConfigs(){
+    var body = el('rcBody');
+    try {
+      var res = await sb.from('remote_config').select('*').eq('active', true).order('created_at', { ascending: false });
+      if (res.error) throw res.error;
+      rcRows = res.data || [];
+      renderRemoteConfigs();
+    } catch(e) {
+      body.innerHTML = '<tr><td colspan="5" class="empty">⚠️ ' + escHtml(e.message) + '<br><small>Run db/remote-config-schema.sql in Supabase SQL editor first.</small></td></tr>';
+    }
+  }
+
+  function renderRemoteConfigs(){
+    var body = el('rcBody');
+    if (!rcRows.length) {
+      body.innerHTML = '<tr><td colspan="5" class="empty">No active configs. Push one above! 📢</td></tr>';
+      return;
+    }
+    var typeLabels = { announcement: '📢 Announcement', receipt_message: '🧾 Receipt msg', billing_notice: '⚠️ Billing notice', feature_toggle: '🔧 Feature toggle' };
+    body.innerHTML = rcRows.map(function(r){
+      var v = r.config_value || {};
+      var valStr = r.config_key === 'feature_toggle'
+        ? Object.keys(v).map(function(k){ return k + ': ' + (v[k] ? 'ON' : 'OFF'); }).join(', ')
+        : (v.text || JSON.stringify(v));
+      return '<tr>' +
+        '<td>' + (typeLabels[r.config_key] || escHtml(r.config_key)) + '</td>' +
+        '<td>' + (r.license_key ? '🎯 ' + escHtml(r.license_key.substring(0, 18)) + '…' : '🌍 All shops') + '</td>' +
+        '<td style="max-width:260px;overflow:hidden;text-overflow:ellipsis">' + escHtml(valStr) + '</td>' +
+        '<td>' + new Date(r.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + '</td>' +
+        '<td><button class="btn btn-ghost btn-sm" data-rc-deactivate="' + r.id + '">Deactivate</button></td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  async function deactivateRemoteConfig(id){
+    if (!confirm('Deactivate this config? Shops will stop receiving it.')) return;
+    var res = await sb.from('remote_config').update({ active: false }).eq('id', id);
+    if (res.error) alert('❌ ' + res.error.message);
+    else { loadRemoteConfigs(); }
+  }
+
   /* ---------- bindings ---------- */
   var TITLES = {
     dashboard: ['Admin <span class="grad">Dashboard</span>', 'Overview of users and licenses.'],
     orders: ['Customer <span class="grad">Orders</span>', 'Verify payments and activate licenses.'],
     users: ['Users &amp; <span class="grad">Licenses</span>', 'Search, filter and manage every account.'],
-    create: ['Create <span class="grad">License</span>', 'Issue a new license key for a customer.']
+    create: ['Create <span class="grad">License</span>', 'Issue a new license key for a customer.'],
+    remote: ['Remote <span class="grad">Config</span>', 'Push updates to shop software remotely.']
   };
   function bindNav(){
     var links = document.querySelectorAll('.nav-link');

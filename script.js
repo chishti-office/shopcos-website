@@ -174,12 +174,24 @@
     try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
     if (user && user.email) {
       loginBtn.textContent = user.email.split('@')[0];
+      loginBtn.onclick = function() { window.location.href = 'dashboard.html'; };
+      loginBtn.title = 'Go to Dashboard';
       signupBtn.textContent = 'Logout';
       signupBtn.onclick = async function() {
         await sb.auth.signOut();
         localStorage.removeItem('shopcos_user');
         location.reload();
       };
+      // Add Dashboard button next to logout
+      if (!document.getElementById('dashNavBtn')) {
+        var db = document.createElement('a');
+        db.id = 'dashNavBtn';
+        db.href = 'dashboard.html';
+        db.className = 'btn btn-primary';
+        db.textContent = '📊 Dashboard';
+        db.style.marginRight = '8px';
+        signupBtn.parentNode.insertBefore(db, signupBtn);
+      }
     }
   }
 
