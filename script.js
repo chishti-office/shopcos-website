@@ -108,6 +108,7 @@
   function initSupabase() {
     if (typeof supabase === 'undefined') { setTimeout(initSupabase, 300); return; }
     sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    window.__shopcosSB = sb; // expose for currency/language sync IIFE
     checkSession();
   }
 
@@ -688,10 +689,52 @@
     BDT: { rate: 119,  sym: '৳', code: 'BDT' }
   };
   function fmt(n){ return Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+  window.__shopcosCURS = CURS; // expose rates for cart.js / checkout
+
+  // ---- Supabase profile sync (preferred_currency) ----
+  function sbClient(){ return window.__shopcosSB || null; }
+  function loggedInUser(){
+    try { var u = JSON.parse(localStorage.getItem('shopcos_user')); return (u && u.id) ? u : null; }
+    catch(e){ return null; }
+  }
+  function waitForSb(tries){
+    return new Promise(function(resolve){
+      (function poll(n){
+        if (sbClient()) return resolve(sbClient());
+        if (n <= 0) return resolve(null);
+        setTimeout(function(){ poll(n - 1); }, 400);
+      })(tries || 12);
+    });
+  }
+  // Save selected currency to the user's Supabase profile (fire-and-forget)
+  var __lastSyncedCur = null;
+  function syncCurrencyToProfile(c){
+    if (c === __lastSyncedCur) return;
+    __lastSyncedCur = c;
+    var u = loggedInUser(); if (!u) return;
+    waitForSb().then(function(client){
+      if (!client) return;
+      client.from('profiles').upsert({ user_id: u.id, preferred_currency: c }, { onConflict: 'user_id' })
+        .then(function(){}, function(){});
+    });
+  }
+  // Load preferred currency from profile (returns currency code or null)
+  function loadCurrencyFromProfile(){
+    var u = loggedInUser(); if (!u) return Promise.resolve(null);
+    return waitForSb().then(function(client){
+      if (!client) return null;
+      return client.from('profiles').select('preferred_currency').eq('user_id', u.id).limit(1).single()
+        .then(function(res){
+          var v = res && res.data && res.data.preferred_currency;
+          return (v && CURS[v]) ? v : null;
+        }, function(){ return null; });
+    });
+  }
 
   function setCurrency(c){
     if (!CURS[c]) c = 'USD';
     try { localStorage.setItem('shopcos_cur', c); } catch(e){}
+    syncCurrencyToProfile(c);
     var cur = CURS[c];
     // Big price cards: data-usd on .price, data-pkr on .price-pkr
     document.querySelectorAll('.price[data-usd]').forEach(function(el){
@@ -722,7 +765,7 @@
     });
   }
 
-  // ---- Init from localStorage ----
+  // ---- Init from Supabase profile (if logged in), else localStorage ----
   var savedLang = 'en', savedCur = 'USD';
   try {
     savedLang = localStorage.getItem('shopcos_lang') || 'en';
@@ -730,6 +773,10 @@
   } catch(e){}
   setLang(savedLang);
   setCurrency(savedCur);
+  // Website currency is the source of truth: pull profile value after login
+  loadCurrencyFromProfile().then(function(pc){
+    if (pc && pc !== savedCur) setCurrency(pc);
+  });
 
   // ---- Events ----
   ['langSelect','langSelectM'].forEach(function(id){

@@ -443,15 +443,29 @@ a{color:inherit;text-decoration:none}
     el('emptyCart').style.display = 'none';
     el('checkoutFlow').style.display = 'block';
 
-    // fill plan summary
+    // fill plan summary — in the user's selected currency
+    var cc = (window.ShopcosCart && ShopcosCart.curCode) ? ShopcosCart.curCode() : 'USD';
+    var pr = (window.ShopcosCart && ShopcosCart.priceInCur) ? ShopcosCart.priceInCur(cart) : null;
+    var bigHtml = pr ? pr.big : ('$' + fmt(cart.usd) + ' <span style="font-size:1rem">USD</span>');
+    var subHtml = pr ? pr.sub : ('Rs ' + fmt(cart.pkr) + ' PKR');
     el('planTag').textContent = cart.tag;
     el('planName').textContent = cart.name;
-    el('planUsd').textContent = fmt(cart.usd);
-    el('planPkr').textContent = fmt(cart.pkr);
-    el('totalUsd').textContent = fmt(cart.usd);
-    el('totalPkr').textContent = fmt(cart.pkr);
-    el('payUsd').textContent = fmt(cart.usd);
-    el('payPkr').textContent = fmt(cart.pkr);
+    el('planUsd').parentElement.innerHTML = bigHtml;
+    el('planPkr').parentElement.innerHTML = subHtml;
+    var tot = (window.ShopcosCart && ShopcosCart.totalInCur) ? ShopcosCart.totalInCur(cart) : ('$' + fmt(cart.usd) + '<small>Rs ' + fmt(cart.pkr) + ' PKR</small>');
+    el('totalUsd').parentElement.innerHTML = tot;
+    // payment step header
+    var payMain, paySub;
+    if (cc === 'USD') { payMain = '$' + fmt(cart.usd) + ' USD'; paySub = 'Rs ' + fmt(cart.pkr) + ' PKR'; }
+    else if (cc === 'PKR') { payMain = '₨ ' + fmt(cart.pkr) + ' PKR'; paySub = '$' + fmt(cart.usd) + ' USD'; }
+    else {
+      var rates = { EUR:0.92, GBP:0.79, INR:84, AED:3.67, SAR:3.75, BDT:119 };
+      var syms = { EUR:'€', GBP:'£', INR:'₹', AED:'د.إ', SAR:'ر.س', BDT:'৳' };
+      payMain = (syms[cc] || cc) + ' ' + fmt(Math.round(cart.usd * (rates[cc] || 1))) + ' ' + cc;
+      paySub = '$' + fmt(cart.usd) + ' USD';
+    }
+    el('payUsd').parentElement.innerHTML = payMain;
+    el('payPkr').parentElement.innerHTML = '(' + paySub + ')';
     document.querySelectorAll('.payUsdEcho').forEach(function(s){ s.textContent = fmt(cart.usd); });
     document.querySelectorAll('.payPkrEcho').forEach(function(s){ s.textContent = fmt(cart.pkr); });
     el('usdtAddr').textContent = USDT_ADDRESS;

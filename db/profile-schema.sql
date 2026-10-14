@@ -10,8 +10,12 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   owner_name    TEXT,
   mobile        TEXT,
   logo_url      TEXT,
+  preferred_currency TEXT DEFAULT 'USD',
   updated_at    TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Migration for existing installs (safe to run multiple times)
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS preferred_currency TEXT DEFAULT 'USD';
 
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 

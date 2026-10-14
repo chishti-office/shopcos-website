@@ -18,6 +18,33 @@
 
   function fmt(n){ return n.toLocaleString('en-US'); }
 
+  /* ---- selected currency (shared with script.js) ---- */
+  var CURS = { USD:{rate:1,sym:'$'}, PKR:{rate:278,sym:'₨'}, EUR:{rate:0.92,sym:'€'},
+               GBP:{rate:0.79,sym:'£'}, INR:{rate:84,sym:'₹'}, AED:{rate:3.67,sym:'د.إ'},
+               SAR:{rate:3.75,sym:'ر.س'}, BDT:{rate:119,sym:'৳'} };
+  function curCode(){
+    try {
+      var c = localStorage.getItem('shopcos_cur');
+      if (c && CURS[c]) return c;
+    } catch(e){}
+    return 'USD';
+  }
+  // Price in the selected currency: { big:'…', sub:'…' }
+  function priceInCur(c){
+    var code = curCode();
+    if (code === 'USD') return { big: '$' + fmt(c.usd) + ' <span style="font-size:1rem">USD</span>', sub: 'Rs ' + fmt(c.pkr) + ' PKR' };
+    if (code === 'PKR') return { big: '₨ ' + fmt(c.pkr) + ' <span style="font-size:1rem">PKR</span>', sub: '$' + fmt(c.usd) + ' USD' };
+    var cur = CURS[code];
+    return { big: cur.sym + ' ' + fmt(Math.round(c.usd * cur.rate)) + ' <span style="font-size:1rem">' + code + '</span>', sub: '$' + fmt(c.usd) + ' USD' };
+  }
+  function totalInCur(c){
+    var code = curCode();
+    if (code === 'USD') return '$' + fmt(c.usd) + '<small>Rs ' + fmt(c.pkr) + ' PKR</small>';
+    if (code === 'PKR') return '₨ ' + fmt(c.pkr) + '<small>$' + fmt(c.usd) + ' USD</small>';
+    var cur = CURS[code];
+    return cur.sym + ' ' + fmt(Math.round(c.usd * cur.rate)) + '<small>$' + fmt(c.usd) + ' USD</small>';
+  }
+
   function get(){
     try {
       var raw = localStorage.getItem(KEY);
@@ -153,17 +180,18 @@
       foot.innerHTML = '';
       return;
     }
+    var pr = priceInCur(c);
     body.innerHTML =
       '<div class="sc-d-item">' +
         '<div class="pname">' + c.tag + ' ' + c.name + ' Plan</div>' +
         '<div class="plic">Lifetime license · Single shop · One-time payment</div>' +
-        '<div class="sc-d-price">$' + fmt(c.usd) + ' <span style="font-size:1rem">USD</span></div>' +
-        '<div class="sc-d-pkr">Rs ' + fmt(c.pkr) + ' PKR</div>' +
+        '<div class="sc-d-price">' + pr.big + '</div>' +
+        '<div class="sc-d-pkr">' + pr.sub + '</div>' +
       '</div>' +
       '<p class="sc-d-note">💡 License plans are one per shop.<br>Adding a different plan replaces this one.</p>';
     foot.innerHTML =
       '<div class="sc-d-total"><span class="t">Total (one-time)</span>' +
-      '<span class="v">$' + fmt(c.usd) + '<small>Rs ' + fmt(c.pkr) + ' PKR</small></span></div>' +
+      '<span class="v">' + totalInCur(c) + '</span></div>' +
       '<a class="sc-btn sc-btn-gold" href="checkout/">Proceed to Checkout →</a>' +
       '<button class="sc-btn sc-btn-ghost" id="scClearCart">Remove from cart</button>';
     var clr = document.getElementById('scClearCart');
@@ -178,9 +206,12 @@
     var prev = get();
     set(planId);
     var p = PLANS[planId];
+    var code = curCode(), plabel = '$' + fmt(p.usd);
+    if (code === 'PKR') plabel = '₨' + fmt(p.pkr);
+    else if (code !== 'USD') plabel = CURS[code].sym + fmt(Math.round(p.usd * CURS[code].rate));
     toast(prev && prev.planId !== planId
-      ? '🔄 Cart updated: ' + p.tag + ' ' + p.name + ' ($' + fmt(p.usd) + ')'
-      : '🛒 Added: ' + p.tag + ' ' + p.name + ' ($' + fmt(p.usd) + ')');
+      ? '🔄 Cart updated: ' + p.tag + ' ' + p.name + ' (' + plabel + ')'
+      : '🛒 Added: ' + p.tag + ' ' + p.name + ' (' + plabel + ')');
     open();
   }
 
@@ -201,5 +232,5 @@
     document.addEventListener('DOMContentLoaded', init);
   } else { init(); }
 
-  window.ShopcosCart = { get:get, set:set, clear:clear, open:open, close:close, count:count, PLANS:PLANS, toast:toast };
+  window.ShopcosCart = { get:get, set:set, clear:clear, open:open, close:close, count:count, PLANS:PLANS, toast:toast, curCode:curCode, priceInCur:priceInCur, totalInCur:totalInCur };
 })();
