@@ -263,3 +263,20 @@
   // Fallback if already loaded
   setTimeout(function(){ if (!sb) initSupabase(); }, 2000);
 })();
+
+// Currency toggle for pricing
+(function(){
+  var prices = { USD: 145, PKR: 40000, INR: 12100, EUR: 133, GBP: 114 };
+  var symbols = { USD: '$', PKR: 'Rs ', INR: '₹', EUR: '€', GBP: '£' };
+  var btns = document.querySelectorAll('.cur-btn');
+  var priceEl = document.querySelector('.price');
+  if (!btns.length || !priceEl) return;
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var cur = btn.getAttribute('data-cur');
+      priceEl.innerHTML = '<span class="cur">' + symbols[cur] + '</span>' + prices[cur].toLocaleString() + ' <span class="usd">' + cur + '</span>';
+    });
+  });
+})();
