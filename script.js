@@ -90,10 +90,14 @@
   });
 })();
 
-// ============ Auth System ============
+// ============ Auth System (Supabase) ============
 (function(){
   'use strict';
-  var API = 'https://script.google.com/macros/s/AKfycbwFao18zk1hLujUHIzHzr7SBAHkmej_-n53YvZ4wbdxIeERGblSplRFupEjBry-fpp6Bw/exec';
+  
+  var SUPABASE_URL = 'https://qqlgebbqhixbvyeotdkm.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxbGdlYmJxaGl4YnZ5ZW90ZGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5ODEyNzQsImV4cCI6MjEwNzU1NzI3NH0.2-7imtVkkH0NfxTMcC-eCGLiZN5tCkiRkNR6XRzfXns';
+  
+  var sb = null;
   var pendingEmail = '';
 
   var overlay = document.getElementById('authOverlay');
@@ -101,10 +105,32 @@
   var signupBtn = document.getElementById('signupBtn');
   var authClose = document.getElementById('authClose');
 
-  function showAuth(tab) {
-    overlay.style.display = 'flex';
-    switchTab(tab || 'login');
+  function initSupabase() {
+    if (typeof supabase === 'undefined') { setTimeout(initSupabase, 300); return; }
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    checkSession();
   }
+
+  function genKey() {
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', k = 'SCS';
+    for (var i = 0; i < 3; i++) { k += '-'; for (var j = 0; j < 4; j++) k += chars[Math.floor(Math.random()*chars.length)]; }
+    return k;
+  }
+
+  async function ensureLicense(user) {
+    // Check if license exists, create trial if not
+    var { data } = await sb.from('licenses').select('*').eq('user_id', user.id).limit(1);
+    if (data && data.length) return data[0];
+    var key = genKey();
+    var trialEnds = new Date(Date.now() + 7*86400000).toISOString();
+    var { data: ins } = await sb.from('licenses').insert({
+      user_id: user.id, email: user.email, license_key: key,
+      type: 'trial', status: 'active', trial_ends_at: trialEnds
+    }).select();
+    return ins && ins[0];
+  }
+
+  function showAuth(tab) { overlay.style.display = 'flex'; switchTab(tab || 'login'); }
   function hideAuth() { overlay.style.display = 'none'; }
   function switchTab(tab) {
     document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
@@ -117,19 +143,24 @@
   function showOTP(email) {
     pendingEmail = email;
     document.getElementById('otpEmail').textContent = email;
-    document.getElementById('formLogin').style.display = 'none';
-    document.getElementById('formSignup').style.display = 'none';
+    ['formLogin','formSignup'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
     document.getElementById('formOTP').style.display = 'block';
     document.getElementById('formSuccess').style.display = 'none';
   }
-  function showSuccess(user) {
-    document.getElementById('formLogin').style.display = 'none';
-    document.getElementById('formSignup').style.display = 'none';
-    document.getElementById('formOTP').style.display = 'none';
+  async function showSuccess(user) {
+    var lic = await ensureLicense(user);
+    ['formLogin','formSignup','formOTP'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
     document.getElementById('formSuccess').style.display = 'block';
-    if (user.licenseKey) document.getElementById('userKey').textContent = user.licenseKey;
-    localStorage.setItem('shopcos_user', JSON.stringify(user));
+    if (lic && lic.license_key) document.getElementById('userKey').textContent = lic.license_key;
+    localStorage.setItem('shopcos_user', JSON.stringify({ email: user.email, id: user.id }));
     updateNav();
+  }
+  async function checkSession() {
+    var { data } = await sb.auth.getSession();
+    if (data.session && data.session.user) {
+      localStorage.setItem('shopcos_user', JSON.stringify({ email: data.session.user.email, id: data.session.user.id }));
+      updateNav();
+    }
   }
   function updateNav() {
     var user = null;
@@ -137,28 +168,20 @@
     if (user && user.email) {
       loginBtn.textContent = user.email.split('@')[0];
       signupBtn.textContent = 'Logout';
-      signupBtn.onclick = function() {
+      signupBtn.onclick = async function() {
+        await sb.auth.signOut();
         localStorage.removeItem('shopcos_user');
         location.reload();
       };
     }
   }
 
-  async function api(action, data) {
-    data = data || {}; data.action = action;
-    var res = await fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(data)
-    });
-    return res.json();
-  }
-
   loginBtn.addEventListener('click', function() { showAuth('login'); });
-  signupBtn.addEventListener('click', function() {
+  signupBtn.addEventListener('click', async function() {
     var user = null;
     try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
     if (user && user.email) {
+      await sb.auth.signOut();
       localStorage.removeItem('shopcos_user');
       location.reload();
     } else showAuth('signup');
@@ -168,31 +191,29 @@
   document.getElementById('tabLogin').addEventListener('click', function() { switchTab('login'); });
   document.getElementById('tabSignup').addEventListener('click', function() { switchTab('signup'); });
 
-  // Login
+  // Login with email + password
   document.getElementById('doLogin').addEventListener('click', async function() {
     var email = document.getElementById('loginEmail').value.trim();
     var pass = document.getElementById('loginPass').value;
     var err = document.getElementById('loginError');
     err.textContent = 'Logging in...';
-    try {
-      var r = await api('login', { email: email, password: pass });
-      if (r.ok) { showSuccess(r); }
-      else if (r.needsOTP) { showOTP(r.email || email); err.textContent = ''; }
-      else err.textContent = r.error || 'Login failed';
-    } catch(e) { err.textContent = 'Connection error — try again'; }
+    var { data, error } = await sb.auth.signInWithPassword({ email: email, password: pass });
+    if (error) err.textContent = error.message;
+    else if (data.user) showSuccess(data.user);
   });
 
-  // Signup
+  // Signup: send OTP
   document.getElementById('doSignup').addEventListener('click', async function() {
     var email = document.getElementById('signupEmail').value.trim();
     var pass = document.getElementById('signupPass').value;
     var err = document.getElementById('signupError');
+    if (pass.length < 6) { err.textContent = 'Password 6 characters se zyada ho'; return; }
     err.textContent = 'Sending OTP...';
-    try {
-      var r = await api('signup', { email: email, password: pass });
-      if (r.ok && r.needsOTP) { showOTP(email); err.textContent = ''; }
-      else err.textContent = r.error || 'Signup failed';
-    } catch(e) { err.textContent = 'Connection error — try again'; }
+    // Store password temporarily, send OTP
+    sessionStorage.setItem('sb_signup_pass', pass);
+    var { error } = await sb.auth.signInWithOtp({ email: email });
+    if (error) err.textContent = error.message;
+    else { showOTP(email); err.textContent = ''; }
   });
 
   // Verify OTP
@@ -201,53 +222,44 @@
     var err = document.getElementById('otpError');
     if (code.length !== 6) { err.textContent = '6-digit code dalain'; return; }
     err.textContent = 'Verifying...';
-    try {
-      var r = await api('verifyOTP', { email: pendingEmail, code: code });
-      if (r.ok) { showSuccess(r); }
-      else err.textContent = r.error || 'Verification failed';
-    } catch(e) { err.textContent = 'Connection error — try again'; }
+    var { data, error } = await sb.auth.verifyOtp({ email: pendingEmail, token: code, type: 'email' });
+    if (error) { err.textContent = error.message; return; }
+    // Set password for the user
+    var pass = sessionStorage.getItem('sb_signup_pass');
+    if (pass && data.user) {
+      await sb.auth.updateUser({ password: pass });
+      sessionStorage.removeItem('sb_signup_pass');
+    }
+    if (data.user) showSuccess(data.user);
   });
 
   // Resend OTP
   document.getElementById('resendOTP').addEventListener('click', async function() {
     var err = document.getElementById('otpError');
     err.textContent = 'Sending...';
-    try {
-      var r = await api('sendOTP', { email: pendingEmail });
-      err.textContent = r.ok ? 'Naya code bhej diya! ✅' : (r.error || 'Failed');
-      err.style.color = r.ok ? '#4ade80' : '#ff6b6b';
-    } catch(e) { err.textContent = 'Connection error'; }
+    var { error } = await sb.auth.signInWithOtp({ email: pendingEmail });
+    err.textContent = error ? error.message : 'Naya code bhej diya! ✅';
+    err.style.color = error ? '#ff6b6b' : '#4ade80';
   });
 
   document.getElementById('authDone').addEventListener('click', hideAuth);
 
-  // Google Sign-In (using Google Identity Services)
-  function initGoogle() {
-    if (typeof google === 'undefined' || !google.accounts) {
-      setTimeout(initGoogle, 500); return;
-    }
-    google.accounts.id.initialize({
-      client_id: '5145903963-im5rmn882upqiar20ajsnp9kbe0q2mnc.apps.googleusercontent.com',
-      callback: async function(resp) {
-        try {
-          var r = await api('gauth', { idToken: resp.credential });
-          if (r.ok) showSuccess(r);
-          else alert(r.error || 'Google login failed');
-        } catch(e) { alert('Connection error'); }
-      }
+  // Google OAuth via Supabase
+  async function googleAuth() {
+    var { error } = await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin }
     });
-    var btns = [document.getElementById('googleLogin'), document.getElementById('googleSignup')];
-    btns.forEach(function(b) {
-      if (b) b.addEventListener('click', function() {
-        google.accounts.id.prompt();
-      });
-    });
+    if (error) alert(error.message);
   }
-  // Load Google Identity Services
-  var gs = document.createElement('script');
-  gs.src = 'https://accounts.google.com/gsi/client';
-  gs.onload = initGoogle;
-  document.head.appendChild(gs);
+  document.getElementById('googleLogin').addEventListener('click', googleAuth);
+  document.getElementById('googleSignup').addEventListener('click', googleAuth);
 
-  updateNav();
+  // Load Supabase JS
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  s.onload = initSupabase;
+  document.head.appendChild(s);
+  // Fallback if already loaded
+  setTimeout(function(){ if (!sb) initSupabase(); }, 2000);
 })();
