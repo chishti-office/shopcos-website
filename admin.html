@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — shopcos soft</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="img/shopcos-logo-transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b1c; --bg-2:#0b1130; --surface:rgba(255,255,255,.035);
+  --border:rgba(255,255,255,.09); --text:#f2f4fb; --muted:#a3adc9; --muted-2:#6d7694;
+  --gold:#f5b73f; --gold-lt:#ffd97a; --gold-dk:#c77f1a;
+  --green:#34d399; --red:#f87171; --blue:#3b82f6; --cyan:#22d3ee;
+  --grad:linear-gradient(120deg,#ffd97a 0%,#f5b73f 45%,#e08a1e 100%);
+  --font-d:'Bricolage Grotesque',system-ui,sans-serif; --font-b:'Inter',system-ui,sans-serif;
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);line-height:1.6;min-height:100vh}
+h1,h2,h3,h4{font-family:var(--font-d);letter-spacing:-.015em}
+a{color:inherit;text-decoration:none}
+
+/* ---------- gate screens ---------- */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center}
+.gate-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:56px 48px;max-width:480px;width:100%}
+.gate-card img{width:72px;margin:0 auto 20px}
+.gate-card h1{font-size:1.9rem;margin-bottom:12px}
+.gate-card p{color:var(--muted);margin-bottom:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:12px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:.2s;font-family:var(--font-b)}
+.btn-primary{background:var(--grad);color:#1a1005}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,183,63,.35)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--gold)}
+.btn-danger{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:var(--red)}
+.btn-danger:hover{background:rgba(248,113,113,.22)}
+.btn-sm{padding:7px 14px;font-size:.82rem;border-radius:9px}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;margin:0 auto 18px;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- layout ---------- */
+#app{display:none;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:var(--bg-2);border-right:1px solid var(--border);padding:28px 18px;display:flex;flex-direction:column;z-index:10}
+.brand{display:flex;align-items:center;gap:12px;padding:0 10px 26px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.brand img{width:42px;height:42px}
+.brand-name{font-family:var(--font-d);font-weight:800;font-size:1.15rem}
+.brand-name em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-sub{font-size:.72rem;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+.nav-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:var(--muted);font-weight:500;margin-bottom:6px;cursor:pointer;transition:.2s;border:1px solid transparent}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.nav-link.active{color:var(--gold-lt);background:rgba(245,183,63,.1);border-color:rgba(245,183,63,.25)}
+.nav-link .ico{font-size:1.15rem;width:26px;text-align:center}
+.side-foot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted-2)}
+.side-foot .admin-email{color:var(--gold-lt);word-break:break-all}
+.main{margin-left:250px;padding:36px 40px;max-width:1200px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;flex-wrap:wrap;gap:14px}
+.topbar h1{font-size:2rem}
+.topbar h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topbar p{color:var(--muted);font-size:.92rem}
+.section{display:none}
+.section.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- stat cards ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-bottom:32px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.stat .num{font-family:var(--font-d);font-size:2.4rem;font-weight:800;margin:6px 0 2px}
+.stat .lbl{color:var(--muted);font-size:.88rem}
+.stat .ico{font-size:1.6rem}
+
+/* ---------- cards / tables ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;margin-bottom:24px}
+.card h2{font-size:1.3rem;margin-bottom:18px}
+.toolbar{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:200px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 16px;color:var(--text);font-size:.92rem;font-family:var(--font-b)}
+.search:focus{outline:none;border-color:var(--gold)}
+.search::placeholder{color:var(--muted-2)}
+select.filter{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:var(--font-b);font-size:.9rem}
+select.filter option{background:#0b1130}
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:760px}
+thead{background:rgba(245,183,63,.07)}
+th{text-align:left;padding:13px 16px;font-family:var(--font-d);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-lt);white-space:nowrap}
+td{padding:13px 16px;border-top:1px solid var(--border);vertical-align:middle}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+.email-cell{font-weight:600}
+.key-cell{font-family:ui-monospace,monospace;font-size:.82rem;color:var(--gold-lt);background:rgba(245,183,63,.08);padding:4px 10px;border-radius:7px;white-space:nowrap}
+.date-cell{color:var(--muted);white-space:nowrap;font-size:.85rem}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.b-trial{background:rgba(59,130,246,.14);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
+.b-lifetime{background:rgba(245,183,63,.14);color:var(--gold-lt);border:1px solid rgba(245,183,63,.35)}
+.b-active{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+.b-revoked{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
+.b-expired{background:rgba(163,173,201,.13);color:var(--muted);border:1px solid rgba(163,173,201,.3)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.empty{padding:50px 20px;text-align:center;color:var(--muted)}
+.warn-banner{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:16px 20px;margin-bottom:24px;font-size:.9rem;color:#fca5a5}
+.warn-banner code{background:rgba(0,0,0,.3);padding:2px 8px;border-radius:6px;font-size:.82rem}
+
+/* ---------- modal ---------- */
+.modal-ov{position:fixed;inset:0;background:rgba(4,6,18,.78);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-ov.open{display:flex}
+.modal{background:var(--bg-2);border:1px solid var(--border);border-radius:20px;padding:34px;width:100%;max-width:460px;animation:fadeIn .25s ease}
+.modal h3{font-size:1.35rem;margin-bottom:8px}
+.modal p.desc{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:7px;font-weight:500}
+.field input,.field select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:12px 15px;color:var(--text);font-size:.95rem;font-family:var(--font-b)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold)}
+.field select option{background:#0b1130}
+.modal-btns{display:flex;gap:12px;justify-content:flex-end;margin-top:24px}
+.result-box{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.3);border-radius:12px;padding:16px;margin-top:18px;display:none}
+.result-box.show{display:block}
+.result-box .k{font-family:ui-monospace,monospace;font-size:1.05rem;color:var(--green);letter-spacing:.05em}
+.result-box p{font-size:.85rem;color:var(--muted);margin-top:6px}
+
+@media(max-width:860px){
+  .sidebar{width:100%;position:static;flex-direction:row;align-items:center;padding:14px 16px;flex-wrap:wrap}
+  .brand{border:none;margin:0;padding:0 12px 0 0}
+  .brand-sub{display:none}
+  .nav-link{margin:0;padding:9px 12px}
+  .nav-link .txt{display:none}
+  .side-foot{display:none}
+  .main{margin-left:0;padding:24px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ GATE: loading / denied / login ============ -->
+<div id="gate">
+  <div class="gate-card" id="gateLoading">
+    <div class="spinner"></div>
+    <h1>Checking access…</h1>
+    <p>Verifying admin credentials.</p>
+  </div>
+  <div class="gate-card" id="gateDenied" style="display:none">
+    <div style="font-size:3rem;margin-bottom:14px">🔒</div>
+    <h1>Access Denied</h1>
+    <p>This admin panel is restricted to the shopcos office account only.</p>
+    <a class="btn btn-ghost" href="index.html">← Back to site</a>
+  </div>
+  <div class="gate-card" id="gateLogin" style="display:none">
+    <img src="img/shopcos-logo-transparent.png" alt="shopcos soft">
+    <h1>Admin <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Login</span></h1>
+    <p>Sign in with the office account<br><b style="color:var(--gold-lt)">chishtioffice2@gmail.com</b> to continue.</p>
+    <div class="field" style="text-align:left">
+      <label>Email</label>
+      <input type="email" id="adminEmail" placeholder="chishtioffice2@gmail.com" autocomplete="email">
+    </div>
+    <div class="field" style="text-align:left">
+      <label>Password</label>
+      <input type="password" id="adminPass" placeholder="Password" autocomplete="current-password">
+    </div>
+    <p id="loginErr" style="color:var(--red);font-size:.88rem;min-height:1.4em;margin-bottom:10px"></p>
+    <button class="btn btn-primary" id="adminLoginBtn" style="width:100%;justify-content:center">Login</button>
+    <p style="margin-top:16px;margin-bottom:0"><a href="index.html" style="color:var(--muted-2);font-size:.85rem">← Back to site</a></p>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="img/shopcos-logo-transparent.png" alt="shopcos">
+      <div>
+        <div class="brand-name">shopcos <em>soft</em></div>
+        <div class="brand-sub">Admin Panel</div>
+      </div>
+    </div>
+    <div class="nav-link active" data-sec="dashboard"><span class="ico">📊</span><span class="txt">Dashboard</span></div>
+    <div class="nav-link" data-sec="users"><span class="ico">👥</span><span class="txt">Users &amp; Licenses</span></div>
+    <div class="nav-link" data-sec="create"><span class="ico">🔑</span><span class="txt">Create License</span></div>
+    <div class="side-foot">
+      <div>Signed in as</div>
+      <div class="admin-email" id="adminEmailShow"></div>
+      <div style="margin-top:10px"><a href="#" id="logoutLink" style="color:var(--muted)">Logout →</a></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="pageTitle">Admin <span class="grad">Dashboard</span></h1>
+        <p id="pageSub">Overview of users and licenses.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="refreshBtn">↻ Refresh data</button>
+    </div>
+
+    <div id="rlsWarn" class="warn-banner" style="display:none">
+      ⚠️ <b>Row Level Security is blocking admin reads.</b> The licenses table only lets each user see their own row.
+      Ask your developer to run this in the Supabase SQL editor to allow the admin account full access:<br><br>
+      <code>CREATE POLICY "admin full access" ON public.licenses FOR ALL USING (auth.jwt() -&gt;&gt; 'email' = 'chishtioffice2@gmail.com');</code>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="section active" id="sec-dashboard">
+      <div class="stats">
+        <div class="stat"><span class="ico">👥</span><div class="num" id="stUsers">–</div><div class="lbl">Registered users</div></div>
+        <div class="stat"><span class="ico">🔑</span><div class="num" id="stLic">–</div><div class="lbl">Licenses issued</div></div>
+        <div class="stat"><span class="ico">🆓</span><div class="num" id="stTrials">–</div><div class="lbl">Active trials</div></div>
+        <div class="stat"><span class="ico">💎</span><div class="num" id="stPaid">–</div><div class="lbl">Paid licenses</div></div>
+      </div>
+      <div class="card">
+        <h2>Recent signups</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Email</th><th>Signed up</th><th>Type</th><th>Status</th></tr></thead>
+          <tbody id="recentBody"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="section" id="sec-users">
+      <div class="card">
+        <h2>Users &amp; licenses</h2>
+        <div class="toolbar">
+          <input class="search" id="userSearch" placeholder="🔍 Search by email…">
+          <select class="filter" id="typeFilter">
+            <option value="">All types</option>
+            <option value="trial">Trial</option>
+            <option value="lifetime">Lifetime</option>
+          </select>
+          <select class="filter" id="statusFilter">
+            <option value="">All statuses</option>
+            <option value="active">Active</option>
+            <option value="revoked">Revoked</option>
+            <option value="expired">Expired</option>
+          </select>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>Email</th><th>Signed up</th><th>License key</th><th>Type</th><th>Status</th><th>Trial ends</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="usersBody"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- CREATE LICENSE -->
+    <div class="section" id="sec-create">
+      <div class="card" style="max-width:560px">
+        <h2>🔑 Create lifetime license</h2>
+        <p style="color:var(--muted);font-size:.92rem;margin-bottom:20px">Generate a paid lifetime license key for a customer after payment is confirmed. The key is saved to the <b>licenses</b> table.</p>
+        <div class="field">
+          <label>Customer email</label>
+          <input type="email" id="newLicEmail" placeholder="customer@example.com">
+        </div>
+        <div class="field">
+          <label>License type</label>
+          <select id="newLicType">
+            <option value="lifetime">Lifetime (paid)</option>
+            <option value="trial">Trial (7 days)</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="createLicBtn">Generate license key</button>
+        <div class="result-box" id="createResult">
+          <div style="font-size:.85rem;color:var(--muted);margin-bottom:6px">License key generated:</div>
+          <div class="k" id="createResultKey"></div>
+          <p>Send this key to the customer on WhatsApp. It activates their software immediately.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ ACTION MODAL ============ -->
+<div class="modal-ov" id="actionOv">
+  <div class="modal">
+    <h3 id="actionTitle">Action</h3>
+    <p class="desc" id="actionDesc"></p>
+    <div class="field" id="extendField" style="display:none">
+      <label>New trial end date</label>
+      <input type="date" id="extendDate">
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-ghost" id="actionCancel">Cancel</button>
+      <button class="btn btn-danger" id="actionConfirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  'use strict';
+  var ADMIN_EMAIL = 'chishtioffice2@gmail.com';
+  var SUPABASE_URL = 'https://qqlgebbqhixbvyeotdkm.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxbGdlYmJxaGl4YnZ5ZW90ZGttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5ODEyNzQsImV4cCI6MjEwNzU1NzI3NH0.2-7imtVkkH0NfxTMcC-eCGLiZN5tCkiRkNR6XRzfXns';
+
+  var sb = null;
+  var allLicenses = [];
+  var pendingAction = null; // {kind:'revoke'|'extend', row}
+
+  function el(id){ return document.getElementById(id); }
+  function show(id){ el(id).style.display = 'block'; }
+  function hide(id){ el(id).style.display = 'none'; }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function genKey(){
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', k = 'SCS';
+    for (var i = 0; i < 3; i++){ k += '-'; for (var j = 0; j < 4; j++) k += chars[Math.floor(Math.random()*chars.length)]; }
+    return k;
+  }
+
+  function fmtDate(iso){
+    if (!iso) return '—';
+    var d = new Date(iso);
+    return d.toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'});
+  }
+
+  function licStatus(row){
+    if (row.status === 'revoked') return 'revoked';
+    if (row.type === 'trial' && row.trial_ends_at && new Date(row.trial_ends_at) < new Date()) return 'expired';
+    return 'active';
+  }
+
+  /* ---------- gate ---------- */
+  function init(){
+    if (typeof supabase === 'undefined'){ setTimeout(init, 300); return; }
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    checkGate();
+  }
+
+  async function checkGate(){
+    var user = null;
+    try {
+      var res = await sb.auth.getSession();
+      user = res.data && res.data.session ? res.data.session.user : null;
+    } catch(e){ user = null; }
+    if (user && user.email === ADMIN_EMAIL){ enterApp(user); return; }
+    if (user && user.email !== ADMIN_EMAIL){
+      // signed in as someone else — deny
+      hide('gateLoading'); show('gateDenied'); return;
+    }
+    hide('gateLoading'); show('gateLogin');
+    el('adminLoginBtn').addEventListener('click', doLogin);
+    el('adminPass').addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
+  }
+
+  async function doLogin(){
+    var email = el('adminEmail').value.trim().toLowerCase();
+    var pass = el('adminPass').value;
+    var err = el('loginErr');
+    if (email !== ADMIN_EMAIL){ err.textContent = 'Only the office account can access the admin panel.'; return; }
+    if (!pass){ err.textContent = 'Please enter the password.'; return; }
+    err.textContent = 'Signing in…';
+    var res = await sb.auth.signInWithPassword({ email: email, password: pass });
+    if (res.error){ err.textContent = res.error.message; return; }
+    enterApp(res.data.user);
+  }
+
+  function enterApp(user){
+    hide('gate'); el('app').style.display = 'block';
+    el('adminEmailShow').textContent = user.email;
+    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindLogout();
+    loadData();
+  }
+
+  /* ---------- data ---------- */
+  async function loadData(){
+    var res = await sb.from('licenses').select('*').order('created_at', {ascending:false});
+    if (res.error){
+      // RLS likely blocking — show warning, keep UI usable
+      el('rlsWarn').style.display = 'block';
+      allLicenses = [];
+      renderAll();
+      return;
+    }
+    allLicenses = res.data || [];
+    // Heuristic: if admin sees suspiciously few rows (only own), warn about RLS
+    if (allLicenses.length <= 1){
+      el('rlsWarn').style.display = 'block';
+    }
+    renderAll();
+  }
+
+  function renderAll(){
+    renderStats();
+    renderRecent();
+    renderUsers();
+  }
+
+  function renderStats(){
+    var now = new Date();
+    var users = allLicenses.length;
+    var trials = allLicenses.filter(function(r){ return r.type === 'trial' && r.status === 'active' && r.trial_ends_at && new Date(r.trial_ends_at) > now; }).length;
+    var paid = allLicenses.filter(function(r){ return r.type !== 'trial' && r.status === 'active'; }).length;
+    el('stUsers').textContent = users;
+    el('stLic').textContent = users;
+    el('stTrials').textContent = trials;
+    el('stPaid').textContent = paid;
+  }
+
+  function statusBadge(row){
+    var s = licStatus(row);
+    var cls = s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : 'b-expired');
+    return '<span class="badge ' + cls + '">' + s + '</span>';
+  }
+
+  function badgeFor(row){
+    var typeCls = row.type === 'lifetime' ? 'b-lifetime' : 'b-trial';
+    return '<span class="badge ' + typeCls + '">' + esc(row.type) + '</span> ' + statusBadge(row);
+  }
+
+  function renderRecent(){
+    var rows = allLicenses.slice(0, 8);
+    if (!rows.length){ el('recentBody').innerHTML = '<tr><td colspan="4" class="empty">No users yet.</td></tr>'; return; }
+    el('recentBody').innerHTML = rows.map(function(r){
+      return '<tr><td class="email-cell">' + esc(r.email) + '</td>' +
+        '<td class="date-cell">' + fmtDate(r.created_at) + '</td>' +
+        '<td><span class="badge ' + (r.type === 'lifetime' ? 'b-lifetime' : 'b-trial') + '">' + esc(r.type) + '</span></td>' +
+        '<td>' + statusBadge(r) + '</td></tr>';
+    }).join('');
+  }
+
+  function filteredRows(){
+    var q = el('userSearch').value.trim().toLowerCase();
+    var tf = el('typeFilter').value;
+    var sf = el('statusFilter').value;
+    return allLicenses.filter(function(r){
+      if (q && String(r.email || '').toLowerCase().indexOf(q) < 0) return false;
+      if (tf && r.type !== tf) return false;
+      if (sf && licStatus(r) !== sf) return false;
+      return true;
+    });
+  }
+
+  function renderUsers(){
+    var rows = filteredRows();
+    if (!rows.length){ el('usersBody').innerHTML = '<tr><td colspan="7" class="empty">No matching records.</td></tr>'; return; }
+    el('usersBody').innerHTML = rows.map(function(r){
+      var s = licStatus(r);
+      var canRevoke = s === 'active';
+      var canExtend = r.type === 'trial';
+      return '<tr>' +
+        '<td class="email-cell">' + esc(r.email) + '</td>' +
+        '<td class="date-cell">' + fmtDate(r.created_at) + '</td>' +
+        '<td><span class="key-cell">' + esc(r.license_key) + '</span></td>' +
+        '<td><span class="badge ' + (r.type === 'lifetime' ? 'b-lifetime' : 'b-trial') + '">' + esc(r.type) + '</span></td>' +
+        '<td><span class="badge ' + (s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : 'b-expired')) + '">' + s + '</span></td>' +
+        '<td class="date-cell">' + (r.type === 'trial' ? fmtDate(r.trial_ends_at) : '—') + '</td>' +
+        '<td><div class="actions">' +
+          (canExtend ? '<button class="btn btn-ghost btn-sm" data-act="extend" data-id="' + r.id + '">⏳ Extend</button>' : '') +
+          (canRevoke ? '<button class="btn btn-danger btn-sm" data-act="revoke" data-id="' + r.id + '">🚫 Revoke</button>' : '') +
+        '</div></td></tr>';
+    }).join('');
+    // bind action buttons
+    var btns = el('usersBody').querySelectorAll('button[data-act]');
+    for (var i = 0; i < btns.length; i++){
+      btns[i].addEventListener('click', onActionClick);
+    }
+  }
+
+  /* ---------- actions ---------- */
+  function onActionClick(e){
+    var btn = e.currentTarget;
+    var id = btn.getAttribute('data-id');
+    var kind = btn.getAttribute('data-act');
+    var row = null;
+    for (var i = 0; i < allLicenses.length; i++){ if (String(allLicenses[i].id) === String(id)){ row = allLicenses[i]; break; } }
+    if (!row) return;
+    pendingAction = {kind: kind, row: row};
+    if (kind === 'revoke'){
+      el('actionTitle').textContent = '🚫 Revoke license';
+      el('actionDesc').innerHTML = 'Revoke the license for <b>' + esc(row.email) + '</b>?<br>Their software will stop working until a new key is issued.';
+      el('extendField').style.display = 'none';
+      el('actionConfirm').textContent = 'Revoke license';
+      el('actionConfirm').className = 'btn btn-danger';
+    } else {
+      el('actionTitle').textContent = '⏳ Extend trial';
+      el('actionDesc').innerHTML = 'Set a new trial end date for <b>' + esc(row.email) + '</b>.';
+      el('extendField').style.display = 'block';
+      var d = new Date(Date.now() + 7*86400000);
+      el('extendDate').value = d.toISOString().slice(0, 10);
+      el('actionConfirm').textContent = 'Extend trial';
+      el('actionConfirm').className = 'btn btn-primary';
+    }
+    el('actionOv').classList.add('open');
+  }
+
+  async function confirmAction(){
+    if (!pendingAction) return;
+    var btn = el('actionConfirm');
+    btn.disabled = true; btn.textContent = 'Working…';
+    var ok = false;
+    if (pendingAction.kind === 'revoke'){
+      var r1 = await sb.from('licenses').update({ status: 'revoked' }).eq('id', pendingAction.row.id);
+      ok = !r1.error;
+      if (r1.error) alert('Failed: ' + r1.error.message);
+    } else {
+      var dv = el('extendDate').value;
+      if (!dv){ alert('Please pick a date.'); btn.disabled = false; return; }
+      var r2 = await sb.from('licenses').update({ trial_ends_at: new Date(dv + 'T23:59:59').toISOString(), status: 'active' }).eq('id', pendingAction.row.id);
+      ok = !r2.error;
+      if (r2.error) alert('Failed: ' + r2.error.message);
+    }
+    btn.disabled = false;
+    el('actionOv').classList.remove('open');
+    pendingAction = null;
+    if (ok) loadData();
+  }
+
+  /* ---------- create license ---------- */
+  async function createLicense(){
+    var email = el('newLicEmail').value.trim().toLowerCase();
+    var type = el('newLicType').value;
+    var btn = el('createLicBtn');
+    if (!email || email.indexOf('@') < 0){ alert('Please enter a valid customer email.'); return; }
+    btn.disabled = true; btn.textContent = 'Generating…';
+    var key = genKey();
+    var payload = { email: email, license_key: key, type: type, status: 'active', user_id: null };
+    if (type === 'trial') payload.trial_ends_at = new Date(Date.now() + 7*86400000).toISOString();
+    else payload.trial_ends_at = null;
+    var res = await sb.from('licenses').insert(payload).select();
+    btn.disabled = false; btn.textContent = 'Generate license key';
+    if (res.error){ alert('Failed: ' + res.error.message); return; }
+    el('createResultKey').textContent = key;
+    el('createResult').classList.add('show');
+    el('newLicEmail').value = '';
+    loadData();
+  }
+
+  /* ---------- bindings ---------- */
+  var TITLES = {
+    dashboard: ['Admin <span class="grad">Dashboard</span>', 'Overview of users and licenses.'],
+    users: ['Users &amp; <span class="grad">Licenses</span>', 'Search, filter and manage every account.'],
+    create: ['Create <span class="grad">License</span>', 'Issue a new license key for a customer.']
+  };
+  function bindNav(){
+    var links = document.querySelectorAll('.nav-link');
+    for (var i = 0; i < links.length; i++){
+      links[i].addEventListener('click', function(){
+        for (var j = 0; j < links.length; j++) links[j].classList.remove('active');
+        this.classList.add('active');
+        var sec = this.getAttribute('data-sec');
+        var secs = document.querySelectorAll('.section');
+        for (var k = 0; k < secs.length; k++) secs[k].classList.remove('active');
+        el('sec-' + sec).classList.add('active');
+        el('pageTitle').innerHTML = TITLES[sec][0];
+        el('pageSub').textContent = TITLES[sec][1].replace(/&amp;/g, '&');
+        window.scrollTo(0, 0);
+      });
+    }
+    el('refreshBtn').addEventListener('click', loadData);
+  }
+  function bindToolbar(){
+    el('userSearch').addEventListener('input', renderUsers);
+    el('typeFilter').addEventListener('change', renderUsers);
+    el('statusFilter').addEventListener('change', renderUsers);
+  }
+  function bindCreate(){
+    el('createLicBtn').addEventListener('click', createLicense);
+  }
+  function bindModal(){
+    el('actionCancel').addEventListener('click', function(){ el('actionOv').classList.remove('open'); pendingAction = null; });
+    el('actionConfirm').addEventListener('click', confirmAction);
+    el('actionOv').addEventListener('click', function(e){ if (e.target === el('actionOv')){ el('actionOv').classList.remove('open'); pendingAction = null; } });
+  }
+  function bindLogout(){
+    el('logoutLink').addEventListener('click', async function(e){
+      e.preventDefault();
+      await sb.auth.signOut();
+      location.reload();
+    });
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
