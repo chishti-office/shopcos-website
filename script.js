@@ -280,3 +280,41 @@
     });
   });
 })();
+
+// Require auth for buy/order buttons
+(function(){
+  function isLoggedIn() {
+    try {
+      var u = JSON.parse(localStorage.getItem('shopcos_user'));
+      return !!(u && u.email);
+    } catch(e) { return false; }
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('.require-auth');
+    if (!btn) return;
+    if (isLoggedIn()) return; // logged in — proceed normally
+    e.preventDefault();
+    // Not logged in — open auth modal directly
+    var overlay = document.getElementById('authOverlay');
+    if (overlay) {
+      overlay.style.display = 'flex';
+      // Switch to signup tab for new users
+      var tabSignup = document.getElementById('tabSignup');
+      if (tabSignup) tabSignup.click();
+      // Store the intended action to resume after login
+      var href = btn.getAttribute('href');
+      if (href && href !== '#pricing') {
+        sessionStorage.setItem('post_auth_action', href);
+      }
+    }
+  });
+  // After successful login, resume pending action
+  var origShowSuccess = window.__shopcosShowSuccess;
+  document.addEventListener('shopcos:authSuccess', function(){
+    var pending = sessionStorage.getItem('post_auth_action');
+    if (pending) {
+      sessionStorage.removeItem('post_auth_action');
+      setTimeout(function(){ window.open(pending, '_blank'); }, 500);
+    }
+  });
+})();
