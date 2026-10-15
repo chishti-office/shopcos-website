@@ -644,3 +644,20 @@ img.aiw-avatar { width: 36px; height: 36px; }
 .ver-badge { font-size: .7rem; background: linear-gradient(135deg,#ffd97a,#f5b73f); color: #1a1a2e; padding: 3px 10px; border-radius: 12px; font-weight: 700; vertical-align: middle; margin-left: 6px; }
 .sys-req { display: flex; flex-direction: column; gap: 4px; margin: 12px 0; padding: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(245,183,63,.15); border-radius: 12px; font-size: .82rem; color: #c8cbe0; }
 .sys-req span:first-child { color: #ffd97a; margin-bottom: 2px; }
+
+/* Floating cards: move to sides, don't cover chat */
+.hero-visual { position: relative; }
+.float-card { z-index: 5; }
+.fc-1 { top: 8%; left: -70px; }
+.fc-2 { bottom: 8%; right: -70px; }
+.fc-3 { top: 46%; right: -80px; }
+@media(max-width: 1200px) {
+  .fc-1 { left: -20px; }
+  .fc-2 { right: -20px; }
+  .fc-3 { right: -30px; }
+}
+@media(max-width: 768px) {
+  .fc-1 { left: 0; top: -10px; }
+  .fc-2 { right: 0; bottom: -10px; }
+  .fc-3 { display: none; }
+}
