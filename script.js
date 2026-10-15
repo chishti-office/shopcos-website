@@ -779,12 +779,44 @@
     });
   }
 
-  // ---- Init from Supabase profile (if logged in), else localStorage ----
+  // ---- Init from Supabase profile (if logged in), else localStorage, else geo-detect ----
   var savedLang = 'en', savedCur = 'USD';
   try {
     savedLang = localStorage.getItem('shopcos_lang') || 'en';
     savedCur = localStorage.getItem('shopcos_cur') || 'USD';
   } catch(e){}
+  // Geo-detect language on first visit (no saved preference)
+  var geoDone = false;
+  try { geoDone = !!localStorage.getItem('shopcos_geo'); } catch(e){}
+  if (!geoDone) {
+    fetch('http://ip-api.com/json/?fields=countryCode')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var cc = (d.countryCode || 'US').toUpperCase();
+        var langMap = {
+          'PK': 'ur',  // Pakistan -> Urdu
+          'ES': 'es',  // Spain -> Spanish
+          'SA': 'ar', 'AE': 'ar', 'QA': 'ar', 'KW': 'ar', 'BH': 'ar', 'OM': 'ar', 'EG': 'ar',  // Arabic
+          'IN': 'en',  // India -> English (Hindi support later)
+          'FR': 'fr',  // France -> French
+          'DE': 'de',  // Germany -> German
+          'IT': 'it',  // Italy -> Italian
+          'PT': 'pt', 'BR': 'pt',  // Portuguese
+          'TR': 'tr',  // Turkey -> Turkish
+          'CN': 'zh',  // China -> Chinese
+          'JP': 'ja',  // Japan -> Japanese
+          'KR': 'ko',  // Korea -> Korean
+          'RU': 'ru',  // Russia -> Russian
+        };
+        var detected = langMap[cc] || 'en';
+        // Only apply if we support the language (en/ur for now, others fall back to en)
+        if (detected === 'ur' || detected === 'en') {
+          setLang(detected);
+        }
+        try { localStorage.setItem('shopcos_geo', cc); } catch(e){}
+      })
+      .catch(function(){});
+  }
   setLang(savedLang);
   setCurrency(savedCur);
   // Website currency is the source of truth: pull profile value after login
