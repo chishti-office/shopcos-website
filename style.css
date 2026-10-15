@@ -169,8 +169,8 @@ a{color:inherit;text-decoration:none}
 .fc-ic{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;flex-shrink:0}
 .fc-ic.warn{background:rgba(245,183,63,.16);color:var(--gold)}
 .fc-ic.good{background:rgba(52,211,153,.15);color:#34d399}
-.fc-1 { bottom: -55px; left: 2%; top: auto; }
-.fc-2 { bottom: -55px; left: 36%; top: auto; right: auto; }
+.fc-1 { bottom: -60px; left: 0%; top: auto; }
+.fc-2 { bottom: -60px; left: 37%; top: auto; right: auto; }
 @keyframes floaty{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
 
 /* ============ Proof / marquee ============ */
@@ -308,7 +308,7 @@ section{padding:96px 0;position:relative}
   .hero-grid{grid-template-columns:1fr;gap:70px}
   .hero{padding-top:140px}
   .hero-visual{max-width:540px;margin:0 auto;width:100%}
-  .fc-1 { bottom: -55px; left: 2%; top: auto; }.fc-2 { bottom: -55px; left: 36%; top: auto; right: auto; }
+  .fc-1 { bottom: -60px; left: 0%; top: auto; }.fc-2 { bottom: -60px; left: 37%; top: auto; right: auto; }
   .span-6{grid-column:span 12}
   .span-3{grid-column:span 6}
   .dl-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
@@ -333,7 +333,7 @@ section{padding:96px 0;position:relative}
   .arch-frame{border-radius:150px 150px 22px 22px}
   .mockup{border-radius:140px 140px 14px 14px}
   .float-card{padding:10px 14px 10px 10px}
-  .fc-1 { bottom: -55px; left: 2%; top: auto; }.fc-2 { bottom: -55px; left: 36%; top: auto; right: auto; }
+  .fc-1 { bottom: -60px; left: 0%; top: auto; }.fc-2 { bottom: -60px; left: 37%; top: auto; right: auto; }
   .urdu-watermark{font-size:8rem;top:20px}
 }
 
@@ -450,7 +450,7 @@ section{padding:96px 0;position:relative}
 .ai-demo-hint{font-size:.78rem;color:var(--muted-2)}
 
 /* third floating card */
-.fc-3 { bottom: -55px; right: 2%; top: auto; }
+.fc-3 { bottom: -60px; right: 0%; top: auto; }
 .float-card .fc-ic{font-size:1.3rem}
 
 /* ---- Use-case strip ---- */
@@ -468,7 +468,7 @@ section{padding:96px 0;position:relative}
 @media(max-width:640px){
   .usecase-strip{grid-template-columns:repeat(2,1fr);margin-top:40px}
   .ai-demo-body{min-height:260px}
-  .fc-3 { bottom: -55px; right: 2%; top: auto; }
+  .fc-3 { bottom: -60px; right: 0%; top: auto; }
   .social-proof{flex-wrap:wrap}
 }
 
@@ -646,18 +646,18 @@ img.aiw-avatar { width: 36px; height: 36px; }
 .sys-req span:first-child { color: #ffd97a; margin-bottom: 2px; }
 
 /* Floating cards: positioned clear of headline and chat */
-.hero-visual { position: relative; margin-bottom: 60px; }
+.hero-visual { position: relative; margin-bottom: 70px; }
 .float-card { z-index: 5; }
-.fc-1 { bottom: -55px; left: 2%; top: auto; }
-.fc-2 { bottom: -55px; left: 36%; top: auto; right: auto; }
-.fc-3 { bottom: -55px; right: 2%; top: auto; }
+.fc-1 { bottom: -60px; left: 0%; top: auto; }
+.fc-2 { bottom: -60px; left: 37%; top: auto; right: auto; }
+.fc-3 { bottom: -60px; right: 0%; top: auto; }
 @media(max-width: 1200px) {
-  .fc-3 { bottom: -55px; right: 2%; top: auto; }
+  .fc-3 { bottom: -60px; right: 0%; top: auto; }
 }
 @media(max-width: 1020px) {
-  .fc-1 { bottom: -55px; left: 2%; top: auto; }
-  .fc-2 { bottom: -55px; left: 36%; top: auto; right: auto; }
-  .fc-3 { bottom: -55px; right: 2%; top: auto; }
+  .fc-1 { bottom: -60px; left: 0%; top: auto; }
+  .fc-2 { bottom: -60px; left: 37%; top: auto; right: auto; }
+  .fc-3 { bottom: -60px; right: 0%; top: auto; }
 }
 
 /* AI fab attention pulse (when hero visible) */
