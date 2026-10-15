@@ -715,6 +715,21 @@ a{color:inherit;text-decoration:none}
       var err = document.getElementById('cardError');
       err.style.display = 'block';
       err.scrollIntoView({behavior:'smooth', block:'center'});
+      // Notify admin: user tried card payment
+      try {
+        var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+        sb.auth.getUser().then(function(res){
+          var email = (res.data && res.data.user && res.data.user.email) || 'guest';
+          var plan = 'unknown';
+          try { plan = localStorage.getItem('shopcos_plan') || document.querySelector('.plan-name')?.textContent || 'unknown'; } catch(e){}
+          sb.from('admin_notifications').insert([{
+            type: 'card_attempt',
+            title: '💳 Card payment attempt',
+            message: email + ' tried to pay by card for plan: ' + plan,
+            created_at: new Date().toISOString()
+          }]).then(function(){}, function(){});
+        });
+      } catch(e){}
     });
     // Auto-format card number
     document.getElementById('cardNum').addEventListener('input', function(e){

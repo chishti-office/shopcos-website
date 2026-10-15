@@ -181,6 +181,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     <div class="nav-link" data-sec="users"><span class="ico">👥</span><span class="txt">Users &amp; Licenses</span></div>
     <div class="nav-link" data-sec="create"><span class="ico">🔑</span><span class="txt">Create License</span></div>
     <div class="nav-link" data-sec="remote"><span class="ico">📢</span><span class="txt">Remote Config</span></div>
+    <div class="nav-link" data-sec="notif"><span class="ico">🔔</span><span class="txt">Notifications</span><span class="badge" id="notifBadge" style="display:none"></span></div>
     <div class="side-foot">
       <div>Signed in as</div>
       <div class="admin-email" id="adminEmailShow"></div>
@@ -195,6 +196,15 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         <p id="pageSub">Overview of users and licenses.</p>
       </div>
       <button class="btn btn-ghost btn-sm" id="refreshBtn">↻ Refresh data</button>
+    </div>
+
+    <div class="sec" id="sec-notif" style="display:none">
+      <div class="card">
+        <h3>🔔 Notifications</h3>
+        <p class="hint">Payment attempts, user activity alerts.</p>
+        <div id="notifList"><p class="hint">Loading...</p></div>
+        <button class="btn btn-ghost btn-sm" id="markReadBtn" style="margin-top:10px">✅ Mark all read</button>
+      </div>
     </div>
 
     <div id="rlsWarn" class="warn-banner" style="display:none">
@@ -442,7 +452,27 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
   }
 
   /* ---------- data ---------- */
+  async function loadNotifs(){
+    try {
+      var res = await sb.from('admin_notifications').select('*').order('created_at', {ascending:false}).limit(50);
+      var list = el('notifList');
+      if (res.error || !res.data || !res.data.length) {
+        list.innerHTML = '<p class="hint">No notifications yet.</p>';
+        el('notifBadge').style.display = 'none';
+        return;
+      }
+      var unread = res.data.filter(function(n){ return !n.is_read; }).length;
+      var badge = el('notifBadge');
+      if (unread > 0) { badge.textContent = unread; badge.style.display = 'inline-block'; }
+      else { badge.style.display = 'none'; }
+      list.innerHTML = res.data.map(function(n){
+        var d = new Date(n.created_at).toLocaleString();
+        return '<div class="kv" style="' + (n.is_read ? 'opacity:.6' : '') + '"><span class="k">' + n.title + '<br><small style="color:var(--muted-2)">' + d + '</small></span><span class="v">' + (n.message || '') + '</span></div>';
+      }).join('');
+    } catch(e){}
+  }
   async function loadData(){
+    loadNotifs();
     var res = await sb.from('licenses').select('*').order('created_at', {ascending:false});
     if (res.error){
       // RLS likely blocking — show warning, keep UI usable
@@ -843,6 +873,11 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
       });
     }
     el('refreshBtn').addEventListener('click', loadData);
+    var mrb = el('markReadBtn');
+    if (mrb) mrb.addEventListener('click', async function(){
+      await sb.from('admin_notifications').update({is_read:true}).eq('is_read', false);
+      loadNotifs();
+    });
   }
   function bindToolbar(){
     el('userSearch').addEventListener('input', renderUsers);
