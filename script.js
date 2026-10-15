@@ -418,13 +418,28 @@
   fab.addEventListener('click', openWidget);
   document.getElementById('aiwClose').addEventListener('click', closeWidget);
 
-  // Auto-open AI chat for first-time visitors (AI first!)
+  // Auto-open AI chat for first-time visitors (AI first!) — but not over the hero
   try {
     if (!localStorage.getItem('shopcos_ai_seen')) {
       setTimeout(function(){
-        openWidget();
+        // Only auto-open if user scrolled past hero (avoid covering demo)
+        var heroVisible = false;
+        try {
+          var hero = document.querySelector('.hero');
+          if (hero) {
+            var r = hero.getBoundingClientRect();
+            heroVisible = r.bottom > 100;
+          }
+        } catch(e){}
+        if (!heroVisible) {
+          openWidget();
+        } else {
+          // Hero visible: pulse the button instead of covering demo
+          fab.classList.add('ai-fab-attention');
+          setTimeout(function(){ fab.classList.remove('ai-fab-attention'); }, 5000);
+        }
         localStorage.setItem('shopcos_ai_seen', '1');
-      }, 3000);
+      }, 5000);
     }
   } catch(e) {}
 

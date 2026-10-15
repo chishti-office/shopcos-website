@@ -659,3 +659,7 @@ img.aiw-avatar { width: 36px; height: 36px; }
   .fc-2 { bottom: -20px; right: 12px; }
   .fc-3 { display: none; }
 }
+
+/* AI fab attention pulse (when hero visible) */
+.ai-fab-attention { animation: aiFabAttention 1s ease-in-out 3; }
+@keyframes aiFabAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(245,183,63,.8); } }
