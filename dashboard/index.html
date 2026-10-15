@@ -1337,15 +1337,11 @@ a{color:inherit;text-decoration:none}
     tp.innerHTML = '<span></span><span></span><span></span>';
     document.getElementById('dashChatMsgs').appendChild(tp);
     dashChatScroll();
-    var quick = dashChatFind(q);
-    if (quick !== DASH_DEFAULT_A) {
-      setTimeout(function(){ tp.remove(); dashChatAdd(quick, 'bot'); }, 700 + Math.random() * 500);
-    } else {
-      dashChatAskAI(q, function(aiAns){
-        tp.remove();
-        dashChatAdd(aiAns || DASH_DEFAULT_A, 'bot');
-      });
-    }
+    dashChatAskAI(q, function(aiAns){
+      tp.remove();
+      if (aiAns) { dashChatAdd(aiAns, 'bot'); }
+      else { dashChatAdd(dashChatFind(q), 'bot'); }
+    });
   }
   document.getElementById('dashChatSend').addEventListener('click', dashChatSend);
   document.getElementById('dashChatInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') dashChatSend(); });

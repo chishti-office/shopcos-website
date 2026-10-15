@@ -447,15 +447,11 @@
     tp.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(tp);
     scrollBottom();
-    var quick = findAnswer(q);
-    if (quick !== DEFAULT_A) {
-      setTimeout(function(){ tp.remove(); addMsg(quick, 'bot'); }, 700 + Math.random() * 500);
-    } else {
-      askAI(q, function(aiAns){
-        tp.remove();
-        addMsg(aiAns || DEFAULT_A, 'bot');
-      });
-    }
+    askAI(q, function(aiAns){
+      tp.remove();
+      if (aiAns) { addMsg(aiAns, 'bot'); }
+      else { addMsg(findAnswer(q), 'bot'); }
+    });
   }
   document.getElementById('aiwSend').addEventListener('click', send);
   input.addEventListener('keydown', function(e){ if (e.key === 'Enter') send(); });
