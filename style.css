@@ -357,6 +357,8 @@ section{padding:96px 0;position:relative}
 .auth-input:focus{outline:none;border-color:#ffd97a}
 .auth-input::placeholder{color:#666}
 .otp-input{text-align:center;font-size:1.5rem;letter-spacing:8px;font-weight:700}
+.otp-input::placeholder{font-size:.85rem;letter-spacing:1px;font-weight:500}
+.otp-input::-webkit-input-placeholder{font-size:.85rem;letter-spacing:1px;font-weight:500}
 .auth-submit{width:100%;margin-top:8px;padding:14px;font-size:1rem}
 .auth-divider{text-align:center;color:#666;margin:16px 0;position:relative}
 .auth-divider::before,.auth-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:rgba(255,255,255,.1)}
