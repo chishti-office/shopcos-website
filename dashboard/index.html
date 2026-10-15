@@ -428,13 +428,13 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="dash-chat-msgs" id="dashChatMsgs"></div>
           <div class="dash-chat-chips" id="dashChatChips">
-            <button data-q="price">💰 Price kya hai?</button>
+            <button data-q="price">💰 What's the price?</button>
             <button data-q="trial">🆓 Free trial?</button>
             <button data-q="apk">📱 APK hai?</button>
             <button data-q="medical">💊 Medical store?</button>
           </div>
           <div class="dash-chat-input">
-            <input type="text" class="input" id="dashChatInput" placeholder="Apna sawal likhein…" maxlength="300" autocomplete="off">
+            <input type="text" class="input" id="dashChatInput" placeholder="Type your question..." maxlength="300" autocomplete="off">
             <button class="btn btn-primary" id="dashChatSend">Send ➤</button>
           </div>
         </div>
@@ -1291,7 +1291,7 @@ a{color:inherit;text-decoration:none}
     { k: ['konsa plan', 'kaunsa plan', 'which plan', 'konsa loon', 'kaunsa loon', 'choti shop', 'chhoti shop', 'small shop', 'recommend', 'suggest', 'plian', 'paln'], a: '🎯 <strong>Mere mashwara:</strong><br><br>🏪 <strong>Choti shop</strong> → <strong>$90 Starter</strong><br>👥 <strong>2-3 staff</strong> → <strong>$145 Business</strong> ⭐<br>🏬 <strong>Bari shop</strong> → <strong>$290 Professional</strong><br>🏢 <strong>Chain</strong> → <strong>$545 Enterprise</strong><br><br>💡 Pehle <strong>7-day free trial</strong> lein! 🆓' },
     { k: ['key', 'keys', 'editor key', 'salesman'], a: '🔑 <strong>Access Keys:</strong><br><br>Software Access tab mein jayein →<br>✏️ <strong>Generate Editor Key</strong> ya 🧾 <strong>Generate Salesman Key</strong> dabayein<br><br>Key copy karke staff ko dein — software mein daal kar login! Plan ke hisab se limits! 📊' }
   ];
-  var DASH_DEFAULT_A = 'Hmm, is bare mein thoda aur batayein? 🤔 Main aapki madad kar sakta hoon:<br><br>💰 <strong>Plans</strong> — konsa plan loon?<br>🔑 <strong>Keys</strong> — editor/salesman key kaise banayein?<br>👛 <strong>Wallet</strong> — paise kaise add karein?<br>✨ <strong>Features</strong> — kya kya hai?<br><br>Ya phir apna sawal dobara likhein! 😊';
+  var DASH_DEFAULT_A = 'Let me help you with:<br><br>💰 <strong>Plans</strong> — Which plan should I choose?<br>🔑 <strong>Keys</strong> — How to create editor/salesman keys?<br>👛 <strong>Wallet</strong> — How to add funds?<br>✨ <strong>Features</strong> — What's included?<br><br>Or rephrase your question! 😊';
   var dashChatOpened = false;
 
   function dashChatScroll() {
@@ -1352,7 +1352,7 @@ a{color:inherit;text-decoration:none}
   document.getElementById('dashChatChips').addEventListener('click', function(e){
     var b = e.target.closest('button');
     if (!b) return;
-    var map = { price: 'Price kya hai?', trial: 'Free trial hai?', apk: 'APK available hai?', medical: 'Medical store ke liye use ho sakta?' };
+    var map = { price: 'What is the price?', trial: 'Is there a free trial?', apk: 'Is APK available?', medical: 'Can it be used for medical stores?' };
     document.getElementById('dashChatInput').value = map[b.getAttribute('data-q')] || '';
     dashChatSend();
   });

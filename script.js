@@ -462,7 +462,7 @@
   document.getElementById('aiwChips').addEventListener('click', function(e){
     var b = e.target.closest('button');
     if (!b) return;
-    var map = { price: 'Price kya hai?', trial: 'Free trial hai?', apk: 'APK available hai?', medical: 'Medical store ke liye use ho sakta?' };
+    var map = { price: 'What is the price?', trial: 'Is there a free trial?', apk: 'Is APK available?', medical: 'Can it be used for medical stores?' };
     input.value = map[b.getAttribute('data-q')] || '';
     send();
   });
