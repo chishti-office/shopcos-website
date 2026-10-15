@@ -318,11 +318,15 @@ a{color:inherit;text-decoration:none}
         <!-- BANK -->
         <div class="pay-pane" id="pay-bank">
           <div class="note">🏦 Transfer <strong>Rs <span class="payPkrEcho">40,000</span></strong> to the account below, then upload your receipt.</div>
-          <div class="kv"><span class="k">Bank</span><span class="v">— placeholder —</span></div>
-          <div class="kv"><span class="k">Account title</span><span class="v">— placeholder —</span></div>
-          <div class="kv"><span class="k">Account number</span><span class="v">— placeholder —</span></div>
-          <div class="kv"><span class="k">IBAN</span><span class="v">— placeholder —</span></div>
-          <div class="warn-note" style="margin-top:14px">⚙️ <span style="font-size:.82rem">hina: replace the placeholder bank details above with your real account details.</span></div>
+          <div class="kv"><span class="k">Bank</span><span class="v">Meezan Bank</span></div>
+          <div class="kv"><span class="k">Account title</span><span class="v">SYED MUHAMMAD RABIE SHAH</span></div>
+          <div class="kv"><span class="k">Account number</span><span class="v"><code id="bankAcct">98360107034722</code> <button class="copy-btn" data-copy="bankAcct">Copy</button></span></div>
+          <div class="kv"><span class="k">IBAN</span><span class="v"><code id="bankIban">PK53MEZN0098360107034722</code> <button class="copy-btn" data-copy="bankIban">Copy</button></span></div>
+          <div class="kv"><span class="k">Branch</span><span class="v">Samundri, Faisalabad</span></div>
+          <div style="text-align:center;margin:16px 0">
+            <img src="../img/pay/meezan-qr.png" alt="Meezan Bank QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+            <div style="font-size:.78rem;color:var(--muted);margin-top:6px">🏦 Scan with any bank app</div>
+          </div>
           <div class="file-row">
             <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px">📤 Upload payment receipt (screenshot / PDF)</label>
             <input type="file" id="bankProof" accept="image/*,.pdf">
