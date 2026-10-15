@@ -230,7 +230,7 @@ section{padding:96px 0;position:relative}
 .step::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .45s ease}
 .step:hover{transform:translateY(-6px);border-color:rgba(245,183,63,.4)}
 .step:hover::after{transform:scaleX(1)}
-.step-num{font-family:var(--font-u);font-size:3rem;line-height:1.6;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step-num{font-family:var(--font-d);font-weight:800;font-size:3rem;line-height:1.2;color:#f5b73f;text-shadow:0 2px 18px rgba(245,183,63,.35)}
 .step h3{font-size:1.25rem;margin:10px 0 10px}
 .step p{color:var(--muted);font-size:.94rem}
 
@@ -645,19 +645,17 @@ img.aiw-avatar { width: 36px; height: 36px; }
 .sys-req { display: flex; flex-direction: column; gap: 4px; margin: 12px 0; padding: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(245,183,63,.15); border-radius: 12px; font-size: .82rem; color: #c8cbe0; }
 .sys-req span:first-child { color: #ffd97a; margin-bottom: 2px; }
 
-/* Floating cards: move to sides, don't cover chat */
+/* Floating cards: positioned clear of headline and chat */
 .hero-visual { position: relative; }
 .float-card { z-index: 5; }
-.fc-1 { top: 8%; left: -70px; }
-.fc-2 { bottom: 8%; right: -70px; }
-.fc-3 { top: 46%; right: -80px; }
+.fc-1 { top: -28px; left: 24px; }
+.fc-2 { bottom: -24px; right: 24px; }
+.fc-3 { top: 44%; right: -56px; }
 @media(max-width: 1200px) {
-  .fc-1 { left: -20px; }
-  .fc-2 { right: -20px; }
-  .fc-3 { right: -30px; }
+  .fc-3 { right: -16px; }
 }
-@media(max-width: 768px) {
-  .fc-1 { left: 0; top: -10px; }
-  .fc-2 { right: 0; bottom: -10px; }
+@media(max-width: 1020px) {
+  .fc-1 { top: -20px; left: 12px; }
+  .fc-2 { bottom: -20px; right: 12px; }
   .fc-3 { display: none; }
 }

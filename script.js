@@ -750,15 +750,17 @@
     try { localStorage.setItem('shopcos_cur', c); } catch(e){}
     syncCurrencyToProfile(c);
     var cur = CURS[c];
-    // Big price cards: data-usd on .price, data-pkr on .price-pkr
+    // Big price cards: data-usd + data-pkr live on .price itself (single source of truth per card)
     document.querySelectorAll('.price[data-usd]').forEach(function(el){
       var usd = parseFloat(el.getAttribute('data-usd'));
       var card = el.closest('.price-card');
       var sub = card ? card.querySelector('.price-pkr') : null;
-      var pkr = sub ? parseFloat(sub.getAttribute('data-pkr')) : Math.round(usd * CURS.PKR.rate);
+      var pkrAttr = el.getAttribute('data-pkr') || (sub && sub.getAttribute('data-pkr'));
+      var pkr = pkrAttr ? parseFloat(pkrAttr) : Math.round(usd * CURS.PKR.rate);
+      var suffix = (sub && sub.getAttribute('data-suffix')) || '';
       if (c === 'USD') {
         el.innerHTML = '<span class="cur">$</span>' + usd + ' <span class="usd">USD</span>';
-        if (sub) sub.textContent = 'Rs ' + fmt(pkr) + ' PKR';
+        if (sub) sub.textContent = 'Rs ' + fmt(pkr) + ' PKR' + suffix;
       } else if (c === 'PKR') {
         el.innerHTML = '<span class="cur">₨</span> ' + fmt(pkr) + ' <span class="usd">PKR</span>';
         if (sub) sub.textContent = '$' + usd + ' USD';
@@ -768,10 +770,17 @@
         if (sub) sub.textContent = '$' + usd + ' USD';
       }
     });
-    // Inline amounts: <span data-usd-inline="145">$145</span>
+    // Inline amounts: <span data-usd-inline="145" data-pkr-inline="40000">$145</span>
     document.querySelectorAll('[data-usd-inline]').forEach(function(el){
       var usd = parseFloat(el.getAttribute('data-usd-inline'));
-      el.textContent = cur.sym + fmt(Math.round(usd * cur.rate));
+      var pkrInline = el.getAttribute('data-pkr-inline');
+      if (c === 'PKR' && pkrInline) {
+        el.textContent = 'Rs ' + fmt(parseFloat(pkrInline));
+      } else if (c === 'USD') {
+        el.textContent = '$' + fmt(usd);
+      } else {
+        el.textContent = cur.sym + ' ' + fmt(Math.round(usd * cur.rate));
+      }
     });
     ['curSelect','curSelectM'].forEach(function(id){
       var s = document.getElementById(id);
