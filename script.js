@@ -406,7 +406,7 @@
     if (!opened){
       opened = true;
       setTimeout(function(){
-        addMsg('Assalam-o-Alaikum! 👋 Main <strong>shopcos AI</strong> hoon.<br>Software, pricing, ya features ke baare mein poochein!', 'bot');
+        addMsg('Hello! 👋 I\'m <strong>shopcos AI</strong>.<br>Ask me about software, pricing, or features!', 'bot');
       }, 300);
     }
     setTimeout(function(){ input.focus(); }, 100);
@@ -428,7 +428,7 @@
     }
   } catch(e) {}
 
-  var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 7-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. Answer in Roman Urdu, brief (2-3 lines max), friendly. Never mention monthly pricing.';
+  var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 7-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. IMPORTANT: Detect the user\'s language from their message and reply in the SAME language. If they write in Urdu/Roman Urdu, reply in Roman Urdu. If they write in English, reply in English. Keep answers brief (2-3 lines max), friendly. Never mention monthly pricing.';
 
   function askAI(q, cb){
     var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
