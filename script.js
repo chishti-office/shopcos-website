@@ -147,6 +147,7 @@
     ['formLogin','formSignup'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
     document.getElementById('formOTP').style.display = 'block';
     document.getElementById('formSuccess').style.display = 'none';
+    if (typeof startResendTimer === 'function') { try { startResendTimer(); } catch(e){} }
   }
   async function showSuccess(user) {
     var lic = await ensureLicense(user);
@@ -259,14 +260,40 @@
     if (data.user) showSuccess(data.user);
   });
 
-  // Resend OTP
+  // Resend OTP with 60-sec timer
+  var resendTimer = null, resendSecs = 0;
+  function startResendTimer(){
+    var btn = document.getElementById('resendOTP');
+    clearInterval(resendTimer);
+    resendSecs = 60;
+    btn.disabled = true;
+    btn.style.opacity = '.5';
+    btn.style.cursor = 'not-allowed';
+    btn.textContent = 'Resend Code (' + resendSecs + 's)';
+    resendTimer = setInterval(function(){
+      resendSecs--;
+      if (resendSecs <= 0) {
+        clearInterval(resendTimer);
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+        btn.textContent = 'Resend Code';
+      } else {
+        btn.textContent = 'Resend Code (' + resendSecs + 's)';
+      }
+    }, 1000);
+  }
   document.getElementById('resendOTP').addEventListener('click', async function() {
+    if (this.disabled) return;
     var err = document.getElementById('otpError');
     err.textContent = 'Sending...';
+    err.style.color = '';
     var { error } = await sb.auth.signInWithOtp({ email: pendingEmail });
-    err.textContent = error ? error.message : 'Naya code bhej diya! ✅';
+    err.textContent = error ? error.message : 'New code sent! ✅';
     err.style.color = error ? '#ff6b6b' : '#4ade80';
+    if (!error) startResendTimer();
   });
+
 
   document.getElementById('authDone').addEventListener('click', hideAuth);
 
