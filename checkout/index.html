@@ -345,10 +345,27 @@ a{color:inherit;text-decoration:none}
               <option value="jazzcash">JazzCash</option>
             </select>
           </div>
-          <div class="kv"><span class="k">Easypaisa number</span><span class="v">0326-4025618</span></div>
-          <div class="kv"><span class="k">JazzCash number</span><span class="v">0326-4025618</span></div>
-          <div class="kv"><span class="k">Account title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
-          <div class="qr-row" style="display:flex;gap:20px;margin:16px 0;flex-wrap:wrap">
+          <div style="display:flex;gap:10px;margin:12px 0">
+            <button class="btn btn-sm subpay-tab active" data-subpay="easypaisa" style="flex:1">🟢 Easypaisa</button>
+            <button class="btn btn-sm subpay-tab" data-subpay="jazzcash" style="flex:1">🔴 JazzCash</button>
+          </div>
+          <div class="subpay-pane" id="subpay-easypaisa">
+            <div class="kv"><span class="k">Easypaisa number</span><span class="v"><code id="epNum">03264025618</code> <button class="copy-btn" data-copy="epNum">Copy</button></span></div>
+            <div class="kv"><span class="k">Account title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+            <div style="text-align:center;margin:16px 0">
+              <img src="../img/pay/easypaisa-qr.png" alt="Easypaisa QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with Easypaisa app</div>
+            </div>
+          </div>
+          <div class="subpay-pane" id="subpay-jazzcash" style="display:none">
+            <div class="kv"><span class="k">JazzCash number</span><span class="v"><code id="jcNum">03264025618</code> <button class="copy-btn" data-copy="jcNum">Copy</button></span></div>
+            <div class="kv"><span class="k">Account title</span><span class="v">Chishti Official</span></div>
+            <div style="text-align:center;margin:16px 0">
+              <img src="../img/pay/jazzcash-qr.png" alt="JazzCash QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with JazzCash app</div>
+            </div>
+          </div>
+          <div class="qr-row" style="display:none">
             <div style="text-align:center">
               <img src="../img/pay/jazzcash-qr.png" alt="JazzCash QR" style="width:150px;border-radius:12px;border:1px solid var(--border)">
               <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with JazzCash</div>
@@ -679,6 +696,14 @@ a{color:inherit;text-decoration:none}
     });
 
     // mobile
+    document.querySelectorAll('.subpay-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.subpay-tab').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelectorAll('.subpay-pane').forEach(function(p){ p.style.display = 'none'; });
+        document.getElementById('subpay-' + btn.dataset.subpay).style.display = 'block';
+      });
+    });
     el('mobileDoneBtn').addEventListener('click', function(){
       placeOrder(el('mobileProvider').value, el('mobileProof').files[0] || null);
     });
