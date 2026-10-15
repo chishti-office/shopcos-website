@@ -428,6 +428,15 @@
     }
   } catch(e) {}
 
+  var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 7-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. Answer in Roman Urdu, brief (2-3 lines max), friendly. Never mention monthly pricing.';
+
+  function askAI(q, cb){
+    var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
+    fetch(url).then(function(r){ return r.text(); }).then(function(t){
+      cb(t.trim() || null);
+    }).catch(function(){ cb(null); });
+  }
+
   function send(){
     var q = input.value.trim();
     if (!q) return;
@@ -438,10 +447,15 @@
     tp.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(tp);
     scrollBottom();
-    setTimeout(function(){
-      tp.remove();
-      addMsg(findAnswer(q), 'bot');
-    }, 700 + Math.random() * 500);
+    var quick = findAnswer(q);
+    if (quick !== DEFAULT_A) {
+      setTimeout(function(){ tp.remove(); addMsg(quick, 'bot'); }, 700 + Math.random() * 500);
+    } else {
+      askAI(q, function(aiAns){
+        tp.remove();
+        addMsg(aiAns || DEFAULT_A, 'bot');
+      });
+    }
   }
   document.getElementById('aiwSend').addEventListener('click', send);
   input.addEventListener('keydown', function(e){ if (e.key === 'Enter') send(); });

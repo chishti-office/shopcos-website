@@ -1319,6 +1319,12 @@ a{color:inherit;text-decoration:none}
     dashChatOpened = true;
     dashChatAdd('Assalam-o-Alaikum! 👋 Main <strong>shopcos AI</strong> hoon.<br>Plans, software ya features ke baare mein poochein!', 'bot');
   }
+  var DASH_AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 7-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. Dashboard tabs: Plans, Software Access (editor/salesman keys), Wallet, Company, AI Chat, Profile. Answer in Roman Urdu, brief (2-3 lines max), friendly. Never mention monthly pricing.';
+  function dashChatAskAI(q, cb){
+    fetch('https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(DASH_AI_SYSTEM))
+      .then(function(r){ return r.text(); }).then(function(t){ cb(t.trim() || null); })
+      .catch(function(){ cb(null); });
+  }
   function dashChatSend() {
     var input = document.getElementById('dashChatInput');
     var q = input.value.trim();
@@ -1330,10 +1336,15 @@ a{color:inherit;text-decoration:none}
     tp.innerHTML = '<span></span><span></span><span></span>';
     document.getElementById('dashChatMsgs').appendChild(tp);
     dashChatScroll();
-    setTimeout(function(){
-      tp.remove();
-      dashChatAdd(dashChatFind(q), 'bot');
-    }, 700 + Math.random() * 500);
+    var quick = dashChatFind(q);
+    if (quick !== DASH_DEFAULT_A) {
+      setTimeout(function(){ tp.remove(); dashChatAdd(quick, 'bot'); }, 700 + Math.random() * 500);
+    } else {
+      dashChatAskAI(q, function(aiAns){
+        tp.remove();
+        dashChatAdd(aiAns || DASH_DEFAULT_A, 'bot');
+      });
+    }
   }
   document.getElementById('dashChatSend').addEventListener('click', dashChatSend);
   document.getElementById('dashChatInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') dashChatSend(); });
