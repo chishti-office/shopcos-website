@@ -551,6 +551,28 @@ a{color:inherit;text-decoration:none}
         document.getElementById('pay-' + cp).classList.add('active');
       });
     });
+    // card pay button - show error + notify admin
+    var cpb = document.getElementById('cardPayBtn');
+    if (cpb) cpb.addEventListener('click', function(){
+      var err = document.getElementById('cardError');
+      if (err) {
+        err.style.display = 'block';
+        err.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+      try {
+        if (typeof supabase !== 'undefined') {
+          var sbc = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+          sbc.auth.getUser().then(function(res){
+            var email = (res.data && res.data.user && res.data.user.email) || 'guest';
+            sbc.from('admin_notifications').insert([{
+              type: 'card_attempt',
+              title: 'Card payment attempt',
+              message: email + ' tried to pay by card'
+            }]).then(function(){}, function(){});
+          });
+        }
+      } catch(e){}
+    });
     // subpay tabs
     document.querySelectorAll('.subpay-tab').forEach(function(btn){
       btn.addEventListener('click', function(){
@@ -732,26 +754,7 @@ a{color:inherit;text-decoration:none}
     });
 
     // crypto
-    document.getElementById('cardPayBtn').addEventListener('click', function(){
-      var err = document.getElementById('cardError');
-      err.style.display = 'block';
-      err.scrollIntoView({behavior:'smooth', block:'center'});
-      // Notify admin: user tried card payment
-      try {
-        var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-        sb.auth.getUser().then(function(res){
-          var email = (res.data && res.data.user && res.data.user.email) || 'guest';
-          var plan = 'unknown';
-          try { plan = localStorage.getItem('shopcos_plan') || document.querySelector('.plan-name')?.textContent || 'unknown'; } catch(e){}
-          sb.from('admin_notifications').insert([{
-            type: 'card_attempt',
-            title: '💳 Card payment attempt',
-            message: email + ' tried to pay by card for plan: ' + plan,
-            created_at: new Date().toISOString()
-          }]).then(function(){}, function(){});
-        });
-      } catch(e){}
-    });
+    // (cardPayBtn bound in bindPayTabs)
     // Auto-format card number
     document.getElementById('cardNum').addEventListener('input', function(e){
       var v = e.target.value.replace(/\D/g,'').slice(0,16);
