@@ -663,3 +663,12 @@ img.aiw-avatar { width: 36px; height: 36px; }
 /* AI fab attention pulse (when hero visible) */
 .ai-fab-attention { animation: aiFabAttention 1s ease-in-out 3; }
 @keyframes aiFabAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(245,183,63,.8); } }
+
+/* Navbar: prevent logo/nav overlap */
+.nav-inner { gap: 24px; }
+.brand { flex-shrink: 0; white-space: nowrap; }
+.nav-links { flex-shrink: 1; min-width: 0; }
+@media(max-width: 1100px) {
+  .nav-links { gap: 22px; }
+  .nav-links a { font-size: .88rem; }
+}
