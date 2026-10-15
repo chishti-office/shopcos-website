@@ -299,11 +299,19 @@ a{color:inherit;text-decoration:none}
 
         <!-- CRYPTO -->
         <div class="pay-pane" id="pay-crypto">
-          <div class="note">🪙 Send <strong><span class="payUsdEcho">145</span> USDT</strong> to the wallet below, then confirm.</div>
-          <div class="kv"><span class="k">Network</span><span class="v">TRC20 (Tron)</span></div>
-          <div class="kv"><span class="k">Amount</span><span class="v"><span class="payUsdEcho">145</span> USDT</span></div>
-          <div class="kv"><span class="k">Wallet address</span><span class="v"><code id="usdtAddr" style="font-size:.8rem">TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code><button class="copy-btn" data-copy="usdtAddr">Copy</button></span></div>
-          <div class="warn-note" style="margin-top:14px">⚙️ <span style="font-size:.82rem">hina: replace the placeholder USDT address above with your real wallet address.</span></div>
+          <div class="note">🪙 Send <strong><span class="payUsdEcho">145</span> USDT</strong> or <strong>BTC</strong> to a wallet below, then confirm.</div>
+          <div class="qr-row" style="display:flex;gap:20px;margin:16px 0;flex-wrap:wrap">
+            <div style="text-align:center;flex:1;min-width:200px">
+              <img src="../img/pay/usdt-qr.png" alt="USDT QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+              <div class="kv" style="margin-top:8px"><span class="k">USDT (TRC20)</span></div>
+              <div style="font-size:.75rem;word-break:break-all;color:var(--muted);margin-top:4px"><code id="usdtAddr">TPwbbScTUAKVnHTmavuFRfRQZ1nsG5PxUx</code> <button class="copy-btn" data-copy="usdtAddr">Copy</button></div>
+            </div>
+            <div style="text-align:center;flex:1;min-width:200px">
+              <img src="../img/pay/btc-qr.png" alt="BTC QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+              <div class="kv" style="margin-top:8px"><span class="k">BTC (Bitcoin)</span></div>
+              <div style="font-size:.75rem;word-break:break-all;color:var(--muted);margin-top:4px"><code id="btcAddr">1PVGJcqNHvjbWTkuBhaMFpeAYzU9gmqmKz</code> <button class="copy-btn" data-copy="btcAddr">Copy</button></div>
+            </div>
+          </div>
           <button class="btn btn-primary" id="cryptoDoneBtn" style="width:100%;margin-top:8px">✅ I've sent the payment</button>
         </div>
 
