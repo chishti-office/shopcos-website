@@ -231,14 +231,17 @@
 
   // Signup: send OTP
   document.getElementById('doSignup').addEventListener('click', async function() {
+    var btn = this;
     var email = document.getElementById('signupEmail').value.trim();
     var pass = document.getElementById('signupPass').value;
     var err = document.getElementById('signupError');
     if (pass.length < 6) { err.textContent = 'Password 6 characters se zyada ho'; return; }
+    btn.disabled = true;
     err.textContent = 'Sending OTP...';
     // Store password temporarily, send OTP
     sessionStorage.setItem('sb_signup_pass', pass);
     var { error } = await sb.auth.signInWithOtp({ email: email });
+    btn.disabled = false;
     if (error) err.textContent = error.message;
     else { showOTP(email); err.textContent = ''; }
   });
@@ -250,7 +253,13 @@
     if (code.length !== 6) { err.textContent = '6-digit code dalain'; return; }
     err.textContent = 'Verifying...';
     var { data, error } = await sb.auth.verifyOtp({ email: pendingEmail, token: code, type: 'email' });
-    if (error) { err.textContent = error.message; return; }
+    if (error) {
+      var m = error.message || '';
+      if (/expir|invalid/i.test(m)) {
+        err.textContent = 'Ye code purana ho gaya hai. Neeche "Resend Code" dabayein aur NAYA code foran enter karein.';
+      } else { err.textContent = m; }
+      return;
+    }
     // Set password for the user
     var pass = sessionStorage.getItem('sb_signup_pass');
     if (pass && data.user) {
