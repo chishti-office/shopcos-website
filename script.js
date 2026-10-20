@@ -123,7 +123,7 @@
     var { data } = await sb.from('licenses').select('*').eq('user_id', user.id).limit(1);
     if (data && data.length) return data[0];
     var key = genKey();
-    var trialEnds = new Date(Date.now() + 7*86400000).toISOString();
+    var trialEnds = new Date(Date.now() + 30*86400000).toISOString();
     var { data: ins } = await sb.from('licenses').insert({
       user_id: user.id, email: user.email, license_key: key,
       type: 'trial', status: 'active', trial_ends_at: trialEnds
@@ -384,9 +384,9 @@
   var WA_LINK = 'https://wa.me/923264025618?text=' + encodeURIComponent('Assalam-o-Alaikum! Mujhe shopcos soft ke baare mein maloomat chahiye.');
 
   var ANSWERS = [
-    { k: ['konsa plan', 'kaunsa plan', 'which plan', 'konsa loon', 'kaunsa loon', 'konsa le', 'recommend', 'suggest', 'choti shop', 'chhoti shop', 'small shop', 'bari shop', 'badi shop'], a: '🎯 <strong>Mere mashwara:</strong><br><br>🏪 <strong>Choti shop (akelai kaam)</strong> → <strong>$90 Starter</strong> — bas aap ke liye perfect!<br><br>👥 <strong>2-3 staff wali shop</strong> → <strong>$145 Business</strong> ⭐ sab se popular! 1 Editor + 2 Users<br><br>🏬 <strong>Bari shop / multiple counters</strong> → <strong>$290 Professional</strong> — 2 Editors + 10 Users<br><br>🏢 <strong>Chain / bohat bara setup</strong> → <strong>$545 Enterprise</strong> — unlimited!<br><br>💡 <strong>Tip:</strong> Pehle <strong>7-day free trial</strong> lein (Business plan unlocked) — pasand aye to khareed lein! 🆓' },
+    { k: ['konsa plan', 'kaunsa plan', 'which plan', 'konsa loon', 'kaunsa loon', 'konsa le', 'recommend', 'suggest', 'choti shop', 'chhoti shop', 'small shop', 'bari shop', 'badi shop'], a: '🎯 <strong>Mere mashwara:</strong><br><br>🏪 <strong>Choti shop (akelai kaam)</strong> → <strong>$90 Starter</strong> — bas aap ke liye perfect!<br><br>👥 <strong>2-3 staff wali shop</strong> → <strong>$145 Business</strong> ⭐ sab se popular! 1 Editor + 2 Users<br><br>🏬 <strong>Bari shop / multiple counters</strong> → <strong>$290 Professional</strong> — 2 Editors + 10 Users<br><br>🏢 <strong>Chain / bohat bara setup</strong> → <strong>$545 Enterprise</strong> — unlimited!<br><br>💡 <strong>Tip:</strong> Pehle <strong>30-day free trial</strong> lein (Business plan unlocked) — pasand aye to khareed lein! 🆓' },
     { k: ['plian', 'paln', 'qemat', 'qeemat'], a: '💰 <strong>4 Plans:</strong><br>• <strong>$90</strong> Starter (Rs 25,000) — 1 Admin<br>• <strong>$145</strong> Business ⭐ (Rs 40,000) — 1 Admin + 1 Editor + 2 Users<br>• <strong>$290</strong> Professional (Rs 80,000) — 1 Admin + 2 Editors + 10 Users<br>• <strong>$545</strong> Enterprise (Rs 150,000) — 1 Admin + 5 Editors + Unlimited Users<br><br>Lifetime license, no monthly fee! 🚀' },
-    { k: ['trial', 'free', 'muft', 'azma'], a: '🆓 <strong>7-day free trial</strong> — koi card nahi chahiye! Sign up karein aur trial auto-start ho jayega. Trial mein <strong>Business plan</strong> unlocked (1 Editor + 2 Users)! ✨' },
+    { k: ['trial', 'free', 'muft', 'azma'], a: '🆓 <strong>30-day free trial</strong> — koi card nahi chahiye! Sign up karein aur trial auto-start ho jayega. Trial mein <strong>Business plan</strong> unlocked (1 Editor + 2 Users)! ✨' },
     { k: ['apk', 'android', 'mobile', 'app'], a: '📱 <strong>Android APK</strong> available hai! Shop ke WiFi se connect karke mobile se billing karein. Dashboard se download karein! 📥' },
     { k: ['medical', 'pharmacy', 'dawai', 'medicine', 'doctor'], a: '💊 Ji haan! <strong>Medical store</strong> ke liye perfect — batch number, generic name, expiry tracking aur expiry alerts sab included! 🏥' },
     { k: ['kiryana', 'grocery', 'general store'], a: '🏪 Kiryana/general store ke liye ideal! Fast barcode billing, stock alerts, khata/udhar management — sab kuch ek screen par! ⚡' },
@@ -470,7 +470,7 @@
     }
   } catch(e) {}
 
-  var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 7-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. IMPORTANT: Detect the user\'s language from their message and reply in the SAME language. If they write in Urdu/Roman Urdu, reply in Roman Urdu. If they write in English, reply in English. Keep answers brief (2-3 lines max), friendly. Never mention monthly pricing.';
+  var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 30-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. IMPORTANT: Detect the user\'s language from their message and reply in the SAME language. If they write in Urdu/Roman Urdu, reply in Roman Urdu. If they write in English, reply in English. Keep answers brief (2-3 lines max), friendly. Never mention monthly pricing.';
 
   function askAI(q, cb){
     var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
@@ -684,7 +684,7 @@
       hero_eyebrow: '<span class="pulse-dot"></span> 🤖 shopcos AI — Shop Software for 31 Countries · POS Billing · 100% Offline',
       hero_h1: '🤖 Talk to Your Shop. <span class="grad">Your Entire Business, In Your Pocket.</span>',
       hero_sub: 'Meet <strong>shopcos AI</strong> — ask <em>"how much did I sell today?"</em> and get instant answers. Billing, stock, credit ledger, reports — on your computer <strong>AND</strong> phone, wherever you are. 28 currencies, 31 countries. No internet needed. No monthly fees. <span class="seo-kw">Best shop software &amp; point of sale (POS) billing software for retail shops, pharmacies &amp; small businesses worldwide.</span>',
-      cta_trial: '⚡ Start 7-Day Free Trial', cta_trial2: 'Start 7-Day Free Trial',
+      cta_trial: '⚡ Start 30-day Free Trial', cta_trial2: 'Start 30-day Free Trial',
       cta_ai: '🤖 Try AI Live',
       cta_buy: '💎 Buy Now — Lifetime License',
       cta_h2: 'Stop managing your shop<br>from a <span class="grad">paper register.</span>',
@@ -701,7 +701,7 @@
       hero_eyebrow: '<span class="pulse-dot"></span> 🤖 shopcos AI — 31 ممالک کے لیے شاپ سافٹ ویئر · POS بلنگ · 100% آف لائن',
       hero_h1: '🤖 اپنی دکان سے بات کریں۔ <span class="grad">آپ کا پورا کاروبار، آپ کی جیب میں۔</span>',
       hero_sub: '<strong>shopcos AI</strong> سے ملیں — پوچھیں <em>"آج کتنی سیل ہوئی؟"</em> اور فوری جواب پائیں۔ بلنگ، اسٹاک، کھاتہ، رپورٹس — آپ کے کمپیوٹر <strong>اور</strong> فون پر، جہاں بھی آپ ہوں۔ 28 کرنسیاں، 31 ممالک۔ انٹرنیٹ کی ضرورت نہیں۔ کوئی ماہانہ فیس نہیں۔',
-      cta_trial: '⚡ 7 دن کا مفت ٹرائل شروع کریں', cta_trial2: '7 دن کا مفت ٹرائل شروع کریں',
+      cta_trial: '⚡ 30 دن کا مفت ٹرائل شروع کریں', cta_trial2: '30 دن کا مفت ٹرائل شروع کریں',
       cta_ai: '🤖 AI لائیو آزمائیں',
       cta_buy: '💎 ابھی خریدیں — لائف ٹائم لائسنس',
       cta_h2: 'اپنی دکان کاغذی رجسٹر<br>سے چلانا <span class="grad">بند کریں۔</span>',
