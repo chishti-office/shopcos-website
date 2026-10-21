@@ -1,0 +1,150 @@
+/* ============================================================
+   shopcos soft — Phone UI layer
+   App-like mobile interface. EVERYTHING in this file lives
+   inside @media (max-width: 768px), so the desktop website
+   is 100% untouched.
+   Loaded on every page via <link href="/mobile.css">.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ---- Base: app feel ---- */
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+    touch-action: manipulation;
+    overscroll-behavior-y: none;
+  }
+  /* Perf: kill heavy fixed effects on phones */
+  .orb, .glow { display: none !important; }
+  body::after { display: none; }
+
+  /* ---- App header: compact ---- */
+  .nav-inner { height: 62px !important; gap: 12px !important; }
+  .brand-logo { width: 36px !important; height: 36px !important; }
+  .brand-name { font-size: 1.1rem !important; }
+  /* Desktop nav pieces replaced by the tab bar */
+  .nav-links { display: none !important; }
+  .nav-cta { display: none !important; }
+  .hamburger { display: none !important; }
+  .mobile-menu { display: none !important; }
+
+  /* Mobile header cart button (injected by mobile.js) */
+  .m-head-cart {
+    margin-left: auto;
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    font-size: 1.25rem; cursor: pointer; position: relative;
+    color: #fff;
+  }
+  .m-head-cart .cart-badge {
+    position: absolute; top: -6px; right: -6px;
+    min-width: 20px; height: 20px; border-radius: 10px;
+    background: linear-gradient(135deg,#ffd97a,#e08a1e);
+    color: #1a1a2e; font-size: .68rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 5px;
+  }
+
+  /* ---- Bottom tab bar (app-style) ---- */
+  .m-tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+    display: flex; align-items: stretch;
+    background: rgba(7,11,28,.94);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(245,183,63,.22);
+    padding: 6px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -12px 40px rgba(0,0,0,.5);
+  }
+  .m-tab {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    background: none; border: none; cursor: pointer; padding: 6px 2px 4px;
+    color: #8a90a8; font-size: .66rem; font-weight: 600; font-family: inherit;
+    position: relative; text-decoration: none;
+  }
+  .m-tab .m-ic { font-size: 1.5rem; line-height: 1.2; transition: transform .2s ease; filter: grayscale(.4); }
+  .m-tab.active { color: #ffd97a; }
+  .m-tab.active .m-ic { transform: scale(1.18); filter: none; }
+  .m-tab.active::after {
+    content: ''; position: absolute; bottom: -1px;
+    width: 22px; height: 3px; border-radius: 3px;
+    background: linear-gradient(90deg,#ffd97a,#e08a1e);
+    box-shadow: 0 0 10px rgba(245,183,63,.8);
+  }
+  .m-tab:active .m-ic { transform: scale(.92); }
+
+  /* ---- Account bottom sheet ---- */
+  .m-sheet-overlay {
+    position: fixed; inset: 0; z-index: 950;
+    background: rgba(3,5,14,.7);
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
+  }
+  .m-sheet-overlay.open { opacity: 1; visibility: visible; }
+  .m-sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 951;
+    background: #0d1530;
+    border: 1px solid rgba(245,183,63,.3); border-bottom: none;
+    border-radius: 26px 26px 0 0;
+    padding: 14px 22px calc(22px + env(safe-area-inset-bottom, 0px));
+    transform: translateY(105%); transition: transform .38s cubic-bezier(.16,1,.3,1);
+    max-height: 78vh; overflow-y: auto;
+    box-shadow: 0 -20px 70px rgba(0,0,0,.6);
+  }
+  .m-sheet-overlay.open .m-sheet { transform: none; }
+  .m-sheet-grab {
+    width: 44px; height: 5px; border-radius: 3px; margin: 0 auto 16px;
+    background: rgba(255,255,255,.22);
+  }
+  .m-sheet h3 { font-size: 1.25rem; margin-bottom: 4px; }
+  .m-sheet .m-sheet-sub { color: #a3adc9; font-size: .88rem; margin-bottom: 18px; }
+  .m-sheet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+  .m-sheet-actions .btn { width: 100%; padding: .95rem .5rem; font-size: .95rem; }
+  .m-sheet-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .m-sheet-row label { font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6d7694; }
+  .m-sheet .nav-select {
+    max-width: none !important; width: 100%;
+    padding: 14px !important; font-size: .95rem !important; border-radius: 14px !important;
+  }
+  .m-sheet-link {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    padding: 15px 16px; margin-bottom: 10px;
+    background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px; color: #f2f4fb; font-weight: 600; font-size: .95rem;
+    cursor: pointer; font-family: inherit; text-align: left;
+  }
+  .m-sheet-link .m-ic { font-size: 1.3rem; }
+  .m-sheet-link:active { background: rgba(245,183,63,.12); }
+
+  /* ---- App-like content tweaks ---- */
+  section { padding: 56px 0 !important; }
+  .hero { padding: 120px 0 46px !important; }
+  .hero h1 { font-size: clamp(2rem, 9vw, 2.7rem) !important; }
+  .hero-ctas .btn { flex: 1 1 100%; padding: 1.05rem 1rem !important; font-size: 1rem !important; }
+  .hero-sub { font-size: 1rem !important; }
+  .sec-head h2 { font-size: clamp(1.6rem, 7vw, 2.1rem) !important; }
+  .bento-card { padding: 28px 22px !important; border-radius: 22px !important; }
+  .price-card { border-radius: 24px !important; }
+  .price-card .btn { padding: 1rem !important; font-size: 1rem !important; }
+  .dl-card { padding: 28px 22px !important; }
+  .faq-q { padding: 18px 20px !important; font-size: .98rem !important; }
+  .auth-modal { border-radius: 24px !important; padding: 28px 22px !important; margin: 12px; }
+  .auth-input, .auth-submit, .btn-google { font-size: 1rem !important; padding: 15px !important; }
+
+  /* Dashboard / checkout / admin pages */
+  .topbar { padding: 10px 14px !important; }
+  .dash-tabs, .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Floating buttons clear the tab bar */
+  #aiFab { bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important; right: 14px !important; }
+  #toTop { bottom: calc(160px + env(safe-area-inset-bottom, 0px)) !important; right: 14px !important; }
+  #waFloat { bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important; left: 14px !important; }
+  #aiWidget {
+    bottom: calc(160px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 10px !important; width: calc(100vw - 20px) !important;
+  }
+
+  /* Footer: room for tab bar */
+  .footer { padding-bottom: 20px; }
+}
