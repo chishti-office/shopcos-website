@@ -367,7 +367,7 @@ a{color:inherit;text-decoration:none}
         <div class="wallet-balance"><small>$</small> <span id="walletBal">0.00</span></div>
         <p class="note" style="margin-top:2px">Available balance · USD</p>
         <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-          <a class="btn btn-primary btn-sm" id="addFundsBtn" href="#" target="_blank" rel="noopener">➕ Add Money</a>
+          <a class="btn btn-primary btn-sm" id="addFundsBtn" href="javascript:void(0)">➕ Add Money</a>
           <button class="btn btn-ghost btn-sm" id="refreshWalletBtn">🔄 Refresh</button>
         </div>
         <h3 style="font-size:.95rem;margin:20px 0 6px">Recent transactions</h3>
@@ -689,8 +689,12 @@ a{color:inherit;text-decoration:none}
                (t.amount >= 0 ? '+' : '−') + '$' + Math.abs(t.amount).toFixed(2) + '</span></div>';
       }).join('');
     }
-    var msg = 'Assalam-o-Alaikum! I want to add funds to my shopcos wallet. My email: ' + user.email;
-    document.getElementById('addFundsBtn').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    // Add Money scrolls to payment methods (no WhatsApp)
+    document.getElementById('addFundsBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      var pm = document.querySelector('.pay-methods');
+      if (pm) pm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   /* ---------- orders ---------- */
