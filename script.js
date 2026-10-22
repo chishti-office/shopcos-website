@@ -140,6 +140,18 @@
     document.getElementById('formSignup').style.display = tab === 'signup' ? 'block' : 'none';
     document.getElementById('formOTP').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'none';
+    document.getElementById('formForgot').style.display = 'none';
+    document.getElementById('formReset').style.display = 'none';
+  }
+  function showForgot() {
+    ['formLogin','formSignup','formOTP','formSuccess','formReset'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
+    document.getElementById('formForgot').style.display = 'block';
+    document.getElementById('forgotError').textContent = '';
+  }
+  function showResetForm() {
+    ['formLogin','formSignup','formOTP','formSuccess','formForgot'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
+    document.getElementById('formReset').style.display = 'block';
+    document.getElementById('resetError').textContent = '';
   }
   function showOTP(email) {
     pendingEmail = email;
@@ -217,6 +229,37 @@
   overlay.addEventListener('click', function(e) { if (e.target === overlay) hideAuth(); });
   document.getElementById('tabLogin').addEventListener('click', function() { switchTab('login'); });
   document.getElementById('tabSignup').addEventListener('click', function() { switchTab('signup'); });
+
+  // Forgot password: send reset link to email
+  document.getElementById('forgotLink').addEventListener('click', function(e) { e.preventDefault(); showForgot(); });
+  document.getElementById('backToLogin').addEventListener('click', function(e) { e.preventDefault(); switchTab('login'); });
+  document.getElementById('doForgot').addEventListener('click', async function() {
+    var email = document.getElementById('forgotEmail').value.trim();
+    var err = document.getElementById('forgotError');
+    if (!email) { err.textContent = 'Gmail likhein'; return; }
+    err.textContent = 'Sending...';
+    var { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: 'https://shopcos.shop/' });
+    if (error) err.textContent = error.message;
+    else { err.textContent = ''; err.style.color = 'green'; err.textContent = '✅ Reset link bhej diya! Gmail check karein (spam folder bhi).'; }
+  });
+
+  // Set new password (opened from the email recovery link)
+  document.getElementById('doResetPass').addEventListener('click', async function() {
+    var p1 = document.getElementById('resetPass').value;
+    var p2 = document.getElementById('resetPass2').value;
+    var err = document.getElementById('resetError');
+    if (p1.length < 6) { err.textContent = 'Password 6 characters se zyada ho'; return; }
+    if (p1 !== p2) { err.textContent = 'Dono password same likhein'; return; }
+    err.textContent = 'Saving...';
+    var { data, error } = await sb.auth.updateUser({ password: p1 });
+    if (error) err.textContent = error.message;
+    else if (data.user) { window.location.hash = ''; showSuccess(data.user); }
+  });
+
+  // If opened via password-recovery email link, show the new-password form
+  if (window.location.hash && window.location.hash.indexOf('type=recovery') !== -1) {
+    showAuth('login'); showResetForm();
+  }
 
   // Login with email + password
   document.getElementById('doLogin').addEventListener('click', async function() {
