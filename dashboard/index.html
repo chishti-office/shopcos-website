@@ -89,6 +89,12 @@ a{color:inherit;text-decoration:none}
 .plan-card .price-big{font-size:1.8rem}
 .pay-pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
 .pay-pills em{font-style:normal;font-size:.78rem;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:6px 12px;border-radius:999px;color:var(--muted)}
+.pay-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.pay-method{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px}
+.pm-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:.95rem}
+.pay-method .kv{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0;font-size:.82rem;border-top:1px solid rgba(255,255,255,.05)}
+.pay-method .kv .k{color:var(--muted)}
+.pay-method .kv .v code{background:rgba(255,255,255,.08);padding:3px 8px;border-radius:6px;font-size:.78rem;word-break:break-all}
 
 /* ---------- downloads ---------- */
 .dl-row{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--border);border-radius:14px;margin-bottom:12px;background:rgba(255,255,255,.02);transition:.2s}
@@ -366,16 +372,36 @@ a{color:inherit;text-decoration:none}
         </div>
         <h3 style="font-size:.95rem;margin:20px 0 6px">Recent transactions</h3>
         <div class="empty-state" id="txList">No transactions yet.<br>Your top-ups and purchases will appear here.</div>
-        <p class="note">💡 Wallet top-ups are currently handled manually via WhatsApp. Send us your payment receipt and your balance will be updated here.</p>
+        <p class="note">💡 Neeche diye gaye methods se payment karein, phir receipt upload karein — admin approve karega to balance yahan update ho jayega.</p>
       </section>
 
       <section class="card" style="margin-top:20px">
         <h2>💳 Payment Methods</h2>
-        <p class="sub">Ways to add money to your wallet or pay for plans</p>
-        <div class="pay-pills">
-          <em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em>
+        <p class="sub">Choose a method, send payment, then upload your receipt below</p>
+        <div class="pay-methods">
+          <div class="pay-method">
+            <div class="pm-head"><img src="../img/pay/easypaisa-logo.png" alt="Easypaisa" style="height:26px;object-fit:contain"><strong>Easypaisa</strong></div>
+            <div class="kv"><span class="k">Number</span><span class="v"><code>03264025618</code></span></div>
+            <div class="kv"><span class="k">Title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+          </div>
+          <div class="pay-method">
+            <div class="pm-head"><img src="../img/pay/jazzcash-logo.png" alt="JazzCash" style="height:26px;object-fit:contain"><strong>JazzCash</strong></div>
+            <div class="kv"><span class="k">Number</span><span class="v"><code>03264025618</code></span></div>
+            <div class="kv"><span class="k">Title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+          </div>
+          <div class="pay-method">
+            <div class="pm-head"><img src="../img/pay/meezan-logo.png" alt="Meezan Bank" style="height:26px;object-fit:contain"><strong>Bank Transfer</strong></div>
+            <div class="kv"><span class="k">Title</span><span class="v">SYED MUHAMMAD RABIE SHAH</span></div>
+            <div class="kv"><span class="k">Account</span><span class="v"><code>98360107034722</code></span></div>
+            <div class="kv"><span class="k">IBAN</span><span class="v"><code>PK53MEZN0098360107034722</code></span></div>
+          </div>
+          <div class="pay-method">
+            <div class="pm-head"><span style="font-size:1.4rem">🪙</span><strong>Crypto</strong></div>
+            <div class="kv"><span class="k">USDT (TRC20)</span><span class="v"><code style="font-size:.7rem">TPwbbScTUAKVnHTmavuFRfRQZ1nsG5PxUx</code></span></div>
+            <div class="kv"><span class="k">BTC</span><span class="v"><code style="font-size:.7rem">1PVGJcqNHvjbWTkuBhaMFpeAYzU9gmqmKz</code></span></div>
+          </div>
         </div>
-        <p class="note">Message us on WhatsApp with your chosen method and we'll guide you through the payment.</p>
+        <p class="note">📤 Payment ke baad <strong>receipt upload</strong> karein ya <a href="../checkout/">checkout</a> se order karein — admin approve karega to balance update ho jayega.</p>
       </section>
     </div><!-- /tab-wallet -->
 
