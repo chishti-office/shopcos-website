@@ -124,9 +124,14 @@
     if (data && data.length) return data[0];
     var key = genKey();
     var trialEnds = new Date(Date.now() + 30*86400000).toISOString();
+    var shop = sessionStorage.getItem('sb_signup_shop') || '';
+    var phone = sessionStorage.getItem('sb_signup_phone') || '';
+    sessionStorage.removeItem('sb_signup_shop');
+    sessionStorage.removeItem('sb_signup_phone');
     var { data: ins } = await sb.from('licenses').insert({
       user_id: user.id, email: user.email, license_key: key,
-      type: 'trial', status: 'active', trial_ends_at: trialEnds
+      type: 'trial', status: 'active', trial_ends_at: trialEnds,
+      shop_name: shop, phone: phone
     }).select();
     return ins && ins[0];
   }
@@ -277,12 +282,16 @@
     var btn = this;
     var email = document.getElementById('signupEmail').value.trim();
     var pass = document.getElementById('signupPass').value;
+    var shop = (document.getElementById('signupShop') || {}).value || '';
+    var phone = (document.getElementById('signupPhone') || {}).value || '';
     var err = document.getElementById('signupError');
     if (pass.length < 6) { err.textContent = 'Password 6 characters se zyada ho'; return; }
     btn.disabled = true;
     err.textContent = 'Sending OTP...';
-    // Store password temporarily, send OTP
+    // Store password + shop/phone temporarily, send OTP
     sessionStorage.setItem('sb_signup_pass', pass);
+    sessionStorage.setItem('sb_signup_shop', shop.trim());
+    sessionStorage.setItem('sb_signup_phone', phone.trim());
     var { error } = await sb.auth.signInWithOtp({ email: email });
     btn.disabled = false;
     if (error) err.textContent = error.message;
