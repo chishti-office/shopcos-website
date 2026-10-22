@@ -275,9 +275,9 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         </div>
         <div class="table-wrap"><table>
           <thead><tr>
-            <th>Email</th><th>Signed up</th><th>License key</th><th>Type</th><th>Status</th><th>Trial ends</th><th>Actions</th>
+            <th>Email</th><th>Shop / Brand</th><th>Phone</th><th>Signed up</th><th>License key</th><th>Type</th><th>Status</th><th>Trial ends</th><th>Actions</th>
           </tr></thead>
-          <tbody id="usersBody"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
+          <tbody id="usersBody"><tr><td colspan="9" class="empty">Loading…</td></tr></tbody>
         </table></div>
       </div>
     </div>
@@ -544,13 +544,15 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 
   function renderUsers(){
     var rows = filteredRows();
-    if (!rows.length){ el('usersBody').innerHTML = '<tr><td colspan="7" class="empty">No matching records.</td></tr>'; return; }
+    if (!rows.length){ el('usersBody').innerHTML = '<tr><td colspan="9" class="empty">No matching records.</td></tr>'; return; }
     el('usersBody').innerHTML = rows.map(function(r){
       var s = licStatus(r);
       var canRevoke = s === 'active';
       var canExtend = r.type === 'trial';
       return '<tr>' +
         '<td class="email-cell">' + esc(r.email) + '</td>' +
+        '<td>' + esc(r.shop_name || '—') + '</td>' +
+        '<td>' + esc(r.phone || '—') + '</td>' +
         '<td class="date-cell">' + fmtDate(r.created_at) + '</td>' +
         '<td><span class="key-cell">' + esc(r.license_key) + '</span></td>' +
         '<td><span class="badge ' + (r.type === 'lifetime' ? 'b-lifetime' : 'b-trial') + '">' + esc(r.type) + '</span></td>' +
