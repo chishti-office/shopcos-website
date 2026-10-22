@@ -536,7 +536,25 @@
   function askAI(q, cb){
     var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
     fetch(url).then(function(r){ return r.text(); }).then(function(t){
-      cb(t.trim() || null);
+      t = (t || '').trim();
+      // Handle Pollinations rate limit gracefully
+      if (t.indexOf('Free limit reached') !== -1 || t.indexOf('Please wait') !== -1) {
+        var waitMatch = t.match(/wait (\d+) seconds/);
+        var waitSec = waitMatch ? parseInt(waitMatch[1], 10) : 10;
+        // Auto-retry after the wait time
+        setTimeout(function(){
+          fetch(url).then(function(r2){ return r2.text(); }).then(function(t2){
+            t2 = (t2 || '').trim();
+            if (t2.indexOf('Free limit reached') !== -1) {
+              cb('⏳ Thoda busy hun! 30 second baad dobara poochein 🙏');
+            } else {
+              cb(t2 || null);
+            }
+          }).catch(function(){ cb(null); });
+        }, (waitSec + 1) * 1000);
+        return;
+      }
+      cb(t || null);
     }).catch(function(){ cb(null); });
   }
 
