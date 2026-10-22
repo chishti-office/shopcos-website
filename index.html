@@ -609,6 +609,7 @@
       <h3>Welcome back! 👋</h3>
       <input type="email" id="loginEmail" placeholder="Gmail address" class="auth-input">
       <input type="password" id="loginPass" placeholder="Password" class="auth-input">
+      <p class="auth-sub" style="text-align:right;margin:-6px 0 8px"><a href="#" id="forgotLink">Forgot password?</a></p>
       <button class="btn btn-primary auth-submit" id="doLogin">Login</button>
       <div class="auth-divider">or</div>
       <button class="btn btn-google" id="googleLogin">
@@ -640,6 +641,26 @@
       <button class="btn btn-primary auth-submit" id="doVerify">Verify & Open Account</button>
       <button class="btn btn-ghost auth-submit" id="resendOTP">Resend Code</button>
       <p class="auth-error" id="otpError"></p>
+    </div>
+    
+    <!-- Forgot password -->
+    <div class="auth-form" id="formForgot" style="display:none">
+      <h3>Reset password 🔑</h3>
+      <p class="auth-sub">Apna Gmail likhein — password reset link bhej denge.</p>
+      <input type="email" id="forgotEmail" placeholder="Gmail address" class="auth-input">
+      <button class="btn btn-primary auth-submit" id="doForgot">Send reset link</button>
+      <p class="auth-sub" style="margin-top:10px"><a href="#" id="backToLogin">← Back to login</a></p>
+      <p class="auth-error" id="forgotError"></p>
+    </div>
+    
+    <!-- Set new password (opened from email link) -->
+    <div class="auth-form" id="formReset" style="display:none">
+      <h3>New password 🔑</h3>
+      <p class="auth-sub">Naya password likhein (min 6 characters).</p>
+      <input type="password" id="resetPass" placeholder="New password" class="auth-input">
+      <input type="password" id="resetPass2" placeholder="Confirm new password" class="auth-input">
+      <button class="btn btn-primary auth-submit" id="doResetPass">Set new password</button>
+      <p class="auth-error" id="resetError"></p>
     </div>
     
     <!-- Success -->
