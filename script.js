@@ -533,29 +533,28 @@
 
   var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 30-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. IMPORTANT: Detect the user\'s language from their message and reply in the SAME language. If they write in Urdu/Roman Urdu, reply in Roman Urdu. If they write in English, reply in English. Keep answers brief (2-3 lines max), friendly. Never mention monthly pricing.';
 
+  var WORKER_URL = 'https://shopcos-ai-chat.chishtioffice2.workers.dev';
   function askAI(q, cb){
-    var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
-    fetch(url).then(function(r){ return r.text(); }).then(function(t){
-      t = (t || '').trim();
-      // Handle Pollinations rate limit gracefully
-      if (t.indexOf('Free limit reached') !== -1 || t.indexOf('Please wait') !== -1) {
-        var waitMatch = t.match(/wait (\d+) seconds/);
-        var waitSec = waitMatch ? parseInt(waitMatch[1], 10) : 10;
-        // Auto-retry after the wait time
-        setTimeout(function(){
-          fetch(url).then(function(r2){ return r2.text(); }).then(function(t2){
-            t2 = (t2 || '').trim();
-            if (t2.indexOf('Free limit reached') !== -1) {
-              cb('⏳ Thoda busy hun! 30 second baad dobara poochein 🙏');
-            } else {
-              cb(t2 || null);
-            }
-          }).catch(function(){ cb(null); });
-        }, (waitSec + 1) * 1000);
-        return;
-      }
-      cb(t || null);
-    }).catch(function(){ cb(null); });
+    // Try Cloudflare Worker (Groq) first — no rate limits, key stays secret
+    fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: q })
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if (j && j.reply) { cb(j.reply.trim() || null); return; }
+      throw new Error('no reply');
+    }).catch(function(){
+      // Fallback: Pollinations (keyless)
+      var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
+      fetch(url).then(function(r){ return r.text(); }).then(function(t){
+        t = (t || '').trim();
+        if (t.indexOf('Free limit reached') !== -1 || t.indexOf('Please wait') !== -1) {
+          cb('⏳ Thoda busy hun! 30 second baad dobara poochein 🙏');
+          return;
+        }
+        cb(t || null);
+      }).catch(function(){ cb(null); });
+    });
   }
 
   function send(){
