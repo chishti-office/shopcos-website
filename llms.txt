@@ -1,0 +1,70 @@
+# shopcos soft
+
+shopcos soft is offline-first point of sale (POS) billing software for retail shops, made by COS — Chishti Office Samundri (Samundri, Faisalabad, Pakistan). It handles fast barcode billing, inventory and stock control, a khata/udhar customer credit ledger, supplier accounts, day closing, and sales and profit reports, with a built-in AI assistant in Urdu and English. It works 100% offline on a Windows PC in the shop, with a companion Android app. Licenses are one-time payments (lifetime license, no monthly subscription), and a 30-day free trial is available with no card required.
+
+## What it is
+
+- Retail POS / billing software for small and medium shops
+- Runs locally on the shop's own Windows PC — internet is not required for daily use
+- One-time purchase with a lifetime license; no monthly fees
+- 30-day free trial (full Business plan features), no credit card required
+
+## Key features
+
+- Fast barcode billing with product photos, auto-barcode for new products, and company barcode quick-add
+- Inventory and stock management with low-stock alerts and expiry tracking (batch number and generic name fields for pharmacies/medical stores)
+- Khata/udhar customer credit ledger with WhatsApp bill sharing and payment reminders
+- Supplier and purchase accounts
+- Day closing and audit log
+- Sales and profit reports
+- Built-in AI assistant ("shopcos AI agent") in Urdu and English for smart insights such as stock prediction and udhar alerts
+- Staff roles: Admin (full access), Editor (products/stock/rates, no AI or user management), User (billing only — staff never see purchase rates)
+- Offline mode with cloud sync when internet is available; multi-shop data isolation
+- Country, currency, and language selection built in
+
+## Pricing
+
+All plans are a one-time payment for a lifetime license. There are no monthly subscription fees.
+
+- Starter: $90 (Rs 25,000)
+- Business: $145 (Rs 40,000)
+- Professional: $290 (Rs 80,000)
+- Enterprise: $545 (Rs 150,000)
+- Free trial: 30 days, full Business plan, no card required
+
+Payment methods: Easypaisa, JazzCash, bank transfer, Google Pay, and crypto.
+
+## Platforms
+
+- Windows desktop (PC software — billing, stock, reports, AI assistant)
+- Android (companion mobile app, syncs with the shop PC in real time over the local network)
+
+## Languages and countries
+
+- Interface languages: English (default) and Urdu
+- Supports 31 countries and 28 currencies
+
+## Who it is for
+
+- Kiryana and general stores
+- Pharmacies and medical stores
+- Garments and clothing shops
+- Bakeries
+- All retail shops that need billing, stock, and credit-ledger management
+
+## Company and contact
+
+- Company: COS — Chishti Office Samundri ("Online Work Solutions")
+- Location: Samundri, Faisalabad, Pakistan
+- Email: chishtioffice2@gmail.com
+- WhatsApp: +92 3264025618
+
+## Links
+
+- [Homepage](https://shopcos.shop/) — product overview, features, pricing, and download
+- [Blog](https://shopcos.shop/blog/) — articles and guides for shop owners on billing, stock, and shop management
+- [Dashboard / free trial](https://shopcos.shop/dashboard/) — sign up, start the 30-day free trial, download the software, and manage your license
+- [Checkout](https://shopcos.shop/checkout/) — buy a lifetime license
+- [About](https://shopcos.shop/about/) — about COS — Chishti Office Samundri and shopcos soft
+- [Contact](https://shopcos.shop/contact/) — contact details and support
+- [Privacy policy](https://shopcos.shop/privacy/) — how shopcos handles data
