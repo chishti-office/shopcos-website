@@ -95,6 +95,19 @@ a{color:inherit;text-decoration:none}
 .pay-method .kv{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0;font-size:.82rem;border-top:1px solid rgba(255,255,255,.05)}
 .pay-method .kv .k{color:var(--muted)}
 .pay-method .kv .v code{background:rgba(255,255,255,.08);padding:3px 8px;border-radius:6px;font-size:.78rem;word-break:break-all}
+/* wallet payment tabs (mirror checkout) */
+.pay-methods{display:block}
+.pay-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.pay-tab{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:.2s;font-size:.82rem;font-weight:600;color:var(--muted)}
+.pay-tab .ic{font-size:1.6rem;display:block;margin-bottom:6px}
+.pay-tab:hover{border-color:var(--gold)}
+.pay-tab.active{border-color:var(--gold);background:rgba(245,183,63,.1);color:var(--gold-lt);box-shadow:0 0 20px rgba(245,183,63,.15)}
+.pay-pane{display:none}
+.pay-pane.active{display:block;animation:fadeIn .3s ease}
+.copy-btn{background:rgba(245,183,63,.12);border:1px solid rgba(245,183,63,.4);color:var(--gold-lt);border-radius:8px;padding:4px 12px;font-size:.78rem;cursor:pointer;margin-left:8px;font-family:var(--font-b)}
+.copy-btn:hover{background:rgba(245,183,63,.22)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(max-width:640px){.pay-tabs{grid-template-columns:repeat(2,1fr)}}
 
 /* ---------- downloads ---------- */
 .dl-row{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--border);border-radius:14px;margin-bottom:12px;background:rgba(255,255,255,.02);transition:.2s}
@@ -223,6 +236,7 @@ a{color:inherit;text-decoration:none}
       <div class="topbar-spacer"></div>
       <span class="user-chip">👋 <b id="chipEmail">…</b></span>
       <button class="btn btn-ghost btn-sm sc-cart-btn" data-open-cart aria-label="Open cart">🛒 <span class="cart-badge sc-cart-badge zero" id="cartCount">0</span></button>
+      <a href="../admin/" class="btn btn-ghost btn-sm" id="adminLink" style="display:none">🛡️ Admin Panel</a>
       <a href="../index.html" class="btn btn-ghost btn-sm">🏠 Home</a>
       <button class="btn btn-ghost btn-sm" id="logoutBtn">Logout</button>
     </div>
@@ -379,26 +393,71 @@ a{color:inherit;text-decoration:none}
         <h2>💳 Payment Methods</h2>
         <p class="sub">Choose a method, send payment, then upload your receipt below</p>
         <div class="pay-methods">
-          <div class="pay-method">
-            <div class="pm-head"><img src="../img/pay/easypaisa-logo.png" alt="Easypaisa" style="height:26px;object-fit:contain"><strong>Easypaisa</strong></div>
-            <div class="kv"><span class="k">Number</span><span class="v"><code>03264025618</code></span></div>
-            <div class="kv"><span class="k">Title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+          <div class="pay-tabs">
+            <div class="pay-tab active" data-pay="wmobile"><img src="../img/pay/easypaisa-logo.png" alt="Easypaisa" style="height:28px;object-fit:contain;margin-bottom:4px"><strong>Mobile Money</strong><small>Easypaisa · JazzCash</small></div>
+            <div class="pay-tab" data-pay="wbank"><img src="../img/pay/meezan-logo.png" alt="Meezan Bank" style="height:28px;object-fit:contain;margin-bottom:4px"><strong>Bank Transfer</strong><small>Meezan Bank</small></div>
+            <div class="pay-tab" data-pay="wcrypto"><span class="ic">🪙</span><strong>Crypto</strong><small>USDT · BTC</small></div>
           </div>
-          <div class="pay-method">
-            <div class="pm-head"><img src="../img/pay/jazzcash-logo.png" alt="JazzCash" style="height:26px;object-fit:contain"><strong>JazzCash</strong></div>
-            <div class="kv"><span class="k">Number</span><span class="v"><code>03264025618</code></span></div>
-            <div class="kv"><span class="k">Title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+
+          <!-- MOBILE MONEY -->
+          <div class="pay-pane active" id="pay-wmobile">
+            <div style="display:flex;gap:10px;margin:12px 0">
+              <button class="btn btn-sm subpay-tab active" data-subpay="easypaisa" style="flex:1"><img src="../img/pay/easypaisa-logo.png" alt="Easypaisa" style="height:22px;object-fit:contain;vertical-align:middle"> Easypaisa</button>
+              <button class="btn btn-sm subpay-tab" data-subpay="jazzcash" style="flex:1"><img src="../img/pay/jazzcash-logo.png" alt="JazzCash" style="height:22px;object-fit:contain;vertical-align:middle"> JazzCash</button>
+            </div>
+            <div class="subpay-pane" id="wsub-easypaisa">
+              <div class="kv"><span class="k">Easypaisa number</span><span class="v"><code id="w-epNum">03264025618</code> <button class="copy-btn" data-copy="w-epNum">Copy</button></span></div>
+              <div class="kv"><span class="k">Account title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+              <div style="text-align:center;margin:16px 0">
+                <img src="../img/pay/easypaisa-qr.png" alt="Easypaisa QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+                <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with Easypaisa app</div>
+              </div>
+            </div>
+            <div class="subpay-pane" id="wsub-jazzcash" style="display:none">
+              <div class="kv"><span class="k">JazzCash number</span><span class="v"><code id="w-jcNum">03264025618</code> <button class="copy-btn" data-copy="w-jcNum">Copy</button></span></div>
+              <div class="kv"><span class="k">Account title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+              <div style="text-align:center;margin:16px 0">
+                <img src="../img/pay/jazzcash-qr.png" alt="JazzCash QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+                <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with JazzCash app</div>
+              </div>
+            </div>
           </div>
-          <div class="pay-method">
-            <div class="pm-head"><img src="../img/pay/meezan-logo.png" alt="Meezan Bank" style="height:26px;object-fit:contain"><strong>Bank Transfer</strong></div>
-            <div class="kv"><span class="k">Title</span><span class="v">SYED MUHAMMAD RABIE SHAH</span></div>
-            <div class="kv"><span class="k">Account</span><span class="v"><code>98360107034722</code></span></div>
-            <div class="kv"><span class="k">IBAN</span><span class="v"><code>PK53MEZN0098360107034722</code></span></div>
+
+          <!-- BANK TRANSFER -->
+          <div class="pay-pane" id="pay-wbank">
+            <div class="kv"><span class="k">Bank</span><span class="v">Meezan Bank</span></div>
+            <div class="kv"><span class="k">Account title</span><span class="v">SYED MUHAMMAD RABIE SHAH</span></div>
+            <div class="kv"><span class="k">Account number</span><span class="v"><code id="w-bankAcct">98360107034722</code> <button class="copy-btn" data-copy="w-bankAcct">Copy</button></span></div>
+            <div class="kv"><span class="k">IBAN</span><span class="v"><code id="w-bankIban">PK53MEZN0098360107034722</code> <button class="copy-btn" data-copy="w-bankIban">Copy</button></span></div>
+            <div class="kv"><span class="k">Branch</span><span class="v">Samundri, Faisalabad</span></div>
+            <div style="text-align:center;margin:16px 0">
+              <img src="../img/pay/meezan-qr.png" alt="Meezan Bank QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">🏦 Scan with any bank app</div>
+            </div>
           </div>
-          <div class="pay-method">
-            <div class="pm-head"><span style="font-size:1.4rem">🪙</span><strong>Crypto</strong></div>
-            <div class="kv"><span class="k">USDT (TRC20)</span><span class="v"><code style="font-size:.7rem">TPwbbScTUAKVnHTmavuFRfRQZ1nsG5PxUx</code></span></div>
-            <div class="kv"><span class="k">BTC</span><span class="v"><code style="font-size:.7rem">1PVGJcqNHvjbWTkuBhaMFpeAYzU9gmqmKz</code></span></div>
+
+          <!-- CRYPTO -->
+          <div class="pay-pane" id="pay-wcrypto">
+            <div style="display:flex;gap:10px;margin:12px 0">
+              <button class="btn btn-sm subpay-tab active" data-subpay="usdt" style="flex:1"><img src="../img/pay/usdt-logo.png" alt="USDT" style="height:22px;object-fit:contain;vertical-align:middle"> USDT (TRC20)</button>
+              <button class="btn btn-sm subpay-tab" data-subpay="btc" style="flex:1"><img src="../img/pay/btc-logo.png" alt="BTC" style="height:22px;object-fit:contain;vertical-align:middle"> BTC (Bitcoin)</button>
+            </div>
+            <div class="subpay-pane" id="wsub-usdt">
+              <div class="kv"><span class="k">Network</span><span class="v">Tron (TRC20)</span></div>
+              <div class="kv"><span class="k">Address</span><span class="v"><code id="w-usdtAddr">TPwbbScTUAKVnHTmavuFRfRQZ1nsG5PxUx</code> <button class="copy-btn" data-copy="w-usdtAddr">Copy</button></span></div>
+              <div style="text-align:center;margin:16px 0">
+                <img src="../img/pay/usdt-qr.png" alt="USDT QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+                <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with your wallet app</div>
+              </div>
+            </div>
+            <div class="subpay-pane" id="wsub-btc" style="display:none">
+              <div class="kv"><span class="k">Network</span><span class="v">Bitcoin</span></div>
+              <div class="kv"><span class="k">Address</span><span class="v"><code id="w-btcAddr">1PVGJcqNHvjbWTkuBhaMFpeAYzU9gmqmKz</code> <button class="copy-btn" data-copy="w-btcAddr">Copy</button></span></div>
+              <div style="text-align:center;margin:16px 0">
+                <img src="../img/pay/btc-qr.png" alt="BTC QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
+                <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with your wallet app</div>
+              </div>
+            </div>
           </div>
         </div>
         <p class="note">📤 Payment ke baad <strong>receipt upload</strong> karein ya <a href="../checkout/">checkout</a> se order karein — admin approve karega to balance update ho jayega.</p>
@@ -916,6 +975,8 @@ a{color:inherit;text-decoration:none}
     document.getElementById('acctSince').textContent = user.created_at ?
       new Date(user.created_at).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '—';
     document.getElementById('acctId').textContent = user.id || '—';
+    var al = document.getElementById('adminLink');
+    if (al) al.style.display = (user.email || '').toLowerCase() === 'chishtioffice2@gmail.com' ? '' : 'none';
   }
 
   /* ---------- change password (with current-password verification) ---------- */
@@ -1454,6 +1515,45 @@ a{color:inherit;text-decoration:none}
   }
   init();
 })();
+</script>
+<script>
+  // Wallet payment tabs (mirrors checkout; scoped to the wallet payment section only)
+  (function(){
+    var wpm = document.querySelector('#tab-wallet .pay-methods');
+    if (!wpm) return;
+    wpm.querySelectorAll('.pay-tab').forEach(function(t){
+      t.addEventListener('click', function(){
+        wpm.querySelectorAll('.pay-tab').forEach(function(x){ x.classList.remove('active'); });
+        wpm.querySelectorAll('.pay-pane').forEach(function(x){ x.classList.remove('active'); });
+        t.classList.add('active');
+        var pane = document.getElementById('pay-' + t.getAttribute('data-pay'));
+        if (pane) pane.classList.add('active');
+      });
+    });
+    wpm.querySelectorAll('.subpay-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var parent = btn.closest('.pay-pane');
+        if (!parent) return;
+        parent.querySelectorAll('.subpay-tab').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        parent.querySelectorAll('.subpay-pane').forEach(function(p){ p.style.display = 'none'; });
+        var target = parent.querySelector('#wsub-' + btn.dataset.subpay);
+        if (target) target.style.display = 'block';
+      });
+    });
+    wpm.querySelectorAll('.copy-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var src = document.getElementById(btn.dataset.copy);
+        if (!src) return;
+        var txt = src.textContent.trim();
+        var old = btn.textContent;
+        function done(){ btn.textContent = 'Copied ✓'; setTimeout(function(){ btn.textContent = old; }, 1500); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(done, done);
+        } else { done(); }
+      });
+    });
+  })();
 </script>
 <script src="/mobile.js" defer></script>
 </body>
