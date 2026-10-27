@@ -174,3 +174,21 @@
     if (e.key === 'Escape') closeSheet();
   });
 })();
+
+/* ============================================================
+   Google Analytics (GA4) — shopcos.shop · G-JLTE8X1KN7
+   Runs on every page/viewport (appended outside the phone-UI IIFE).
+   ============================================================ */
+(function () {
+  if (window.__shopcosGA) return;
+  window.__shopcosGA = true;
+  var GA_ID = 'G-JLTE8X1KN7';
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GA_ID);
+})();
