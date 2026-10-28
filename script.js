@@ -534,16 +534,32 @@
   var AI_SYSTEM = 'You are shopcos AI, friendly assistant for shopcos soft billing software. Plans (LIFETIME, not monthly): Starter $90 (1 admin), Business $145 (1 admin+1 editor+2 users), Professional $290 (1 admin+2 editors+10 users), Enterprise $545 (1 admin+5 editors+unlimited). 30-day free trial with Business plan unlocked. Features: barcode billing, stock alerts, khata/udhar, AI assistant, voice billing, cloud sync, offline mode, 28 currencies, Urdu+English. IMPORTANT: Detect the user\'s language from their message and reply in the SAME language. If they write in Urdu/Roman Urdu, reply in Roman Urdu. If they write in English, reply in English. Keep answers brief (2-3 lines max), friendly. Never mention monthly pricing.';
 
   var WORKER_URL = 'https://shopcos-ai-chat.chishtioffice2.workers.dev';
+  function workerReplyOk(t){
+    // The Worker swallows Groq errors and answers HTTP 200 with a "busy"
+    // fallback string — that counts as failure, never as a real answer.
+    t = (t || '').trim();
+    return !!t && t.indexOf('Thoda busy hun') === -1 && t.charAt(0) !== '⏳';
+  }
   function askAI(q, cb){
     // Try Cloudflare Worker (Groq) first — no rate limits, key stays secret
-    fetch(WORKER_URL, {
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 15000) : null;
+    var opts = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: q })
-    }).then(function(r){ return r.json(); }).then(function(j){
-      if (j && j.reply) { cb(j.reply.trim() || null); return; }
-      throw new Error('no reply');
+    };
+    if (ctrl) opts.signal = ctrl.signal;
+    fetch(WORKER_URL, opts).then(function(r){
+      if (timer) clearTimeout(timer);
+      if (!r.ok) throw new Error('worker ' + r.status);
+      return r.json();
+    }).then(function(j){
+      var rep = (j && j.reply) ? String(j.reply).trim() : '';
+      if (workerReplyOk(rep)) { cb(rep); return; }
+      throw new Error('worker busy');
     }).catch(function(){
+      if (timer) clearTimeout(timer);
       // Fallback: Pollinations (keyless)
       var url = 'https://text.pollinations.ai/' + encodeURIComponent(q) + '?system=' + encodeURIComponent(AI_SYSTEM);
       fetch(url).then(function(r){ return r.text(); }).then(function(t){
