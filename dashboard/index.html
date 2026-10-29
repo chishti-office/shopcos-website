@@ -191,6 +191,26 @@ a{color:inherit;text-decoration:none}
 .dash-chat-chips button:hover{background:rgba(245,183,63,.2)}
 .dash-chat-input{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--border)}
 .dash-chat-input .input{flex:1}
+/* AI chat — pretty + photo upload (2026-10-29) */
+.dash-chat{border-radius:16px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.dash-chat-head{background:linear-gradient(120deg,rgba(245,183,63,.22),rgba(245,183,63,.06) 55%,rgba(78,140,255,.10))}
+.dash-chat-avatar{border:2px solid rgba(245,183,63,.75);box-shadow:0 0 0 3px rgba(245,183,63,.18),0 4px 12px rgba(0,0,0,.35);background:#fff}
+.dash-chat-msg{border-radius:16px}
+.dash-chat-msg.bot{border-bottom-left-radius:5px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+.dash-chat-msg.user{border-bottom-right-radius:5px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+.dash-chat-msg.note{background:rgba(255,196,66,.12);border:1px dashed rgba(245,183,63,.45);color:#ffe1a1;font-size:.85rem;align-self:flex-start}
+.dash-sent-img{display:block;max-width:190px;max-height:190px;border-radius:10px;margin-bottom:6px;object-fit:cover}
+.dash-chat-msg.user .dash-sent-img{margin-left:auto}
+.dash-chat-msg.user span{display:block}
+.dash-attach{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid rgba(245,183,63,.45);background:rgba(245,183,63,.10);font-size:1.15rem;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
+.dash-attach:hover{background:rgba(245,183,63,.25);transform:scale(1.06)}
+.dash-preview{display:none;align-items:center;gap:10px;padding:8px 16px;background:rgba(245,183,63,.08);border-top:1px solid var(--border)}
+.dash-preview img{width:44px;height:44px;border-radius:8px;object-fit:cover;border:1px solid rgba(245,183,63,.4)}
+.dash-preview-name{flex:1;font-size:.8rem;color:#ffd97a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-preview-x{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:#fff;cursor:pointer;font-size:.72rem}
+.dash-preview-x:hover{background:rgba(255,90,90,.35)}
+.tab-avatar{width:20px;height:20px;border-radius:50%;object-fit:cover;vertical-align:-4px;margin-right:6px;border:1px solid rgba(245,183,63,.6);background:#fff}
+.h2-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;vertical-align:-8px;margin-right:8px;border:2px solid rgba(245,183,63,.7);background:#fff}
 
 /* ---------- access keys ---------- */
 .key-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.02);flex-wrap:wrap}
@@ -248,7 +268,7 @@ a{color:inherit;text-decoration:none}
       <button class="tab-btn" data-tab="access">🔑 Software Access</button>
       <button class="tab-btn" data-tab="wallet">👛 Wallet</button>
       <button class="tab-btn" data-tab="company">🏪 Company</button>
-      <button class="tab-btn" data-tab="aichat">🤖 AI Chat</button>
+      <button class="tab-btn" data-tab="aichat"><img src="../img/shopcos-ai-avatar.webp" alt="" class="tab-avatar">AI Chat</button>
       <button class="tab-btn" data-tab="profile">👤 Profile</button>
     </div>
   </nav>
@@ -502,7 +522,7 @@ a{color:inherit;text-decoration:none}
     <!-- ============ TAB: AI Chat ============ -->
     <div class="tab-pane" id="tab-aichat">
       <section class="card">
-        <h2>🤖 Chat with shopcos AI</h2>
+        <h2><img src="../img/shopcos-ai-avatar.webp" alt="" class="h2-avatar">Chat with shopcos AI</h2>
         <p class="sub">Ask about software, plans and features — instant answers</p>
         <div class="dash-chat">
           <div class="dash-chat-head">
@@ -519,7 +539,14 @@ a{color:inherit;text-decoration:none}
             <button data-q="apk">📱 APK hai?</button>
             <button data-q="medical">💊 Medical store?</button>
           </div>
+          <div class="dash-preview" id="dashPreview">
+            <img id="dashPreviewImg" alt="Attached photo">
+            <span class="dash-preview-name" id="dashPreviewName"></span>
+            <button class="dash-preview-x" id="dashPreviewRemove" aria-label="Photo hatayein / Remove photo" title="Photo hatayein">✕</button>
+          </div>
           <div class="dash-chat-input">
+            <button class="dash-attach" id="dashAttach" aria-label="Photo bhejein / Attach a photo" title="📷 Photo bhejein — AI dekh kar jawab dega">📷</button>
+            <input type="file" id="dashFile" accept="image/*" hidden>
             <input type="text" class="input" id="dashChatInput" placeholder="Type your question..." maxlength="300" autocomplete="off">
             <button class="btn btn-primary" id="dashChatSend">Send ➤</button>
           </div>
@@ -791,7 +818,7 @@ a{color:inherit;text-decoration:none}
 
   /* ---------- downloads ---------- */
   var DL_FILES = {
-    windows: 'https://github.com/chishti-office/shopcos-website/releases/download/v11/shopcos-soft-portable-v11.zip',
+    windows: 'https://github.com/chishti-office/shopcos-website/releases/download/v12/shopcos-soft-portable-v12.zip',
     apk: '../downloads/shopcos-soft.apk',
     guide: '../downloads/shopcos-soft-guide-book.pdf'
   };
@@ -1453,17 +1480,117 @@ a{color:inherit;text-decoration:none}
         .catch(function(){ cb(null); });
     });
   }
+  // ---- Photo attach (📷) — photo Worker (Groq vision) se process hoti hai ----
+  var dashPendingImg = null;
+  function dashChatNote(text) {
+    var d = document.createElement('div');
+    d.className = 'dash-chat-msg note';
+    d.textContent = text;
+    document.getElementById('dashChatMsgs').appendChild(d);
+    dashChatScroll();
+  }
+  function dashClearImg() {
+    dashPendingImg = null;
+    var f = document.getElementById('dashFile');
+    if (f) f.value = '';
+    document.getElementById('dashPreview').style.display = 'none';
+  }
+  function dashDownscale(file, done) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function() {
+      var w = img.naturalWidth, h = img.naturalHeight, max = 1024;
+      if (w > max || h > max) { var s = max / Math.max(w, h); w = Math.round(w * s); h = Math.round(h * s); }
+      var c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      done(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = function() { URL.revokeObjectURL(url); done(null); };
+    img.src = url;
+  }
+  var DASH_PHOTO_FALLBACK = '📷 Maazrat! Is waqt photo dekhne wali sahulat jawab nahi de rahi. 🙏 Aap photo ke baare mein likh kar bata dein — main yahin madad kar dunga! (You can also type what is in the photo.)';
+  var DASH_PHOTO_DEFAULT_Q = 'Is photo mein kya hai? Describe this photo briefly.';
+  function dashChatAskImage(q, imgData, cb) {
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 40000) : null;
+    var opts = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: q, image: imgData })
+    };
+    if (ctrl) opts.signal = ctrl.signal;
+    fetch(DASH_WORKER_URL, opts).then(function(r){
+      if (timer) clearTimeout(timer);
+      if (!r.ok) throw new Error('worker ' + r.status);
+      return r.json();
+    }).then(function(j){
+      var rep = (j && j.reply) ? String(j.reply).trim() : '';
+      if (j && j.vision === true && dashWorkerReplyOk(rep)) { cb(rep); return; }
+      cb(DASH_PHOTO_FALLBACK);
+    }).catch(function(){
+      if (timer) clearTimeout(timer);
+      cb(DASH_PHOTO_FALLBACK);
+    });
+  }
+  (function(){
+    var attach = document.getElementById('dashAttach');
+    var fileIn = document.getElementById('dashFile');
+    if (!attach || !fileIn) return;
+    attach.addEventListener('click', function(){ fileIn.click(); });
+    document.getElementById('dashPreviewRemove').addEventListener('click', dashClearImg);
+    fileIn.addEventListener('change', function(){
+      var f = fileIn.files && fileIn.files[0];
+      if (!f) return;
+      if (f.type.indexOf('image/') !== 0) {
+        dashChatNote('⚠️ Ye photo nahi hai — meharbani karke ek image file chunein (JPG / PNG). / Please choose an image file.');
+        dashClearImg();
+        return;
+      }
+      if (f.size > 10 * 1024 * 1024) {
+        dashChatNote('⚠️ Photo bohat bari hai (max 10 MB). Chhoti photo try karein. / Photo is too large (max 10 MB).');
+        dashClearImg();
+        return;
+      }
+      dashDownscale(f, function(dataUri){
+        if (!dataUri) {
+          dashChatNote('⚠️ Photo khul nahi saki — koi aur photo try karein. / Could not read that photo, please try another.');
+          dashClearImg();
+          return;
+        }
+        dashPendingImg = dataUri;
+        document.getElementById('dashPreviewImg').src = dataUri;
+        document.getElementById('dashPreviewName').textContent = f.name || 'photo';
+        document.getElementById('dashPreview').style.display = 'flex';
+        document.getElementById('dashChatInput').focus();
+      });
+    });
+  })();
+
   function dashChatSend() {
     var input = document.getElementById('dashChatInput');
     var q = input.value.trim();
-    if (!q) return;
+    var img = dashPendingImg;
+    if (!q && !img) return;
     input.value = '';
-    dashChatAdd(q.replace(/</g, '&lt;'), 'user');
+    dashClearImg();
+    var html = '';
+    if (img) html += '<img class="dash-sent-img" src="' + img + '" alt="Attached photo">';
+    if (q) html += '<span>' + q.replace(/</g, '&lt;') + '</span>';
+    dashChatAdd(html, 'user');
     var tp = document.createElement('div');
     tp.className = 'dash-chat-msg bot typing';
     tp.innerHTML = '<span></span><span></span><span></span>';
     document.getElementById('dashChatMsgs').appendChild(tp);
     dashChatScroll();
+    if (img) {
+      dashChatAskImage(q || DASH_PHOTO_DEFAULT_Q, img, function(aiAns){
+        tp.remove();
+        dashChatAdd(aiAns, 'bot');
+      });
+      return;
+    }
     dashChatAskAI(q, function(aiAns){
       tp.remove();
       if (aiAns) { dashChatAdd(aiAns, 'bot'); }
