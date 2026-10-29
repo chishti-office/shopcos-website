@@ -893,3 +893,17 @@ body{
 .ai-ava-eyebrow{width:20px;height:20px;box-shadow:0 0 0 1.5px rgba(245,183,63,.75)}
 .ai-ava-h1{width:.82em;height:.82em;box-shadow:0 0 0 3px rgba(245,183,63,.55),0 8px 22px rgba(0,0,0,.35)}
 .ai-ava-btn{width:22px;height:22px;box-shadow:0 0 0 1.5px rgba(34,21,3,.35)}
+
+/* ===== Hero float cards lowered (2026-10-29) ===== */
+/* The Phone/Computer/Cloud-Sync badges were sitting on top of the phone
+   demo's "Try it live →" row. Base position shifted down only — the
+   floaty animation is untouched. Two-column hero: badges hang lower
+   under .hero-visual (plenty of room before the use-case strip).
+   Stacked hero (<=1020px): the gap below is tight, so instead the
+   visual gains bottom padding — badges (anchored to its bottom) drop
+   by the same amount and everything below moves down with them. */
+.fc-1,.fc-2,.fc-3{bottom:-124px}
+@media(max-width:1020px){
+  .fc-1,.fc-2,.fc-3{bottom:-60px}
+  .hero-visual{padding-bottom:56px}
+}
