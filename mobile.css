@@ -148,3 +148,26 @@
   /* Footer: room for tab bar */
   .footer { padding-bottom: 20px; }
 }
+
+/* ---- VIP PREMIUM harmony (2026-10-29) ---- */
+@media (max-width: 768px) {
+  .m-tabbar {
+    background: rgba(6,9,22,.92);
+    border-top: 1px solid rgba(245,183,63,.3);
+    box-shadow: 0 -14px 44px rgba(0,0,0,.55);
+  }
+  .m-tabbar::before {
+    content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,transparent,rgba(245,183,63,.6),transparent);
+  }
+  .m-tab.active { color: #ffd97a; text-shadow: 0 0 14px rgba(245,183,63,.45); }
+  .m-sheet {
+    background: linear-gradient(180deg,#101a3d,#0c1229);
+    border-color: rgba(245,183,63,.4);
+  }
+  .m-head-cart {
+    background: linear-gradient(165deg,rgba(255,255,255,.09),rgba(255,255,255,.04));
+    border-color: rgba(245,183,63,.3);
+  }
+  .hero-ctas .btn-primary { box-shadow: 0 14px 38px rgba(245,183,63,.4); }
+}
