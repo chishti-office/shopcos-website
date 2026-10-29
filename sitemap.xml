@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://shopcos.shop/</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/img/shopcos-pos-billing.jpg</image:loc>
+      <image:title>shopcos soft billing screen on a POS counter with touchscreen terminal, barcode scanner, cash drawer and receipt printer</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/img/shopcos-logo.png</image:loc>
+      <image:title>shopcos soft logo</image:title>
+    </image:image>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -20,6 +28,26 @@
   </url>
   <url>
     <loc>https://shopcos.shop/blog/how-to-increase-shop-sales.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog9-hero-busy-shop.jpg</image:loc>
+      <image:title>Busy retail grocery shop with customers — proven ways to increase shop sales</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog9-product-display.png</image:loc>
+      <image:title>Attractive product display on retail shelves increases impulse sales</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog9-pos-billing-counter.jpg</image:loc>
+      <image:title>Fast POS billing software at shop counter reduces queues and increases sales</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog9-happy-customers.jpg</image:loc>
+      <image:title>Happy repeat customers shopping in a retail store</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog9-customer-service.jpg</image:loc>
+      <image:title>Shop assistant handing shopping bag to customer — great service drives repeat sales</image:title>
+    </image:image>
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -68,48 +96,168 @@
   </url>
   <url>
     <loc>https://shopcos.shop/blog/medical-store-software-pakistan.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog10-hero-pharmacy-counter.jpg</image:loc>
+      <image:title>Pharmacist billing medicines on computer at a modern medical store counter in Pakistan</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog10-batch-tracking.jpg</image:loc>
+      <image:title>Medicine boxes with batch numbers being scanned at a pharmacy</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog10-generic-search.jpg</image:loc>
+      <image:title>Pharmacy medicine shelves organized with generic drug names</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog10-expiry-alert.jpg</image:loc>
+      <image:title>Pharmacist checking expiry dates on medicine strips with alert reminders</image:title>
+    </image:image>
     <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/fbr-e-invoicing-guide-pakistan-2026.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog11-hero-receipt-printer.jpg</image:loc>
+      <image:title>Cash register printing a receipt at a retail store counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog11-gst-receipt.jpg</image:loc>
+      <image:title>Close-up of a printed sales receipt showing tax and total amounts</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog11-portable-printer.jpg</image:loc>
+      <image:title>Hands operating a receipt printer with printed invoices on a wooden table</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog11-receipt-records.jpg</image:loc>
+      <image:title>Sales receipt, tags, and pen on a wooden shop counter</image:title>
+    </image:image>
     <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/pos-software-cost-pakistan.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog12-hero-register.jpg</image:loc>
+      <image:title>Vintage cash register with a receipt in warm cafe lighting</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog12-cash-drawer.jpg</image:loc>
+      <image:title>Cash register drawer with organized coins and banknotes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog12-pos-terminal.jpg</image:loc>
+      <image:title>Hand pressing buttons on a card payment terminal</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog12-old-register.jpg</image:loc>
+      <image:title>Close-up of an old vintage cash register with dials</image:title>
+    </image:image>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/7-signs-shop-outgrown-cash-register.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog13-hero-register.jpg</image:loc>
+      <image:title>A beautifully preserved vintage brass cash register in warm rustic light</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog13-till-receipt.jpg</image:loc>
+      <image:title>Close-up of a cash register printing a long receipt in a retail store</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog13-empty-shelves.jpg</image:loc>
+      <image:title>Half empty supermarket shelves with gaps where products ran out</image:title>
+    </image:image>
     <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/train-staff-billing-software-one-day.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog14-hero-training.jpg</image:loc>
+      <image:title>Two colleagues training together at a computer, learning a new billing system</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog14-counter-practice.jpg</image:loc>
+      <image:title>A cashier processing transactions at a supermarket checkout counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog14-helping-customer.jpg</image:loc>
+      <image:title>A shop employee happily helping a customer at the store counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog14-notes-learning.jpg</image:loc>
+      <image:title>A person writing notes at a laptop while learning a new system</image:title>
+    </image:image>
     <lastmod>2026-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/offline-vs-online-billing-software.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog15-hero-checkout.jpg</image:loc>
+      <image:title>A customer paying by card at a store checkout counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog15-touchscreen-register.jpg</image:loc>
+      <image:title>A touchscreen register at a retail checkout counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog15-smartphone-payment.jpg</image:loc>
+      <image:title>Customers paying with a smartphone at a supermarket checkout</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog15-tablet-payment.jpg</image:loc>
+      <image:title>A woman paying with a tablet at a modern store counter</image:title>
+    </image:image>
     <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/best-billing-software-pakistan-2026.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog16-hero-cashier.jpg</image:loc>
+      <image:title>A cashier processing sales at a shop counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog16-counter-customer.jpg</image:loc>
+      <image:title>A cashier serving a customer at a shop counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog16-shopkeeper-market.jpg</image:loc>
+      <image:title>A young shopkeeper at his market stall</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog16-grocery-seller.jpg</image:loc>
+      <image:title>A grocery seller holding fresh produce in his store</image:title>
+    </image:image>
     <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://shopcos.shop/blog/billing-machine-price-pakistan.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog17-hero-checkout.jpg</image:loc>
+      <image:title>A modern supermarket checkout counter with a POS terminal, receipt printer and card machine</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog17-portable-printer.jpg</image:loc>
+      <image:title>A portable receipt printer printing a bill, held in one hand</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog17-card-terminal.jpg</image:loc>
+      <image:title>A customer paying by card at a shop counter with a card terminal</image:title>
+    </image:image>
     <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
