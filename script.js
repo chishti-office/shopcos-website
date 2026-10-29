@@ -573,16 +573,129 @@
     });
   }
 
+  // ---- Photo attach (📷) — visitor photo bhejta hai, AI dekh kar jawab deta hai ----
+  var pendingImg = null; // downscaled JPEG data-URI, send ke liye ready
+  var fileInput = document.getElementById('aiwFile');
+  var attachBtn = document.getElementById('aiwAttach');
+  var previewBar = document.getElementById('aiwPreview');
+  var previewImg = document.getElementById('aiwPreviewImg');
+  var previewName = document.getElementById('aiwPreviewName');
+
+  function chatNote(text){
+    var d = document.createElement('div');
+    d.className = 'aiw-msg bot aiw-note';
+    d.textContent = text;
+    msgs.appendChild(d);
+    scrollBottom();
+  }
+  function clearPendingImg(){
+    pendingImg = null;
+    if (fileInput) fileInput.value = '';
+    if (previewBar) previewBar.style.display = 'none';
+    if (previewImg) previewImg.removeAttribute('src');
+  }
+  function downscaleImage(file, done){
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function(){
+      var w = img.naturalWidth, h = img.naturalHeight;
+      var max = 1024;
+      if (w > max || h > max){
+        var s = max / Math.max(w, h);
+        w = Math.round(w * s); h = Math.round(h * s);
+      }
+      var c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      done(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = function(){
+      URL.revokeObjectURL(url);
+      done(null);
+    };
+    img.src = url;
+  }
+  if (attachBtn && fileInput){
+    attachBtn.addEventListener('click', function(){ fileInput.click(); });
+    fileInput.addEventListener('change', function(){
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      if (f.type.indexOf('image/') !== 0){
+        chatNote('⚠️ Ye photo nahi hai — meharbani karke ek image file chunein (JPG / PNG). / Please choose an image file.');
+        clearPendingImg();
+        return;
+      }
+      if (f.size > 10 * 1024 * 1024){
+        chatNote('⚠️ Photo bohat bari hai (max 10 MB). Chhoti photo try karein. / Photo is too large (max 10 MB).');
+        clearPendingImg();
+        return;
+      }
+      downscaleImage(f, function(dataUri){
+        if (!dataUri){
+          chatNote('⚠️ Photo khul nahi saki — koi aur photo try karein. / Could not read that photo, please try another.');
+          clearPendingImg();
+          return;
+        }
+        pendingImg = dataUri;
+        previewImg.src = dataUri;
+        previewName.textContent = f.name || 'photo';
+        previewBar.style.display = 'flex';
+        input.focus();
+      });
+    });
+    document.getElementById('aiwPreviewRemove').addEventListener('click', clearPendingImg);
+  }
+
+  var PHOTO_FALLBACK = '📷 Maazrat! Is waqt photo dekhne wali sahulat jawab nahi de rahi. 🙏 Aap photo ke baare mein likh kar bata dein — main yahin madad kar dunga! (You can also type what is in the photo.)';
+  var PHOTO_DEFAULT_Q = 'Is photo mein kya hai? Describe this photo briefly.';
+  function askAIWithImage(q, imgData, cb){
+    // Photo sirf Worker (Groq vision) se — jawaab mein vision flag lazmi hai,
+    // warna samjha jayega ke photo process nahi hui (purana worker) → polite fallback.
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 40000) : null;
+    var opts = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: q, image: imgData })
+    };
+    if (ctrl) opts.signal = ctrl.signal;
+    fetch(WORKER_URL, opts).then(function(r){
+      if (timer) clearTimeout(timer);
+      if (!r.ok) throw new Error('worker ' + r.status);
+      return r.json();
+    }).then(function(j){
+      var rep = (j && j.reply) ? String(j.reply).trim() : '';
+      if (j && j.vision === true && workerReplyOk(rep)) { cb(rep); return; }
+      cb(PHOTO_FALLBACK);
+    }).catch(function(){
+      if (timer) clearTimeout(timer);
+      cb(PHOTO_FALLBACK);
+    });
+  }
+
   function send(){
     var q = input.value.trim();
-    if (!q) return;
+    var img = pendingImg;
+    if (!q && !img) return;
     input.value = '';
-    addMsg(q.replace(/</g, '&lt;'), 'user');
+    clearPendingImg();
+    var html = '';
+    if (img) html += '<img class="aiw-sent-img" src="' + img + '" alt="Attached photo">';
+    if (q) html += '<span>' + q.replace(/</g, '&lt;') + '</span>';
+    addMsg(html, 'user');
     var tp = document.createElement('div');
     tp.className = 'aiw-msg bot typing';
     tp.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(tp);
     scrollBottom();
+    if (img) {
+      askAIWithImage(q || PHOTO_DEFAULT_Q, img, function(aiAns){
+        tp.remove();
+        addMsg(aiAns, 'bot');
+      });
+      return;
+    }
     askAI(q, function(aiAns){
       tp.remove();
       if (aiAns) { addMsg(aiAns, 'bot'); }
