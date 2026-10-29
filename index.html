@@ -442,7 +442,7 @@
       <p>Start your 30-day free trial today — no card required.</p>
     </div>
     <div class="dl-grid">
-      <a href="https://github.com/chishti-office/shopcos-website/releases/download/v11/shopcos-soft-portable-v11.zip" class="dl-card reveal reveal-d1">
+      <a href="https://github.com/chishti-office/shopcos-website/releases/download/v12/shopcos-soft-portable-v12.zip" class="dl-card reveal reveal-d1">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5L10.5 4.5v7H3zM11.5 4.3L21 3v8.5h-9.5zM3 13h7.5v7L3 18.5zM11.5 13H21v8l-9.5-1.3z"/></svg></div>
         <h3>Windows <span class="ver-badge">v1.0.26</span></h3>
         <p>Portable package — unzip and run on your shop PC. No installation.</p>
@@ -784,7 +784,14 @@
     <button data-q="apk">📱 Is APK available?</button>
     <button data-q="medical">💊 For medical stores?</button>
   </div>
+  <div class="aiw-preview" id="aiwPreview" style="display:none">
+    <img id="aiwPreviewImg" alt="Attached photo">
+    <span class="aiw-preview-name" id="aiwPreviewName"></span>
+    <button id="aiwPreviewRemove" aria-label="Photo hatayein / Remove photo" title="Photo hatayein">✕</button>
+  </div>
   <div class="aiw-inputbar">
+    <button id="aiwAttach" aria-label="Photo bhejein / Attach a photo" title="📷 Photo bhejein — AI dekh kar jawab dega">📷</button>
+    <input type="file" id="aiwFile" accept="image/*" hidden>
     <input type="text" id="aiwInput" placeholder="Type your question..." maxlength="500" autocomplete="off">
     <button id="aiwSend" aria-label="Send">➤</button>
   </div>
