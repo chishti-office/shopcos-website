@@ -191,12 +191,13 @@
   <div class="urdu-watermark" aria-hidden="true">دکان</div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <div class="eyebrow reveal" data-i18n="hero_eyebrow"><span class="pulse-dot"></span> 🤖 shopcos AI — Shop Software for 31 Countries · POS Billing · 100% Offline</div>
-      <h1 class="reveal" data-i18n="hero_h1">🤖 Talk to Your Shop. <span class="grad">Your Entire Business, In Your Pocket.</span></h1>
+      <div class="eyebrow reveal" data-i18n="hero_eyebrow"><span class="pulse-dot"></span> <img class="ai-ava-inline ai-ava-eyebrow" src="img/shopcos-ai-avatar.webp" alt="shopcos AI"> shopcos AI — Shop Software for 31 Countries · POS Billing · 100% Offline</div>
+      <h1 class="reveal" data-i18n="hero_h1"><img class="ai-ava-inline ai-ava-h1" src="img/shopcos-ai-avatar.webp" alt="shopcos AI"> Talk to Your Shop. <span class="grad">Your Entire Business, In Your Pocket.</span></h1>
       <p class="hero-sub reveal" data-i18n="hero_sub">Meet <strong>shopcos AI</strong> — ask <em>"how much did I sell today?"</em> and get instant answers. Billing, stock, credit ledger, reports — on your computer <strong>AND</strong> phone, wherever you are. 28 currencies, 31 countries. No internet needed. No monthly fees. <span class="seo-kw">Best shop software &amp; point of sale (POS) billing software for retail shops, pharmacies &amp; small businesses worldwide.</span></p>
       <div class="hero-ctas reveal">
         <a class="btn btn-primary btn-lg require-auth" href="#pricing" data-i18n="cta_trial">⚡ Start 30-day Free Trial</a>
-        <button class="btn btn-gold-glow btn-lg" id="tryAiLive" data-i18n="cta_ai">🤖 Try AI Live</button>
+        <button class="btn btn-gold-glow btn-lg" id="tryAiLive" data-i18n="cta_ai"><img class="ai-ava-inline ai-ava-btn" src="img/shopcos-ai-avatar.webp" alt=""> Try AI Live</button>
+        <a class="btn btn-ghost btn-lg" href="downloads/" data-i18n="cta_download">⬇ Download</a>
       </div>
       <div class="trust-row reveal">
         <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="trust_1">No card required</span></div>
@@ -216,20 +217,49 @@
     </div>
 
     <div class="hero-visual reveal">
-      <!-- Live AI chat demo -->
-      <div class="ai-demo" id="aiDemo">
-        <div class="ai-demo-head">
-          <img class="ai-demo-avatar" src="img/shopcos-ai-avatar.webp" alt="shopcos AI">
-          <div>
-            <strong>shopcos AI agent</strong>
-            <small><span class="ai-online-dot"></span> online — live demo</small>
+      <!-- Live AI chat demo — phone UI -->
+      <div class="phdemo" id="aiDemo">
+        <div class="phdemo-frame">
+          <span class="phdemo-side phdemo-side-l1"></span>
+          <span class="phdemo-side phdemo-side-l2"></span>
+          <span class="phdemo-side phdemo-side-r"></span>
+          <div class="phdemo-screen">
+            <span class="phdemo-notch"></span>
+            <div class="phdemo-status" aria-hidden="true">
+              <span class="phdemo-time">9:41</span>
+              <span class="phdemo-icons">
+                <svg width="17" height="11" viewBox="0 0 17 11" fill="#dbe2f5" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="5" width="3" height="6" rx="1"/><rect x="9.2" y="2.6" width="3" height="8.4" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1" opacity=".35"/></svg>
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="#dbe2f5" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1.6 4.2a10.5 10.5 0 0 1 12.8 0"/><path d="M4.1 7a6.6 6.6 0 0 1 7.8 0"/><circle cx="8" cy="9.9" r="1.2" fill="#dbe2f5" stroke="none"/></svg>
+                <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x=".7" y=".7" width="20" height="10.6" rx="3" stroke="#dbe2f5" opacity=".45"/><rect x="2.3" y="2.3" width="14.5" height="7.4" rx="1.8" fill="#dbe2f5"/><path d="M23.2 4v4a2.3 2.3 0 0 0 0-4z" fill="#dbe2f5" opacity=".45"/></svg>
+              </span>
+            </div>
+            <div class="ai-demo-head phdemo-head">
+              <img class="ai-demo-avatar" src="img/shopcos-ai-avatar.webp" alt="shopcos AI">
+              <div>
+                <strong>shopcos AI agent</strong>
+                <small><span class="ai-online-dot"></span> Online — aap ki dukaan ka hisab janta hai</small>
+              </div>
+            </div>
+            <div class="phdemo-card">
+              <div class="ai-demo-body" id="aiDemoBody">
+                <!-- messages injected by JS -->
+              </div>
+              <div class="phdemo-chips" aria-hidden="true">
+                <span class="phdemo-chip">📊 Aaj ka hisab</span>
+                <span class="phdemo-chip">💰 Aaj ki sale</span>
+                <span class="phdemo-chip">📒 Udhar list</span>
+                <span class="phdemo-chip">⚠️ Low stock</span>
+                <span class="phdemo-chip">🤖 Tum kaun ho?</span>
+              </div>
+              <div class="phdemo-inputbar" aria-hidden="true">
+                <span class="phdemo-attach">📷 Photo</span>
+                <span class="phdemo-pill">Yahan likhein...</span>
+                <span class="phdemo-send">➤ Bhejein</span>
+              </div>
+            </div>
           </div>
-          <span class="ai-demo-badge">LIVE</span>
         </div>
-        <div class="ai-demo-body" id="aiDemoBody">
-          <!-- messages injected by JS -->
-        </div>
-        <div class="ai-demo-foot">
+        <div class="ai-demo-foot phdemo-foot">
           <button class="btn btn-primary btn-sm" id="aiDemoTry">Try it live →</button>
           <span class="ai-demo-hint">⚡ 30-second demo</span>
         </div>
@@ -488,7 +518,7 @@
         <p>Companion app for mobiles — connects to your shop PC over Wi-Fi.</p>
         <div class="sys-req">
           <span>📱 <strong>Requirements:</strong></span>
-          <span>🤖 Android 8.0 or higher</span>
+          <span>⚙️ Android 8.0 or higher</span>
           <span>🧠 RAM: 2 GB minimum</span>
           <span>💾 Storage: 50 MB free space</span>
           <span>📶 Same Wi-Fi as shop PC</span>
