@@ -263,6 +263,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://shopcos.shop/blog/year-end-stock-audit-checklist.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog18-hero-warehouse.jpg</image:loc>
+      <image:title>Two workers moving a trolley through a large warehouse filled with boxes and shelves</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog18-inventory-aisle.jpg</image:loc>
+      <image:title>Two workers managing inventory together in a spacious warehouse aisle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog18-carrying-box.jpg</image:loc>
+      <image:title>A worker carrying a box through a well-organized warehouse storage aisle</image:title>
+    </image:image>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://shopcos.shop/about/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
