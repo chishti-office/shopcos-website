@@ -156,6 +156,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 .or-media-img{width:100%;height:auto;border-radius:10px;border:1px solid var(--border);display:block;background:#0b1130}
 .or-media-video{width:100%;border-radius:10px;border:1px solid var(--border);display:block;background:#000}
 .or-voice-ph{color:var(--muted);border:1px dashed var(--border);border-radius:10px;padding:18px;font-size:.9rem}
+.or-media-status{color:var(--muted);font-size:.88rem;min-height:1.1em;margin-top:10px}
 .or-help{color:var(--muted);font-size:.92rem;margin-bottom:8px}
 .or-note-input{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-family:var(--font-b);font-size:.88rem;min-width:140px}
 @media(max-width:860px){.or-media-grid{grid-template-columns:1fr}}
@@ -469,28 +470,40 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         <p class="or-help">Tartib: pehle text message (upar wala, auto tayyar) bhejein → phir tasveer → phir video → aakhir mein voice note.</p>
         <p class="or-help">⚠️ WhatsApp Kholo se sirf text jata hai — tasveer, video aur voice chat khulne ke baad wahan se attach ya forward karein.</p>
         <p class="or-help">⭐ Tez tareeqa: pehli dafa ye teeno cheezein apne WhatsApp ki 'Message Yourself' (apne number wali) chat mein bhej kar un par Star laga lein. Phir har client ki chat mein Starred Messages se wahi teeno Forward kar dein — 2 tap mein poora package, aur voice note asli voice-note ki shakal mein hi jayega.</p>
+        <p class="or-help">🔄 Media badalna ho to har hisse ke neeche <b>Badlein</b> button hai — nayi tasveer, video ya apni voice note yahin se upload kar dein, phir wo khud hi istemal hogi. 🎬 Video ke liye: WhatsApp par bhejne ke liye chhoti file behtar hai — koshish karein video <b>16MB se kam</b> ho.</p>
         <div class="or-media-grid">
           <div class="or-media-slot">
             <h3>🖼 Tasveer</h3>
-            <img class="or-media-img" src="/media-kit/ad-pic.png" alt="shopcos ad tasveer">
+            <img class="or-media-img" id="orPicImg" src="/media-kit/ad-pic.png" alt="shopcos ad tasveer">
             <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-              <a class="btn btn-primary btn-sm" href="/media-kit/ad-pic.png" download>⬇ Kholo / Download</a>
-              <a class="btn btn-ghost btn-sm" href="/media-kit/ad-pic.png" target="_blank" rel="noopener">↗ Kholo</a>
+              <a class="btn btn-primary btn-sm" id="orPicDl" href="/media-kit/ad-pic.png" download>⬇ Kholo / Download</a>
+              <a class="btn btn-ghost btn-sm" id="orPicOpen" href="/media-kit/ad-pic.png" target="_blank" rel="noopener">↗ Kholo</a>
+              <label class="btn btn-ghost btn-sm" for="orPicFile" style="cursor:pointer;margin:0">🔄 Badlein</label>
+              <input type="file" id="orPicFile" accept="image/*" style="display:none">
             </div>
+            <p class="or-media-status" id="orPicStatus"></p>
           </div>
           <div class="or-media-slot">
             <h3>🎬 Video</h3>
-            <video class="or-media-video" controls preload="metadata" src="/media-kit/ad-video.mp4"></video>
+            <video class="or-media-video" id="orVidPlayer" controls preload="metadata" src="/media-kit/ad-video.mp4"></video>
             <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-              <a class="btn btn-primary btn-sm" href="/media-kit/ad-video.mp4" download>⬇ Kholo / Download</a>
-              <a class="btn btn-ghost btn-sm" href="/media-kit/ad-video.mp4" target="_blank" rel="noopener">↗ Kholo</a>
+              <a class="btn btn-primary btn-sm" id="orVidDl" href="/media-kit/ad-video.mp4" download>⬇ Kholo / Download</a>
+              <a class="btn btn-ghost btn-sm" id="orVidOpen" href="/media-kit/ad-video.mp4" target="_blank" rel="noopener">↗ Kholo</a>
+              <label class="btn btn-ghost btn-sm" for="orVidFile" style="cursor:pointer;margin:0">🔄 Badlein</label>
+              <input type="file" id="orVidFile" accept="video/mp4,video/*" style="display:none">
             </div>
+            <p class="or-media-status" id="orVidStatus"></p>
           </div>
           <div class="or-media-slot">
             <h3>🎤 Voice Note</h3>
             <div id="orVoiceSlot">
-              <div class="or-voice-ph">Voice note abhi nahi rakhi gayi — apni awaz mein voice note media-kit/voice.mp3 ke naam se site par rakhein, phir wo yahan khud aa jayegi.</div>
+              <div class="or-voice-ph">Voice note abhi nahi rakhi gayi — apni awaz mein recording karke neeche 🔄 Badlein button se yahin upload kar dein, phir wo yahan khud aa jayegi.</div>
             </div>
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <label class="btn btn-ghost btn-sm" for="orVoiceFile" style="cursor:pointer;margin:0">🔄 Badlein</label>
+              <input type="file" id="orVoiceFile" accept="audio/*" style="display:none">
+            </div>
+            <p class="or-media-status" id="orVoiceStatus"></p>
           </div>
         </div>
       </div>
@@ -1088,7 +1101,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   /* ---------- outreach ---------- */
   var OR_DEFAULT_MSG = "Assalam-o-Alaikum, {name} ke liye ek paigham hai. 👋\n\nHum *shopcos soft* banate hain — dukaan ka billing software, stock aur khata/udhar ka software, jo baghair internet ke bhi chalta hai, barcode scanner, printing bill 🧾\n\nAur is mein sab se bari baat — *AI assistant* bhi hai jo ke duniya mein kisi software mein nahi hai 🤖 Is se aap apne phone se baithay sawal jawab kar sakte hain 📱\n\n🎁 30 din ka *FREE trial* hai, koi card nahi chahiye.\nDetail yahan hai: https://shopcos.shop\n\nAgar interested hon to demo bhej dun? Shukriya 🙏";
   var OR_STAGES = [['bheja','Bheja'],['jawab','Jawab Aaya'],['demo','Demo Bheja'],['trial','Trial Shuru'],['nahi','Nahi Chahiye']];
-  var OR = { leads: [], activity: {}, settings: {}, loaded: false, queue: [], idx: 0, listMode: 'belt', area: '', cat: '', query: '', view: 'send', initDone: false, bound: false, voiceProbed: false };
+  var OR = { leads: [], activity: {}, settings: {}, loaded: false, queue: [], idx: 0, listMode: 'belt', area: '', cat: '', query: '', view: 'send', initDone: false, bound: false, voiceProbed: false, voiceSet: false };
 
   function orTodayStr(){
     var d = new Date();
@@ -1214,12 +1227,37 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     var b2 = el('orBody2'); if (b2) b2.style.display = 'none';
     el('orMissing').style.display = 'block';
   }
+  function orPublicUrl(path){
+    try {
+      var r = sb.storage.from('media-kit').getPublicUrl(path);
+      return (r && r.data && r.data.publicUrl) || '';
+    } catch(e) { return ''; }
+  }
+  function orSetPic(url){
+    var img = el('orPicImg'); if (img) img.src = url;
+    var d = el('orPicDl'); if (d) d.href = url;
+    var o = el('orPicOpen'); if (o) o.href = url;
+  }
+  function orSetVideo(url){
+    var v = el('orVidPlayer'); if (v) v.src = url;
+    var d = el('orVidDl'); if (d) d.href = url;
+    var o = el('orVidOpen'); if (o) o.href = url;
+  }
+  function orSetVoice(url){
+    var slot = el('orVoiceSlot'); if (!slot) return;
+    slot.innerHTML = '<audio controls src="' + esc(url) + '" style="width:100%"></audio>' +
+      '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">' +
+      '<a class="btn btn-primary btn-sm" href="' + esc(url) + '" download>⬇ Download</a>' +
+      '<a class="btn btn-ghost btn-sm" href="' + esc(url) + '" target="_blank" rel="noopener">↗ Kholo</a></div>';
+  }
   async function orProbeVoice(){
     if (OR.voiceProbed) return;
     OR.voiceProbed = true;
     var files = ['voice.mp3', 'voice.opus', 'voice.m4a'];
-    for (var i = 0; i < files.length; i++){
-      var url = '/media-kit/' + files[i];
+    for (var i = 0; i < files.length; i++) {
+      if (OR.voiceSet) return;
+      var url = orPublicUrl(files[i]);
+      if (!url) continue;
       var found = false;
       try {
         var r1 = await fetch(url, { method: 'HEAD' });
@@ -1232,14 +1270,60 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         } catch(e2) { found = false; }
       }
       if (found){
-        el('orVoiceSlot').innerHTML = '<audio controls src="' + url + '" style="width:100%"></audio>' +
-          '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">' +
-          '<a class="btn btn-primary btn-sm" href="' + url + '" download>⬇ Download</a>' +
-          '<a class="btn btn-ghost btn-sm" href="' + url + '" target="_blank" rel="noopener">↗ Kholo</a></div>';
+        if (!OR.voiceSet) orSetVoice(url);
         return;
       }
     }
     /* none found: static placeholder already in the markup stays */
+  }
+  function orApplyMediaSettings(){
+    var tp = OR.settings.media_tasveer;
+    if (tp){ var u1 = orPublicUrl(tp); if (u1) orSetPic(u1); }
+    var vp = OR.settings.media_video;
+    if (vp){ var u2 = orPublicUrl(vp); if (u2) orSetVideo(u2); }
+    var wp = OR.settings.media_voice;
+    if (wp){ var u3 = orPublicUrl(wp); if (u3){ OR.voiceSet = true; orSetVoice(u3); } }
+  }
+  function orIsBucketMissing(err){
+    if (!err) return false;
+    var m = String((err.message || '') + ' ' + (err.error || '') + ' ' + (err.statusCode || ''));
+    return /bucket not found/i.test(m);
+  }
+  async function orUploadMedia(kind, input, statusId){
+    var st = el(statusId);
+    var f = input.files && input.files[0];
+    if (!f) return;
+    var cfg = {
+      tasveer: { key: 'media_tasveer', base: 'tasveer', defExt: 'png' },
+      video:   { key: 'media_video',   base: 'video',   defExt: 'mp4' },
+      voice:   { key: 'media_voice',   base: 'voice',   defExt: 'mp3' }
+    }[kind];
+    if (!cfg) return;
+    var ext = cfg.defExt;
+    var m = /\.([A-Za-z0-9]+)$/.exec(f.name || '');
+    if (m) ext = m[1].toLowerCase();
+    var path = cfg.base + '.' + ext;
+    if (st) st.textContent = 'Upload ho raha hai… ⏳';
+    try {
+      var up = await sb.storage.from('media-kit').upload(path, f, { upsert: true, contentType: f.type || undefined });
+      if (up && up.error) throw up.error;
+      var sRes = await sb.from('outreach_settings').upsert({ key: cfg.key, value: path }, { onConflict: 'key' });
+      if (sRes && sRes.error) throw sRes.error;
+      OR.settings[cfg.key] = path;
+      var url = orPublicUrl(path);
+      var bust = url ? url + (url.indexOf('?') > -1 ? '&' : '?') + 'v=' + Date.now() : '';
+      if (kind === 'tasveer') orSetPic(bust || url);
+      else if (kind === 'video') orSetVideo(bust || url);
+      else { OR.voiceSet = true; orSetVoice(bust || url); }
+      if (st) st.textContent = 'Ho gaya ✓ — ab yehi media jayega.';
+      try { input.value = ''; } catch(e3) {}
+    } catch(e) {
+      if (orIsBucketMissing(e) || orIsMissingErr(e)) {
+        if (st) st.textContent = '⚠️ Database wala step (SQL) pehle chalayein — phir media badal sakengi.';
+      } else if (st) {
+        st.textContent = '⚠️ Upload nahi hua: ' + ((e && e.message) || e);
+      }
+    }
   }
   async function orOnOpen(){
     orProbeVoice();
@@ -1261,6 +1345,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       OR.loaded = true;
       el('orMsg').value = OR.settings.message_template || OR_DEFAULT_MSG;
       el('orTargetInput').value = orTarget();
+      orApplyMediaSettings();
       el('orLoading').style.display = 'none';
       orBuildFilters();
       orRebuildQueue();
@@ -1526,6 +1611,9 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     el('orSentBody').addEventListener('change', orOnSentChange);
     el('orReportBtn').addEventListener('click', orDownloadReport);
     el('orImportBtn').addEventListener('click', orHandleImport);
+    el('orPicFile').addEventListener('change', function(){ orUploadMedia('tasveer', this, 'orPicStatus'); });
+    el('orVidFile').addEventListener('change', function(){ orUploadMedia('video', this, 'orVidStatus'); });
+    el('orVoiceFile').addEventListener('change', function(){ orUploadMedia('voice', this, 'orVoiceStatus'); });
   }
 
   init();
