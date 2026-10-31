@@ -340,4 +340,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/mobile-shop-software.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog21-hero-phone-store.jpg</image:loc>
+      <image:title>A modern mobile phone shop interior with handsets displayed on wooden tables and a wall of colorful phone cases</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog21-phone-repair.jpg</image:loc>
+      <image:title>A technician's hand repairing an opened smartphone with a precision screwdriver</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog21-accessories-market.jpg</image:loc>
+      <image:title>Bundles of colorful phone covers and accessories stacked at a market stall</image:title>
+    </image:image>
+  </url>
 </urlset>
