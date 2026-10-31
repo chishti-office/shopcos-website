@@ -322,4 +322,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/binance-hack-6-3-billion-lessons-small-shops.html</loc>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog20-hero-crypto-keyboard.jpg</image:loc>
+      <image:title>A hand placing glowing green Bitcoin and Ethereum coins on a dark computer keyboard</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog20-hackers-dark-room.jpg</image:loc>
+      <image:title>Two hooded figures working at computer monitors filled with code in a dark room</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog20-shop-counter-tablets.jpg</image:loc>
+      <image:title>Two small shop partners working with tablets at a wooden shop counter, a paper notebook beside them</image:title>
+    </image:image>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
