@@ -358,4 +358,22 @@
       <image:title>Bundles of colorful phone covers and accessories stacked at a market stall</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/billing-software-kiryana-shops.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog22-hero-kiryana-store.jpg</image:loc>
+      <image:title>A small grocery store produce section with fresh vegetables and fruit on display</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog22-loose-vegetables.jpg</image:loc>
+      <image:title>Fresh loose vegetables displayed for sale at a grocery shop</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog22-shopkeeper-counter.jpg</image:loc>
+      <image:title>A friendly shopkeeper standing behind shelves of goods in a small shop</image:title>
+    </image:image>
+  </url>
 </urlset>
