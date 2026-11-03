@@ -376,4 +376,22 @@
       <image:title>A friendly shopkeeper standing behind shelves of goods in a small shop</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/vyapar-alternative-pakistan.html</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog23-hero-shop-counter.jpg</image:loc>
+      <image:title>A customer ordering at a shop counter while the shopkeeper serves behind it</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog23-calculator-bills.jpg</image:loc>
+      <image:title>Hands managing cash, receipts and a calculator on a wooden table while checking bills</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog23-phone-billing.jpg</image:loc>
+      <image:title>A shopkeeper using a smartphone calculator and cash register app at a shop counter</image:title>
+    </image:image>
+  </url>
 </urlset>
