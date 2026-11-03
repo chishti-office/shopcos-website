@@ -160,7 +160,16 @@ BEGIN
 END;
 $$;
 
-DROP TRIGGER IF EXISTS trg_referrals_order_activated ON public.orders;
-CREATE TRIGGER trg_referrals_order_activated
-  AFTER UPDATE ON public.orders
-  FOR EACH ROW EXECUTE FUNCTION public.referrals_on_order_activated();
+-- Attach the trigger only if the orders table exists (it is created by
+-- db/orders-schema.sql). If orders is missing, this block is skipped
+-- instead of failing the whole script — run orders-schema.sql first,
+-- then re-run this file and the trigger will be created.
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'orders') THEN
+    EXECUTE 'DROP TRIGGER IF EXISTS trg_referrals_order_activated ON public.orders';
+    EXECUTE 'CREATE TRIGGER trg_referrals_order_activated
+               AFTER UPDATE ON public.orders
+               FOR EACH ROW EXECUTE FUNCTION public.referrals_on_order_activated()';
+  END IF;
+END $$;
