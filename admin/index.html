@@ -209,6 +209,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     </div>
     <div class="nav-link active" data-sec="dashboard"><span class="ico">📊</span><span class="txt">Dashboard</span></div>
     <div class="nav-link" data-sec="orders"><span class="ico">🧾</span><span class="txt">Orders</span></div>
+    <div class="nav-link" data-sec="referrals"><span class="ico">🎁</span><span class="txt">Referrals</span></div>
     <div class="nav-link" data-sec="users"><span class="ico">👥</span><span class="txt">Users &amp; Licenses</span></div>
     <div class="nav-link" data-sec="create"><span class="ico">🔑</span><span class="txt">Create License</span></div>
     <div class="nav-link" data-sec="remote"><span class="ico">📢</span><span class="txt">Remote Config</span></div>
@@ -282,6 +283,24 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
             <th>Order</th><th>Customer</th><th>Plan</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th><th>Actions</th>
           </tr></thead>
           <tbody id="ordersBody"><tr><td colspan="8" class="empty">Loading…</td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- REFERRALS -->
+    <div class="section" id="sec-referrals">
+      <div class="card">
+        <h2>🎁 Referrals &amp; rewards</h2>
+        <p style="color:var(--muted);font-size:.92rem;margin-bottom:18px">Invite system: dost ko pehle plan par <b>10% OFF</b> milta hai, aur har <b>paid sale</b> par refer karne wale ko <b>Rs 2,000</b> reward banta hai. Reward Easypaisa/JazzCash se bhej kar <b>💸 Reward Paid</b> mark karein — sirf trial signup par koi reward nahi banta.</p>
+        <div class="toolbar">
+          <button class="btn btn-ghost btn-sm" id="refRefresh">↻ Refresh</button>
+          <span id="refSummary" style="color:var(--muted);font-size:.9rem"></span>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>Referrer (reward lene wala)</th><th>Code</th><th>Invited user</th><th>Status</th><th>Reward</th><th>Date</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="refBody"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
         </table></div>
       </div>
     </div>
@@ -640,7 +659,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   function enterApp(user){
     hide('gate'); el('app').style.display = 'block';
     el('adminEmailShow').textContent = user.email;
-    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindRemote(); bindLogout();
+    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindRemote(); bindLogout(); bindReferrals();
     loadData();
   }
 
@@ -1044,10 +1063,79 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     else { loadRemoteConfigs(); }
   }
 
+  /* ---------- referrals ---------- */
+  var allReferrals = [];
+
+  function refBadge(st){
+    if (st === 'rewarded') return '<span class="badge green">💸 Reward paid</span>';
+    if (st === 'paid') return '<span class="badge blue">💰 Reward dena hai</span>';
+    if (st === 'rejected') return '<span class="badge red">❌ Rejected</span>';
+    return '<span class="badge yellow">🎁 Trial signup</span>';
+  }
+
+  async function loadAdminReferrals(){
+    var body = el('refBody');
+    try {
+      var res = await sb.from('referrals').select('*').order('created_at', {ascending:false});
+      if (res.error) throw res.error;
+      allReferrals = res.data || [];
+    } catch(e) {
+      allReferrals = [];
+      body.innerHTML = '<tr><td colspan="7" class="empty">Could not load referrals — run db/referral-schema.sql in Supabase first.</td></tr>';
+      el('refSummary').textContent = '';
+      return;
+    }
+    var payable = 0, paidOut = 0;
+    allReferrals.forEach(function(r){
+      if (r.status === 'paid') payable += Number(r.reward_pkr || 2000);
+      if (r.status === 'rewarded') paidOut += Number(r.reward_pkr || 2000);
+    });
+    el('refSummary').textContent = 'Total invites: ' + allReferrals.length +
+      ' · Reward dena hai: Rs ' + payable.toLocaleString() +
+      ' · De chuke: Rs ' + paidOut.toLocaleString();
+    if (!allReferrals.length){
+      body.innerHTML = '<tr><td colspan="7" class="empty">No referrals yet.</td></tr>';
+      return;
+    }
+    body.innerHTML = allReferrals.map(function(r){
+      var actions = r.status === 'paid'
+        ? '<button class="btn btn-primary btn-sm" data-refward="' + r.id + '">💸 Reward Paid</button>'
+        : '<span style="color:var(--muted-2)">—</span>';
+      return '<tr>' +
+        '<td>' + esc(r.referrer_email || '—') + '</td>' +
+        '<td><code style="font-size:.78rem">' + esc(r.referrer_code || '') + '</code></td>' +
+        '<td>' + esc(r.referred_email || '—') + '</td>' +
+        '<td>' + refBadge(r.status) + '</td>' +
+        '<td><b>Rs ' + Number(r.reward_pkr || 2000).toLocaleString() + '</b></td>' +
+        '<td>' + fmtDate(r.created_at) + '</td>' +
+        '<td style="white-space:nowrap">' + actions + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  async function markRewardPaid(refId){
+    var r = null;
+    for (var i = 0; i < allReferrals.length; i++) if (allReferrals[i].id === refId) r = allReferrals[i];
+    if (!r) return;
+    if (!confirm('Rs ' + Number(r.reward_pkr || 2000).toLocaleString() + ' reward ' + (r.referrer_email || 'referrer') + ' ko bhej diya hai?\n\nSirf tab OK karein jab Easypaisa/JazzCash se paisay asal mein bhej diye hon.')) return;
+    var res = await sb.from('referrals').update({ status: 'rewarded', rewarded_at: new Date().toISOString() }).eq('id', refId);
+    if (res.error) alert('❌ ' + res.error.message);
+    else { alert('✅ Reward paid mark ho gaya.'); loadAdminReferrals(); }
+  }
+
+  function bindReferrals(){
+    el('refRefresh').addEventListener('click', loadAdminReferrals);
+    el('refBody').addEventListener('click', function(e){
+      var b = e.target.closest('[data-refward]');
+      if (b) markRewardPaid(b.getAttribute('data-refward'));
+    });
+  }
+
   /* ---------- bindings ---------- */
   var TITLES = {
     dashboard: ['Admin <span class="grad">Dashboard</span>', 'Overview of users and licenses.'],
     orders: ['Customer <span class="grad">Orders</span>', 'Verify payments and activate licenses.'],
+    referrals: ['Referrals &amp; <span class="grad">Rewards</span>', 'Invite tracking — Rs 2,000 reward per paid sale.'],
     users: ['Users &amp; <span class="grad">Licenses</span>', 'Search, filter and manage every account.'],
     create: ['Create <span class="grad">License</span>', 'Issue a new license key for a customer.'],
     remote: ['Remote <span class="grad">Config</span>', 'Push updates to shop software remotely.'],
@@ -1066,6 +1154,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         el('pageTitle').innerHTML = TITLES[sec][0];
         el('pageSub').textContent = TITLES[sec][1].replace(/&amp;/g, '&');
         if (sec === 'outreach') orOnOpen();
+        if (sec === 'referrals') loadAdminReferrals();
         window.scrollTo(0, 0);
       });
     }
