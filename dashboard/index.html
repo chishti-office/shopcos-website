@@ -267,6 +267,7 @@ a{color:inherit;text-decoration:none}
       <button class="tab-btn active" data-tab="plans">💎 Plans</button>
       <button class="tab-btn" data-tab="access">🔑 Software Access</button>
       <button class="tab-btn" data-tab="wallet">👛 Wallet</button>
+      <button class="tab-btn" data-tab="referrals">🎁 Invite &amp; Earn</button>
       <button class="tab-btn" data-tab="company">🏪 Company</button>
       <button class="tab-btn" data-tab="aichat"><img src="../img/shopcos-ai-avatar.webp" alt="" class="tab-avatar">AI Chat</button>
       <button class="tab-btn" data-tab="profile">👤 Profile</button>
@@ -483,6 +484,40 @@ a{color:inherit;text-decoration:none}
         <p class="note">📤 Payment ke baad <strong>receipt upload</strong> karein ya <a href="../checkout/">checkout</a> se order karein — admin approve karega to balance update ho jayega.</p>
       </section>
     </div><!-- /tab-wallet -->
+
+    <!-- ============ TAB: Invite & Earn (Referrals) ============ -->
+    <div class="tab-pane" id="tab-referrals">
+      <section class="card">
+        <h2>🎁 Invite &amp; Earn</h2>
+        <p class="sub">Share your invite link — your friend gets <b>10% OFF</b> his first plan, and you earn <b>Rs 2,000</b> for every paid sale.</p>
+        <div class="kv"><span class="k">Your invite code</span><span class="v"><span class="key-code" id="refCode">—</span></span></div>
+        <div class="kv"><span class="k">Your invite link</span><span class="v" style="word-break:break-all;text-align:right"><a href="#" id="refLink" style="color:var(--gold-lt)">—</a></span></div>
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" id="refCopyBtn">📋 Copy Invite Link</button>
+          <a class="btn btn-ghost btn-sm" id="refWaBtn" href="#" target="_blank" rel="noopener">💬 Share on WhatsApp</a>
+        </div>
+        <p class="note" id="refNote">Rewards are paid by COS via Easypaisa / JazzCash after your friend's license is activated.</p>
+      </section>
+
+      <section class="card" style="margin-top:20px">
+        <h2>📊 Your Referrals</h2>
+        <p class="sub">Free-trial signups are counted, but the Rs 2,000 reward unlocks only when your friend buys a plan.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0">
+          <div style="background:rgba(245,183,63,.07);border:1px solid rgba(245,183,63,.25);border-radius:14px;padding:14px;text-align:center"><div style="font-size:1.5rem;font-weight:800" id="refStatSignups">0</div><div style="color:var(--muted);font-size:.82rem">Invited signups</div></div>
+          <div style="background:rgba(245,183,63,.07);border:1px solid rgba(245,183,63,.25);border-radius:14px;padding:14px;text-align:center"><div style="font-size:1.5rem;font-weight:800" id="refStatPaid">0</div><div style="color:var(--muted);font-size:.82rem">Paid sales</div></div>
+          <div style="background:rgba(245,183,63,.07);border:1px solid rgba(245,183,63,.25);border-radius:14px;padding:14px;text-align:center"><div style="font-size:1.5rem;font-weight:800">Rs <span id="refStatEarned">0</span></div><div style="color:var(--muted);font-size:.82rem">Reward paid to you</div></div>
+          <div style="background:rgba(245,183,63,.07);border:1px solid rgba(245,183,63,.25);border-radius:14px;padding:14px;text-align:center"><div style="font-size:1.5rem;font-weight:800">Rs <span id="refStatPending">0</span></div><div style="color:var(--muted);font-size:.82rem">Reward on the way</div></div>
+        </div>
+        <div id="refList"><div class="empty-state">Loading referrals…</div></div>
+      </section>
+
+      <section class="card" style="margin-top:20px">
+        <h2>💡 How it works</h2>
+        <div class="kv"><span class="k">1️⃣ Share</span><span class="v" style="text-align:right">Send your invite link to a shopkeeper friend</span></div>
+        <div class="kv"><span class="k">2️⃣ Friend joins</span><span class="v" style="text-align:right">He signs up with your link and gets 10% OFF his first plan</span></div>
+        <div class="kv"><span class="k">3️⃣ You earn</span><span class="v" style="text-align:right">When his license is activated, Rs 2,000 becomes your reward</span></div>
+      </section>
+    </div><!-- /tab-referrals -->
 
     <!-- ============ TAB: Company ============ -->
     <div class="tab-pane" id="tab-company">
@@ -706,6 +741,8 @@ a{color:inherit;text-decoration:none}
       }).select();
       if (res.error) throw res.error;
       license = res.data[0];
+      await tryClaimReferral();
+      loadReferral();
       renderLicense();
       renderPlanBanner();
       toast('🎉 30-day free trial activated!');
@@ -1156,6 +1193,83 @@ a{color:inherit;text-decoration:none}
     renderWallet();
     toast('🔄 Wallet refreshed.');
   });
+
+  /* ---------- referrals (Invite & Earn) ---------- */
+  async function tryClaimReferral() {
+    try {
+      var code = null;
+      try { code = localStorage.getItem('shopcos_ref'); } catch(e) {}
+      if (!code) return;
+      var r = await sb.rpc('claim_referral', { p_code: code });
+      if (!r.error && r.data && r.data !== 'noauth') {
+        try { localStorage.removeItem('shopcos_ref'); } catch(e) {}
+        if (r.data === 'ok') toast('🎁 Referral applied — you get 10% OFF at checkout!');
+      }
+    } catch(e) { /* referral system not set up yet — ignore */ }
+  }
+
+  function refStatusBadge(st) {
+    if (st === 'rewarded') return badge('green', '💸 Reward paid');
+    if (st === 'paid') return badge('yellow', '💰 Reward on the way');
+    if (st === 'rejected') return badge('red', 'Rejected');
+    return badge('gray', '🎁 Trial signup');
+  }
+
+  async function loadReferral() {
+    var codeEl = document.getElementById('refCode');
+    var linkEl = document.getElementById('refLink');
+    var listEl = document.getElementById('refList');
+    try {
+      var cr = await sb.rpc('get_or_create_referral_code');
+      var code = (!cr.error && cr.data) ? cr.data : null;
+      if (!code) {
+        codeEl.textContent = 'Start your free trial first';
+        linkEl.textContent = 'Your invite link appears here once your trial is active.';
+        linkEl.removeAttribute('href');
+        listEl.innerHTML = '<div class="empty-state">Activate your free trial from the Plans tab — your invite link will be ready here right away.</div>';
+        return;
+      }
+      var link = window.location.origin + '/?ref=' + encodeURIComponent(code);
+      codeEl.textContent = code;
+      codeEl.title = 'Click to copy';
+      linkEl.textContent = link;
+      linkEl.href = link;
+      var waMsg = 'Assalam-o-Alaikum! I use *shopcos soft* for my shop — billing, stock, khata/udhar, barcode, sab kuch ek hi software mein, internet ke baghair bhi chalta hai.\n\n🎁 Mere invite link se signup karein, aapko pehle plan par *10% OFF* milega aur 30 din ka FREE trial bhi hai:\n' + link + '\n\nDownload: https://shopcos.shop';
+      document.getElementById('refWaBtn').href = 'https://wa.me/?text=' + encodeURIComponent(waMsg);
+      var cp = document.getElementById('refCopyBtn');
+      cp.onclick = function() {
+        function done() { toast('📋 Invite link copied!'); }
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done, done);
+        else done();
+      };
+      codeEl.onclick = function() {
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(function(){ toast('📋 Invite code copied!'); }, function(){});
+      };
+
+      var res = await sb.from('referrals').select('*').eq('referrer_user_id', user.id).order('created_at', { ascending: false });
+      var rows = (!res.error && res.data) ? res.data : [];
+      var paidCount = 0, earned = 0, pending = 0;
+      rows.forEach(function(r) {
+        var amt = Number(r.reward_pkr || 2000);
+        if (r.status === 'paid') { paidCount++; pending += amt; }
+        if (r.status === 'rewarded') { paidCount++; earned += amt; }
+      });
+      document.getElementById('refStatSignups').textContent = rows.length;
+      document.getElementById('refStatPaid').textContent = paidCount;
+      document.getElementById('refStatEarned').textContent = earned.toLocaleString('en-US');
+      document.getElementById('refStatPending').textContent = pending.toLocaleString('en-US');
+      if (!rows.length) {
+        listEl.innerHTML = '<div class="empty-state">No referrals yet.<br>Share your invite link — your friends will appear here.</div>';
+        return;
+      }
+      listEl.innerHTML = rows.map(function(r) {
+        var d = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+        return '<div class="kv"><span class="k">' + esc(r.referred_email || 'New user') + '<br><small style="color:var(--muted-2)">' + d + '</small></span><span class="v">' + refStatusBadge(r.status) + '</span></div>';
+      }).join('');
+    } catch(e) {
+      listEl.innerHTML = '<div class="empty-state">Referral system is being set up.<br><small>Please check back shortly.</small></div>';
+    }
+  }
 
   /* ---------- tab navigation ---------- */
   function activateTab(name, pushHash) {
@@ -1653,6 +1767,8 @@ a{color:inherit;text-decoration:none}
       renderLicense();
       renderWallet();
       try { await withTimeout(renderOrders(), 15000, 'orders'); } catch(e) { /* orders slow — section keeps its empty state */ }
+      try { await withTimeout(tryClaimReferral(), 8000, 'ref-claim'); } catch(e) { /* referral not set up yet */ }
+      try { await withTimeout(loadReferral(), 8000, 'referral'); } catch(e) { /* referral tab keeps its empty state */ }
       renderPlanBanner();
       renderAccount();
       try { await withTimeout(fetchProfile(), 15000, 'profile'); }
@@ -1661,7 +1777,7 @@ a{color:inherit;text-decoration:none}
       try { await withTimeout(fetchAccessKeys(), 15000, 'keys'); } catch(e) { /* access_keys table may not exist yet */ }
       try { await withTimeout(refreshMfa(), 15000, 'mfa'); } catch(e) { /* MFA unavailable */ }
       dashChatWelcome();
-      // deep-link: #plans #access #wallet #company #aichat #profile
+      // deep-link: #plans #access #wallet #referrals #company #aichat #profile
       var h = (location.hash || '').replace('#', '');
       if (h) activateTab(h, false);
     } catch(e) { /* unexpected — still reveal the dashboard shell below */ }
