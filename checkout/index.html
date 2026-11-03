@@ -211,6 +211,9 @@ a{color:inherit;text-decoration:none}
           <span class="t">Total due today (one-time)</span>
           <span class="v">$<span id="totalUsd">145</span><small>Rs <span id="totalPkr">40,000</span> PKR</small></span>
         </div>
+        <div id="refDiscountNote" style="display:none;margin-top:14px;background:rgba(245,183,63,.09);border:1px solid rgba(245,183,63,.4);border-radius:12px;padding:12px 16px;font-size:.92rem">
+          🎁 <b>Referral discount applied — 10% OFF!</b> <span id="refDiscountDetail" style="color:var(--muted)"></span>
+        </div>
         <div class="btn-row">
           <a href="../index.html#pricing" class="btn btn-ghost">← Change plan</a>
           <button class="btn btn-primary" id="toAccount">Continue →</button>
@@ -481,6 +484,70 @@ a{color:inherit;text-decoration:none}
     clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove('show'); }, 3200);
   }
 
+  /* ---------- referral discount (invited users: 10% OFF first plan) ---------- */
+  var refDiscount = null; // { code, pct } once applied
+
+  function refreshAmounts() {
+    if (!cart) return;
+    // NOTE: init() replaces the price spans' parents' HTML, which destroys the
+    // original span ids — so re-render through structural selectors.
+    function setHtml(sel, id, html) {
+      var n = id ? el(id) : null;
+      var t = n ? n.parentElement : document.querySelector(sel);
+      if (t) t.innerHTML = html;
+    }
+    var cc = (window.ShopcosCart && ShopcosCart.curCode) ? ShopcosCart.curCode() : 'USD';
+    var pr = (window.ShopcosCart && ShopcosCart.priceInCur) ? ShopcosCart.priceInCur(cart) : null;
+    var bigHtml = pr ? pr.big : ('$' + fmt(cart.usd) + ' <span style="font-size:1rem">USD</span>');
+    var subHtml = pr ? pr.sub : ('Rs ' + fmt(cart.pkr) + ' PKR');
+    setHtml('#pane-plan .order-price .usd', 'planUsd', bigHtml);
+    setHtml('#pane-plan .order-price .pkr', 'planPkr', subHtml);
+    var tot = (window.ShopcosCart && ShopcosCart.totalInCur) ? ShopcosCart.totalInCur(cart) : ('$' + fmt(cart.usd) + '<small>Rs ' + fmt(cart.pkr) + ' PKR</small>');
+    setHtml('.total-row .v', 'totalUsd', tot);
+    var payMain, paySub;
+    if (cc === 'USD') { payMain = '$' + fmt(cart.usd) + ' USD'; paySub = 'Rs ' + fmt(cart.pkr) + ' PKR'; }
+    else if (cc === 'PKR') { payMain = '₨ ' + fmt(cart.pkr) + ' PKR'; paySub = '$' + fmt(cart.usd) + ' USD'; }
+    else {
+      var rates = { EUR:0.92, GBP:0.79, INR:84, AED:3.67, SAR:3.75, BDT:119 };
+      var syms = { EUR:'€', GBP:'£', INR:'₹', AED:'د.إ', SAR:'ر.س', BDT:'৳' };
+      payMain = (syms[cc] || cc) + ' ' + fmt(Math.round(cart.usd * (rates[cc] || 1))) + ' ' + cc;
+      paySub = '$' + fmt(cart.usd) + ' USD';
+    }
+    setHtml('#pane-payment .sub strong', 'payUsd', payMain);
+    setHtml('#pane-payment .sub > span', 'payPkr', '(' + paySub + ')');
+    document.querySelectorAll('.payUsdEcho').forEach(function(x){ x.textContent = fmt(cart.usd); });
+    document.querySelectorAll('.payPkrEcho').forEach(function(x){ x.textContent = fmt(cart.pkr); });
+  }
+
+  async function applyReferralDiscount() {
+    if (!sb || !user || !cart || refDiscount) return;
+    try {
+      // Claim a pending invite first (user may have signed up right here)
+      try {
+        var pending = localStorage.getItem('shopcos_ref');
+        if (pending) {
+          var cr = await sb.rpc('claim_referral', { p_code: pending });
+          if (!cr.error && cr.data && cr.data !== 'noauth') localStorage.removeItem('shopcos_ref');
+        }
+      } catch(e) {}
+      var res = await sb.from('referrals').select('*').eq('referred_user_id', user.id).eq('status', 'signed_up').limit(1);
+      if (res.error || !res.data || !res.data.length) return;
+      var row = res.data[0];
+      var pct = Number(row.discount_percent || 10);
+      var origUsd = cart.usd, origPkr = cart.pkr;
+      cart.usd = Math.round(origUsd * (100 - pct)) / 100;
+      cart.pkr = Math.round(origPkr * (100 - pct) / 10000) * 100; // 10% OFF, rounded to nearest Rs 100
+      refDiscount = { code: row.referrer_code, pct: pct, origUsd: origUsd, origPkr: origPkr };
+      refreshAmounts();
+      var note = el('refDiscountNote');
+      if (note) {
+        note.style.display = 'block';
+        el('refDiscountDetail').textContent = 'You were invited with code ' + row.referrer_code + ' — price dropped from $' + fmt(origUsd) + ' / Rs ' + fmt(origPkr) + '.';
+      }
+      toast('🎁 Referral discount applied — 10% OFF!');
+    } catch(e) { /* referral system not set up yet — full price, no breakage */ }
+  }
+
   function gotoStep(name){
     document.querySelectorAll('.step-pane').forEach(function(p){ p.classList.remove('active'); });
     el('pane-' + name).classList.add('active');
@@ -603,7 +670,7 @@ a{color:inherit;text-decoration:none}
     var logged = !!user;
     el('acctLoggedIn').style.display = logged ? 'block' : 'none';
     el('acctLoginForm').style.display = logged ? 'none' : 'block';
-    if (logged) el('acctEmailShow').textContent = user.email;
+    if (logged) { el('acctEmailShow').textContent = user.email; applyReferralDiscount(); }
   }
 
   /* ---------- order placement ---------- */
@@ -644,7 +711,10 @@ a{color:inherit;text-decoration:none}
       payment_method: paymentMethod,
       status: 'pending',
       proof_url: proofPath,
-      notes: proofFile && !proofPath ? 'receipt upload failed — customer will send via support' : null
+      notes: [
+        proofFile && !proofPath ? 'receipt upload failed — customer will send via support' : '',
+        refDiscount ? ('Referral ' + refDiscount.code + ': ' + refDiscount.pct + '% OFF applied (was $' + fmt(refDiscount.origUsd) + ' / Rs ' + fmt(refDiscount.origPkr) + ')') : ''
+      ].filter(Boolean).join(' · ') || null
     };
     try {
       var res = await sb.from('orders').insert(payload).select('id').single();
@@ -741,8 +811,11 @@ a{color:inherit;text-decoration:none}
       });
     });
 
-    // stripe
-    el('stripePayBtn').addEventListener('click', function(){
+    // stripe (button was removed from the card pane in a redesign — guard it,
+    // otherwise this throws and the crypto/bank/mobile order buttons below
+    // never get their click handlers)
+    var stripeBtn = el('stripePayBtn');
+    if (stripeBtn) stripeBtn.addEventListener('click', function(){
       var link = STRIPE_LINKS[cart.planId];
       if (!link || link === '#') {
         toast('⚙️ Card payments go live soon — please choose Crypto, Bank or Mobile instead.');
