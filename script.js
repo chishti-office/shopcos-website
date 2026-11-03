@@ -100,6 +100,43 @@
   var sb = null;
   var pendingEmail = '';
 
+  // ---- Referral capture: shopcos.shop/?ref=SHOP-XXXXXX ----
+  try {
+    var _refParam = new URLSearchParams(window.location.search).get('ref');
+    if (_refParam) {
+      localStorage.setItem('shopcos_ref', _refParam.trim().toUpperCase());
+      sessionStorage.setItem('shopcos_ref_banner', '1');
+    }
+  } catch(e) {}
+
+  async function claimPendingReferral() {
+    try {
+      var code = localStorage.getItem('shopcos_ref');
+      if (!code || !sb) return;
+      var r = await sb.rpc('claim_referral', { p_code: code });
+      // 'ok' / 'invalid' / 'self' / 'already' are final — stop retrying.
+      // A real error (e.g. referral SQL not run yet) keeps the code for later.
+      if (!r.error && r.data && r.data !== 'noauth') {
+        localStorage.removeItem('shopcos_ref');
+      }
+    } catch(e) { /* keep the code — retry on a later visit */ }
+  }
+
+  function showRefBanner() {
+    try {
+      if (!sessionStorage.getItem('shopcos_ref_banner')) return;
+      sessionStorage.removeItem('shopcos_ref_banner');
+      if (document.getElementById('refInviteBanner')) return;
+      var b = document.createElement('div');
+      b.id = 'refInviteBanner';
+      b.style.cssText = 'position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:3000;max-width:92vw;background:#101736;border:1px solid rgba(245,183,63,.55);color:#f2f4fb;padding:13px 18px;border-radius:14px;font-size:.92rem;font-weight:600;box-shadow:0 12px 40px rgba(0,0,0,.5);text-align:center';
+      b.innerHTML = '🎁 You were invited by a shopcos user! Sign up and get <b style="color:#ffd97a">10% OFF</b> your first plan. <span id="refBannerX" style="cursor:pointer;margin-left:10px;opacity:.7">✕</span>';
+      document.body.appendChild(b);
+      document.getElementById('refBannerX').addEventListener('click', function(){ b.remove(); });
+      setTimeout(function(){ if (b.parentNode) b.remove(); }, 12000);
+    } catch(e) {}
+  }
+
   var overlay = document.getElementById('authOverlay');
   var loginBtn = document.getElementById('loginBtn');
   var signupBtn = document.getElementById('signupBtn');
@@ -109,6 +146,7 @@
     if (typeof supabase === 'undefined') { setTimeout(initSupabase, 300); return; }
     sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
     window.__shopcosSB = sb; // expose for currency/language sync IIFE
+    showRefBanner();
     checkSession();
   }
 
@@ -121,7 +159,7 @@
   async function ensureLicense(user) {
     // Check if license exists, create trial if not
     var { data } = await sb.from('licenses').select('*').eq('user_id', user.id).limit(1);
-    if (data && data.length) return data[0];
+    if (data && data.length) { claimPendingReferral(); return data[0]; }
     var key = genKey();
     var trialEnds = new Date(Date.now() + 30*86400000).toISOString();
     var shop = sessionStorage.getItem('sb_signup_shop') || '';
@@ -133,6 +171,7 @@
       type: 'trial', status: 'active', trial_ends_at: trialEnds,
       shop_name: shop, phone: phone
     }).select();
+    await claimPendingReferral();
     return ins && ins[0];
   }
 
@@ -178,6 +217,7 @@
     if (data.session && data.session.user) {
       localStorage.setItem('shopcos_user', JSON.stringify({ email: data.session.user.email, id: data.session.user.id }));
       updateNav();
+      claimPendingReferral();
     }
     // Notice set by dashboard/ when a logged-out user lands there
     var notice = null;
