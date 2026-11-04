@@ -16,7 +16,7 @@
   </url>
   <url>
     <loc>https://shopcos.shop/blog/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -392,6 +392,24 @@
     <image:image>
       <image:loc>https://shopcos.shop/blog/img/blog23-phone-billing.jpg</image:loc>
       <image:title>A shopkeeper using a smartphone calculator and cash register app at a shop counter</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://shopcos.shop/blog/fbr-pos-invoice-verification.html</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog24-hero-receipt-qr.jpg</image:loc>
+      <image:title>Close-up of a printed shop receipt showing totals and change</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog24-phone-scan.jpg</image:loc>
+      <image:title>A person scanning a QR code with a smartphone at a retail counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog24-shop-counter.jpg</image:loc>
+      <image:title>A shop employee pulling a freshly printed receipt from a payment terminal at the counter</image:title>
     </image:image>
   </url>
 </urlset>
