@@ -412,4 +412,22 @@
       <image:title>A shop employee pulling a freshly printed receipt from a payment terminal at the counter</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/free-billing-software-pakistan.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog25-hero-shop-expenses.jpg</image:loc>
+      <image:title>A shopkeeper calculating expenses in a small shop</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog25-till-receipt.jpg</image:loc>
+      <image:title>A cash register printing a receipt at a retail counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog25-calculator-bills.jpg</image:loc>
+      <image:title>Hands holding a calculator over bills and financial documents</image:title>
+    </image:image>
+  </url>
 </urlset>
