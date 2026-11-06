@@ -32,6 +32,7 @@ a{color:inherit;text-decoration:none}
 .gate-card p{color:var(--muted);margin-bottom:24px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:12px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:.2s;font-family:var(--font-b)}
 .btn-primary{background:var(--grad);color:#1a1005}
+.btn-gold{background:var(--grad);color:#1a1005}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,183,63,.35)}
 .btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text)}
 .btn-ghost:hover{border-color:var(--gold)}
@@ -159,7 +160,50 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 .or-media-status{color:var(--muted);font-size:.88rem;min-height:1.1em;margin-top:10px}
 .or-help{color:var(--muted);font-size:.92rem;margin-bottom:8px}
 .or-note-input{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-family:var(--font-b);font-size:.88rem;min-width:140px}
-@media(max-width:860px){.or-media-grid{grid-template-columns:1fr}}
+/* ---------- WhatsApp-style sender (admin port of helper) ---------- */
+.or-wa-wrap{display:flex;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.18);margin-top:14px}
+.or-wa-listpane{flex:0 0 300px;width:300px;border-inline-end:1px solid var(--border);display:flex;flex-direction:column;background:rgba(255,255,255,.02);max-height:640px}
+.or-wa-listhead{background:linear-gradient(135deg,#0b2545,#123a6d);color:#fff;padding:11px 14px;font-weight:700;font-size:.95rem;border-bottom:3px solid var(--gold)}
+.or-wa-list{overflow-y:auto;flex:1;min-height:0}
+.or-wa-empty{padding:18px 14px;color:var(--muted);font-size:.9rem}
+.or-wa-row{display:flex;align-items:center;gap:11px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer}
+.or-wa-row:hover{background:rgba(255,255,255,.04)}
+.or-wa-row.sel{background:rgba(245,183,63,.14);box-shadow:inset 3px 0 0 var(--gold)}
+.or-wa-ava{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#1a1005;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.or-wa-rowmain{flex:1;min-width:0}
+.or-wa-rowname{font-weight:700;font-size:.95rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.or-wa-rowsub{font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.or-wa-rowstat{flex:0 0 auto;min-width:16px;text-align:center}
+.or-wa-ticks{color:var(--gold-lt);font-weight:800;font-size:.9rem;letter-spacing:-2px}
+.or-wa-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);display:inline-block}
+.or-wa-chatpane{flex:1;min-width:0;display:flex;flex-direction:column}
+.or-wa-head{display:flex;align-items:center;gap:11px;background:linear-gradient(135deg,#0b2545,#123a6d);color:#fff;padding:10px 14px;border-bottom:3px solid var(--gold)}
+.or-wa-back{display:none;background:transparent;color:#fff;font-size:21px;padding:2px 8px 2px 0;font-weight:700;border:none;cursor:pointer}
+.or-wa-headmain{flex:1;min-width:0}
+.or-wa-headname{font-size:1.05rem;font-weight:800;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.or-wa-headsub{font-size:.8rem;color:#cfd9e8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.or-wa-count{background:rgba(255,255,255,.13);border:1px solid var(--gold);color:#fff;border-radius:14px;padding:2px 9px;font-size:.75rem;white-space:nowrap}
+.or-wa-info{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border);font-size:.85rem;color:var(--muted)}
+.or-wa-area{background-color:#ece5dd;background-image:radial-gradient(rgba(11,37,69,.055) 1px,transparent 1.4px);background-size:18px 18px;padding:16px 14px;overflow-y:auto;max-height:420px}
+.or-wa-bubble{max-width:84%;margin-inline-start:auto;background:#fdf3d0;border:1px solid #e6d488;border-radius:10px;border-start-end-radius:2px;padding:9px 11px 6px;box-shadow:0 1px 1px rgba(11,37,69,.12)}
+.or-wa-bubbletext{white-space:pre-wrap;font-size:.9rem;line-height:1.55;color:#1a1005;word-break:break-word}
+.or-wa-bubblemeta{text-align:end;font-size:.7rem;color:#8a7a2e;margin-top:3px}
+.or-wa-chip{display:inline-block;margin-top:10px;background:#fff;border:1.5px dashed var(--gold);color:#0b2545;border-radius:16px;padding:5px 12px;font-size:.8rem;font-weight:700}
+.or-wa-inputbar{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.03);border-top:1px solid var(--border)}
+.or-wa-inputprev{flex:1;min-width:0;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:22px;padding:11px 16px;font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.or-wa-send{flex:0 0 auto;width:48px;height:48px;border-radius:50%;background:var(--gold);color:#1a1005;font-size:21px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 2px 5px rgba(11,37,69,.25)}
+.or-wa-send.off{opacity:.45;pointer-events:none}
+.or-wa-actions{padding:4px 14px 14px}
+.or-wa-done{padding:22px 16px;color:var(--text);font-size:1.05rem}
+.or-media-tgl{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:.92rem;color:var(--text)}
+.or-media-tgl label{display:inline-flex;align-items:center;gap:5px;margin:0;cursor:pointer}
+#orMediaStack{padding:0 12px 8px;background:rgba(255,255,255,.03)}
+@media(max-width:860px){.or-media-grid{grid-template-columns:1fr}
+.or-wa-listpane{flex:1 1 auto;width:auto;border-inline-end:none;max-height:none}
+.or-wa-chatpane{display:none}
+.or-wa-wrap.chat-open .or-wa-listpane{display:none}
+.or-wa-wrap.chat-open .or-wa-chatpane{display:flex}
+.or-wa-back{display:inline-block}}
 </style>
 
 <link rel="stylesheet" href="/mobile.css">
@@ -428,6 +472,10 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         </div>
 
         <div id="orSendView">
+          <div class="card" style="text-align:center">
+            <a class="btn or-wa" href="https://web.whatsapp.com/" target="_blank" rel="noopener" style="display:block;justify-content:center;font-size:1.05rem;padding:16px 18px;text-decoration:none;border-radius:10px">📱 WhatsApp Web Kholein</a>
+            <p style="color:var(--muted);font-size:.88rem;margin:8px 0 0">Ek bar link karne ke baad WhatsApp khud yaad rakhta hai — QR sirf tab aayega jab wahan se logout ho.</p>
+          </div>
           <div class="card">
             <h2>📂 List Chunein</h2>
             <div class="or-seg" style="margin-bottom:16px">
@@ -463,10 +511,15 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
           </div>
 
           <div class="card">
-            <h2>🏪 Agli Dukaan</h2>
-            <div id="orShopCard"><p style="color:var(--muted)">—</p></div>
-            <h3 style="margin:20px 0 10px">Message Preview</h3>
-            <div class="or-preview" id="orPreview">—</div>
+            <h2>💬 WhatsApp Sender — dukaan tap karein, chat kholein</h2>
+            <p style="color:var(--muted)" id="orPos">Dukaan – / –</p>
+            <div class="or-wa-wrap" id="orWaWrap">
+              <div class="or-wa-listpane">
+                <div class="or-wa-listhead">💬 Dukanein — tap karke chat kholein <span id="orWaListCount"></span></div>
+                <div class="or-wa-list" id="orChatList"></div>
+              </div>
+              <div class="or-wa-chatpane" id="orShopCard"><p style="color:var(--muted);padding:18px">—</p></div>
+            </div>
           </div>
         </div>
 
@@ -486,6 +539,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 
       <div class="card" id="orMediaPanel">
         <h2>🎁 Media Package — Poora Package Bhejein</h2>
+        <p class="or-help">Har cheez ke neeche ✅ / ❌ hai — jo ON ho, bas wohi chat mein Share button banega. Bhejne ka order: <b>1 ➤ Message → 2 Tasveer → 3 Video → 4 Voice</b>.</p>
         <p class="or-help">Tartib: pehle text message (upar wala, auto tayyar) bhejein → phir tasveer → phir video → aakhir mein voice note.</p>
         <p class="or-help">⚠️ WhatsApp Kholo se sirf text jata hai — tasveer, video aur voice chat khulne ke baad wahan se attach ya forward karein.</p>
         <p class="or-help">⭐ Tez tareeqa: pehli dafa ye teeno cheezein apne WhatsApp ki 'Message Yourself' (apne number wali) chat mein bhej kar un par Star laga lein. Phir har client ki chat mein Starred Messages se wahi teeno Forward kar dein — 2 tap mein poora package, aur voice note asli voice-note ki shakal mein hi jayega.</p>
@@ -500,6 +554,10 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
               <label class="btn btn-ghost btn-sm" for="orPicFile" style="cursor:pointer;margin:0">🔄 Badlein</label>
               <input type="file" id="orPicFile" accept="image/*" style="display:none">
             </div>
+            <div class="or-media-tgl">
+              <label><input type="radio" name="orSendPic" id="orPicYes" value="yes" checked> ✅ Tasveer bhejni hai</label>
+              <label><input type="radio" name="orSendPic" id="orPicNo" value="no"> ❌ Tasveer nahi bhejni</label>
+            </div>
             <p class="or-media-status" id="orPicStatus"></p>
           </div>
           <div class="or-media-slot">
@@ -511,6 +569,10 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
               <label class="btn btn-ghost btn-sm" for="orVidFile" style="cursor:pointer;margin:0">🔄 Badlein</label>
               <input type="file" id="orVidFile" accept="video/mp4,video/*" style="display:none">
             </div>
+            <div class="or-media-tgl">
+              <label><input type="radio" name="orSendVideo" id="orVidYes" value="yes" checked> ✅ Video bhejni hai</label>
+              <label><input type="radio" name="orSendVideo" id="orVidNo" value="no"> ❌ Video nahi bhejni</label>
+            </div>
             <p class="or-media-status" id="orVidStatus"></p>
           </div>
           <div class="or-media-slot">
@@ -521,6 +583,10 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
             <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
               <label class="btn btn-ghost btn-sm" for="orVoiceFile" style="cursor:pointer;margin:0">🔄 Badlein</label>
               <input type="file" id="orVoiceFile" accept="audio/*" style="display:none">
+            </div>
+            <div class="or-media-tgl">
+              <label><input type="radio" name="orSendVoice" id="orVoiceYes" value="yes" checked> ✅ Voice bhejni hai</label>
+              <label><input type="radio" name="orSendVoice" id="orVoiceNo" value="no"> ❌ Voice nahi bhejni</label>
             </div>
             <p class="or-media-status" id="orVoiceStatus"></p>
           </div>
@@ -1190,7 +1256,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   /* ---------- outreach ---------- */
   var OR_DEFAULT_MSG = "Assalam-o-Alaikum, {name} ke liye ek paigham hai. 👋\n\nHum *shopcos soft* banate hain — dukaan ka billing software, stock aur khata/udhar ka software, jo baghair internet ke bhi chalta hai, barcode scanner, printing bill 🧾\n\nAur is mein sab se bari baat — *AI assistant* bhi hai jo ke duniya mein kisi software mein nahi hai 🤖 Is se aap apne phone se baithay sawal jawab kar sakte hain 📱\n\n🎁 30 din ka *FREE trial* hai, koi card nahi chahiye.\nDetail yahan hai: https://shopcos.shop\n\nAgar interested hon to demo bhej dun? Shukriya 🙏";
   var OR_STAGES = [['bheja','Bheja'],['jawab','Jawab Aaya'],['demo','Demo Bheja'],['trial','Trial Shuru'],['nahi','Nahi Chahiye']];
-  var OR = { leads: [], activity: {}, settings: {}, loaded: false, queue: [], idx: 0, listMode: 'belt', area: '', cat: '', query: '', view: 'send', initDone: false, bound: false, voiceProbed: false, voiceSet: false };
+  var OR = { leads: [], activity: {}, settings: {}, loaded: false, queue: [], idx: 0, listMode: 'belt', area: '', cat: '', query: '', view: 'send', initDone: false, bound: false, voiceProbed: false, voiceSet: false, voiceUrl: '', mediaSend: { pic: true, video: true, voice: true } };
 
   function orTodayStr(){
     var d = new Date();
@@ -1334,6 +1400,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   }
   function orSetVoice(url){
     var slot = el('orVoiceSlot'); if (!slot) return;
+    OR.voiceUrl = url || '';
     slot.innerHTML = '<audio controls src="' + esc(url) + '" style="width:100%"></audio>' +
       '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">' +
       '<a class="btn btn-primary btn-sm" href="' + esc(url) + '" download>⬇ Download</a>' +
@@ -1405,6 +1472,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       else if (kind === 'video') orSetVideo(bust || url);
       else { OR.voiceSet = true; orSetVoice(bust || url); }
       if (st) st.textContent = 'Ho gaya ✓ — ab yehi media jayega.';
+      if (el('orMediaStack')) orRenderMediaStack();
       try { input.value = ''; } catch(e3) {}
     } catch(e) {
       if (orIsBucketMissing(e) || orIsMissingErr(e)) {
@@ -1435,6 +1503,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       el('orMsg').value = OR.settings.message_template || OR_DEFAULT_MSG;
       el('orTargetInput').value = orTarget();
       orApplyMediaSettings();
+      orApplyMediaSend();
       el('orLoading').style.display = 'none';
       orBuildFilters();
       orRebuildQueue();
@@ -1473,6 +1542,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       return true;
     });
     OR.idx = 0;
+    var w = el('orWaWrap'); if (w) w.classList.remove('chat-open');
     orRenderStats();
     orRenderShop();
   }
@@ -1493,38 +1563,127 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     var chips = document.querySelectorAll('[data-or-target]');
     for (var i = 0; i < chips.length; i++) chips[i].classList.toggle('active', parseInt(chips[i].getAttribute('data-or-target'), 10) === orTarget());
   }
+  function orMediaUrl(kind){
+    if (kind === 'pic'){ var img = el('orPicImg'); return (img && img.getAttribute('src')) || '/media-kit/ad-pic.png'; }
+    if (kind === 'video'){ var v = el('orVidPlayer'); return (v && v.getAttribute('src')) || '/media-kit/ad-video.mp4'; }
+    if (kind === 'voice'){ return OR.voiceSet ? (OR.voiceUrl || '') : ''; }
+    return '';
+  }
+  function orRenderChatList(){
+    var list = el('orChatList'); if (!list) return;
+    var cnt = el('orWaListCount'); if (cnt) cnt.textContent = '(' + OR.queue.length + ')';
+    if (!OR.queue.length){ list.innerHTML = '<div class="or-wa-empty">Is filter mein koi dukaan baqi nahi.</div>'; return; }
+    var SHOW = 200, html = '';
+    for (var i = 0; i < OR.queue.length && i < SHOW; i++){
+      var l = OR.queue[i], a = OR.activity[l.phone] || {};
+      var stat = (a.status === 'sent')
+        ? '<span class="or-wa-ticks" title="Bhej diya">✓✓</span>'
+        : '<span class="or-wa-dot"></span>';
+      html += '<div class="or-wa-row' + (i === OR.idx ? ' sel' : '') + '" data-i="' + i + '">' +
+        '<div class="or-wa-ava">' + esc(String(l.shop_name || '?').trim().charAt(0) || '?') + '</div>' +
+        '<div class="or-wa-rowmain"><div class="or-wa-rowname">' + esc(l.shop_name || '—') + '</div>' +
+        '<div class="or-wa-rowsub">' + esc(orLeadArea(l) || '') + ' · ' + esc(l.category || '') + '</div></div>' +
+        '<div class="or-wa-rowstat">' + stat + '</div></div>';
+    }
+    if (OR.queue.length > SHOW) html += '<div class="or-wa-empty">…aur ' + (OR.queue.length - SHOW) + ' dukanein — area/category/search se list chhoti karein.</div>';
+    list.innerHTML = html;
+    var sel = list.querySelector('.or-wa-row.sel');
+    if (sel){
+      var t = sel.offsetTop;
+      if (t < list.scrollTop || t + sel.offsetHeight > list.scrollTop + list.clientHeight) list.scrollTop = Math.max(0, t - 8);
+    }
+  }
+  function orSelectShop(i){
+    if (i < 0 || i >= OR.queue.length) return;
+    OR.idx = i;
+    var w = el('orWaWrap'); if (w) w.classList.add('chat-open');
+    orRenderShop();
+  }
+  function orRenderMediaStack(){
+    var wrap = el('orMediaStack'); if (!wrap) return;
+    var kinds = [
+      { key: 'pic', num: 2, icon: '🖼', label: 'Tasveer', on: OR.mediaSend.pic, url: orMediaUrl('pic') },
+      { key: 'video', num: 3, icon: '🎬', label: 'Video', on: OR.mediaSend.video, url: orMediaUrl('video') },
+      { key: 'voice', num: 4, icon: '🎤', label: 'Voice', on: OR.mediaSend.voice, url: orMediaUrl('voice') }
+    ].filter(function(k){ return k.on && k.url; });
+    if (!kinds.length){ wrap.innerHTML = ''; return; }
+    var html = '<p style="color:var(--muted);font-size:.85rem;margin:10px 0 0">Bhejne ka order: <b>1 ➤ Message</b>' +
+      kinds.map(function(k){ return ' → <b>' + k.num + ' ' + k.icon + ' ' + k.label + '</b>'; }).join('') + '</p>';
+    kinds.forEach(function(k){
+      html += '<div style="margin-top:8px"><span class="or-wa-chip">' + k.num + ' · ' + k.icon + ' ' + k.label + ' ready hai</span></div>' +
+        '<a class="btn btn-gold" href="' + esc(k.url) + '" download target="_blank" rel="noopener" style="display:block;width:100%;margin-top:8px;font-size:1rem;padding:14px 18px;text-align:center;text-decoration:none">' + k.num + ' · ' + k.icon + ' ' + k.label + ' Share Karein</a>' +
+        '<p style="color:var(--muted);font-size:.85rem;margin:6px 0 0">Download hogi — WhatsApp chat mein attach karke bhej dein, ya Starred se Forward karein.</p>';
+    });
+    wrap.innerHTML = html;
+  }
+  function orUpdateBubble(){
+    var lead = OR.queue[OR.idx]; if (!lead) return;
+    var msg = orPersonalize(el('orMsg').value, lead.shop_name);
+    var b = el('orChatBubbleText'); if (b) b.textContent = msg;
+    var prev = el('orWaInputPrev'); if (prev) prev.textContent = msg.replace(/\s+/g, ' ').slice(0, 90);
+    var wb = el('orWaSendBtn'); if (wb && !orTargetReached()) wb.href = waUrlFor(lead.phone, el('orMsg').value, lead.shop_name);
+  }
+  function orApplyMediaSend(){
+    OR.mediaSend.pic = OR.settings.media_send_tasveer !== 'no';
+    OR.mediaSend.video = OR.settings.media_send_video !== 'no';
+    OR.mediaSend.voice = OR.settings.media_send_voice !== 'no';
+    var pY = el('orPicYes'), pN = el('orPicNo'), vY = el('orVidYes'), vN = el('orVidNo'), aY = el('orVoiceYes'), aN = el('orVoiceNo');
+    if (pY) pY.checked = OR.mediaSend.pic; if (pN) pN.checked = !OR.mediaSend.pic;
+    if (vY) vY.checked = OR.mediaSend.video; if (vN) vN.checked = !OR.mediaSend.video;
+    if (aY) aY.checked = OR.mediaSend.voice; if (aN) aN.checked = !OR.mediaSend.voice;
+  }
   function orRenderShop(){
     orRenderStats();
-    var card = el('orShopCard');
+    orRenderChatList();
+    var pane = el('orShopCard');
     if (!OR.queue.length || OR.idx >= OR.queue.length){
       el('orPos').textContent = 'Dukaan – / ' + OR.queue.length;
-      card.innerHTML = '<p style="font-size:1.1rem">Is filter mein koi dukaan baqi nahi 🎉</p>';
-      el('orPreview').textContent = '—';
+      pane.innerHTML = '<div class="or-wa-chat"><div class="or-wa-head"><button class="or-wa-back" id="orChatBack" type="button" title="Wapas list par">←</button><div class="or-wa-headmain"><div class="or-wa-headname">shopcos Outreach</div><div class="or-wa-headsub">Saari dukanein mukammal</div></div></div>' +
+        '<div class="or-wa-area"><div class="or-wa-done">🎉 Is list/filter mein saari dukanein ho gayi hain — koi baqi nahi!</div></div></div>';
+      var bk0 = el('orChatBack'); if (bk0) bk0.addEventListener('click', function(){ var w = el('orWaWrap'); if (w) w.classList.remove('chat-open'); });
       return;
     }
     var lead = OR.queue[OR.idx];
     el('orPos').textContent = 'Dukaan ' + (OR.idx + 1) + ' / ' + OR.queue.length;
     var reached = orTargetReached();
+    var msg = orPersonalize(el('orMsg').value, lead.shop_name);
     var wa = waUrlFor(lead.phone, el('orMsg').value, lead.shop_name);
-    card.innerHTML =
-      '<div class="or-shopname">' + esc(lead.shop_name || '—') + '</div>' +
-      '<div class="or-meta">' + esc(lead.category || '—') + ' · ' + esc(orLeadArea(lead) || '—') + '<br>' +
-      '📞 <b>' + esc(lead.phone) + '</b>' +
-      (lead.rating ? '<br>⭐ Rating: ' + esc(lead.rating) : '') +
-      (lead.address ? '<br>📍 ' + esc(lead.address) : '') + '</div>' +
-      '<div style="margin-top:16px;display:flex;flex-direction:column;gap:10px">' +
-        '<a id="orWaBtn" class="btn or-wa' + (reached ? ' disabled' : '') + '" style="justify-content:center;font-size:1.05rem;padding:14px" ' + (reached ? '' : 'href="' + esc(wa) + '"') + ' target="_blank" rel="noopener">💬 WhatsApp Kholo</a>' +
+    var act = OR.activity[lead.phone] || {};
+    pane.innerHTML =
+      '<div class="or-wa-chat">' +
+        '<div class="or-wa-head">' +
+          '<button class="or-wa-back" id="orChatBack" type="button" title="Wapas list par">←</button>' +
+          '<div class="or-wa-ava">' + esc(String(lead.shop_name || '?').trim().charAt(0) || '?') + '</div>' +
+          '<div class="or-wa-headmain"><div class="or-wa-headname">' + esc(lead.shop_name || '—') + '</div>' +
+          '<div class="or-wa-headsub">📞 ' + esc(lead.phone) + '</div></div>' +
+          '<span class="or-wa-count">' + (OR.idx + 1) + ' / ' + OR.queue.length + '</span>' +
+        '</div>' +
+        '<div class="or-wa-info"><span>' + esc(lead.category || '—') + '</span><span>📍 ' + esc(orLeadArea(lead) || '—') + '</span>' +
+        (lead.rating ? '<span>⭐ ' + esc(lead.rating) + '</span>' : '') +
+        (lead.address ? '<span>' + esc(lead.address) + '</span>' : '') +
+        (act.status ? '<span>pehle mark: ' + esc(act.status) + '</span>' : '') + '</div>' +
+        '<div class="or-wa-area">' +
+          '<div class="or-wa-bubble"><div class="or-wa-bubbletext" id="orChatBubbleText">' + esc(msg) + '</div><div class="or-wa-bubblemeta">Message tayyar hai — bhejne ke liye neeche ➤ dabayein</div></div>' +
+        '</div>' +
+        '<div id="orMediaStack"></div>' +
+        '<div class="or-wa-inputbar">' +
+          '<div class="or-wa-inputprev" id="orWaInputPrev">' + esc(msg.replace(/\s+/g, ' ').slice(0, 90)) + '</div>' +
+          '<a id="orWaSendBtn" class="or-wa-send' + (reached ? ' off' : '') + '" ' + (reached ? '' : 'href="' + esc(wa) + '"') + ' target="_blank" rel="noopener" title="WhatsApp Web mein chat kholein — Send wahan dabayein">➤</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="or-wa-actions"><div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">' +
         '<button class="btn btn-primary" id="orSentBtn" style="justify-content:center">Bhej Diya — Agli Dukaan ✓</button>' +
         '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
           '<button class="btn btn-ghost" id="orSkipBtn" style="flex:1;justify-content:center">Abhi Nahi / Skip</button>' +
           '<button class="btn btn-danger" id="orBadBtn" style="flex:1;justify-content:center">Number Ghalat ✗</button>' +
         '</div>' +
       '</div>' +
-      '<p style="color:var(--muted-2);font-size:.85rem;margin-top:10px">Pehle WhatsApp mein Send dabayein, phir yahan "Bhej Diya" dabayein.</p>';
-    el('orPreview').textContent = orPersonalize(el('orMsg').value, lead.shop_name);
+      '<p style="color:var(--muted-2);font-size:.85rem;margin-top:10px">Pehle ➤ dabakar WhatsApp Web mein Send dabayein, phir yahan "Bhej Diya" dabayein.</p></div>';
     el('orSentBtn').addEventListener('click', orMarkSent);
     el('orSkipBtn').addEventListener('click', function(){ OR.idx++; orRenderShop(); });
     el('orBadBtn').addEventListener('click', orMarkInvalid);
+    var bk = el('orChatBack'); if (bk) bk.addEventListener('click', function(){ var w = el('orWaWrap'); if (w) w.classList.remove('chat-open'); });
+    orRenderMediaStack();
   }
   function orAdvanceAfterMark(phone){
     for (var i = 0; i < OR.queue.length; i++){ if (OR.queue[i].phone === phone){ OR.queue.splice(i, 1); if (OR.idx > i) OR.idx--; break; } }
@@ -1675,7 +1834,19 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     el('orAreaFilter').addEventListener('change', orRebuildQueue);
     el('orCatFilter').addEventListener('change', orRebuildQueue);
     el('orSearch').addEventListener('input', orRebuildQueue);
-    el('orMsg').addEventListener('input', function(){ if (OR.queue.length && OR.idx < OR.queue.length) orRenderShop(); });
+    el('orMsg').addEventListener('input', function(){ orUpdateBubble(); });
+    el('orChatList').addEventListener('click', function(e){
+      var row = e.target.closest ? e.target.closest('.or-wa-row') : null;
+      if (row) orSelectShop(parseInt(row.getAttribute('data-i'), 10));
+    });
+    [['orPicYes', 'pic', true], ['orPicNo', 'pic', false], ['orVidYes', 'video', true], ['orVidNo', 'video', false], ['orVoiceYes', 'voice', true], ['orVoiceNo', 'voice', false]].forEach(function(cfg){
+      var input = el(cfg[0]); if (!input) return;
+      input.addEventListener('change', async function(){
+        OR.mediaSend[cfg[1]] = cfg[2];
+        try { await orSaveSetting('media_send_' + (cfg[1] === 'pic' ? 'tasveer' : cfg[1]), cfg[2] ? 'yes' : 'no'); } catch(e2) {}
+        orRenderMediaStack();
+      });
+    });
     el('orSaveMsgBtn').addEventListener('click', async function(){
       var ok = await orSaveSetting('message_template', el('orMsg').value);
       el('orMsgSaved').textContent = ok ? '✓ Save ho gaya' : '';
