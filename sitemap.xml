@@ -448,4 +448,22 @@
       <image:title>An open ledger book with handwritten entries</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/grocery-store-pos-software.html</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog27-hero-produce.jpg</image:loc>
+      <image:title>Colourful assortment of fresh vegetables on display at a supermarket produce section</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog27-weighing-produce.jpg</image:loc>
+      <image:title>An elderly vendor weighing fresh produce on a scale at a busy market stall</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog27-checkout-counter.jpg</image:loc>
+      <image:title>A cashier serving a customer at a supermarket checkout counter with groceries</image:title>
+    </image:image>
+  </url>
 </urlset>
