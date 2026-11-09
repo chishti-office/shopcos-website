@@ -466,4 +466,22 @@
       <image:title>A cashier serving a customer at a supermarket checkout counter with groceries</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/monthly-subscription-vs-one-time-payment-pos-cost.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog28-hero-calculator-cash.jpg</image:loc>
+      <image:title>Calculator, cash and a notepad on a desk — working out the true cost of POS software</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog28-till-receipt.jpg</image:loc>
+      <image:title>Close-up of a cash register printing a receipt in a retail store</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog28-counting-cash.jpg</image:loc>
+      <image:title>Hands counting cash with a calculator while checking receipts</image:title>
+    </image:image>
+  </url>
 </urlset>
