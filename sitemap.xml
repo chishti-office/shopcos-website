@@ -484,4 +484,22 @@
       <image:title>Hands counting cash with a calculator while checking receipts</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/digital-invoicing-pakistan-small-shops.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog29-hero-receipt.jpg</image:loc>
+      <image:title>Close-up of a printed shop receipt showing tax lines and totals</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog29-receipt-printer.jpg</image:loc>
+      <image:title>Hands operating a receipt printer with printed receipts on a wooden counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog29-tax-documents.jpg</image:loc>
+      <image:title>Tax forms, calculator and office supplies arranged on a desk</image:title>
+    </image:image>
+  </url>
 </urlset>
