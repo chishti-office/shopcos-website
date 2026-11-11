@@ -22,25 +22,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0 8px;border:1px solid rgba(255,255,255,.08)}
-.img-cap{color:var(--muted);font-size:.85rem;margin:0 0 24px;text-align:center}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -67,11 +119,39 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Sales Growth</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Sales Growth</span>
 <h1>10 Proven Ways to Increase Sales in Your Retail Shop</h1>
-<div class="article-meta"><span>October 16, 2026</span><span>7 min read</span><span>Sales Growth</span></div>
+<p class="art-stand">Sales stuck? Learn 10 proven strategies Pakistani shopkeepers use to increase retail shop sales — product placement, faster billing, smart pricing, upselling, and customer loyalty.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 October 16, 2026</span><span>⏱ 7 min read</span></div>
+<img class="art-hero" src="img/blog9-hero-busy-shop.jpg" alt="10 Proven Ways to Increase Sales in Your Retail Shop">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#1-arrange-your-shop-like-a-supermarket">1. Arrange Your Shop Like a Supermarket</a></li>
+<li><a href="#2-never-run-out-of-your-bestsellers">2. Never Run Out of Your Bestsellers</a></li>
+<li><a href="#3-speed-up-your-billing-queues-kill-sales">3. Speed Up Your Billing — Queues Kill Sales</a></li>
+<li><a href="#4-use-smart-pricing-and-small-discounts">4. Use Smart Pricing and Small Discounts</a></li>
+<li><a href="#5-upsell-at-the-counter-every-time">5. Upsell at the Counter — Every Time</a></li>
+<li><a href="#6-remember-your-regulars-they-are-your-real-asse">6. Remember Your Regulars — They Are Your Real Asset</a></li>
+<li><a href="#7-keep-the-shop-clean-bright-and-welcoming">7. Keep the Shop Clean, Bright, and Welcoming</a></li>
+<li><a href="#8-use-whatsapp-to-bring-customers-back">8. Use WhatsApp to Bring Customers Back</a></li>
+<li><a href="#9-watch-your-numbers-every-day">9. Watch Your Numbers Every Day</a></li>
+<li><a href="#10-train-your-staff-to-sell-not-just-bill">10. Train Your Staff to Sell, Not Just Bill</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Sales stuck?</li>
+<li>The math of small wins: A shop doing Rs 50,000 in daily sales that lifts its average bill by just 8% through upselling, faster billing, and better displays adds roughly Rs 4,000 per day — over Rs 1.2 million in extra yearly sales — without a single new customer walking through the door.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog9-hero-busy-shop.jpg" alt="Busy retail grocery shop with customers — proven ways to increase shop sales" class="article-img">
 <p class="img-cap">A busy shop is not an accident — it is the result of deliberate sales habits.</p>
@@ -80,7 +160,7 @@
 
 <p>The strategies below are not theory. They are habits used by successful kiryana stores, pharmacies, garment shops, and general stores across Pakistan and beyond. None of them requires a big budget. All of them compound over time.</p>
 
-<h2>1. Arrange Your Shop Like a Supermarket</h2>
+<h2 id="1-arrange-your-shop-like-a-supermarket">1. Arrange Your Shop Like a Supermarket</h2>
 <p>Where a product sits decides whether it sells. Supermarkets spend millions studying this; you can apply the same science for free:</p>
 <ul>
 <li><strong>Eye level is buy level</strong> — put your highest-margin items where customers' eyes naturally fall, not on the bottom shelf</li>
@@ -91,11 +171,11 @@
 <img src="img/blog9-product-display.png" alt="Attractive product display on retail shelves increases impulse sales" class="article-img">
 <p class="img-cap">Smart product placement turns browsing into buying.</p>
 
-<h2>2. Never Run Out of Your Bestsellers</h2>
+<h2 id="2-never-run-out-of-your-bestsellers">2. Never Run Out of Your Bestsellers</h2>
 <p>Nothing kills sales faster than a customer asking for something and hearing "khatam ho gaya hai." Studies in retail consistently show that <strong>a single stock-out does not just lose one sale — it sends the customer to a competitor</strong>, and many never come back.</p>
 <p>Keep a simple rule: identify your top 20 selling items and check their stock every single morning. Set a reorder point for each. Modern billing software can warn you automatically when <a href="stock-management-tips-small-shops.html">stock drops below your set level</a>, so the shelf never goes empty on your money-makers.</p>
 
-<h2>3. Speed Up Your Billing — Queues Kill Sales</h2>
+<h2 id="3-speed-up-your-billing-queues-kill-sales">3. Speed Up Your Billing — Queues Kill Sales</h2>
 <p>Watch your shop during rush hour. Every customer standing in a slow queue is a customer deciding whether to come back tomorrow. Long waits are one of the top reasons shoppers switch stores.</p>
 <ul>
 <li>Use <strong><a href="barcode-system-small-shops.html">barcode scanning</a></strong> instead of typing prices by hand — a 2-minute bill becomes a 30-second bill</li>
@@ -106,7 +186,7 @@
 <img src="img/blog9-pos-billing-counter.jpg" alt="Fast POS billing software at shop counter reduces queues and increases sales" class="article-img">
 <p class="img-cap">Fast billing keeps the queue moving — and customers returning.</p>
 
-<h2>4. Use Smart Pricing and Small Discounts</h2>
+<h2 id="4-use-smart-pricing-and-small-discounts">4. Use Smart Pricing and Small Discounts</h2>
 <p>You do not need to be the cheapest shop in the market. You need to <em>feel</em> like good value:</p>
 <ul>
 <li><strong>Bundle deals:</strong> "surf + soap together Rs 50 off" sells two items where one would have sold</li>
@@ -115,11 +195,11 @@
 </ul>
 <p>The key is knowing your margin on every item, so discounts increase volume without eating your profit. Guessing margins is how shops discount themselves into losses.</p>
 
-<h2>5. Upsell at the Counter — Every Time</h2>
+<h2 id="5-upsell-at-the-counter-every-time">5. Upsell at the Counter — Every Time</h2>
 <p>The cheapest new sale is the one to the customer already standing in front of you. Train yourself and your staff to ask one simple question with every bill: <strong>"aur kuch chahiye?"</strong></p>
 <p>Place small, high-margin items near the counter — toffees, batteries, razors, small snacks. These impulse buys add 5–10% to daily sales with zero extra customers. It feels small; over a month, it is the difference between a flat shop and a growing one.</p>
 
-<h2>6. Remember Your Regulars — They Are Your Real Asset</h2>
+<h2 id="6-remember-your-regulars-they-are-your-real-asse">6. Remember Your Regulars — They Are Your Real Asset</h2>
 <p>It costs far more effort to win a new customer than to keep an existing one. Your regulars deserve to feel like regulars:</p>
 <ul>
 <li>Greet them by name and remember what they usually buy</li>
@@ -130,7 +210,7 @@
 <img src="img/blog9-happy-customers.jpg" alt="Happy repeat customers shopping in a retail store" class="article-img">
 <p class="img-cap">Loyal customers are the foundation of steady sales growth.</p>
 
-<h2>7. Keep the Shop Clean, Bright, and Welcoming</h2>
+<h2 id="7-keep-the-shop-clean-bright-and-welcoming">7. Keep the Shop Clean, Bright, and Welcoming</h2>
 <p>Customers judge a shop in the first ten seconds. Dusty shelves, dim lights, and a cluttered entrance silently tell people to shop elsewhere. The fixes are free:</p>
 <ul>
 <li>Clean shelves and floors daily — a clean shop signals fresh, trustworthy products</li>
@@ -138,7 +218,7 @@
 <li>A clear, readable shop signboard so new customers can find you</li>
 </ul>
 
-<h2>8. Use WhatsApp to Bring Customers Back</h2>
+<h2 id="8-use-whatsapp-to-bring-customers-back">8. Use WhatsApp to Bring Customers Back</h2>
 <p>Almost every shopkeeper has customers' WhatsApp numbers — very few use them. A simple weekly broadcast works wonders:</p>
 <ul>
 <li>"New stock aaya hai — fresh dates and dry fruits available"</li>
@@ -147,7 +227,7 @@
 </ul>
 <p>Keep messages short, useful, and infrequent (once a week maximum). You are reminding them you exist, not spamming them.</p>
 
-<h2>9. Watch Your Numbers Every Day</h2>
+<h2 id="9-watch-your-numbers-every-day">9. Watch Your Numbers Every Day</h2>
 <p>You cannot grow what you do not measure. Spend ten minutes each evening on a <strong>day closing</strong> routine:</p>
 <ol>
 <li>How much did I sell today — and how does it compare to yesterday and last week?</li>
@@ -157,7 +237,7 @@
 </ol>
 <p>Shopkeepers who review daily numbers spot problems in days; those who don't spot them in months, when the damage is done.</p>
 
-<h2>10. Train Your Staff to Sell, Not Just Bill</h2>
+<h2 id="10-train-your-staff-to-sell-not-just-bill">10. Train Your Staff to Sell, Not Just Bill</h2>
 <p>Your staff member at the counter is your salesperson. A trained one greets customers, suggests items, and handles complaints gracefully. An untrained one stares at the phone while customers wait.</p>
 <p>Teach three habits: greet every customer, know where the top 50 items are, and always ask "aur kuch?" before closing the bill. And protect your business at the same time — staff should handle billing only, while buying rates, profits, and reports stay with you.</p>
 
@@ -168,16 +248,32 @@
 <p><strong>The math of small wins:</strong> A shop doing Rs 50,000 in daily sales that lifts its average bill by just 8% through upselling, faster billing, and better displays adds roughly Rs 4,000 per day — over Rs 1.2 million in extra yearly sales — without a single new customer walking through the door.</p>
 </div>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>Increasing sales is not about one big trick. It is about ten small habits done every day: stock what sells, bill fast, place products smartly, price with intelligence, upsell at the counter, remember your regulars, keep the shop inviting, message customers weekly, watch your numbers, and train your staff. Start with any three this week. Measure the difference. Then add the rest.</p>
 
-<div class="cta-box">
-<h3>Want these sales habits to run on autopilot?</h3>
-<p>shopcos soft gives you barcode billing, low-stock alerts, bestseller reports, and day-closing summaries — everything in strategies #2, #3, and #9, automatic. Try it free for 7 days.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-</div>
-
 </article>
+<div class="art-tags"><span>#sales-growth</span><span>#increase</span><span>#shop</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=10%20Proven%20Ways%20to%20Increase%20Sales%20in%20Your%20Retail%20Shop%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fhow-to-increase-shop-sales.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/how-to-increase-shop-sales.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="barcode-system-small-shops.html"><img src="img/blog15-touchscreen-register.jpg"><div><p>Barcode System for Small Shops: Complete Beginner's Guide</p><span>Technology · Oct 14, 2026</span></div></a>
+<a class="art-ncard" href="choose-pos-software-pakistan.html"><img src="img/blog12-pos-terminal.jpg"><div><p>How to Choose the Right POS Software for Your Shop in Pakistan</p><span>Buyer's Guide · Oct 14, 2026</span></div></a>
+<a class="art-ncard" href="day-closing-habit-profit.html"><img src="img/blog13-till-receipt.jpg"><div><p>Day Closing: The 10-Minute Habit That Transforms Your Business</p><span>Daily Routine · Oct 14, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

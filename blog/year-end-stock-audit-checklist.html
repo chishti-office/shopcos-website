@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Inventory</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Inventory</span>
 <h1>Year-End Stock Audit Checklist for Small Shops (2026)</h1>
-<div class="article-meta"><span>October 30, 2026</span><span>10 min read</span><span>Inventory</span></div>
+<p class="art-stand">Year-end stock audit checklist for small shops: how to count your stock accurately before the new year — prep, counting teams, variance checks, expiry review, reconciliation and the decisions that follow.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 October 30, 2026</span><span>⏱ 10 min read</span></div>
+<img class="art-hero" src="img/blog18-hero-warehouse.jpg" alt="Year-End Stock Audit Checklist for Small Shops (2026)">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#what-a-stock-audit-actually-is-and-isn-t">What a Stock Audit Actually Is (and Isn't)</a></li>
+<li><a href="#before-you-count-one-day-of-preparation">Before You Count: One Day of Preparation</a></li>
+<li><a href="#the-year-end-stock-audit-checklist">The Year-End Stock Audit Checklist</a></li>
+<li><a href="#7-counting-mistakes-that-ruin-an-audit">7 Counting Mistakes That Ruin an Audit</a></li>
+<li><a href="#after-the-count-turn-numbers-into-decisions">After the Count: Turn Numbers Into Decisions</a></li>
+<li><a href="#how-billing-software-makes-next-year-s-audit-far">How Billing Software Makes Next Year's Audit Far Easier</a></li>
+<li><a href="#the-one-page-checklist">The One-Page Checklist</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Year-end stock audit checklist for small shops: how to count your stock accurately before the new year — prep, counting teams, variance checks, expiry review, reconciliation and the decisions that follow.</li>
+<li>The rule that saves the most arguments: no adjustment is entered from a single count. Every variance gets a recount by a different person, and every adjustment gets a written reason — damage, expiry, entry error, or unexplained. Six months later, when you wonder why a number changed, that one line of reason is worth more than the number itself.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog18-hero-warehouse.jpg" alt="Two workers moving a trolley through a large warehouse filled with boxes and shelves" class="article-img">
 
@@ -85,12 +157,12 @@
 
 <p>This checklist is built for small Pakistani shops: kiryana stores, general stores, pharmacies, garment and electronics shops. No warehouse team, no consultants — just you, your staff, and a system that works even if your stock lives partly on shelves, partly in a back room, and partly in cartons you forgot about.</p>
 
-<h2>What a Stock Audit Actually Is (and Isn't)</h2>
+<h2 id="what-a-stock-audit-actually-is-and-isn-t">What a Stock Audit Actually Is (and Isn't)</h2>
 <p>A stock audit is not "looking around the shop and guessing." It is a physical count of every item, in every location, recorded on paper or a device, and then compared line by line with your stock records. The difference between the two — called variance — is the whole point. Variance is where you discover theft, damage, expiry, data-entry mistakes, and supplier short-deliveries you never noticed.</p>
 <p>It is also not a punishment exercise. If your staff think the audit is a trap to catch them stealing, they will count defensively and hide problems. Tell them plainly before you start: the audit finds mistakes in the system, not culprits. The shops that find the most variance are usually the shops that needed the audit the most — and they are the ones that profit from it the most afterwards.</p>
 <p>Finally, a stock audit is not the same as your daily stock check. Daily checks catch fast-moving items running out. A year-end audit catches everything else: the slow items, the back-room stock, the cartons under the counter, and the slow accumulation of small errors that, over twelve months, can add up to lakhs of rupees.</p>
 
-<h2>Before You Count: One Day of Preparation</h2>
+<h2 id="before-you-count-one-day-of-preparation">Before You Count: One Day of Preparation</h2>
 <p>Most failed audits fail before counting starts. A single day of preparation saves you two days of recounts.</p>
 <ul>
 <li><strong>Freeze stock movement.</strong> Pick a counting window — ideally a Sunday or a half-day when the shop is closed — and stop all sales, deliveries, and transfers during it. Every item that moves mid-count creates a variance you will chase for hours. If you absolutely must stay open, count one section at a time and seal it off with tape or a "counted" tag as you finish.</li>
@@ -103,7 +175,7 @@
 
 <img src="img/blog18-inventory-aisle.jpg" alt="Two workers managing inventory together in a spacious warehouse aisle" class="article-img">
 
-<h2>The Year-End Stock Audit Checklist</h2>
+<h2 id="the-year-end-stock-audit-checklist">The Year-End Stock Audit Checklist</h2>
 <p>Work through these phases in order. Do not skip ahead to reconciliation until every section is counted and tagged.</p>
 
 <h3>Phase 1: Count everything, everywhere</h3>
@@ -131,7 +203,7 @@
 <h3>Phase 5: Reconcile, adjust, and value your stock</h3>
 <p>Now compare the final counted quantities with your records and enter the adjustments — with reasons, as above. Then value the stock: multiply each item's counted quantity by its purchase cost (not its selling price). This closing stock value is what your accountant needs, what your profit calculation depends on, and what tells you how much of your money is sitting on shelves instead of in the bank. If your closing stock is far higher than last year's, you over-bought; if it is far lower, you may be understocked for January demand.</p>
 
-<h2>7 Counting Mistakes That Ruin an Audit</h2>
+<h2 id="7-counting-mistakes-that-ruin-an-audit">7 Counting Mistakes That Ruin an Audit</h2>
 <ol>
 <li><strong>Counting from memory.</strong> "We usually have about 50 of those" is not a count. If it wasn't physically touched and tallied, it wasn't counted.</li>
 <li><strong>Letting counters see expected quantities.</strong> Counters unconsciously match the expected number. Keep it hidden until reconciliation.</li>
@@ -144,7 +216,7 @@
 
 <img src="img/blog18-carrying-box.jpg" alt="A worker carrying a box through a well-organized warehouse storage aisle" class="article-img">
 
-<h2>After the Count: Turn Numbers Into Decisions</h2>
+<h2 id="after-the-count-turn-numbers-into-decisions">After the Count: Turn Numbers Into Decisions</h2>
 <p>The audit's real payoff comes in the week after it. Five decisions, made from real numbers for once:</p>
 <ul>
 <li><strong>Clear the dead stock.</strong> Anything that hasn't sold in six months is not stock — it is frozen cash. Discount it hard, bundle it, or return it to the supplier if they allow it. Freeing that shelf space for a fast seller is usually worth more than the discount costs.</li>
@@ -154,11 +226,11 @@
 <li><strong>Write down what went wrong.</strong> One page: where the biggest variances were, why they happened, and what changes next year. Tape it inside the stock register. Next December, it is the most valuable page you own.</li>
 </ul>
 
-<h2>How Billing Software Makes Next Year's Audit Far Easier</h2>
+<h2 id="how-billing-software-makes-next-year-s-audit-far">How Billing Software Makes Next Year's Audit Far Easier</h2>
 <p>Everything above is harder on paper and easier with software — not because software counts for you, but because it removes the steps where humans make mistakes. A barcode scanner counts a shelf in minutes instead of an hour, and it cannot misread a digit the way a tired counter can. A system that deducts stock automatically on every bill means your expected quantities are actually trustworthy, so variances point to real problems instead of bookkeeping noise. And expiry alerts mean the audit is not the first time you discover expired stock — you knew months ago. If you are still counting from purchase bills and memory, read our <a href="barcode-system-small-shops.html">beginner's guide to barcode systems</a>: one scanner and one afternoon of setup changes every audit after it.</p>
 <p>The honest version of this advice: this year's audit will still be work, software or not. But it is the last hard one. Every year after the first properly reconciled audit, the count gets faster, the variances get smaller, and the numbers get more trustworthy — because you are no longer counting twelve months of accumulated errors. You are counting one year of a system that works.</p>
 
-<h2>The One-Page Checklist</h2>
+<h2 id="the-one-page-checklist">The One-Page Checklist</h2>
 <p>Print this section and tick it off:</p>
 <ol>
 <li>Counting date fixed; stock movement frozen for the window.</li>
@@ -175,22 +247,35 @@
 <li>Dead stock clearance, reorder levels, supplier claims, and January order planned from the results.</li>
 </ol>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>A year-end stock audit is not paperwork for its own sake. It is the one day a year when you stop guessing and find out what your shop is actually worth, what it actually lost, and what it should actually order next. Shops that audit every year make better buying decisions, catch leaks early, and walk into January with numbers they can trust. Shops that don't are still guessing in March — and paying for the guess all year.</p>
 <p>Pick your date this week, before December crowds make it impossible. Print the checklist, brief your staff, and count it properly — once. Your January self will be grateful.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Two workers moving a trolley in a warehouse photo by <a href="https://www.pexels.com/photo/men-going-around-a-warehouse-1797428/" target="_blank" rel="noopener">Alexander Isreb</a> · Two workers managing inventory in a warehouse aisle photo by <a href="https://www.pexels.com/photo/employee-pulling-a-cart-4487365/" target="_blank" rel="noopener">Tiger Lily</a> · Worker carrying a box in a warehouse aisle photo by <a href="https://www.pexels.com/photo/man-standing-in-an-aisle-of-a-warehouse-carrying-a-box-4483774/" target="_blank" rel="noopener">Tiger Lily</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Make next year's audit the easy one.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), barcode billing in seconds, automatic stock deduction on every bill, expiry alerts, digital khata with credit limits, per-cashier logins, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20apne%20shop%20ke%20year-end%20stock%20audit%20ke%20liye%20shopcos%20soft%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#inventory</span><span>#year</span><span>#stock</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Year-End%20Stock%20Audit%20Checklist%20for%20Small%20Shops%20%282026%29%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fyear-end-stock-audit-checklist.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/year-end-stock-audit-checklist.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="billing-machine-price-pakistan.html"><img src="img/blog17-hero-checkout.jpg"><div><p>Billing Machine Price in Pakistan: The Full Counter Setup Cost (2026)</p><span>Buyer's Guide · Oct 29, 2026</span></div></a>
+<a class="art-ncard" href="best-billing-software-pakistan-2026.html"><img src="img/blog16-hero-cashier.jpg"><div><p>Best Billing Software in Pakistan (2026): 9 Options Compared Honestly</p><span>Buyer's Guide · Oct 28, 2026</span></div></a>
+<a class="art-ncard" href="offline-vs-online-billing-software.html"><img src="img/blog15-hero-checkout.jpg"><div><p>Offline vs Online Billing Software: Which Is Right for Your Shop?</p><span>Buyer's Guide · Oct 28, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

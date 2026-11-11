@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Tax &amp; Compliance</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Tax &amp; Compliance</span>
 <h1>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</h1>
-<div class="article-meta"><span>November 10, 2026</span><span>10 min read</span><span>Tax &amp; Compliance</span></div>
+<p class="art-stand">Does FBR digital invoicing apply to your small shop? The Tier-1 self-test in plain words, the small-shopkeeper scheme, what a proper bill must show, and the 5 steps to get ready — no jargon, no scare tactics.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 November 10, 2026</span><span>⏱ 10 min read</span></div>
+<img class="art-hero" src="img/blog29-hero-receipt.jpg" alt="Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#what-digital-invoicing-actually-means">What "Digital Invoicing" Actually Means</a></li>
+<li><a href="#the-one-question-that-decides-everything-are-you">The One Question That Decides Everything: Are You a Tier-1 Retailer?</a></li>
+<li><a href="#the-small-shopkeeper-scheme-fbr-s-own-simpler-pa">The Small-Shopkeeper Scheme: FBR's Own Simpler Path</a></li>
+<li><a href="#what-fbr-still-expects-from-every-shop">What FBR Still Expects From Every Shop</a></li>
+<li><a href="#the-quiet-triggers-how-a-growing-shop-becomes-ti">The Quiet Triggers: How a Growing Shop Becomes Tier-1</a></li>
+<li><a href="#if-you-cross-the-line-5-steps-to-get-ready">If You Cross the Line: 5 Steps to Get Ready</a></li>
+<li><a href="#5-mistakes-small-shops-make-about-digital-invoic">5 Mistakes Small Shops Make About Digital Invoicing</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Does FBR digital invoicing apply to your small shop?</li>
+<li>The trap most shops miss: Rs 1,200,000 of electricity over 12 months is only about Rs 100,000 a month. A shop running several freezers, air conditioning through a Punjab summer, and bright lighting can cross that line without ever feeling "big." Add up your last twelve bills — the answer might surprise you.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog29-hero-receipt.jpg" alt="Close-up of a printed shop receipt showing tax lines and totals" class="article-img">
 
@@ -87,7 +159,7 @@
 
 <p><em>A note before we start: this article explains the rules in plain words. It is not tax advice. FBR changes thresholds and notifications regularly, so confirm your own status with your accountant or the FBR helpline (051-111-772-772) before acting on anything here.</em></p>
 
-<h2>What "Digital Invoicing" Actually Means</h2>
+<h2 id="what-digital-invoicing-actually-means">What "Digital Invoicing" Actually Means</h2>
 <p>Strip away the jargon and digital invoicing is three simple things, all happening at your counter:</p>
 <ol>
 <li><strong>The bill is made by software, not by hand.</strong> The sale is entered in a billing system, which prints an itemized invoice — every item, its price, and the tax shown as its own line.</li>
@@ -96,7 +168,7 @@
 </ol>
 <p>That is the whole idea: every sale visible to FBR the moment it happens, so sales cannot quietly disappear off the books. The question for your shop is not whether the idea is good or bad. The question is whether the mandatory version of it applies to you.</p>
 
-<h2>The One Question That Decides Everything: Are You a Tier-1 Retailer?</h2>
+<h2 id="the-one-question-that-decides-everything-are-you">The One Question That Decides Everything: Are You a Tier-1 Retailer?</h2>
 <p>FBR's mandatory POS integration and real-time invoicing rules apply to <strong>Tier-1 retailers</strong>, a category defined in Section 2(43A) of the Sales Tax Act, 1990. You only need to meet <strong>one</strong> of the tests below to count as Tier-1 — and the tests are wider than most shopkeepers realise. Run through them honestly:</p>
 
 <table>
@@ -115,12 +187,12 @@
 <p><strong>The trap most shops miss:</strong> Rs 1,200,000 of electricity over 12 months is only about Rs 100,000 a month. A shop running several freezers, air conditioning through a Punjab summer, and bright lighting can cross that line without ever feeling "big." Add up your last twelve bills — the answer might surprise you.</p>
 </div>
 
-<h2>The Small-Shopkeeper Scheme: FBR's Own Simpler Path</h2>
+<h2 id="the-small-shopkeeper-scheme-fbr-s-own-simpler-pa">The Small-Shopkeeper Scheme: FBR's Own Simpler Path</h2>
 <p>Here is the part the scare stories leave out. In 2026, FBR introduced a special tax procedure for small shopkeepers (SRO 1166(I)/2026). Under it, eligible small shopkeepers are <strong>exempt from installing a POS system or digital invoicing infrastructure</strong>. The scheme offers simplified filing and relief from certain withholding and minimum-tax provisions. Compliant shops display a "green plate" — a QR plate outside the shop — which generally protects the shop from routine field visits by tax officers.</p>
 <p>That is a genuine relief, and it is the reason the honest answer to "does digital invoicing apply to my shop?" is usually "not the mandatory version." But two warnings come with it. First, eligibility is FBR's decision, not yours — your accountant can confirm whether your shop qualifies. Second, the exemption is from the <em>infrastructure</em>, not from keeping proper records. A shop under the small-shopkeeper scheme still needs clean, itemized, sequentially numbered bills and proper books. The scheme makes compliance simpler; it does not make it optional.</p>
 <p>Do not let anyone sell you expensive "FBR integration" before you know which category you fall into. The first step is always the category question, never the purchase.</p>
 
-<h2>What FBR Still Expects From Every Shop</h2>
+<h2 id="what-fbr-still-expects-from-every-shop">What FBR Still Expects From Every Shop</h2>
 <p>Exempt or not, every shop benefits — and is safer — when its bills look the way FBR expects a tax invoice to look. A proper bill carries:</p>
 <ul>
 <li><strong>Your business name, address, and NTN/STRN</strong> — the tax identity FBR knows you by.</li>
@@ -135,7 +207,7 @@
 
 <img src="img/blog29-receipt-printer.jpg" alt="Hands operating a receipt printer with printed receipts on a wooden counter" class="article-img">
 
-<h2>The Quiet Triggers: How a Growing Shop Becomes Tier-1</h2>
+<h2 id="the-quiet-triggers-how-a-growing-shop-becomes-ti">The Quiet Triggers: How a Growing Shop Becomes Tier-1</h2>
 <p>The most dangerous moment in this whole story is not the day FBR announces a new rule. It is the ordinary Tuesday when your shop quietly crosses a threshold and nobody tells you. These are the five crossings to watch:</p>
 
 <h3>1. You install a card machine</h3>
@@ -155,7 +227,7 @@
 
 <p>None of these is a reason to stop growing. Every one of them is a reason to check your category the month it happens, instead of discovering it during an inspection a year later.</p>
 
-<h2>If You Cross the Line: 5 Steps to Get Ready</h2>
+<h2 id="if-you-cross-the-line-5-steps-to-get-ready">If You Cross the Line: 5 Steps to Get Ready</h2>
 <ol>
 <li><strong>Confirm your status with your accountant.</strong> Which test did you meet, and when? That single answer decides everything else — and it is a one-conversation job, not a research project.</li>
 <li><strong>Get your registrations in order.</strong> An active NTN, and an STRN (sales tax registration) if you are registered for sales tax. Your business name, address, and category must match across FBR's IRIS system. An e-invoice is only as valid as the tax identity behind it.</li>
@@ -164,7 +236,7 @@
 <li><strong>Keep billing through load shedding.</strong> Real-time e-invoice transmission needs an internet connection at the moment of sale — a real operational change for shops used to billing through power cuts. Choose a setup that bills offline at the counter and syncs when the connection returns, so the counter never stops. Our guide to <a href="offline-vs-online-billing-software.html">offline vs online billing software</a> explains why that matters in a Pakistani shop.</li>
 </ol>
 
-<h2>5 Mistakes Small Shops Make About Digital Invoicing</h2>
+<h2 id="5-mistakes-small-shops-make-about-digital-invoic">5 Mistakes Small Shops Make About Digital Invoicing</h2>
 
 <h3>1. Printing a fake FBR logo or QR code</h3>
 <p>Some shops print an FBR logo or a made-up QR code on ordinary bills to look "official." Do not do this. A QR code that does not verify against FBR's records is worse than no QR code at all — a customer who scans it and gets "not found" will assume the worst, and FBR treats misrepresentation seriously. If you are not integrated, your bill should simply be a clean, honest bill.</p>
@@ -183,7 +255,7 @@
 
 <img src="img/blog29-tax-documents.jpg" alt="Tax forms, calculator and office supplies arranged on a desk" class="article-img">
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>Digital invoicing in Pakistan is not one rule for every shop. It is a system with a line drawn through it: on one side, Tier-1 retailers and notified sectors must report every sale to FBR in real time; on the other, small shopkeepers follow a simpler scheme, exempt from POS and digital invoicing infrastructure, with a green plate to show for it. Your job is to know which side of the line your shop stands on — and to notice the day it moves.</p>
 <p>That is a short checklist, and it is worth doing this week:</p>
 <ul>
@@ -194,19 +266,32 @@
 <li>If you are near any threshold, choose billing software that is ready for FBR invoicing before you need it, not after.</li>
 </ul>
 <p>Do those five things and you have done more than most shops in your bazaar. The rules are real, the fines are real — FBR has reported penalties from Rs 500,000 to Rs 3 million for POS-system violations — but so is the simpler path FBR wrote for small shops. Take it, keep your records clean, and let your shop grow without the compliance surprise.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Close-up of a printed shop receipt showing tax lines and totals photo by <a href="https://www.pexels.com/photo/close-up-of-a-receipt-14647295/" target="_blank" rel="noopener">Towfiqu barbhuiya</a> · Hands operating a receipt printer with printed receipts photo by <a href="https://www.pexels.com/photo/person-printing-a-receipt-3570235/" target="_blank" rel="noopener">Hook Tell</a> · Tax forms, calculator and office supplies on a desk photo by <a href="https://www.pexels.com/photo/tax-documents-on-the-table-6863202/" target="_blank" rel="noopener">Nataliya Vaitkevich</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Try the full software free for 7 days — no card, no limits trap.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), billing, stock, khata with credit limits, barcode scanning, WhatsApp bills and statements, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20FBR%20digital%20invoicing%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#tax-compliance</span><span>#digital</span><span>#invoicing</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Digital%20Invoicing%20in%20Pakistan%3A%20FBR%27s%20Rules%20for%20Small%20Shops%2C%20in%20Simple%20Words%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fdigital-invoicing-pakistan-small-shops.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/digital-invoicing-pakistan-small-shops.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+<a class="art-post" href="wholesale-billing-software.html"><img src="img/blog26-hero-warehouse.jpg"><div><p>Wholesale Billing Software: Credit Parties, Cartons and Ledgers, Explained</p><span>Nov 06, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Pricing Guide · Nov 09, 2026</span></div></a>
+<a class="art-ncard" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Grocery Guide · Nov 07, 2026</span></div></a>
+<a class="art-ncard" href="wholesale-billing-software.html"><img src="img/blog26-hero-warehouse.jpg"><div><p>Wholesale Billing Software: Credit Parties, Cartons and Ledgers, Explained</p><span>Wholesale Guide · Nov 06, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,37 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Grocery Guide</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Grocery Guide</span>
 <h1>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</h1>
-<div class="article-meta"><span>November 7, 2026</span><span>11 min read</span><span>Grocery Guide</span></div>
+<p class="art-stand">A grocery counter is not a normal retail counter. Per-kg pricing, weighing scales, loose items, daily rate changes, expiry dates and evening rush queues — what grocery store POS software must actually do, and the 8 questions to ask before you buy.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 November 7, 2026</span><span>⏱ 11 min read</span></div>
+<img class="art-hero" src="img/blog27-hero-produce.jpg" alt="Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#why-grocery-billing-breaks-generic-pos-software">Why Grocery Billing Breaks Generic POS Software</a></li>
+<li><a href="#the-weighing-scale-problem-where-grocery-billing">The Weighing-Scale Problem: Where Grocery Billing Is Won or Lost</a></li>
+<li><a href="#loose-items-selling-what-has-no-barcode">Loose Items: Selling What Has No Barcode</a></li>
+<li><a href="#fast-queues-what-actually-makes-a-counter-quick">Fast Queues: What Actually Makes a Counter Quick</a></li>
+<li><a href="#expiry-and-wastage-the-silent-leak">Expiry and Wastage: The Silent Leak</a></li>
+<li><a href="#the-7-features-grocery-store-pos-software-must-h">The 7 Features Grocery Store POS Software Must Have</a></li>
+<li><a href="#the-6-mistakes-grocery-owners-make-when-choosing">The 6 Mistakes Grocery Owners Make When Choosing Software</a></li>
+<li><a href="#the-8-questions-to-ask-before-you-buy">The 8 Questions to Ask Before You Buy</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>A grocery counter is not a normal retail counter.</li>
+<li>The number that matters: in a grocery store, the evening rush — roughly 5 pm to 9 pm — can carry 40–50% of the day's sales. A counter that bills one customer per minute instead of one per 40 seconds loses a third of its rush-hour customers to the queue. Over a month, that is not a small loss. It is the difference between a growing store and a struggling one. Speed at the counter is revenue.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog27-hero-produce.jpg" alt="Colourful assortment of fresh vegetables on display at a supermarket produce section" class="article-img">
 
@@ -83,7 +156,7 @@
 
 <p>This is the grocery counter's daily reality, and it is why most generic POS software fails in a grocery store. A clothing shop sells fixed items at fixed prices. A grocery store sells things by weight, by the dozen, by the piece, and by the bag — at prices that can change twice a day. Add expiry dates, wastage, and a queue that never stops, and you have the hardest billing job in retail. This guide explains what grocery store POS software must actually do: how weighing scales connect to billing, how loose items are handled without slowing the queue, what a fast counter really needs, and the eight questions to ask before you spend anything.</p>
 
-<h2>Why Grocery Billing Breaks Generic POS Software</h2>
+<h2 id="why-grocery-billing-breaks-generic-pos-software">Why Grocery Billing Breaks Generic POS Software</h2>
 <p>Ordinary retail software assumes five things. A grocery counter violates all five before the first customer of the day:</p>
 <ul>
 <li><strong>Everything has a fixed price.</strong> A packet of biscuits costs the same all day. But tomatoes, onions, potatoes, and fruit are priced per kilo, and the per-kilo rate moves with the morning mandi. A rate set on Monday can be wrong by Wednesday — and wrong rates mean either lost margin or angry customers.</li>
@@ -94,7 +167,7 @@
 </ul>
 <p>None of this is unusual. It is the daily reality of every grocery store and supermarket in Pakistan, from a small mohalla kiryana with a vegetable cart outside to a full supermarket with ten aisles. Software that cannot model weight, loose items, changing rates, and expiry is not "simpler" — it is wrong for the job, and the calculator and the register book will quietly stay in charge. Our guide to <a href="billing-software-kiryana-shops.html">billing software for kiryana shops</a> covers the small-store side of this same counter; this guide covers the full grocery workflow.</p>
 
-<h2>The Weighing-Scale Problem: Where Grocery Billing Is Won or Lost</h2>
+<h2 id="the-weighing-scale-problem-where-grocery-billing">The Weighing-Scale Problem: Where Grocery Billing Is Won or Lost</h2>
 <p>The weighing scale is the heart of a grocery counter, and it is also where most billing goes wrong. Here is what actually happens at a typical counter without scale integration: the cashier puts the tomatoes on the scale, reads 1.350 kg, walks back to the computer, types "tomato," types "1.35," checks the rate, and multiplies. In a rush, the mistakes write themselves — 1.35 becomes 1.53, the morning rate stays when the evening rate should apply, or the cashier rounds the weight "approximately" and the customer notices.</p>
 <p>Real grocery POS software connects directly to the electronic weighing scale. The scale sends the weight to the software the moment the item settles, and the bill line appears by itself: item, weight, rate per kg, amount. No typing, no mental maths, no wrong digits. Three things to check when a vendor talks about scale support:</p>
 <ul>
@@ -105,7 +178,7 @@
 
 <img src="img/blog27-weighing-produce.jpg" alt="An elderly vendor weighing fresh produce on a scale at a busy market stall" class="article-img">
 
-<h2>Loose Items: Selling What Has No Barcode</h2>
+<h2 id="loose-items-selling-what-has-no-barcode">Loose Items: Selling What Has No Barcode</h2>
 <p>Half of a grocery store's range has no barcode: loose rice, pulses, spices, flour, sugar, vegetables, fruit, eggs, and loose biscuits. These items are also the ones with the thinnest margins, so every billing mistake eats directly into profit. Good grocery software treats loose items as first-class citizens, not as an afterthought:</p>
 <ul>
 <li><strong>Quick keys and PLU codes.</strong> The cashier should be able to press one key — or type a short code like "101" — and have "Tomato — Rs 160/kg" ready. Typing full item names during a rush is how queues form. The best grocery counters run almost entirely on quick keys for the 30–40 items that sell every day.</li>
@@ -132,7 +205,7 @@
 <p><strong>The number that matters:</strong> in a grocery store, the evening rush — roughly 5 pm to 9 pm — can carry 40–50% of the day's sales. A counter that bills one customer per minute instead of one per 40 seconds loses a third of its rush-hour customers to the queue. Over a month, that is not a small loss. It is the difference between a growing store and a struggling one. Speed at the counter is revenue.</p>
 </div>
 
-<h2>Fast Queues: What Actually Makes a Counter Quick</h2>
+<h2 id="fast-queues-what-actually-makes-a-counter-quick">Fast Queues: What Actually Makes a Counter Quick</h2>
 <p>Vendors love to say their software is "fast." What matters is not how fast the software runs, but how fast the cashier can finish a bill. Six things decide that:</p>
 <ul>
 <li><strong>Barcode scanning that never misses.</strong> A scanner should read a barcode on the first pass, every time — even a crumpled packet. If the cashier has to scan twice or type the code by hand, the queue grows. Test the scanner with your own worst packets in the demo.</li>
@@ -143,7 +216,7 @@
 <li><strong>Instant reprint and return.</strong> A customer comes back ten minutes later: the milk was the wrong pack. The cashier should find the bill by phone number or bill number, return the item, and reprint — in under a minute, without a manager's password for every small return.</li>
 </ul>
 
-<h2>Expiry and Wastage: The Silent Leak</h2>
+<h2 id="expiry-and-wastage-the-silent-leak">Expiry and Wastage: The Silent Leak</h2>
 <p>Fresh stock is the grocery store's biggest hidden cost. Milk, bread, yogurt, and vegetables do not wait for a sale — they expire. Most grocery stores lose 3–5% of their fresh stock to expiry and spoilage, and most of them never measure it, because their software does not track expiry dates at all.</p>
 <p>Grocery POS software should track every batch with its expiry date, and do three things with that information:</p>
 <ul>
@@ -154,7 +227,7 @@
 
 <img src="img/blog27-checkout-counter.jpg" alt="A cashier serving a customer at a supermarket checkout counter with groceries" class="article-img">
 
-<h2>The 7 Features Grocery Store POS Software Must Have</h2>
+<h2 id="the-7-features-grocery-store-pos-software-must-h">The 7 Features Grocery Store POS Software Must Have</h2>
 <p>Judge any grocery POS against these seven. If it fails two or more, it is a general retail system wearing a grocery label.</p>
 
 <h3>1. Weighing-scale integration</h3>
@@ -178,7 +251,7 @@
 <h3>7. Udhar for regular customers</h3>
 <p>Neighbourhood grocery stores run on trust: regular customers take goods on udhar and pay at month's end. The software should keep a khata per customer, show the balance on the billing screen before the next sale, and send a statement on WhatsApp. Our guide to <a href="how-to-manage-udhar-khata.html">managing udhar khata</a> explains why this one habit prevents most bad-credit decisions.</p>
 
-<h2>The 6 Mistakes Grocery Owners Make When Choosing Software</h2>
+<h2 id="the-6-mistakes-grocery-owners-make-when-choosing">The 6 Mistakes Grocery Owners Make When Choosing Software</h2>
 <ol>
 <li><strong>Choosing on the bill design.</strong> A pretty bill is the least important feature. Scale integration, loose-item speed, and expiry tracking are what you will live with. Judge the software on those, not on the font.</li>
 <li><strong>Buying software that cannot weigh.</strong> If the demo is run with packaged items only, ask the vendor to weigh 1.35 kg of tomatoes and bill them. If he reaches for a calculator, your counter will too — every day, on every customer.</li>
@@ -188,7 +261,7 @@
 <li><strong>No trial on your real counter.</strong> A demo with the vendor's sample data proves nothing. Run the software for a full month on your real vegetables, your real scale, your real mandi rates, and your real evening rush. If the cashier is still reaching for the calculator after a week, the software has failed.</li>
 </ol>
 
-<h2>The 8 Questions to Ask Before You Buy</h2>
+<h2 id="the-8-questions-to-ask-before-you-buy">The 8 Questions to Ask Before You Buy</h2>
 <ol>
 <li>Does it connect to my exact weighing-scale model, and can you show it working on my counter?</li>
 <li>Can I bill loose items by PLU code or quick key, with decimal quantities, without leaving the billing screen?</li>
@@ -201,22 +274,35 @@
 </ol>
 <p>Run those eight questions on any software, including ours, and compare the answers side by side. A vendor who answers clearly is a vendor who has actually served grocery stores. A vendor who changes the subject to the bill design has told you everything you need to know.</p>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>A grocery store is not a normal retail shop with more shelves. It is a weighing-scale business, a loose-item business, a daily-rate business, and a race against expiry — all happening at the speed of an evening queue. Software built for a clothing shop will print your bills beautifully and lose your business quietly: in wrong weights, stale rates, expired stock, and customers who walked out of a slow queue.</p>
 <p>The right software does four things without being asked: it reads the scale, it bills loose items as fast as barcoded ones, it warns you before stock expires, and it keeps billing when the internet dies. Everything else — the pretty bill, the reports, the extras — is decoration. Get the four things right, test them on your real counter for a full month, and the calculator can finally retire.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Colourful assortment of fresh vegetables at a supermarket display photo by <a href="https://www.pexels.com/photo/9705821/" target="_blank" rel="noopener">Greta Hoffman</a> · Elderly vendor weighing produce in a vibrant Asian street market photo by <a href="https://www.pexels.com/photo/40010159/" target="_blank" rel="noopener">Wasif Mujahid</a> · Supermarket scene with cashier and assortment of products at checkout counter photo by <a href="https://www.pexels.com/photo/36772947/" target="_blank" rel="noopener">Radik 2707</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Try the full software free for 7 days — no card, no limits trap.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), weighing-scale integration, loose-item billing with quick keys, per-kg rate management, expiry and batch tracking, offline billing, customer khata with WhatsApp statements, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20grocery%20store%20POS%20software%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#grocery-guide</span><span>#grocery</span><span>#store</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Grocery%20Store%20POS%20Software%3A%20Weighing%20Scales%2C%20Loose%20Items%20and%20Fast%20Queues%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fgrocery-store-pos-software.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/grocery-store-pos-software.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="wholesale-billing-software.html"><img src="img/blog26-hero-warehouse.jpg"><div><p>Wholesale Billing Software: Credit Parties, Cartons and Ledgers, Explained</p><span>Nov 06, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="wholesale-billing-software.html"><img src="img/blog26-hero-warehouse.jpg"><div><p>Wholesale Billing Software: Credit Parties, Cartons and Ledgers, Explained</p><span>Wholesale Guide · Nov 06, 2026</span></div></a>
+<a class="art-ncard" href="free-billing-software-pakistan.html"><img src="img/blog25-hero-shop-expenses.jpg"><div><p>Free Billing Software in Pakistan: What "Free" Really Costs Your Shop</p><span>Buyer's Guide · Nov 05, 2026</span></div></a>
+<a class="art-ncard" href="fbr-pos-invoice-verification.html"><img src="img/blog24-hero-receipt-qr.jpg"><div><p>How to Verify an FBR POS Invoice — and What That QR Code Really Means</p><span>Tax &amp; Compliance · Nov 04, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,23 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -64,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Shop Management</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Shop Management</span>
 <h1>How to Manage Udhar/Khata Effectively and Recover Every Rupee</h1>
-<div class="article-meta"><span>October 14, 2026</span><span>6 min read</span><span>Shop Management</span></div>
+<p class="art-stand">Struggling with unpaid udhar? Learn 7 proven rules Pakistani shopkeepers use to manage khata, set credit limits, and recover every rupee — without losing customers.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 October 14, 2026</span><span>⏱ 6 min read</span></div>
+<img class="art-hero" src="img/media-generation-udhar-ledger-book-0-37fe9239-81f1-48f6-ad0d-b2261c27697f.webp" alt="How to Manage Udhar/Khata Effectively and Recover Every Rupee">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#1-set-a-credit-limit-for-every-customer">1. Set a Credit Limit for Every Customer</a></li>
+<li><a href="#2-record-every-transaction-immediately-no-except">2. Record Every Transaction Immediately — No Exceptions</a></li>
+<li><a href="#3-fix-a-weekly-recovery-day">3. Fix a Weekly "Recovery Day"</a></li>
+<li><a href="#4-accept-partial-payments-happily">4. Accept Partial Payments Happily</a></li>
+<li><a href="#5-learn-to-say-no-politely-but-firmly">5. Learn to Say No — Politely but Firmly</a></li>
+<li><a href="#6-review-your-khata-monthly-like-a-bank-would">6. Review Your Khata Monthly Like a Bank Would</a></li>
+<li><a href="#7-let-software-do-the-remembering">7. Let Software Do the Remembering</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Struggling with unpaid udhar?</li>
+<li>Real example: A general store owner in Faisalabad switched from a paper register to a digital khata system and discovered Rs 127,000 in forgotten balances within the first week — money he did not even know he was owed. Within two months of systematic follow-ups, he recovered over Rs 80,000.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <p>Walk into any kiryana store, pharmacy, or cloth shop in Pakistan and you will find the same thing behind the counter: a register — sometimes a notebook, sometimes just loose pages — full of names, amounts, and dates. This is the <strong>khata</strong>, the credit ledger that keeps neighbourhood commerce running. Udhar (selling on credit) is not a choice for most small shops; it is how business is done. The mohalla expects it, regular customers demand it, and refusing it can cost you the customer forever.</p>
 
@@ -76,7 +155,7 @@
 
 <p>The good news: managing khata well is a learnable skill, not luck. Here are seven rules that successful shopkeepers follow.</p>
 
-<h2>1. Set a Credit Limit for Every Customer</h2>
+<h2 id="1-set-a-credit-limit-for-every-customer">1. Set a Credit Limit for Every Customer</h2>
 <p>The biggest mistake is giving unlimited udhar. Before you hand over goods on credit, decide the maximum each customer can owe. A good starting rule:</p>
 <ul>
 <li><strong>New customers:</strong> Rs 2,000–5,000 maximum until they prove reliable</li>
@@ -85,11 +164,11 @@
 </ul>
 <p>Write the limit next to the customer's name. When they hit the limit, the rule is simple: pay something before taking more. This one habit alone prevents most disasters.</p>
 
-<h2>2. Record Every Transaction Immediately — No Exceptions</h2>
+<h2 id="2-record-every-transaction-immediately-no-except">2. Record Every Transaction Immediately — No Exceptions</h2>
 <p>"I will write it later" is where money disappears. The bill must go into the khata the moment the customer leaves the counter. Not at night, not tomorrow — now. Every entry needs four things: <strong>date, items or amount, customer's name, and running balance</strong>.</p>
 <p>If you use a paper register, keep it at the counter, not in a drawer. If you use software, enter the sale as a "khata sale" linked to the customer's account so the balance updates automatically.</p>
 
-<h2>3. Fix a Weekly "Recovery Day"</h2>
+<h2 id="3-fix-a-weekly-recovery-day">3. Fix a Weekly "Recovery Day"</h2>
 <p>Do not chase payments randomly. Pick one or two days a week — many shopkeepers choose Friday or Monday — as recovery days. On that day:</p>
 <ol>
 <li>Pull up the list of everyone who owes you money, sorted by oldest balance first</li>
@@ -98,10 +177,10 @@
 </ol>
 <p>Consistency matters more than strictness. Customers pay the shopkeeper who asks regularly, not the one who asks angrily once a year.</p>
 
-<h2>4. Accept Partial Payments Happily</h2>
+<h2 id="4-accept-partial-payments-happily">4. Accept Partial Payments Happily</h2>
 <p>A customer who owes Rs 20,000 and offers Rs 3,000 is not insulting you — they are paying you. Always accept partial payments and record them immediately. Small, regular payments are far better than a promised lump sum that never comes. Many successful shopkeepers tell customers: "jitna ho sake de dein, baqi next week" — and their recovery rates are dramatically higher than those who demand full payment or nothing.</p>
 
-<h2>5. Learn to Say No — Politely but Firmly</h2>
+<h2 id="5-learn-to-say-no-politely-but-firmly">5. Learn to Say No — Politely but Firmly</h2>
 <p>Some customers will never pay. The signs are always there: the balance keeps growing, promises keep breaking, and they avoid eye contact at the counter. For these accounts:</p>
 <ul>
 <li>Stop extending new credit immediately — "bhai, purana clear kar dein phir naya le lein"</li>
@@ -110,7 +189,7 @@
 </ul>
 <p>Remember: refusing new udhar to a defaulter is not rude. It is business.</p>
 
-<h2>6. Review Your Khata Monthly Like a Bank Would</h2>
+<h2 id="6-review-your-khata-monthly-like-a-bank-would">6. Review Your Khata Monthly Like a Bank Would</h2>
 <p>Once a month, sit down for 30 minutes and review every account. Ask three questions about each debtor:</p>
 <ol>
 <li>How old is the oldest unpaid amount? (Anything over 90 days is a red flag)</li>
@@ -119,7 +198,7 @@
 </ol>
 <p>Customers with no payment in 90+ days need personal attention. This monthly review is what separates shops that thrive from shops that slowly bleed out.</p>
 
-<h2>7. Let Software Do the Remembering</h2>
+<h2 id="7-let-software-do-the-remembering">7. Let Software Do the Remembering</h2>
 <p>Here is the real problem with paper registers: they do not remind you. Pages get lost, handwriting becomes unreadable, and nobody alerts you when Ahmed's balance crosses Rs 30,000 or when Fatima hasn't paid in four months. A proper khata system should:</p>
 <ul>
 <li>Show every customer's complete history and current balance in one tap</li>
@@ -132,16 +211,32 @@
 <p><strong>Real example:</strong> A general store owner in Faisalabad switched from a paper register to a <a href="choose-pos-software-pakistan.html">digital khata system</a> and discovered Rs 127,000 in forgotten balances within the first week — money he did not even know he was owed. Within two months of systematic follow-ups, he recovered over Rs 80,000.</p>
 </div>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>Udhar is not the enemy — unmanaged udhar is. The shops that survive and grow in Pakistan are not the ones that refuse credit; they are the ones that manage it like professionals. Set limits, record everything instantly, follow up weekly, accept partial payments, and review monthly. Do these five things consistently and your khata will transform from your biggest headache into a genuine business advantage: loyal customers who buy more because you trusted them, and who pay because you run a tight system.</p>
 
-<div class="cta-box">
-<h3>Tired of chasing udhar with a paper register?</h3>
-<p>shopcos soft tracks every khata account automatically — balances, histories, risky debtors, and one-tap WhatsApp reminders. Try it free for 7 days.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-</div>
-
 </article>
+<div class="art-tags"><span>#shop-management</span><span>#manage</span><span>#udhar</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=How%20to%20Manage%20Udhar%2FKhata%20Effectively%20and%20Recover%20Every%20Rupee%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fhow-to-manage-udhar-khata.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/how-to-manage-udhar-khata.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="prevent-staff-theft-retail.html"><img src="img/blog12-cash-drawer.jpg"><div><p>How to Prevent Theft and Manage Staff in Your Retail Shop</p><span>Staff Management · Oct 14, 2026</span></div></a>
+<a class="art-ncard" href="reduce-expired-product-losses.html"><img src="img/blog10-expiry-alert.jpg"><div><p>How to Reduce Losses from Expired Products</p><span>Pharmacy &amp; Grocery · Oct 14, 2026</span></div></a>
+<a class="art-ncard" href="stock-management-tips-small-shops.html"><img src="img/blog10-batch-tracking.jpg"><div><p>10 Stock Management Tips for Small Shops in Pakistan</p><span>Inventory · Oct 14, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

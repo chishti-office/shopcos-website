@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,33 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Business Security</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Business Security</span>
 <h1>The $6.3 Billion Binance Hack: What Happened — and 7 Lessons for Small Shop Owners</h1>
-<div class="article-meta"><span>October 31, 2026</span><span>9 min read</span><span>Business Security</span></div>
+<p class="art-stand">Hackers drained $6.3 billion from Binance in about 20 minutes — the biggest crypto theft on record. What happened, how they got in, and 7 record-keeping lessons every small shop should take from it.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 October 31, 2026</span><span>⏱ 9 min read</span></div>
+<img class="art-hero" src="img/blog20-hero-crypto-keyboard.jpg" alt="The $6.3 Billion Binance Hack: What Happened — and 7 Lessons for Small Shop Owners">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#what-happened-on-october-29">What Happened on October 29</a></li>
+<li><a href="#the-response-a-6-34-billion-promise">The Response: A $6.34 Billion Promise</a></li>
+<li><a href="#why-this-belongs-on-a-shopkeeper-s-reading-list">Why This Belongs on a Shopkeeper's Reading List</a></li>
+<li><a href="#7-lessons-for-small-shops">7 Lessons for Small Shops</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Hackers drained $6.3 billion from Binance in about 20 minutes — the biggest crypto theft on record.</li>
+<li>The detail that should stay with you: the attackers rehearsed. Small, easy-to-miss losses came first — then the big one. That pattern, as we will see below, is exactly how money leaks out of small shops too.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog20-hero-crypto-keyboard.jpg" alt="A hand placing glowing green Bitcoin and Ethereum coins on a dark computer keyboard" class="article-img">
 
@@ -83,7 +152,7 @@
 
 <p>Your shop does not hold $6.3 billion, and nobody is suggesting a kiryana store in Samundri faces the same attackers as a global exchange. But read the details of how this happened — a trusted laptop, a system that approved whatever it was told to approve, small warning signs in the days before — and you will recognize your own counter in miniature. The failure that cost Binance billions is the same failure that costs small shops lakhs every year: records and access that nobody was watching closely enough. Here is what happened, and the seven lessons worth stealing from it.</p>
 
-<h2>What Happened on October 29</h2>
+<h2 id="what-happened-on-october-29">What Happened on October 29</h2>
 <p>According to Binance and the blockchain investigators tracking the theft, the attack began at about <strong>20:05 UTC on October 29</strong>. Over roughly the next twenty minutes, the attackers drained about $6.3 billion worth of crypto assets from Binance's hot wallets — the online wallets an exchange keeps ready for daily withdrawals. It was fast, coordinated, and, by the standards of crypto crime, enormous: larger than the $1.5 billion Bybit hack of February 2025, which had held the record until now.</p>
 
 <p>The first hours were confused, as they always are. Binance initially suspected that a single compromised laptop — belonging to a DevOps engineer — was the entry point. As the investigation widened, the company found additional points of breach. The picture that emerged was more serious than one bad laptop: the attackers had abused the <strong>signing infrastructure</strong>, the internal machinery that authorizes and signs transactions before money moves. In plain words, they did not steal the keys to the vault; they found a way to make the vault's own stamp approve their paperwork. Binance has said there is no evidence that users' private keys themselves leaked.</p>
@@ -94,7 +163,7 @@
 <p><strong>The detail that should stay with you:</strong> the attackers rehearsed. Small, easy-to-miss losses came first — then the big one. That pattern, as we will see below, is exactly how money leaks out of small shops too.</p>
 </div>
 
-<h2>The Response: A $6.34 Billion Promise</h2>
+<h2 id="the-response-a-6-34-billion-promise">The Response: A $6.34 Billion Promise</h2>
 <p>What Binance did next is the second half of the story, and the half most worth studying. Within hours, co-CEO <strong>Richard Teng</strong> was posting updates on X, and the exchange moved to contain the damage on three fronts.</p>
 
 <p>First, freezing. Working with token issuers and partners, Binance said about <strong>$3 billion</strong> of the stolen assets were frozen before they could be laundered further. Not everything stayed frozen in place — investigators noted, for example, roughly $60 million of stolen Tether swapped into Ether on the Aave platform, according to an expert quoted by USA Today — but freezing half the haul within hours limited the attackers' room to move.</p>
@@ -105,10 +174,10 @@
 
 <img src="img/blog20-hackers-dark-room.jpg" alt="Two hooded figures working at computer monitors filled with code in a dark room" class="article-img">
 
-<h2>Why This Belongs on a Shopkeeper's Reading List</h2>
+<h2 id="why-this-belongs-on-a-shopkeeper-s-reading-list">Why This Belongs on a Shopkeeper's Reading List</h2>
 <p>It is tempting to file this under "crypto problems" and scroll on. Resist that. Strip away the zeros and the technology, and the Binance story has three moving parts that exist in every shop: <strong>money stored somewhere digital, people and devices trusted to touch it, and records that either prove what happened or don't.</strong> Binance's attackers won because the approval system trusted what it should have questioned. Shops lose money the same way — a cashier with too much access, a ledger nobody reconciles, a backup that was "going to be made" next week. Our guides on <a href="prevent-staff-theft-retail.html">preventing staff theft in retail</a> and <a href="offline-vs-online-billing-software.html">offline vs online billing software</a> circle the same truths from the shop side. Here they are, sharpened by a $6.3 billion example.</p>
 
-<h2>7 Lessons for Small Shops</h2>
+<h2 id="7-lessons-for-small-shops">7 Lessons for Small Shops</h2>
 
 <h3>1. Keep complete records — not just totals</h3>
 <p>Binance could freeze $3 billion because its records showed, transaction by transaction, exactly what left and where it went. A shop that only knows "today's sale was about forty thousand" can prove nothing and recover nothing. Keep itemized records: every bill, every udhar entry, every payment, dated and attached to a name. When a dispute or a theft comes — and one day it will — the shop with complete records is the shop that gets its money back.</p>
@@ -133,21 +202,34 @@
 <h3>7. Decide your bad-day plan before the bad day</h3>
 <p>Binance could promise users their money because a reserve fund existed <em>before</em> the crisis. Your SAFU fund is humbler: a cash buffer you do not touch, a backup you can restore from, and a written-down answer to "what do we do if the PC dies on a Saturday evening?" The shops that survive disasters are rarely the ones with the best luck; they are the ones that rehearsed. Our <a href="year-end-stock-audit-checklist.html">year-end stock audit checklist</a> is a good place to build that habit — one full, honest count that proves your records match your shelves.</p>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>The Binance hack will be studied for years as a crime. For a small shop, it is more useful as a mirror. The attackers did not defeat mathematics; they defeated housekeeping — trusted access nobody reviewed, an approval nobody questioned, small warnings nobody connected. The defense is equally unglamorous: complete records, automatic backups, proof you can show, access split sensibly, data kept on your own machine, and a plan for the bad day. None of it costs $6.3 billion. Most of it costs only the decision to take your records as seriously as Binance now wishes it had.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> A hand placing glowing cryptocurrency coins on a keyboard photo by <a href="https://www.pexels.com/photo/crypto-coins-on-keyboard-representing-digital-economy-31600306/" target="_blank" rel="noopener">Jakub Zerdzicki</a> · Two people working at computers in a dark room photo by <a href="https://www.pexels.com/photo/two-people-using-computers-5380607/" target="_blank" rel="noopener">Tima Miroshnichenko</a> · Two cafeteria partners using tablets at a counter photo by <a href="https://www.pexels.com/photo/faceless-cafeteria-partners-using-smartphone-and-tablet-at-counter-6205519/" target="_blank" rel="noopener">Tim Douglas</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Your records deserve the same seriousness.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), billing, stock and digital khata in one system that runs on your own shop PC — automatic daily backups, per-cashier logins with owner-only controls, WhatsApp statements, 100% offline billing, full Urdu interface, and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20shopcos%20soft%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#business-security</span><span>#binance</span><span>#hack</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=The%20%246.3%20Billion%20Binance%20Hack%3A%20What%20Happened%20%2014%20and%207%20Lessons%20for%20Small%20Shop%20Owners%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fbinance-hack-6-3-billion-lessons-small-shops.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/binance-hack-6-3-billion-lessons-small-shops.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="khata-book-app-pc.html"><img src="img/blog19-hero-shop-computer.jpg"><div><p>Khata Book App for PC: Run Your Shop's Udhar Ledger on the Big Screen</p><span>Khata &amp; Udhar · Oct 31, 2026</span></div></a>
+<a class="art-ncard" href="mobile-shop-software.html"><img src="img/blog21-hero-phone-store.jpg"><div><p>Mobile Shop Software: Billing, IMEI Tracking, Warranty and Udhar in One Place</p><span>Mobile Shops · Oct 31, 2026</span></div></a>
+<a class="art-ncard" href="year-end-stock-audit-checklist.html"><img src="img/blog18-hero-warehouse.jpg"><div><p>Year-End Stock Audit Checklist for Small Shops (2026)</p><span>Inventory · Oct 30, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,38 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Buyer's Guide</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Buyer's Guide</span>
 <h1>Vyapar Alternative in Pakistan: PKR Billing Without the Indian GST Mismatch</h1>
-<div class="article-meta"><span>November 3, 2026</span><span>11 min read</span><span>Buyer's Guide</span></div>
+<p class="art-stand">Vyapar is built for Indian shops, Indian GST and Indian rupees. For a Pakistani shopkeeper that creates real friction at the counter. The honest guide to what actually mismatches, what to check before switching, and how a Pakistan-first alternative compares.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 November 3, 2026</span><span>⏱ 11 min read</span></div>
+<img class="art-hero" src="img/blog23-hero-shop-counter.jpg" alt="Vyapar Alternative in Pakistan: PKR Billing Without the Indian GST Mismatch">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#why-so-many-pakistani-shopkeepers-try-vyapar-fir">Why So Many Pakistani Shopkeepers Try Vyapar First</a></li>
+<li><a href="#the-gst-mismatch-explained-simply">The GST Mismatch, Explained Simply</a></li>
+<li><a href="#currency-language-and-the-daily-details-that-mat">Currency, Language, and the Daily Details That Matter</a></li>
+<li><a href="#phone-app-vs-pc-software-the-trade-off-nobody-me">Phone App vs PC Software: The Trade-Off Nobody Mentions</a></li>
+<li><a href="#what-a-pakistan-first-alternative-must-do-the-ch">What a Pakistan-First Alternative Must Do: The Checklist</a></li>
+<li><a href="#vyapar-vs-a-pakistan-first-alternative-an-honest">Vyapar vs a Pakistan-First Alternative: An Honest Comparison</a></li>
+<li><a href="#the-price-question-monthly-abroad-vs-one-time-at">The Price Question: Monthly Abroad vs One-Time at Home</a></li>
+<li><a href="#switching-without-losing-your-shop-s-records">Switching Without Losing Your Shop's Records</a></li>
+<li><a href="#who-should-stay-and-who-should-switch">Who Should Stay, and Who Should Switch?</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Vyapar is built for Indian shops, Indian GST and Indian rupees.</li>
+<li>The 10-minute switch test: before you commit to any alternative, bill a real basket on it — a scanned packet, a loose item if you sell one, a price changed mid-bill, and half the bill on udhar for a named customer. Then unplug the internet and bill the next customer. Then print the receipt and read it as your customer would. If any step needs a workaround, a foreign tax field, or a currency you did not choose, keep looking.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog23-hero-shop-counter.jpg" alt="A customer ordering at a shop counter while the shopkeeper serves behind it" class="article-img">
 
@@ -83,26 +157,26 @@
 
 <p>One honest note before we start: software changes fast. Plans, prices, and features on any app — Vyapar included — can change between the time you read this and the time you install it. Where this article describes Vyapar, it describes the product's Indian-market design, which is its public identity. Before you pay for anything, check the current version yourself against the checklist in this guide. That is the whole point: judge software on your counter, in rupees, under Pakistani conditions — not on another country's demo.</p>
 
-<h2>Why So Many Pakistani Shopkeepers Try Vyapar First</h2>
+<h2 id="why-so-many-pakistani-shopkeepers-try-vyapar-fir">Why So Many Pakistani Shopkeepers Try Vyapar First</h2>
 <p>It is easy to see the appeal. Vyapar is well known across the border, it is designed for small businesses rather than big companies, it runs on a phone, and it promises fast bills, stock tracking, and customer records in one app. For a shopkeeper who has been billing on a calculator or a paper register, that sounds like exactly the upgrade he needs — and for a simple, cash-only, single-person shop, it may even work well enough for a while. Many Pakistani shopkeepers start there because it is the name they have heard most, not because they compared it with a product built for Pakistan.</p>
 <p>The trouble usually appears later, once the shop's real life enters the software: a regular customer asks for udhar, a supplier's rate changes, a bill needs to be printed on the shop's own computer, or a customer questions a tax line on a receipt that does not match anything in Pakistan. That is when the question changes from "does this app make bills?" to "does this app understand my shop?" And that second question is where a Pakistan-first alternative earns its place.</p>
 
-<h2>The GST Mismatch, Explained Simply</h2>
+<h2 id="the-gst-mismatch-explained-simply">The GST Mismatch, Explained Simply</h2>
 <p>The single biggest mismatch is tax. India runs on GST — Goods and Services Tax — with its own invoice formats, tax slabs, and filing language. Pakistan does not. A small Pakistani shop is not filing Indian GST, and its customers are not expecting GST lines on their receipts. When an app's billing, reporting, and invoice templates are built around GST, a Pakistani shopkeeper ends up in one of three awkward positions: ignoring tax fields that should not be there, explaining to customers why a receipt shows a tax system they have never heard of, or working around the app's assumptions every single day.</p>
 <p>This is not a small cosmetic issue. Tax fields touch every bill, every report, and every record you might one day show an accountant. Software that forces you to think in another country's tax language is software that adds work instead of removing it. A Pakistan-first system, by contrast, bills in plain rupees with no GST assumptions baked in — and keeps the conversation about tax where it belongs for a small shop: simple, local, and in words your accountant and your customer both understand. Our plain-language <a href="fbr-e-invoicing-guide-pakistan-2026.html">FBR e-invoicing guide for small shops</a> explains which Pakistani shops actually fall under FBR rules and which do not, so you do not buy software for a compliance burden you do not have.</p>
 
 <img src="img/blog23-calculator-bills.jpg" alt="Hands managing cash, receipts and a calculator on a wooden table while checking bills" class="article-img">
 
-<h2>Currency, Language, and the Daily Details That Matter</h2>
+<h2 id="currency-language-and-the-daily-details-that-mat">Currency, Language, and the Daily Details That Matter</h2>
 <p>After tax, the next mismatches are the ones you touch a hundred times a day. The first is currency. A Pakistani shop bills in PKR. Every price, every total, every khata balance, and every report should read in rupees without conversion, without a foreign currency symbol sneaking onto a printed bill, and without a customer asking why the receipt looks like it came from another country. If you have to double-check the currency on every printout, the software has already failed a basic test.</p>
 <p>The second is language and support. A Pakistani shopkeeper should be able to run his counter in Urdu — and, on a PC system, in Roman Urdu or English as well — and get help from someone who understands local shop problems: load shedding, Easypaisa and JazzCash payments, mohalla udhar, and suppliers who change rates without warning. Support that works on another country's business hours, in another country's business language, is support that will not be there on the evening you actually need it.</p>
 <p>The third is payments and identity. Pakistani shops take cash, bank transfer, Easypaisa, and JazzCash far more often than they take the payment methods an Indian app is built around. The billing software does not need to process those payments itself — but it must not get in the way of recording them clearly, and its customer records should be built around Pakistani phone numbers and local shop realities, not around another market's onboarding flow. If signing up, paying, or getting support requires workarounds because you are in Pakistan, that is a warning sign, not a minor inconvenience.</p>
 
-<h2>Phone App vs PC Software: The Trade-Off Nobody Mentions</h2>
+<h2 id="phone-app-vs-pc-software-the-trade-off-nobody-me">Phone App vs PC Software: The Trade-Off Nobody Mentions</h2>
 <p>Here is the honest trade-off at the heart of this comparison. Vyapar is a mobile-first app: your shop lives on your phone. That is convenient — until your customer list grows, your staff needs to bill while you are away, or your eyes get tired of managing a thousand items on a small screen. A PC billing system like shopcos soft is the opposite bet: the shop lives on the counter computer, with a big screen, a keyboard, a barcode scanner, and a printer attached. It is less portable and more powerful, and for a shop with real stock, real staff, and real daily volume, that power is usually the right trade.</p>
 <p>Neither choice is wrong in the abstract. The question is which one matches your shop today. If you are a one-person stall billing twenty customers a day from your pocket, a phone app may genuinely be enough. If you have a counter, a printer, staff, and a khata book that already fills pages, a PC system will save you time every single day — and the phone stays free for what it does best, like sending a bill or a khata statement over WhatsApp. Do not let anyone sell you "mobile" or "PC" as a virtue in itself. Ask which device your counter actually runs on, and buy for that counter.</p>
 
-<h2>What a Pakistan-First Alternative Must Do: The Checklist</h2>
+<h2 id="what-a-pakistan-first-alternative-must-do-the-ch">What a Pakistan-First Alternative Must Do: The Checklist</h2>
 <p>Use this checklist on any alternative you consider — including shopcos soft. A product that fails two or more of these is not ready for a Pakistani counter, however good its demo looks:</p>
 <ul>
 <li><strong>PKR everywhere, by default.</strong> Prices, bills, reports, and khata balances in rupees, with no foreign tax or currency assumptions on a printed receipt.</li>
@@ -119,7 +193,7 @@
 <p><strong>The 10-minute switch test:</strong> before you commit to any alternative, bill a real basket on it — a scanned packet, a loose item if you sell one, a price changed mid-bill, and half the bill on udhar for a named customer. Then unplug the internet and bill the next customer. Then print the receipt and read it as your customer would. If any step needs a workaround, a foreign tax field, or a currency you did not choose, keep looking.</p>
 </div>
 
-<h2>Vyapar vs a Pakistan-First Alternative: An Honest Comparison</h2>
+<h2 id="vyapar-vs-a-pakistan-first-alternative-an-honest">Vyapar vs a Pakistan-First Alternative: An Honest Comparison</h2>
 <table>
 <tr><th>What your counter needs</th><th>An Indian-market app (Vyapar's design)</th><th>A Pakistan-first PC system</th></tr>
 <tr><td><strong>Currency</strong></td><td>Built around INR and Indian market assumptions</td><td>PKR by default, on every bill and report</td></tr>
@@ -134,11 +208,11 @@
 
 <img src="img/blog23-phone-billing.jpg" alt="A shopkeeper using a smartphone calculator and cash register app at a shop counter" class="article-img">
 
-<h2>The Price Question: Monthly Abroad vs One-Time at Home</h2>
+<h2 id="the-price-question-monthly-abroad-vs-one-time-at">The Price Question: Monthly Abroad vs One-Time at Home</h2>
 <p>Price deserves the same honesty. Many billing apps, in India and Pakistan alike, now charge monthly. A small monthly fee feels cheap — until you multiply it. Even a modest subscription, kept for three years, adds up to several times the price of a one-time purchase, and the day you stop paying, the software usually stops working and your data becomes a negotiation. A one-time purchase costs more on day one and far less by year two, and it keeps running whether or not you ever pay again.</p>
 <p>Shopcos soft, to be fully transparent about our own product, costs Rs 40,000 once for a lifetime license, with a 7-day free trial and no card required to try it. That is a full week to test it properly on your own counter — and far less than three years of a subscription. Do the same maths for any alternative you consider: monthly fee, multiplied by 36 months, plus any hardware or support plan the vendor quietly requires — and then ask what happens to your data if you leave. An honest vendor answers that question in one sentence. Our <a href="pos-software-cost-pakistan.html">POS software cost guide for Pakistan</a> walks through the full rupee-by-rupee breakdown if you want to compare properly before deciding.</p>
 
-<h2>Switching Without Losing Your Shop's Records</h2>
+<h2 id="switching-without-losing-your-shop-s-records">Switching Without Losing Your Shop's Records</h2>
 <p>The fear that keeps shopkeepers on the wrong software is not the price — it is the move. "Mere paas 500 items aur 100 udhar customers hain, main dobara kaise likhun?" You do not retype everything in one sitting, and you do not close the shop to do it. The order that works:</p>
 <ol>
 <li><strong>Export what you can, before you cancel anything.</strong> From your current app, export or write down your item list, your customer list, and — most importantly — each customer's current udhar balance. Do this while your old account is still active, not after it expires.</li>
@@ -149,25 +223,38 @@
 </ol>
 <p>One more practical warning: never cancel the old app until the new system's opening balances are verified. A week of overlap costs you nothing; a lost khata ledger costs you customers' trust and money you may never recover.</p>
 
-<h2>Who Should Stay, and Who Should Switch?</h2>
+<h2 id="who-should-stay-and-who-should-switch">Who Should Stay, and Who Should Switch?</h2>
 <p>Stay where you are if your current app already bills cleanly in rupees, handles your udhar without workarounds, prints receipts your customers understand, and keeps working through load shedding — and if its long-term cost still makes sense to you. Switching for its own sake is wasted effort, and no honest guide should tell you otherwise.</p>
 <p>Switch if you are explaining tax fields that do not belong in Pakistan, converting currency in your head, managing khata in a separate notebook because the app's version does not match how your customers actually pay, or paying a monthly fee that has already passed the price of a one-time license. Those are not minor annoyances; they are daily taxes on your time, and they compound exactly like a bad loan — quietly, every day, until the shop is working for the software instead of the other way round.</p>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>Vyapar became popular by solving a real problem for Indian small businesses. Pakistani shopkeepers deserve the same quality of solution, built for their own currency, their own tax reality, their own udhar habits, and their own load-shedding afternoons. That is the standard to hold any alternative to — including ours. Test it with your own basket, your own udhar customer, and your own printed receipt, during a real rush, with the internet unplugged. The right system will feel boring in the best possible way: bills print in rupees, stock falls, khata updates, and the queue moves. If a system cannot do that on your counter, in Pakistan, it does not matter how well it works anywhere else.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> A customer ordering at a shop counter photo by <a href="https://www.pexels.com/photo/woman-in-tropical-print-dress-ordering-in-front-of-cashier-behind-the-counter-6545445/" target="_blank" rel="noopener">Tima Miroshnichenko</a> · Hands managing cash, receipts and a calculator photo by <a href="https://www.pexels.com/photo/person-holding-paper-bills-while-using-a-calculator-5900233/" target="_blank" rel="noopener">Kaboompics</a> · A shopkeeper using a smartphone billing app at a counter photo by <a href="https://www.pexels.com/photo/man-using-application-on-smartphone-for-calculating-4449784/" target="_blank" rel="noopener">Hook Tell</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Bill in PKR, with khata built in — no GST mismatch.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), fast billing, digital khata with credit limits and WhatsApp statements, automatic stock deduction, expiry alerts, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20Vyapar%20alternative%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#buyer-s-guide</span><span>#vyapar</span><span>#alternative</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Vyapar%20Alternative%20in%20Pakistan%3A%20PKR%20Billing%20Without%20the%20Indian%20GST%20Mismatch%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fvyapar-alternative-pakistan.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/vyapar-alternative-pakistan.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="billing-software-kiryana-shops.html"><img src="img/blog22-hero-kiryana-store.jpg"><div><p>Billing Software for Kiryana Shops: What Actually Matters at the Counter</p><span>Buyer's Guide · Nov 02, 2026</span></div></a>
+<a class="art-ncard" href="binance-hack-6-3-billion-lessons-small-shops.html"><img src="img/blog20-hero-crypto-keyboard.jpg"><div><p>The $6.3 Billion Binance Hack: What Happened — and 7 Lessons for Small Shop Owners</p><span>Business Security · Oct 31, 2026</span></div></a>
+<a class="art-ncard" href="khata-book-app-pc.html"><img src="img/blog19-hero-shop-computer.jpg"><div><p>Khata Book App for PC: Run Your Shop's Udhar Ledger on the Big Screen</p><span>Khata &amp; Udhar · Oct 31, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Tax &amp; Compliance</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Tax &amp; Compliance</span>
 <h1>How to Verify an FBR POS Invoice — and What That QR Code Really Means</h1>
-<div class="article-meta"><span>November 4, 2026</span><span>10 min read</span><span>Tax &amp; Compliance</span></div>
+<p class="art-stand">That little QR code on your receipt is not decoration. A plain-English guide to verifying an FBR POS invoice in Pakistan with the Tax Asaan app, what each line on the receipt means, and what to do when a bill does not verify.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 November 4, 2026</span><span>⏱ 10 min read</span></div>
+<img class="art-hero" src="img/blog24-hero-receipt-qr.jpg" alt="How to Verify an FBR POS Invoice — and What That QR Code Really Means">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#first-what-is-an-fbr-pos-invoice">First, What Is an FBR POS Invoice?</a></li>
+<li><a href="#reading-the-receipt-what-each-part-means">Reading the Receipt: What Each Part Means</a></li>
+<li><a href="#how-to-verify-step-by-step-tax-asaan-app">How to Verify, Step by Step (Tax Asaan App)</a></li>
+<li><a href="#what-the-result-actually-proves-and-what-it-does">What the Result Actually Proves — and What It Does Not</a></li>
+<li><a href="#when-a-bill-does-not-verify-the-calm-checklist">When a Bill Does Not Verify: The Calm Checklist</a></li>
+<li><a href="#a-warning-about-qr-codes-in-general">A Warning About QR Codes in General</a></li>
+<li><a href="#for-shopkeepers-what-to-print-and-what-never-to-">For Shopkeepers: What to Print, and What Never to Fake</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>That little QR code on your receipt is not decoration.</li>
+<li>The one-sentence version: an FBR POS invoice is a sale that the shop's billing system has reported to FBR in real time. The QR code is your shortcut to checking that report. If the shop is supposed to be FBR-integrated and its receipt has no FBR invoice number and no QR code, that absence is itself the answer.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog24-hero-receipt-qr.jpg" alt="Close-up of a printed shop receipt showing totals and change" class="article-img">
 
@@ -87,12 +159,12 @@
 <p><strong>The one-sentence version:</strong> an FBR POS invoice is a sale that the shop's billing system has reported to FBR in real time. The QR code is your shortcut to checking that report. If the shop is supposed to be FBR-integrated and its receipt has no FBR invoice number and no QR code, that absence is itself the answer.</p>
 </div>
 
-<h2>First, What Is an FBR POS Invoice?</h2>
+<h2 id="first-what-is-an-fbr-pos-invoice">First, What Is an FBR POS Invoice?</h2>
 <p>POS stands for point of sale — the till, the counter system, the software that prints your bill. Under FBR's POS integration system, certain retailers connect that system directly to FBR. Every time they make a sale, the invoice details go to FBR electronically, and FBR returns a unique invoice number. That number, together with a QR code, is printed on your receipt. In other words, the receipt is not just the shop's own record any more; it is a copy of a transaction FBR has also seen.</p>
 <p>That is the key difference from an ordinary receipt. An ordinary receipt proves only that the shop printed a piece of paper. An FBR POS invoice proves that the sale was transmitted to the tax authority at the time of sale. This is why FBR built a public verification tool for shoppers: the system only works as a check on the system if customers can actually use it.</p>
 <p>One important boundary, because it confuses almost everyone: not every shop in Pakistan has to do this. POS integration was rolled out for Tier-1 retailers — large stores, chains, and outlets in specified categories — and the list and thresholds have changed over time. Your neighbourhood kiryana store, your mohalla pharmacy, and a small single-counter shop are generally not Tier-1 retailers, and their receipts will not carry an FBR QR code. That does not make them dishonest; it means this particular system does not apply to them. Our <a href="fbr-e-invoicing-guide-pakistan-2026.html">FBR e-invoicing guide for small shops</a> explains who must comply, who is exempt, and how to tell which side of the line your shop falls on — check it before you demand an FBR receipt from a shop that was never required to issue one.</p>
 
-<h2>Reading the Receipt: What Each Part Means</h2>
+<h2 id="reading-the-receipt-what-each-part-means">Reading the Receipt: What Each Part Means</h2>
 <p>Hold a genuine FBR POS receipt up to the light — metaphorically — and you will usually find these elements. Learn them once and you will read every future receipt in seconds:</p>
 <ul>
 <li><strong>The shop's name, address, and NTN.</strong> The National Tax Number identifies the registered business. A receipt with no shop name and no NTN is not a good sign, FBR-integrated or not.</li>
@@ -112,7 +184,7 @@
 <tr><td><strong>QR code that opens a payment page or unknown website</strong></td><td>Do not proceed — a verification QR should lead to FBR's verification result, never to a payment</td></tr>
 </table>
 
-<h2>How to Verify, Step by Step (Tax Asaan App)</h2>
+<h2 id="how-to-verify-step-by-step-tax-asaan-app">How to Verify, Step by Step (Tax Asaan App)</h2>
 <p>FBR's official verification tool is the Tax Asaan mobile app. Download it only from the official app stores, and check that the developer is FBR/PRAL before installing — fake tax apps are a real scam vector, and an app that asks for your bank card details is not FBR's. Once installed, the check itself is short:</p>
 <ol>
 <li><strong>Open Tax Asaan and find the POS section.</strong> Look for the Point of Sale (POS) option on the main menu, then the "Verify Invoice" option inside it.</li>
@@ -125,12 +197,12 @@
 
 <p>FBR also provides an SMS-based verification route through 9966 for invoice information, for shoppers who do not want to install the app. Follow the format the official app or FBR's own guidance gives you for that route — do not trust an SMS format forwarded on WhatsApp, and never send your CNIC, bank details, or any code to a number someone in a shop hands you. If a route asks for anything beyond the invoice details, stop and use the official app instead.</p>
 
-<h2>What the Result Actually Proves — and What It Does Not</h2>
+<h2 id="what-the-result-actually-proves-and-what-it-does">What the Result Actually Proves — and What It Does Not</h2>
 <p>This is where most explanations stop short, so let us be precise. A successful verification proves one thing well: that this invoice, with this number and amount, exists in FBR's POS records as a sale reported by that retailer. That is genuinely useful. It is the difference between trusting a printed slip and checking a second, independent record.</p>
 <p>It does not prove everything else you might assume. It does not prove the shop paid its full tax bill for the month — reporting a sale and settling a tax liability are two different steps. It does not prove the prices were fair, the goods were genuine, or the weights were correct. And it does not, by itself, make you eligible for anything: FBR has run prize draws tied to verified invoices in the past, but whether any such scheme is running today, and what its rules are, is something to check inside the official app at the time — not something to assume from an old receipt or a shopkeeper's poster. Treat any claim of "scan and win guaranteed" with the same suspicion as any other too-good promise at a counter.</p>
 <p>None of that makes verification pointless. It makes it specific. You are checking the one thing the QR code was designed to check: was this sale reported? For a shopper who just paid sales tax on a large purchase, that is exactly the right question.</p>
 
-<h2>When a Bill Does Not Verify: The Calm Checklist</h2>
+<h2 id="when-a-bill-does-not-verify-the-calm-checklist">When a Bill Does Not Verify: The Calm Checklist</h2>
 <p>A "not found" result feels alarming, but do not jump straight to an accusation. Work through this order, because the boring explanations are also the common ones:</p>
 <ol>
 <li><strong>Re-type the number.</strong> Check every digit against the receipt, especially 0 vs O and 1 vs 7 on a faded thermal print. Scan instead of typing if the print is clear.</li>
@@ -141,31 +213,44 @@
 </ol>
 <p>And keep perspective: a single failed check on one small purchase is a data point, not a verdict on a business. A pattern — every receipt failing, no FBR numbers at a store that plainly should be integrated, a QR code that opens a stranger's website — is the thing worth reporting properly.</p>
 
-<h2>A Warning About QR Codes in General</h2>
+<h2 id="a-warning-about-qr-codes-in-general">A Warning About QR Codes in General</h2>
 <p>Here is an uncomfortable truth that belongs in any QR code guide in 2026: a QR code is just a barcode that opens a link, and anyone can print one. Criminals now stick fake QR codes over real ones, on parking meters, menus, and shop counters, to send scanners to phishing pages that steal payment credentials — a scam now common enough to have its own name, "quishing". So apply one hard rule, on receipts and everywhere else: a verification QR should lead to FBR's verification result. If scanning a receipt's code opens a payment page, asks for your card or bank login, or downloads an app you did not ask for, close it immediately and do not enter anything. FBR verification never asks you to pay, and never asks for your bank details. The same rule protects you at restaurants, petrol pumps, and anywhere else a QR code appears: if the destination does not match what the code claimed to be, the code is the scam, not the shortcut.</p>
 
 <img src="img/blog24-shop-counter.jpg" alt="A shop employee pulling a freshly printed receipt from a payment terminal at the counter" class="article-img">
 
-<h2>For Shopkeepers: What to Print, and What Never to Fake</h2>
+<h2 id="for-shopkeepers-what-to-print-and-what-never-to-">For Shopkeepers: What to Print, and What Never to Fake</h2>
 <p>If you run a shop that is FBR-integrated, your job is simple and non-negotiable: let the system do its work. Every bill your integrated system prints should carry the FBR invoice number, the QR code, and the FBR POS logo, on paper clear enough to scan. Test it yourself the way a customer would — scan your own receipt in Tax Asaan at least once, and after any printer change, paper change, or software update. A QR code that prints too faint, too small, or cut off at the edge is as useless as no QR code, and it is your customer who pays for it in wasted time and lost trust.</p>
 <p>If your shop is not integrated — and most small shops are not — do not borrow the look. Never print an FBR logo, an invented "FBR number", or a decorative QR code on your bills to look bigger or more official than you are. Customers increasingly know how to check, a fake FBR mark is a fast way to lose a regular customer forever, and misrepresenting a tax document is a legal risk no small shop needs. An honest, itemised, clearly printed bill with your shop name, date, items, and total is worth far more than a copied logo: it is a receipt a customer can actually rely on, and it is the foundation your own records, your khata, and your accountant all stand on. If you later grow into Tier-1 territory, integrate properly — our <a href="pos-software-cost-pakistan.html">POS cost guide</a> walks through the real rupee cost of a counter setup, and our <a href="offline-vs-online-billing-software.html">offline vs online billing comparison</a> explains why a shop that loses internet during load shedding still needs to bill without interruption.</p>
 <p>One practical habit for every shopkeeper, integrated or not: when a customer asks about the QR code, answer in one plain sentence instead of getting defensive. "This is our FBR invoice number, you can check it in the Tax Asaan app" — or, honestly, "Our shop is small, so we are not on the FBR POS system yet; this is our own printed bill." Customers respect a straight answer far more than a technical dodge, and the ones who ask are usually the ones who come back.</p>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>The QR code on an FBR POS receipt is a small piece of public accountability that Pakistan's shoppers barely use — and that is exactly why it matters. It takes less than a minute, it costs nothing, and it turns a piece of paper you would otherwise throw away into a check you can actually run. Learn what a real FBR receipt looks like, verify the big purchases, keep the receipt until you have checked, and report the ones that fail instead of just complaining about them. A system that nobody checks will eventually be gamed; a system that ordinary shoppers check, casually and often, stays honest almost by itself. Start with your next receipt.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Close-up of a printed receipt photo by <a href="https://www.pexels.com/photo/close-up-of-a-receipt-14647295/" target="_blank" rel="noopener">Towfiqu barbhuiya</a> · Person scanning a QR code at a retail counter photo by <a href="https://www.pexels.com/photo/a-close-up-shot-of-a-person-scanning-a-qr-code-12935051/" target="_blank" rel="noopener">iMin Technology</a> · Employee pulling a printed receipt from a payment terminal photo by <a href="https://www.pexels.com/photo/an-employee-using-a-payment-terminal-6684788/" target="_blank" rel="noopener">Kampus Production</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Running a small shop? Bill clearly, keep every record straight.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), fast billing, digital khata with credit limits and WhatsApp statements, automatic stock deduction, expiry alerts, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20FBR%20POS%20invoice%20verification%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#tax-compliance</span><span>#invoice</span><span>#verification</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=How%20to%20Verify%20an%20FBR%20POS%20Invoice%20%2014%20and%20What%20That%20QR%20Code%20Really%20Means%20https%3A%2F%2Fshopcos.shop%2Fblog%2Ffbr-pos-invoice-verification.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/fbr-pos-invoice-verification.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="vyapar-alternative-pakistan.html"><img src="img/blog23-hero-shop-counter.jpg"><div><p>Vyapar Alternative in Pakistan: PKR Billing Without the Indian GST Mismatch</p><span>Buyer's Guide · Nov 03, 2026</span></div></a>
+<a class="art-ncard" href="billing-software-kiryana-shops.html"><img src="img/blog22-hero-kiryana-store.jpg"><div><p>Billing Software for Kiryana Shops: What Actually Matters at the Counter</p><span>Buyer's Guide · Nov 02, 2026</span></div></a>
+<a class="art-ncard" href="binance-hack-6-3-billion-lessons-small-shops.html"><img src="img/blog20-hero-crypto-keyboard.jpg"><div><p>The $6.3 Billion Binance Hack: What Happened — and 7 Lessons for Small Shop Owners</p><span>Business Security · Oct 31, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

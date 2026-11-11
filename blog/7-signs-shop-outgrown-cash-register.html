@@ -21,27 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -68,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Growth Signals</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Growth Signals</span>
 <h1>7 Signs Your Shop Has Outgrown Its Cash Register</h1>
-<div class="article-meta"><span>October 23, 2026</span><span>7 min read</span><span>Growth Signals</span></div>
+<p class="art-stand">Still running your shop on a basic cash register or calculator? Here are 7 clear signs your business has outgrown it — billing queues, lost stock, messy udhar, invisible profits — and what to do next.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 October 23, 2026</span><span>⏱ 7 min read</span></div>
+<img class="art-hero" src="img/blog13-hero-register.jpg" alt="7 Signs Your Shop Has Outgrown Its Cash Register">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#sign-1-billing-is-the-bottleneck-not-the-custome">Sign 1: Billing Is the Bottleneck, Not the Customers</a></li>
+<li><a href="#sign-2-you-run-out-of-stock-without-warning">Sign 2: You Run Out of Stock Without Warning</a></li>
+<li><a href="#sign-3-your-udhar-lives-in-a-notebook">Sign 3: Your Udhar Lives in a Notebook</a></li>
+<li><a href="#sign-4-closing-the-day-takes-an-hour-and-you-sti">Sign 4: Closing the Day Takes an Hour (and You Still Don't Trust the Number)</a></li>
+<li><a href="#sign-5-you-suspect-leakage-but-can-t-prove-anyth">Sign 5: You Suspect Leakage but Can't Prove Anything</a></li>
+<li><a href="#sign-6-customers-ask-for-things-you-can-t-give-t">Sign 6: Customers Ask for Things You Can't Give Them</a></li>
+<li><a href="#sign-7-your-growth-plans-die-at-but-our-system-c">Sign 7: Your Growth Plans Die at "But Our System Can't Handle That"</a></li>
+<li><a href="#what-to-do-next-the-30-day-test">What to Do Next: The 30-Day Test</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Still running your shop on a basic cash register or calculator?</li>
+<li>The real question: if your register broke tomorrow, would you replace it with the same thing — or with something smarter? However you answer that question, you already know what your shop has outgrown.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog13-hero-register.jpg" alt="A beautifully preserved vintage brass cash register in warm rustic light" class="article-img">
 
@@ -82,39 +157,39 @@
 
 <p>Every shop that upgraded its billing system says the same thing afterwards: <em>"I should have done this two years earlier."</em> Here are the 7 signs that it is already time for yours.</p>
 
-<h2>Sign 1: Billing Is the Bottleneck, Not the Customers</h2>
+<h2 id="sign-1-billing-is-the-bottleneck-not-the-custome">Sign 1: Billing Is the Bottleneck, Not the Customers</h2>
 <p>Watch your counter during evening rush. If customers are standing in line while your cashier punches prices on a calculator or hunts for a price list, the problem is not "too many customers." The problem is that each bill takes two or three minutes when it should take thirty seconds.</p>
 <p>During rush hour, slow billing does something worse than annoy people — it caps your sales. A counter that finishes one customer every 2 minutes serves 30 customers an hour. Cut that to 45 seconds with barcode scanning and you serve 80. Same shop, same staff, same evening — more than double the customers walked out with full bags instead of walking out of the queue.</p>
 <p>This is exactly why so many <a href="why-shop-needs-billing-software.html">shops are switching to proper billing software in 2026</a>: the counter stops being the choke point and starts being the engine.</p>
 
 <img src="img/blog13-till-receipt.jpg" alt="Close-up of a cash register printing a long receipt in a retail store" class="article-img">
 
-<h2>Sign 2: You Run Out of Stock Without Warning</h2>
+<h2 id="sign-2-you-run-out-of-stock-without-warning">Sign 2: You Run Out of Stock Without Warning</h2>
 <p>It always happens the same way. A regular customer asks for a popular item. You walk to the shelf — empty. "Sir, kal aa jaye ga," you say, and you mean it. But you lost today's sale, and worse, you trained a loyal customer to check your competitor first next time.</p>
 <p>A cash register cannot warn you that stock is running low because it has no idea what your stock is. It never counted it. When your shop was tiny, your eyes were the inventory system — you could glance at the shelves and know. But once you carry hundreds of products, your eyes stop being a system. Stock-outs stop being bad luck and start being a regular expense.</p>
 <p>Modern billing software deducts stock automatically with every sale and warns you before items run out. Read our <a href="stock-management-tips-small-shops.html">stock management guide for small shops</a> to see how much money predictable stock alone is worth.</p>
 
 <img src="img/blog13-empty-shelves.jpg" alt="Half empty supermarket shelves with gaps where products ran out" class="article-img">
 
-<h2>Sign 3: Your Udhar Lives in a Notebook</h2>
+<h2 id="sign-3-your-udhar-lives-in-a-notebook">Sign 3: Your Udhar Lives in a Notebook</h2>
 <p>Every Pakistani shopkeeper knows the notebook. The one with customer names, amounts, dates in the margins, crossed-out entries, arrows, and your staff's handwriting mixed with yours. It worked when five people took udhar. It does not work when fifty people do.</p>
 <p>Here is what the notebook cannot do: it cannot remind you that Ahmed's payment was due last Tuesday. It cannot tell you which customer already crossed their limit. It cannot stop your cashier from giving udhar to someone you blacklisted. And it definitely cannot survive a cup of chai, a torn page, or a disagreement about what was written there three months ago.</p>
 <p>Udhar is not a small side issue — it is often 20 to 30% of a shop's money, sitting outside the shop. Digital khata tracks every rupee, sets credit limits, and reminds you to follow up. Our <a href="how-to-manage-udhar-khata.html">udhar management guide</a> shows the exact rules that recover every rupee — and they all start with getting it out of the notebook.</p>
 
-<h2>Sign 4: Closing the Day Takes an Hour (and You Still Don't Trust the Number)</h2>
+<h2 id="sign-4-closing-the-day-takes-an-hour-and-you-sti">Sign 4: Closing the Day Takes an Hour (and You Still Don't Trust the Number)</h2>
 <p>Be honest: when was the last time you closed your day feeling confident about the numbers? The typical cash-register routine goes like this — count the cash in the drawer, try to remember the day's udhar, subtract what you paid the supplier this morning, compare it against a gut feeling of "acha din tha," and go home vaguely unsure whether something is off.</p>
 <p>That hour of counting is not diligence; it is manual labor that a computer does in ten seconds. And the bigger problem is what you never find out: was today actually better than last Tuesday? Which hours sold the most? Did the new product line earn its shelf space? A cash register hands you a total. Billing software hands you answers. There is a reason successful shopkeepers treat <a href="day-closing-habit-profit.html">day closing as a 10-minute profit habit</a> — because the right system makes it that fast.</p>
 
-<h2>Sign 5: You Suspect Leakage but Can't Prove Anything</h2>
+<h2 id="sign-5-you-suspect-leakage-but-can-t-prove-anyth">Sign 5: You Suspect Leakage but Can't Prove Anything</h2>
 <p>This is the uncomfortable one. Cash sales happen fast, change is given quickly, and between opening and closing, money moves in ways nobody fully tracks. Maybe the cashier pockets a small amount now and then. Maybe "discounts" are given to friends a little too generously. Maybe nobody is stealing at all and your margins just feel thinner than they should.</p>
 <p>The painful part is not the suspicion — it is the helplessness. A cash register cannot show you that your top-selling item sells 40 units when it is recorded 35. It cannot flag the unusual number of "voided" sales. It cannot tie each sale to the staff member who made it. So the suspicion just sits there, poisoning your relationship with people you need to trust.</p>
 <p>Proper billing software gives every cashier their own login, logs every bill, every void, every discount. Theft usually stops not because anyone gets caught, but because everyone knows the system is watching. Our <a href="prevent-staff-theft-retail.html">guide to preventing staff theft</a> covers the full picture — but the foundation is always the same: record everything, automatically.</p>
 
-<h2>Sign 6: Customers Ask for Things You Can't Give Them</h2>
+<h2 id="sign-6-customers-ask-for-things-you-can-t-give-t">Sign 6: Customers Ask for Things You Can't Give Them</h2>
 <p>Notice how customer expectations have changed. People now ask for a proper itemized receipt — especially for returns, for company expenses, for warranty claims. "Bhai, bill bana dein, item-wise." With a basic register, you hand them a slip with one total, or nothing at all. They notice. And in their mind, the shop with proper receipts is the professional one.</p>
 <p>It goes further than receipts. Customers increasingly expect you to check stock for them ("kitne piece available hain?"), to return an item days later without a fight, to honor the price they saw yesterday. Every one of these moments is a small test of trust, and a register fails every one of them. Software passes them without thinking: search the product, print the detailed bill, look up the old sale for the return. Each tiny "yes, of course" is a customer who comes back.</p>
 
-<h2>Sign 7: Your Growth Plans Die at "But Our System Can't Handle That"</h2>
+<h2 id="sign-7-your-growth-plans-die-at-but-our-system-c">Sign 7: Your Growth Plans Die at "But Our System Can't Handle That"</h2>
 <p>This is the sign shopkeepers feel last, but it costs the most. You think about adding a second counter — but then billing chaos doubles. You consider opening a second branch — but then stock and cash become unmanageable across two locations. You want to start taking online orders or WhatsApp orders — but your billing lives in one drawer in one shop.</p>
 <p>A cash register is a ceiling. It worked perfectly for the shop you had, and it quietly forbids the shop you want to become. Every expansion idea — second counter, new branch, online sales, loyalty programs, proper tax invoicing — has to be squeezed through a machine that was designed in a different era.</p>
 <p>When you catch yourself saying "we would, but our system can't," the system is no longer a tool. It is a cage. Before you spend a single rupee on expansion, make sure your billing can carry the weight of your ambition. Our <a href="choose-pos-software-pakistan.html">POS buyer's guide</a> shows exactly what to look for so you buy once and grow without hitting the wall again.</p>
@@ -123,24 +198,37 @@
 <p><strong>The real question:</strong> if your register broke tomorrow, would you replace it with the same thing — or with something smarter? However you answer that question, you already know what your shop has outgrown.</p>
 </div>
 
-<h2>What to Do Next: The 30-Day Test</h2>
+<h2 id="what-to-do-next-the-30-day-test">What to Do Next: The 30-Day Test</h2>
 <p>You do not have to guess whether better billing pays off. The honest way to decide is to test it: run proper billing software on your own counter for 7 days, side by side with your current routine, and compare. Count how much faster billing gets, how many stock-outs you catch early, how much udhar gets followed up, and how the day-end number feels.</p>
 <p>Just make sure the trial is real — full features, your real products, your real staff. A "demo" with half the buttons disabled proves nothing. And before you commit money to any system, run the numbers: our <a href="pos-software-cost-pakistan.html">honest price guide</a> shows what POS software in Pakistan actually costs in 2026, so no vendor can surprise you.</p>
 
 <p>The register served you well. It was the right tool for the shop you had. But tools have a lifespan, and when a tool starts costing you customers, stock, cash, and growth — keeping it is not loyalty. It is just expensive.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Vintage brass cash register photo by <a href="https://www.pexels.com/photo/32850670/" target="_blank" rel="noopener">DΛVΞ GΛRCIΛ</a> · Cash register printing receipt photo by <a href="https://www.pexels.com/photo/19224085/" target="_blank" rel="noopener">GOWTHAM AGM</a> · Half empty store shelves photo by <a href="https://www.pexels.com/photo/4437148/" target="_blank" rel="noopener">Roy Broo</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Stop losing money to an old cash register. Try modern billing free for 7 days.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), barcode billing in seconds, automatic stock deduction, digital khata with credit limits, per-cashier logins, 100% offline, full Urdu interface — and WhatsApp support in your language.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20apne%20shop%20ke%20liye%20billing%20software%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#growth-signals</span><span>#signs</span><span>#shop</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=7%20Signs%20Your%20Shop%20Has%20Outgrown%20Its%20Cash%20Register%20https%3A%2F%2Fshopcos.shop%2Fblog%2F7-signs-shop-outgrown-cash-register.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/7-signs-shop-outgrown-cash-register.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="pos-software-cost-pakistan.html"><img src="img/blog12-hero-register.jpg"><div><p>POS Software Cost in Pakistan (2026): An Honest Price Guide</p><span>Price Guide · Oct 21, 2026</span></div></a>
+<a class="art-ncard" href="fbr-e-invoicing-guide-pakistan-2026.html"><img src="img/blog11-hero-receipt-printer.jpg"><div><p>FBR E-Invoicing in Pakistan (2026): A Shopkeeper's Complete Guide</p><span>Tax &amp; Compliance · Oct 19, 2026</span></div></a>
+<a class="art-ncard" href="medical-store-software-pakistan.html"><img src="img/blog10-hero-pharmacy-counter.jpg"><div><p>Best Medical Store Software in Pakistan (2026): Pharmacy Billing with Batch &amp; Expiry Tracking</p><span>Pharmacy · Oct 18, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,40 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Buyer's Guide</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Buyer's Guide</span>
 <h1>Billing Software for Kiryana Shops: What Actually Matters at the Counter</h1>
-<div class="article-meta"><span>November 2, 2026</span><span>11 min read</span><span>Buyer's Guide</span></div>
+<p class="art-stand">Billing software for kiryana shops has to handle loose atta and daal by the kilo, mohalla udhar, morning rush queues and load shedding. The honest guide to what actually matters at a kiryana counter — and what to test before you buy.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 November 2, 2026</span><span>⏱ 11 min read</span></div>
+<img class="art-hero" src="img/blog22-hero-kiryana-store.jpg" alt="Billing Software for Kiryana Shops: What Actually Matters at the Counter">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#why-the-kiryana-counter-is-different">Why the Kiryana Counter Is Different</a></li>
+<li><a href="#1-loose-item-billing-has-to-be-as-fast-as-packet">1. Loose-Item Billing Has to Be as Fast as Packet Billing</a></li>
+<li><a href="#2-udhar-must-live-inside-the-bill-not-beside-it">2. Udhar Must Live Inside the Bill, Not Beside It</a></li>
+<li><a href="#3-speed-at-the-counter-is-a-feature-not-a-luxury">3. Speed at the Counter Is a Feature, Not a Luxury</a></li>
+<li><a href="#4-stock-must-be-tracked-in-kilos-packets-and-sac">4. Stock Must Be Tracked in Kilos, Packets, and Sacks — at Once</a></li>
+<li><a href="#5-offline-is-non-negotiable">5. Offline Is Non-Negotiable</a></li>
+<li><a href="#6-prices-must-be-changeable-in-seconds-by-you">6. Prices Must Be Changeable in Seconds, by You</a></li>
+<li><a href="#kiryana-ready-vs-generic-a-quick-comparison">Kiryana-Ready vs Generic: A Quick Comparison</a></li>
+<li><a href="#what-about-the-price-do-the-3-year-maths">What About the Price? Do the 3-Year Maths</a></li>
+<li><a href="#moving-from-the-register-to-software-in-one-week">Moving From the Register to Software in One Weekend</a></li>
+<li><a href="#5-mistakes-kiryana-owners-make-with-new-software">5 Mistakes Kiryana Owners Make With New Software</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Billing software for kiryana shops has to handle loose atta and daal by the kilo, mohalla udhar, morning rush queues and load shedding.</li>
+<li>The 10-minute test: before you buy any billing software, bill a basket of 2 kg atta, 500 g daal, one oil pouch and three sachets, put half the bill on udhar for a named customer, change the daal price mid-bill, and print. Then unplug the internet and bill the next customer. If any step fails, stalls, or needs a workaround, that software is not ready for your counter.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog22-hero-kiryana-store.jpg" alt="A small grocery store produce section with fresh vegetables and fruit on display" class="article-img">
 
@@ -83,7 +159,7 @@
 
 <p>This is why generic billing software so often disappoints kiryana owners. It is not that the software is bad. It is that it was built for a shop where everything comes in a sealed packet with a barcode, every customer pays in full, and the internet never drops. A kiryana shop is the opposite of that shop in almost every way that matters. If you are shopping for billing software for a kiryana store, judge it on the kiryana counter, not on a demo screen in a sales office. This guide covers exactly what to look for, what to test with your own hands, and what you can safely ignore.</p>
 
-<h2>Why the Kiryana Counter Is Different</h2>
+<h2 id="why-the-kiryana-counter-is-different">Why the Kiryana Counter Is Different</h2>
 <p>Five things make a kiryana shop harder to bill than almost any other retail business, and every one of them should shape your software choice:</p>
 <ul>
 <li><strong>Loose items outsell packed items.</strong> Atta, cheeni, daal, chawal, spices, and washing powder are sold by weight, not by packet. A bill is not "1 × item" — it is "2.5 kg at Rs 180 per kg," and the price per kilo changes whenever a new sack arrives at a different wholesale rate.</li>
@@ -94,7 +170,7 @@
 </ul>
 <p>Keep those five realities in front of you while reading every feature list a vendor sends you. If a feature does not help with one of them, it is decoration.</p>
 
-<h2>1. Loose-Item Billing Has to Be as Fast as Packet Billing</h2>
+<h2 id="1-loose-item-billing-has-to-be-as-fast-as-packet">1. Loose-Item Billing Has to Be as Fast as Packet Billing</h2>
 <p>This is the single most important test for a kiryana shop, and the one most demos skip. A good system lets you bill a loose item in three moves: pick the item, type the weight, and watch the amount calculate itself from the per-kilo rate. Selling 750 grams of cheeni should feel no slower than scanning a biscuit packet. What to check, specifically:</p>
 <ul>
 <li><strong>Decimal quantities.</strong> The software must accept 0.25, 0.5, 1.75 kg without rounding tricks or workarounds. If it only accepts whole numbers, it is not kiryana software.</li>
@@ -105,27 +181,27 @@
 
 <img src="img/blog22-loose-vegetables.jpg" alt="Fresh loose vegetables displayed for sale at a grocery shop" class="article-img">
 
-<h2>2. Udhar Must Live Inside the Bill, Not Beside It</h2>
+<h2 id="2-udhar-must-live-inside-the-bill-not-beside-it">2. Udhar Must Live Inside the Bill, Not Beside It</h2>
 <p>Here is the test that separates kiryana-ready software from the rest. Ring up a mixed bill — some items cash, the balance on udhar — and see how many steps it takes. In a proper system, it takes one: choose the customer, choose "udhar," and the bill posts to his ledger automatically, updates his balance, and deducts the stock at the same time. If you have to bill first and then open a separate app to record the udhar, you now own two records that will disagree by the end of the week.</p>
 <p>Three udhar features matter more than all the rest combined. First, <strong>credit limits that warn at the counter</strong>: when a customer's balance crosses the limit you set, the system should say so before the goods leave, while the amount is still small and the conversation is still friendly. Second, <strong>one searchable ledger per customer</strong>, with every purchase and payment dated, so "kitna banta hai" is answered by showing a screen, not by arguing from memory. Third, <strong>statements over WhatsApp</strong>: a clean monthly statement sent to the customer in one tap does more for recovery than a week of verbal reminders. Our guide on <a href="how-to-manage-udhar-khata.html">managing udhar khata</a> covers the recovery habits; the software's job is to make those habits effortless. And when the customer list grows past what a phone screen can hold, our <a href="khata-book-app-pc.html">PC khata guide</a> explains why the ledger belongs on the counter computer, where the billing happens.</p>
 
-<h2>3. Speed at the Counter Is a Feature, Not a Luxury</h2>
+<h2 id="3-speed-at-the-counter-is-a-feature-not-a-luxury">3. Speed at the Counter Is a Feature, Not a Luxury</h2>
 <p>Time a real bill, not a demo bill. A demo uses five scanned packets. Your counter uses fifteen mixed items, two loose weights, one price change, and a customer paying half in cash and half on udhar. Ask the vendor to bill that exact basket in front of you, and count the seconds and the clicks. The features that actually save time are unglamorous: search by typing the first two letters of an item name, favourite items pinned for the twenty things you sell every hour, a barcode scanner that reads in under a second, and a bill that prints without a confirmation dialog asking "are you sure?" for the hundredth time that day. Touch-friendly buttons matter too, because the person billing is often standing, often in a hurry, and often not a computer expert. A system your youngest staff member can learn in a day will be used; a system that needs a training course will be bypassed with the calculator within a week.</p>
 
-<h2>4. Stock Must Be Tracked in Kilos, Packets, and Sacks — at Once</h2>
+<h2 id="4-stock-must-be-tracked-in-kilos-packets-and-sac">4. Stock Must Be Tracked in Kilos, Packets, and Sacks — at Once</h2>
 <p>Kiryana stock is where careless software quietly costs you money. You buy atta by the 50-kg sack, sell it by the kilo, and sometimes by the pre-packed 5-kg bag. If the software only understands "units," your stock report will say you have 40 units of atta when you actually have 40 kilos, 3 sacks, and 12 bags — and you will order more of what you already have while running out of what you need. A kiryana-ready system converts between units automatically: sell 2 kg, and the sack balance falls by 2 kg. It also warns you before you run out of a fast mover, not after the shelf is empty during the evening rush. Expiry alerts matter here as well — ghee, oil, spices, and packed snacks all expire, and a system that flags items 30 days before expiry turns a loss into a discount sale. Finally, stock must fall the moment a bill is printed, including for udhar bills. A system that only deducts cash sales is keeping a fantasy inventory.</p>
 
 <div class="stat-callout">
 <p><strong>The 10-minute test:</strong> before you buy any billing software, bill a basket of 2 kg atta, 500 g daal, one oil pouch and three sachets, put half the bill on udhar for a named customer, change the daal price mid-bill, and print. Then unplug the internet and bill the next customer. If any step fails, stalls, or needs a workaround, that software is not ready for your counter.</p>
 </div>
 
-<h2>5. Offline Is Non-Negotiable</h2>
+<h2 id="5-offline-is-non-negotiable">5. Offline Is Non-Negotiable</h2>
 <p>This one is simple, and there is no honest middle ground. If the software needs the internet to print a bill, it will fail you during load shedding, during a router fault, and during every PTCL outage in your area. A kiryana system must run entirely on the shop's own computer, print bills offline, update stock offline, and record udhar offline — and then sync a backup copy online when the connection returns. Ask the vendor the blunt question: "If I unplug the router right now, can I bill the next ten customers normally?" Watch the answer, not the brochure. The same rule applies to your data: it should live on your PC, with a backup you control, not only on a vendor's server that you lose access to the day a subscription lapses.</p>
 
-<h2>6. Prices Must Be Changeable in Seconds, by You</h2>
+<h2 id="6-prices-must-be-changeable-in-seconds-by-you">6. Prices Must Be Changeable in Seconds, by You</h2>
 <p>When a new sack of cheeni arrives at a higher wholesale rate, the retail price changes that same morning — not after an email to support, not after a software update, and not only by someone with an admin password you do not have. You should be able to open the item, change the rate, and have every new bill use it immediately, while old bills keep their original prices for an honest record. The same goes for discounts: a Ramazan offer on dates, a clearance price on a slow-moving snack, a regular-customer rate on atta. If changing a price feels like filing paperwork, the software is working against the way a kiryana shop actually runs.</p>
 
-<h2>Kiryana-Ready vs Generic: A Quick Comparison</h2>
+<h2 id="kiryana-ready-vs-generic-a-quick-comparison">Kiryana-Ready vs Generic: A Quick Comparison</h2>
 <table>
 <tr><th>What the counter needs</th><th>Generic billing software</th><th>Kiryana-ready software</th></tr>
 <tr><td><strong>Loose items by weight</strong></td><td>Whole units only, or awkward workarounds</td><td>Decimal kilos, price per kg, multi-unit items</td></tr>
@@ -139,10 +215,10 @@
 
 <img src="img/blog22-shopkeeper-counter.jpg" alt="A friendly shopkeeper standing behind shelves of goods in a small shop" class="article-img">
 
-<h2>What About the Price? Do the 3-Year Maths</h2>
+<h2 id="what-about-the-price-do-the-3-year-maths">What About the Price? Do the 3-Year Maths</h2>
 <p>Almost every billing vendor in Pakistan now charges monthly — commonly Rs 1,000 to Rs 5,000 a month for a small shop, which sounds small until you multiply it. Rs 2,000 a month is Rs 24,000 a year and Rs 72,000 over three years, and the day you stop paying, the software usually stops working and your data becomes a hostage negotiation. A one-time purchase — shopcos soft, for example, is Rs 40,000 once for a lifetime license — costs more on day one and far less by year two, and the software keeps running whether or not you ever pay again. Do the maths for your own shop before you sign anything: monthly fee × 36 months, plus hardware, plus any "support plan" the vendor quietly requires. Then compare that total with a one-time price. The cheapest option on the first invoice is very often the most expensive option by the third year. Also ask what happens to your data if you leave. An honest vendor answers in one sentence; an evasive one has already answered you.</p>
 
-<h2>Moving From the Register to Software in One Weekend</h2>
+<h2 id="moving-from-the-register-to-software-in-one-week">Moving From the Register to Software in One Weekend</h2>
 <p>The fear that stops most kiryana owners is not the price — it is the changeover. "Mere paas 500 items hain, main dobara kaise likhun?" You do not type them all in one sitting, and you do not close the shop to do it. The order that works:</p>
 <ol>
 <li><strong>Start with your top 100 items.</strong> The atta, cheeni, daal, oil, tea, soap, and snacks that make up most of your daily sales. Enter those first, with correct per-kilo rates. The remaining slow items can be added over the following week as they sell.</li>
@@ -152,7 +228,7 @@
 <li><strong>Train the person who actually bills.</strong> If your cashier or son handles the counter, he must be able to bill loose items, record udhar, and reprint a bill without calling you. Software only the owner can operate is a bottleneck, not a solution.</li>
 </ol>
 
-<h2>5 Mistakes Kiryana Owners Make With New Software</h2>
+<h2 id="5-mistakes-kiryana-owners-make-with-new-software">5 Mistakes Kiryana Owners Make With New Software</h2>
 <ul>
 <li><strong>Buying on the demo, not on their own basket.</strong> A demo with five scanned packets proves nothing. Always test with your real mix: loose weights, udhar, and a price change mid-bill.</li>
 <li><strong>Ignoring the udhar migration.</strong> If the opening balances are wrong, every report after them is wrong. Spend one careful evening on the top 30 debtors before go-live.</li>
@@ -161,21 +237,34 @@
 <li><strong>Choosing monthly because it feels cheaper.</strong> See the 3-year maths above. A small monthly fee is a large lifetime bill with an off switch the vendor controls.</li>
 </ul>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>A kiryana shop does not need the fanciest billing software in Pakistan. It needs software that bills a kilo as easily as a packet, records udhar inside the bill, survives load shedding, lets you change a price in seconds, and keeps your stock honest in kilos and sacks at the same time. Everything else — dashboards, charts, AI features — is useful only after those five things work flawlessly at your counter, during your morning rush, with your customers standing in front of you. Test any software against that reality, with your own basket and your own udhar customer, before you pay a rupee. The right system will feel boring in the best possible way: bills print, stock falls, khata updates, and the queue moves. That is what a kiryana counter actually needs.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> A small grocery store produce section photo by <a href="https://www.pexels.com/photo/grocery-store-piggly-wiggly-produce-small-town-1055443/" target="_blank" rel="noopener">Diane Webb</a> · A friendly shopkeeper standing behind shelves of goods photo by <a href="https://www.pexels.com/photo/smiling-shopkeeper-with-homemade-preserves-34674788/" target="_blank" rel="noopener">Demetra Ioannidou</a> · Fresh loose vegetables at a grocery shop photo by <a href="https://www.pexels.com/photo/food-fresh-vegetables-groceries-shop-2600345/" target="_blank" rel="noopener">Suzy Hazelwood</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Bill kilos, packets and udhar from one counter.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), fast billing for loose and packed items, digital khata with credit limits and WhatsApp statements, automatic stock deduction on every bill, expiry alerts, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20apne%20kiryana%20shop%20ke%20liye%20shopcos%20soft%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#buyer-s-guide</span><span>#billing</span><span>#software</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Billing%20Software%20for%20Kiryana%20Shops%3A%20What%20Actually%20Matters%20at%20the%20Counter%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fbilling-software-kiryana-shops.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/billing-software-kiryana-shops.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="binance-hack-6-3-billion-lessons-small-shops.html"><img src="img/blog20-hero-crypto-keyboard.jpg"><div><p>The $6.3 Billion Binance Hack: What Happened — and 7 Lessons for Small Shop Owners</p><span>Business Security · Oct 31, 2026</span></div></a>
+<a class="art-ncard" href="khata-book-app-pc.html"><img src="img/blog19-hero-shop-computer.jpg"><div><p>Khata Book App for PC: Run Your Shop's Udhar Ledger on the Big Screen</p><span>Khata &amp; Udhar · Oct 31, 2026</span></div></a>
+<a class="art-ncard" href="mobile-shop-software.html"><img src="img/blog21-hero-phone-store.jpg"><div><p>Mobile Shop Software: Billing, IMEI Tracking, Warranty and Udhar in One Place</p><span>Mobile Shops · Oct 31, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Buyer's Guide</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Buyer's Guide</span>
 <h1>Billing Machine Price in Pakistan: The Full Counter Setup Cost (2026)</h1>
-<div class="article-meta"><span>October 29, 2026</span><span>11 min read</span><span>Buyer's Guide</span></div>
+<p class="art-stand">Billing machine price in Pakistan in 2026: what a full counter setup really costs — cash register vs POS terminal vs PC setup, printer, scanner and drawer prices in rupees, plus the hidden costs sellers never mention.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 October 29, 2026</span><span>⏱ 11 min read</span></div>
+<img class="art-hero" src="img/blog17-hero-checkout.jpg" alt="Billing Machine Price in Pakistan: The Full Counter Setup Cost (2026)">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#first-decide-what-billing-machine-means-for-your">First, Decide What "Billing Machine" Means for Your Shop</a></li>
+<li><a href="#every-piece-of-the-counter-priced">Every Piece of the Counter, Priced</a></li>
+<li><a href="#the-three-budgets-what-a-complete-setup-actually">The Three Budgets: What a Complete Setup Actually Totals</a></li>
+<li><a href="#the-hidden-costs-sellers-never-put-in-the-quotat">The Hidden Costs Sellers Never Put in the Quotation</a></li>
+<li><a href="#where-to-buy-and-how-to-avoid-getting-burned">Where to Buy, and How to Avoid Getting Burned</a></li>
+<li><a href="#card-machines-the-separate-question">Card Machines: The Separate Question</a></li>
+<li><a href="#what-not-to-buy-yet">What Not to Buy (Yet)</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Billing machine price in Pakistan in 2026: what a full counter setup really costs — cash register vs POS terminal vs PC setup, printer, scanner and drawer prices in rupees, plus the hidden costs sellers never mention.</li>
+<li>The number that matters most is not the machine's price — it is the five-year price. A "cheap" system with a monthly subscription of Rs 5,000 costs Rs 300,000 over five years, and stops working the month you stop paying. A one-time software license of Rs 40,000 plus hardware you own outright is usually far cheaper by year two — and your sales data stays yours. Our POS price guide runs that comparison in full.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog17-hero-checkout.jpg" alt="A modern supermarket checkout counter with a POS terminal, receipt printer and card machine" class="article-img">
 
@@ -85,14 +157,14 @@
 
 <p>Prices below are typical market ranges seen in Pakistani computer markets and online stores in 2026. Exact prices move with the dollar rate, the city, and the brand — treat them as planning ranges, not quotations, and always confirm before paying.</p>
 
-<h2>First, Decide What "Billing Machine" Means for Your Shop</h2>
+<h2 id="first-decide-what-billing-machine-means-for-your">First, Decide What "Billing Machine" Means for Your Shop</h2>
 <p>When Pakistani shopkeepers say "billing machine," they usually mean one of three very different setups. Naming yours first saves you from paying for the wrong one.</p>
 <p><strong>1. A standalone electronic cash register (ECR).</strong> One box with buttons, a small display, and a built-in receipt printer. It adds up bills and opens a cash drawer. It does not track stock properly, it does not remember customer udhar, and it cannot print item-wise reports you can actually use. It is cheap, and that is its only real advantage.</p>
 <p><strong>2. An all-in-one POS terminal.</strong> A touchscreen computer with a printer, a cash drawer, and sometimes a scanner built into a single unit. It looks professional, takes up little space, and is what you see at supermarkets and clothing chains. It is also the most expensive option, and if one part breaks, the whole unit often has to go for repair.</p>
 <p><strong>3. A PC setup: computer + billing software + printer + scanner + drawer.</strong> Separate pieces, each replaceable on its own. This is what most small and mid-size Pakistani shops actually run, because it is the most flexible: you may already own the computer, and you can upgrade one piece at a time. It is also the setup this guide prices in detail, because it is where the best value is.</p>
 <p>If your shop is a small kiryana or general store, option 3 is almost always the right answer. If you run a busy supermarket counter where looks matter and space is tight, option 2 is worth pricing. Option 1 only makes sense if you truly want nothing more than printed bills — and in 2026, that is a very low ceiling for your money.</p>
 
-<h2>Every Piece of the Counter, Priced</h2>
+<h2 id="every-piece-of-the-counter-priced">Every Piece of the Counter, Priced</h2>
 <p>Here is what each part of a billing counter typically costs in Pakistan in 2026, and what to watch for when buying it.</p>
 <table>
 <tr><th>Item</th><th>Typical price (PKR)</th><th>Notes</th></tr>
@@ -112,7 +184,7 @@
 <tr><td>Billing software (one-time)</td><td>40,000 (shopcos soft)</td><td>Lifetime license; compare with subscriptions below</td></tr>
 </table>
 
-<h2>The Three Budgets: What a Complete Setup Actually Totals</h2>
+<h2 id="the-three-budgets-what-a-complete-setup-actually">The Three Budgets: What a Complete Setup Actually Totals</h2>
 <p>Adding the pieces up is where most shopkeepers get their first surprise — and their first useful number. Here are three realistic complete setups, assuming you need everything except where stated.</p>
 <h3>Budget 1: The Starter Counter — roughly Rs 55,000 to 90,000</h3>
 <p>For a small kiryana or general store that already has a working computer at home or in the shop. You add an 80mm thermal printer (Rs 12,000–25,000), a wired barcode scanner (Rs 3,500–8,000), a cash drawer (Rs 6,000–12,000), a UPS (Rs 12,000–20,000), and billing software. This is the setup that turns a spare PC into a real billing counter for less than the price of a single all-in-one terminal — and every piece can be replaced separately later.</p>
@@ -127,7 +199,7 @@
 
 <img src="img/blog17-portable-printer.jpg" alt="A portable receipt printer printing a bill, held in one hand" class="article-img">
 
-<h2>The Hidden Costs Sellers Never Put in the Quotation</h2>
+<h2 id="the-hidden-costs-sellers-never-put-in-the-quotat">The Hidden Costs Sellers Never Put in the Quotation</h2>
 <p>The machine's price tag is only the first bill. These are the costs that quietly add up afterwards — budget for them now, or they will surprise you later.</p>
 <ul>
 <li><strong>Receipt paper rolls.</strong> A roll costs roughly Rs 150–350 depending on size and quality, and a busy shop can go through several a week. Cheap paper jams printers and fades within months, which matters when a customer returns with a faded bill. Buy a month's supply at once and you will immediately see the real monthly cost.</li>
@@ -137,7 +209,7 @@
 <li><strong>Training and downtime.</strong> A system your staff cannot use confidently in a week costs you sales every single day. Factor in one day of proper training — our <a href="train-staff-billing-software-one-day.html">one-day staff training plan</a> is built exactly for this — and the first week's slower billing while everyone learns.</li>
 </ul>
 
-<h2>Where to Buy, and How to Avoid Getting Burned</h2>
+<h2 id="where-to-buy-and-how-to-avoid-getting-burned">Where to Buy, and How to Avoid Getting Burned</h2>
 <p>Computer markets like Hall Road in Lahore, Saddar in Karachi, and the tech markets in Rawalpindi and Faisalabad usually beat online prices for printers, scanners, and drawers — and you can test the item on the spot. Online stores are fine for standard items with clear model numbers, but check the seller's return policy before ordering anything you cannot test.</p>
 <p>Wherever you buy, run these checks before you pay:</p>
 <ol>
@@ -150,29 +222,42 @@
 
 <img src="img/blog17-card-terminal.jpg" alt="A customer paying by card at a shop counter with a card terminal" class="article-img">
 
-<h2>Card Machines: The Separate Question</h2>
+<h2 id="card-machines-the-separate-question">Card Machines: The Separate Question</h2>
 <p>One item deliberately left out of the budgets above is the card machine, because in Pakistan it is usually not something you buy — it is something a bank provides. Debit and credit card terminals are typically issued by your bank against your business account, sometimes with a monthly rental or a per-transaction fee, and sometimes free above a certain volume. If a seller tries to sell you a card machine as part of a "billing machine package" at a big markup, pause: call your bank first and ask what terminal they offer your account type. For most small shops, JazzCash and Easypaisa QR payments at the counter cover the cashless customers without any card-machine cost at all.</p>
 
-<h2>What Not to Buy (Yet)</h2>
+<h2 id="what-not-to-buy-yet">What Not to Buy (Yet)</h2>
 <p>New shopkeepers overspend in predictable places. You do not need a customer-facing display on day one — a printed bill does that job. You do not need a second screen for advertising until your queue is long enough to have an audience. You do not need a barcode label printer until you actually stock unlabelled products. And you do not need the biggest, fastest PC in the market: billing software is light work, and the money is far better spent on a good printer, a good scanner, and a UPS that actually holds a charge.</p>
 <p>The right order to spend is simple: printer and scanner first, UPS the same day, software that fits your shop, and everything else only when a real problem — not a salesman's pitch — demands it.</p>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>A billing machine in Pakistan in 2026 costs anywhere from Rs 25,000 for a basic cash register to Rs 400,000 for a full supermarket counter — but the number that should guide your decision is not the sticker price. It is the total cost of the counter over five years, including paper, batteries, maintenance, and the software model you choose. A starter PC setup with a good 80mm printer, a reliable scanner, a UPS, and one-time software gives most Pakistani shops everything they need for well under Rs 200,000 — and, unlike a subscription system, it keeps working and keeps your data yours no matter what happens next year.</p>
 <p>Before you spend a rupee, write down your three budgets, visit two sellers with the same list, and test every item on your own software. The shopkeeper who does that never overpays — and never has to explain to a queue of customers why the billing machine is "loading."</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Modern supermarket checkout counter photo by <a href="https://www.pexels.com/photo/4199490/" target="_blank" rel="noopener">Jack Sparrow</a> · Portable receipt printer photo by <a href="https://www.pexels.com/photo/4449786/" target="_blank" rel="noopener">Hook Tell</a> · Card payment at a shop counter photo by <a href="https://www.pexels.com/photo/3907161/" target="_blank" rel="noopener">Andrea Piacquadio</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Set up your counter once — and own it forever.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), barcode billing in seconds, automatic stock deduction, digital khata with credit limits, per-cashier logins, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20apne%20shop%20ke%20liye%20billing%20machine%20setup%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#buyer-s-guide</span><span>#billing</span><span>#machine</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Billing%20Machine%20Price%20in%20Pakistan%3A%20The%20Full%20Counter%20Setup%20Cost%20%282026%29%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fbilling-machine-price-pakistan.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/billing-machine-price-pakistan.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="best-billing-software-pakistan-2026.html"><img src="img/blog16-hero-cashier.jpg"><div><p>Best Billing Software in Pakistan (2026): 9 Options Compared Honestly</p><span>Buyer's Guide · Oct 28, 2026</span></div></a>
+<a class="art-ncard" href="offline-vs-online-billing-software.html"><img src="img/blog15-hero-checkout.jpg"><div><p>Offline vs Online Billing Software: Which Is Right for Your Shop?</p><span>Buyer's Guide · Oct 28, 2026</span></div></a>
+<a class="art-ncard" href="train-staff-billing-software-one-day.html"><img src="img/blog14-hero-training.jpg"><div><p>How to Train Your Staff on Billing Software in Just One Day</p><span>Staff Management · Oct 26, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">

@@ -21,30 +21,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <style>
-.blog-article{max-width:800px;margin:0 auto;padding:130px 20px 60px}
-.blog-article h1{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;line-height:1.2;margin:14px 0 12px;color:#fff}
-.article-meta{color:var(--muted);font-size:.9rem;margin-bottom:30px;display:flex;gap:18px;flex-wrap:wrap}
-.blog-article h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.65rem;margin:42px 0 14px;color:#fff}
-.blog-article h3{font-size:1.2rem;margin:26px 0 10px;color:var(--gold-lt)}
-.blog-article p{color:#d5d9e8;line-height:1.85;margin-bottom:18px;font-size:1.04rem}
-.blog-article ul,.blog-article ol{color:#d5d9e8;line-height:1.85;margin:0 0 20px 22px;font-size:1.04rem}
-.blog-article li{margin-bottom:10px}
-.blog-article strong{color:#fff}
-.blog-article table{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:.98rem;color:#d5d9e8}
-.blog-article th,.blog-article td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.12);line-height:1.6}
-.blog-article th{color:#fff}
-.back-link{color:var(--gold-lt);text-decoration:none;font-weight:600}
-.back-link:hover{text-decoration:underline}
-.cta-box{background:linear-gradient(135deg,rgba(245,183,63,.12),rgba(245,183,63,.03));border:1px solid rgba(245,183,63,.4);border-radius:16px;padding:32px;margin:48px 0 0;text-align:center}
-.cta-box h3{margin:0 0 10px;color:#fff;font-size:1.4rem}
-.cta-box p{margin-bottom:20px}
-.stat-callout{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);padding:16px 20px;margin:24px 0;border-radius:0 10px 10px 0}
-.stat-callout p{margin:0}
-.article-img{width:100%;border-radius:14px;margin:26px 0;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-.photo-credits{font-size:.85rem;color:var(--muted);margin:40px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.photo-credits a{color:var(--gold-lt);text-decoration:none}
-.photo-credits a:hover{text-decoration:underline}
-@media(max-width:720px){.blog-article h1{font-size:1.9rem}.blog-article{padding-top:110px}.blog-article table{font-size:.88rem}}
+.art-prog{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e9b949,#c9930a);width:0;z-index:999}
+.art-main{max-width:none;margin:0;background:#f4f6f8;color:#23282e;padding:96px 0 0}
+.art-inner{max-width:1180px;margin:0 auto;padding:0 20px}
+.art-crumb{font-size:13.5px;color:#7c8694;padding:18px 0 4px}
+.art-crumb a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:10px 0 6px}
+.art-chip{display:inline-block;background:#fdf3d7;color:#8a6d1f;border:1px solid #ecd28a;font-size:12px;font-weight:800;letter-spacing:1.2px;padding:5px 12px;border-radius:20px;text-transform:uppercase}
+.art-grid h1{font-size:41px;line-height:1.2;color:#0d1520;font-weight:800;margin:14px 0 10px;letter-spacing:-.5px;font-family:inherit}
+.art-stand{font-size:19px;color:#5b6570;line-height:1.6;margin:0 0 14px}
+.art-meta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;color:#6b7480;font-size:14px;padding-bottom:16px;border-bottom:1px solid #e5e8ec;margin-bottom:20px}
+.art-meta .who{display:flex;align-items:center;gap:8px}
+.art-meta .who img{width:30px;height:30px;border-radius:50%;border:2px solid #e9b949}
+.art-meta b{color:#39424e}
+.art-hero{width:100%;border-radius:16px;box-shadow:0 14px 34px rgba(11,30,58,.18);margin-bottom:22px}
+.art-toc{background:#fff;border:1px solid #e5e8ec;border-left:5px solid #e9b949;border-radius:12px;padding:18px 22px;margin:0 0 26px}
+.art-toc h4{font-size:15px;color:#0b1e3a;text-transform:uppercase;letter-spacing:.7px;margin:0 0 10px}
+.art-toc ol{margin:0 0 0 18px;font-size:15.5px;line-height:1.7}
+.art-toc a{color:#0b5cad;font-weight:600;text-decoration:none}
+.art-keys{background:linear-gradient(160deg,#fdf6dd,#fdfaf0);border:1px solid #ecd28a;border-radius:14px;padding:20px 24px;margin:0 0 26px}
+.art-keys h4{color:#8a6d1f;font-size:15px;text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+.art-keys ul{margin:0 0 0 18px;font-size:16.5px;line-height:1.65}
+.blog-article{font-size:18.5px;color:#2c333c;line-height:1.78}
+.blog-article>p:first-of-type{font-size:20px;color:#39424e}
+.blog-article>p:first-of-type::first-letter{font-size:52px;font-weight:800;color:#0b1e3a;float:left;line-height:.85;padding:4px 10px 0 0}
+.blog-article p{margin:0 0 20px}
+.blog-article h2{font-size:27px;color:#0b1e3a;font-weight:800;line-height:1.3;margin:40px 0 14px;padding-bottom:8px;border-bottom:3px solid #e9b949}
+.blog-article h3{font-size:21px;color:#12283f;margin:28px 0 10px}
+.blog-article ul,.blog-article ol{margin:0 0 20px 22px}
+.blog-article li{margin-bottom:8px}
+.blog-article a{color:#0b5cad;font-weight:600}
+.blog-article img{max-width:100%;border-radius:12px;margin:10px 0 18px;box-shadow:0 6px 20px rgba(11,30,58,.1)}
+.blog-article blockquote{border-left:4px solid #e9b949;background:#fdfaf0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:19px;color:#39424e;margin:0 0 22px}
+.blog-article .stat-callout{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border-radius:14px;padding:22px 26px;margin:26px 0;font-size:17px;box-shadow:0 10px 26px rgba(11,30,58,.22)}
+.blog-article .stat-callout strong{color:#e9b949}
+.blog-article table{width:100%;border-collapse:collapse;margin:0 0 22px;font-size:16.5px;background:#fff}
+.blog-article th{background:#0b1e3a;color:#fff;text-align:left;padding:10px 12px}
+.blog-article td{border-bottom:1px solid #e5e8ec;padding:10px 12px}
+.blog-article .photo-credits{font-size:13px;color:#8a919c;margin-top:10px}
+.art-tags{margin:26px 0 4px;display:flex;gap:8px;flex-wrap:wrap}
+.art-tags span{background:#eef1f5;color:#4a545f;font-size:13px;font-weight:700;padding:6px 12px;border-radius:16px}
+.art-author{display:flex;gap:16px;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:20px 22px;margin:24px 0}
+.art-author img{width:64px;height:64px;border-radius:50%;border:3px solid #e9b949}
+.art-author h4{color:#0b1e3a;font-size:17px;margin:0 0 4px}
+.art-author p{font-size:15px;color:#5b6570;line-height:1.55;margin:0}
+.art-share{display:flex;gap:10px;margin:22px 0 4px}
+.art-share a{flex:1;text-align:center;padding:11px;border-radius:9px;font-weight:700;font-size:15px;color:#fff;text-decoration:none}
+.s-wa{background:#25d366}.s-fb{background:#1877f2}.s-x{background:#0b1e3a}
+.art-side{display:flex;flex-direction:column;gap:22px}
+.art-sticky{position:sticky;top:104px;display:flex;flex-direction:column;gap:22px}
+.art-card{color:#23282e;background:#fff;border:1px solid #e5e8ec;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(16,30,50,.05)}
+.art-card h4{font-size:16px;color:#0b1e3a;margin:0 0 12px;text-transform:uppercase;letter-spacing:.6px}
+.art-trial{background:linear-gradient(160deg,#0b1e3a,#12305c);color:#fff;border:none}
+.art-trial h4{color:#e9b949}
+.art-trial .big{font-size:21px;font-weight:800;margin-bottom:4px}
+.art-trial p{font-size:15px;line-height:1.6;color:#d7e1ee;margin:0}
+.art-trial .price{font-size:14px;color:#e9b949;font-weight:700;margin-top:8px}
+.gold-btn{display:block;text-align:center;background:#e9b949;color:#0b1e3a;font-weight:800;padding:12px;border-radius:9px;margin-top:14px;font-size:16px;text-decoration:none}
+.wa-btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:700;padding:11px;border-radius:9px;margin-top:10px;font-size:15px;text-decoration:none}
+.art-post{display:flex;gap:12px;margin-bottom:16px}
+.art-post img{width:74px;height:58px;object-fit:cover;border-radius:8px}
+.art-post p{font-size:14.5px;font-weight:700;line-height:1.35;margin:0;color:#23282e}
+.art-post span{font-size:12.5px;color:#8a919c}
+.art-next{padding:26px 0 40px}
+.art-next h3{font-size:23px;color:#0b1e3a;margin:0 0 16px}
+.art-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.art-ncard{background:#fff;border:1px solid #e5e8ec;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(16,30,50,.05);display:block;text-decoration:none;color:inherit}
+.art-ncard img{width:100%;height:150px;object-fit:cover}
+.art-ncard div{padding:16px}
+.art-ncard p{font-weight:700;font-size:16.5px;line-height:1.4;margin:0;color:#23282e}
+.art-ncard span{font-size:13px;color:#8a919c}
+@media(max-width:900px){.art-grid{grid-template-columns:1fr}.art-cards{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/mobile.css">
 </head>
@@ -71,11 +118,36 @@
   </div>
 </header>
 
-<main class="container">
-<article class="blog-article">
-<p><a href="index.html" class="back-link">← Back to Blog</a></p>
+<main class="art-main">
+<div class="art-inner">
+<div class="art-prog" id="rdprog"></div>
+<div class="art-crumb"><a href="../index.html">Home</a> › <a href="index.html">Blog</a> › <b>Wholesale Guide</b></div>
+<div class="art-grid">
+<div>
+<span class="art-chip">Wholesale Guide</span>
 <h1>Wholesale Billing Software: Credit Parties, Cartons and Ledgers, Explained</h1>
-<div class="article-meta"><span>November 6, 2026</span><span>11 min read</span><span>Wholesale Guide</span></div>
+<p class="art-stand">Wholesale billing is not retail billing with bigger numbers. Carton and piece rates, credit parties, party-wise ledgers, godown stock and payment cycles — what wholesale billing software must actually do, and the 8 questions to ask before you buy.</p>
+<div class="art-meta"><span class="who"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team">By <b>COS Team</b></span><span>📅 November 6, 2026</span><span>⏱ 11 min read</span></div>
+<img class="art-hero" src="img/blog26-hero-warehouse.jpg" alt="Wholesale Billing Software: Credit Parties, Cartons and Ledgers, Explained">
+<div class="art-toc"><h4>📋 Is article mein kya hai</h4><ol>
+<li><a href="#why-wholesale-billing-breaks-retail-software">Why Wholesale Billing Breaks Retail Software</a></li>
+<li><a href="#the-carton-problem-units-that-multiply">The Carton Problem: Units That Multiply</a></li>
+<li><a href="#credit-parties-your-real-business-is-the-ledger">Credit Parties: Your Real Business Is the Ledger</a></li>
+<li><a href="#the-6-features-wholesale-billing-software-must-h">The 6 Features Wholesale Billing Software Must Have</a></li>
+<li><a href="#the-7-mistakes-wholesalers-make-when-choosing-so">The 7 Mistakes Wholesalers Make When Choosing Software</a></li>
+<li><a href="#what-a-good-wholesale-bill-looks-like">What a Good Wholesale Bill Looks Like</a></li>
+<li><a href="#the-8-questions-to-ask-before-you-buy">The 8 Questions to Ask Before You Buy</a></li>
+<li><a href="#the-bottom-line">The Bottom Line</a></li>
+</ol></div>
+<div class="art-keys"><h4>⭐ Khulasa — main points</h4><ul>
+<li>Wholesale billing is not retail billing with bigger numbers.</li>
+<li>The number that matters: in a typical Pakistani wholesale business, 60–80% of the money on the street at any moment is credit — goods already delivered, payment still pending. A wholesaler who cannot see, per party, exactly how much is owed and how old it is, is not running a business. He is running a hope. The ledger is the difference.</li>
+<li>shopcos soft: billing, stock aur khata ek hi software mein — 7-day FREE trial, 100% offline, plans Rs 25,000 se shuru.</li>
+</ul></div>
+<article class="blog-article">
+<p></p>
+
+
 
 <img src="img/blog26-hero-warehouse.jpg" alt="Two workers handling a package in a spacious wholesale warehouse" class="article-img">
 
@@ -85,7 +157,7 @@
 
 <p>This guide explains wholesale billing the way it actually works on a Pakistani godown floor, the six features wholesale billing software must have, the seven mistakes wholesalers make when choosing it, and the eight questions to ask before you spend anything. If you supply retailers, run a distribution business, or buy in bulk and sell in cartons, this is the guide your software vendor will not write for you.</p>
 
-<h2>Why Wholesale Billing Breaks Retail Software</h2>
+<h2 id="why-wholesale-billing-breaks-retail-software">Why Wholesale Billing Breaks Retail Software</h2>
 <p>Retail billing software assumes five things. A wholesale counter violates all five, every single day:</p>
 <ul>
 <li><strong>The customer pays now.</strong> Retail assumes cash or card at the counter. Wholesale assumes credit — a party takes goods today and pays on a cycle of 7, 15, or 30 days. The bill is not the end of the transaction; it is the start of a receivable.</li>
@@ -96,7 +168,7 @@
 </ul>
 <p>None of this is exotic. It is the daily reality of every wholesale market in Pakistan, from Akbari Mandi in Lahore to the wholesale belts of Faisalabad and Karachi. Software that cannot model these five things is not "simpler" — it is wrong for the job, and the register book will quietly win again.</p>
 
-<h2>The Carton Problem: Units That Multiply</h2>
+<h2 id="the-carton-problem-units-that-multiply">The Carton Problem: Units That Multiply</h2>
 <p>The single most common reason wholesale billing goes wrong is units. A carton of cooking oil contains 12 bottles. A carton of soap contains 48 bars. A carton of biscuits contains 24 packets — except the large pack, which contains 12. And a retailer will sometimes buy two cartons and six loose bottles, because that is exactly what his shelf needs.</p>
 <p>If your software only understands "quantity × price," you are forced to choose: either bill everything in pieces (and do the carton maths in your head, on every bill, during a rush), or create a separate item for every carton size (so your item list explodes into hundreds of near-duplicates and your stock report becomes fiction). Both options produce the same result: wrong stock, wrong bills, and a godown count that never matches the computer.</p>
 <p>Real wholesale billing software handles this with <strong>multi-unit items</strong>: one item, defined once, with its carton size and its loose-piece rate. You type "2 cartons + 6 pieces" and the software does the rest — it bills the cartons at the carton rate, the loose pieces at the piece rate, and deducts exactly 30 bottles from stock. Here is what that looks like on a real bill:</p>
@@ -113,7 +185,7 @@
 
 <img src="img/blog26-stacked-cartons.jpg" alt="High stacks of cardboard cartons organised in a warehouse" class="article-img">
 
-<h2>Credit Parties: Your Real Business Is the Ledger</h2>
+<h2 id="credit-parties-your-real-business-is-the-ledger">Credit Parties: Your Real Business Is the Ledger</h2>
 <p>Ask a wholesaler what his business is worth and he will not point at his godown. He will point at his parties. A wholesaler's real asset is the network of retailers who buy from him on credit, pay on time, and come back next week. The goods are just inventory. The relationships — and the ledgers that record them — are the business.</p>
 <p>That is why the party ledger is the heart of wholesale billing software, not a side feature. A party is not a "customer name" typed on a bill. A party is a record with a full history: every bill, every payment, every discount, every returned carton, every bounced cheque, and one number that matters more than all of them — the outstanding balance, right now.</p>
 <p>Four ledger features separate real wholesale software from a receipt printer with a customer field:</p>
@@ -128,7 +200,7 @@
 <p><strong>The number that matters:</strong> in a typical Pakistani wholesale business, 60–80% of the money on the street at any moment is credit — goods already delivered, payment still pending. A wholesaler who cannot see, per party, exactly how much is owed and how old it is, is not running a business. He is running a hope. The ledger is the difference.</p>
 </div>
 
-<h2>The 6 Features Wholesale Billing Software Must Have</h2>
+<h2 id="the-6-features-wholesale-billing-software-must-h">The 6 Features Wholesale Billing Software Must Have</h2>
 <p>Judge any wholesale billing software against these six. If it fails two or more, it is retail software wearing a wholesale label.</p>
 
 <h3>1. Multi-unit billing (carton, dozen, piece)</h3>
@@ -149,7 +221,7 @@
 <h3>6. Supplier-side billing too</h3>
 <p>You are a customer as well as a seller. The same software should track what you owe your suppliers, per supplier, with the same ledger discipline — purchase bills, supplier payments, and the margin between your buying rate and your selling rate, item by item. If the software only tracks sales, you will know your turnover and still not know your profit.</p>
 
-<h2>The 7 Mistakes Wholesalers Make When Choosing Software</h2>
+<h2 id="the-7-mistakes-wholesalers-make-when-choosing-so">The 7 Mistakes Wholesalers Make When Choosing Software</h2>
 <ol>
 <li><strong>Choosing on the bill printout.</strong> A pretty bill is the least important feature. The ledger, the carton maths, and the ageing report are what you will live with. Judge the software on those, not on the font.</li>
 <li><strong>Buying retail software because it is cheaper.</strong> It is cheaper because it does less. The register book you keep alongside it — the one that tracks the real credit and the real stock — is the hidden cost, paid every day in time and mistakes.</li>
@@ -162,7 +234,7 @@
 
 <img src="img/blog26-ledger-book.jpg" alt="An open ledger book with handwritten entries" class="article-img">
 
-<h2>What a Good Wholesale Bill Looks Like</h2>
+<h2 id="what-a-good-wholesale-bill-looks-like">What a Good Wholesale Bill Looks Like</h2>
 <p>A wholesale bill is a document your customer checks, his accountant files, and you both refer back to when a payment is disputed. It needs to carry more than a retail receipt:</p>
 <ul>
 <li><strong>Party name, address, and phone</strong> — printed, not handwritten, so there is no argument about whose bill it is.</li>
@@ -174,7 +246,7 @@
 </ul>
 <p>If your current bills carry only the item names and a total, you are doing your collection team's job for them — badly. The bill is your cheapest collection tool. Use it.</p>
 
-<h2>The 8 Questions to Ask Before You Buy</h2>
+<h2 id="the-8-questions-to-ask-before-you-buy">The 8 Questions to Ask Before You Buy</h2>
 <ol>
 <li>Can I bill cartons, dozens, and loose pieces of the same item on one bill, with correct stock deduction for each?</li>
 <li>Does the party's outstanding balance and credit limit appear on screen before I add items to the bill?</li>
@@ -187,22 +259,35 @@
 </ol>
 <p>Run those eight questions on any software, including ours, and compare the answers side by side. A vendor who answers clearly is a vendor who has actually served wholesalers. A vendor who changes the subject to the bill design has told you everything you need to know.</p>
 
-<h2>The Bottom Line</h2>
+<h2 id="the-bottom-line">The Bottom Line</h2>
 <p>Wholesale billing is not retail billing with bigger numbers. It is a different business: cartons that multiply, parties who pay later, ledgers that are the real asset, and godowns that have to match the computer. Software built for a retail counter will print your bills beautifully and lose your business quietly — in wrong stock, uncollected credit, and a register book that never goes away.</p>
 <p>The right software does three things without being asked: it bills in cartons and pieces correctly, it shows you every party's balance and age before you extend more credit, and it keeps your data on your own computer where no subscription can take it away. Everything else — the pretty bill, the reports, the extras — is decoration. Get the three things right, test them on your real counter for a full month, and the register book can finally retire.</p>
-
 <div class="photo-credits">
 <p><strong>Photo credits:</strong> Two workers handling a package in a warehouse photo by <a href="https://www.pexels.com/photo/workers-walking-along-aisle-in-warehouse-4487383/" target="_blank" rel="noopener">Tiger Lily</a> · High stacks of cardboard boxes in a warehouse photo by <a href="https://www.pexels.com/photo/stacked-boxes-in-a-warehouse-10834810/" target="_blank" rel="noopener">Ihsan Adityawarman</a> · An open ledger book with handwritten entries photo by <a href="https://www.pexels.com/photo/open-book-in-close-up-shot-12983110/" target="_blank" rel="noopener">Strange Happenings</a> — all via Pexels.</p>
 </div>
-
-<div class="cta-box">
-<h3>Try the full software free for 7 days — no card, no limits trap.</h3>
-<p>shopcos soft: Rs 40,000 one-time (lifetime license), multi-unit carton billing, party-wise khata with credit limits and ageing, godown-wise stock, WhatsApp party statements, 100% offline billing with online sync, full Urdu interface — and WhatsApp support in your language. Try it free for 7 days before you spend anything.</p>
-<a class="btn btn-primary btn-lg" href="https://shopcos.shop/#pricing">Start 7-day Free Trial</a>
-<p style="margin-top:14px;font-size:.95rem">Questions? <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20wholesale%20billing%20software%20ke%20bare%20mein%20poochna%20hai." target="_blank" rel="noopener" style="color:var(--gold-lt);font-weight:600">WhatsApp us: 0326 4025618</a></p>
-</div>
-
 </article>
+<div class="art-tags"><span>#wholesale-guide</span><span>#wholesale</span><span>#billing</span><span>#billing-software</span></div>
+<div class="art-author"><img src="../img/shopcos-ai-avatar.webp" alt="COS Team"><div><h4>COS Team — Chishti Office Samundri</h4><p>shopcos soft banane wali team. Hum Pakistan aur duniya bhar ke chhote dukandaaron ke liye billing, stock aur khata ka asaan software banate hain — WhatsApp par Urdu mein madad hazir hai.</p></div></div>
+<div class="art-share"><a class="s-wa" href="https://wa.me/?text=Wholesale%20Billing%20Software%3A%20Credit%20Parties%2C%20Cartons%20and%20Ledgers%2C%20Explained%20https%3A%2F%2Fshopcos.shop%2Fblog%2Fwholesale-billing-software.html" target="_blank" rel="noopener">Share on WhatsApp</a><a class="s-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://shopcos.shop/blog/wholesale-billing-software.html" target="_blank" rel="noopener">Share on Facebook</a><a class="s-x" href="#" onclick="navigator.clipboard.writeText(location.href);this.textContent='Link Copied ✓';return false;">Copy Link</a></div>
+</div>
+<aside class="art-side"><div class="art-sticky">
+<div class="art-card art-trial"><h4>Try shopcos soft</h4><div class="big">7-Day FREE Trial</div><p>Billing, stock, khata &amp; AI assistant for your shop. One-time payment, works 100% offline.</p><div class="price">Plans Rs 25,000 se shuru</div><a class="gold-btn" href="../index.html#pricing">Start Free Trial</a><a class="wa-btn" href="https://wa.me/923264025618">Order on WhatsApp</a></div>
+<div class="art-card"><h4>Latest Articles</h4>
+<a class="art-post" href="bahi-khata-software.html"><img src="img/blog30-hero-ledger.jpg"><div><p>Bahi Khata Software: Your Register Book, Finally Digital</p><span>Nov 11, 2026</span></div></a>
+<a class="art-post" href="digital-invoicing-pakistan-small-shops.html"><img src="img/blog29-hero-receipt.jpg"><div><p>Digital Invoicing in Pakistan: FBR's Rules for Small Shops, in Simple Words</p><span>Nov 10, 2026</span></div></a>
+<a class="art-post" href="monthly-subscription-vs-one-time-payment-pos-cost.html"><img src="img/blog28-hero-calculator-cash.jpg"><div><p>Monthly Subscription vs One-Time Payment: What a POS Really Costs Over 3 Years</p><span>Nov 09, 2026</span></div></a>
+<a class="art-post" href="grocery-store-pos-software.html"><img src="img/blog27-hero-produce.jpg"><div><p>Grocery Store POS Software: Weighing Scales, Loose Items and Fast Queues</p><span>Nov 07, 2026</span></div></a>
+</div>
+<div class="art-card"><h4>Madad chahiye?</h4><p style="font-size:15px;color:#4a545f;margin:0">WhatsApp par Urdu mein baat karein — COS team hazir hai.</p><a class="wa-btn" href="https://wa.me/923264025618">WhatsApp: 0326 4025618</a></div>
+</div></aside>
+</div>
+<div class="art-next"><h3>Read Next</h3><div class="art-cards">
+<a class="art-ncard" href="free-billing-software-pakistan.html"><img src="img/blog25-hero-shop-expenses.jpg"><div><p>Free Billing Software in Pakistan: What "Free" Really Costs Your Shop</p><span>Buyer's Guide · Nov 05, 2026</span></div></a>
+<a class="art-ncard" href="fbr-pos-invoice-verification.html"><img src="img/blog24-hero-receipt-qr.jpg"><div><p>How to Verify an FBR POS Invoice — and What That QR Code Really Means</p><span>Tax &amp; Compliance · Nov 04, 2026</span></div></a>
+<a class="art-ncard" href="vyapar-alternative-pakistan.html"><img src="img/blog23-hero-shop-counter.jpg"><div><p>Vyapar Alternative in Pakistan: PKR Billing Without the Indian GST Mismatch</p><span>Buyer's Guide · Nov 03, 2026</span></div></a>
+</div></div>
+</div>
+<script>addEventListener('scroll',function(){var e=document.documentElement;var p=document.getElementById('rdprog');if(p)p.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';});</script>
 </main>
 
 <footer class="footer">
