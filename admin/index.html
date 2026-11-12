@@ -644,6 +644,16 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
       <label>New trial end date</label>
       <input type="date" id="extendDate">
     </div>
+    <div class="field" id="planPickField" style="display:none">
+      <label>Plan</label>
+      <select id="planPick">
+        <option value="">— No plan —</option>
+        <option value="starter">🌱 Starter — Rs 25,000 / $90</option>
+        <option value="business">💼 Business — Rs 40,000 / $145</option>
+        <option value="professional">🚀 Professional — Rs 80,000 / $290</option>
+        <option value="enterprise">🏢 Enterprise — Rs 150,000 / $545</option>
+      </select>
+    </div>
     <div class="modal-btns">
       <button class="btn btn-ghost" id="actionCancel">Cancel</button>
       <button class="btn btn-danger" id="actionConfirm">Confirm</button>
@@ -866,6 +876,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         '<td class="date-cell">' + (r.type === 'trial' ? fmtDate(r.trial_ends_at) : '—') + '</td>' +
         '<td><div class="actions">' +
           (canExtend ? '<button class="btn btn-ghost btn-sm" data-act="extend" data-id="' + r.id + '">⏳ Extend</button>' : '') +
+          '<button class="btn btn-ghost btn-sm" data-act="plan" data-id="' + r.id + '">🏷 Plan</button>' +
           (canSuspend ? '<button class="btn btn-ghost btn-sm" data-act="suspend" data-id="' + r.id + '">⏸ Suspend</button>' : '') +
           (canUnsuspend ? '<button class="btn btn-ghost btn-sm" data-act="unsuspend" data-id="' + r.id + '">▶️ Unsuspend</button>' : '') +
           (canRevoke ? '<button class="btn btn-danger btn-sm" data-act="revoke" data-id="' + r.id + '">🚫 Revoke</button>' : '') +
@@ -888,7 +899,16 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     for (var i = 0; i < allLicenses.length; i++){ if (String(allLicenses[i].id) === String(id)){ row = allLicenses[i]; break; } }
     if (!row) return;
     pendingAction = {kind: kind, row: row};
-    if (kind === 'revoke'){
+    el('planPickField').style.display = 'none';
+    if (kind === 'plan'){
+      el('actionTitle').textContent = '🏷 Set plan';
+      el('actionDesc').innerHTML = 'Choose the plan for <b>' + esc(row.email) + '</b>. Ye plan is account ke saare license records par lag jayega.';
+      el('extendField').style.display = 'none';
+      el('planPickField').style.display = 'block';
+      el('planPick').value = row.plan || '';
+      el('actionConfirm').textContent = 'Save plan';
+      el('actionConfirm').className = 'btn btn-primary';
+    } else if (kind === 'revoke'){
       el('actionTitle').textContent = '🚫 Revoke license';
       el('actionDesc').innerHTML = 'Revoke the license for <b>' + esc(row.email) + '</b>?<br>Their software will stop working until a new key is issued.';
       el('extendField').style.display = 'none';
@@ -929,7 +949,11 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     var btn = el('actionConfirm');
     btn.disabled = true; btn.textContent = 'Working…';
     var ok = false;
-    if (pendingAction.kind === 'revoke'){
+    if (pendingAction.kind === 'plan'){
+      var r6 = await sb.from('licenses').update({ plan: el('planPick').value }).eq('email', pendingAction.row.email);
+      ok = !r6.error;
+      if (r6.error) alert('Failed: ' + r6.error.message);
+    } else if (pendingAction.kind === 'revoke'){
       var r1 = await sb.from('licenses').update({ status: 'revoked' }).eq('id', pendingAction.row.id);
       ok = !r1.error;
       if (r1.error) alert('Failed: ' + r1.error.message);
