@@ -96,6 +96,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 .b-lifetime{background:rgba(245,183,63,.14);color:var(--gold-lt);border:1px solid rgba(245,183,63,.35)}
 .b-active{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
 .b-revoked{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
+.b-suspended{background:rgba(245,183,63,.13);color:#f5b73f;border:1px solid rgba(245,183,63,.4)}
 .b-expired{background:rgba(163,173,201,.13);color:var(--muted);border:1px solid rgba(163,173,201,.3)}
 .badge.green{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
 .badge.red{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
@@ -364,6 +365,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
             <option value="">All statuses</option>
             <option value="active">Active</option>
             <option value="revoked">Revoked</option>
+            <option value="suspended">Suspended</option>
             <option value="expired">Expired</option>
           </select>
         </div>
@@ -706,6 +708,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
 
   function licStatus(row){
     if (row.status === 'revoked') return 'revoked';
+    if (row.status === 'suspended') return 'suspended';
     if (row.type === 'trial' && row.trial_ends_at && new Date(row.trial_ends_at) < new Date()) return 'expired';
     return 'active';
   }
@@ -810,7 +813,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
 
   function statusBadge(row){
     var s = licStatus(row);
-    var cls = s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : 'b-expired');
+    var cls = s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : (s === 'suspended' ? 'b-suspended' : 'b-expired'));
     return '<span class="badge ' + cls + '">' + s + '</span>';
   }
 
@@ -849,6 +852,8 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       var s = licStatus(r);
       var canRevoke = s === 'active';
       var canExtend = r.type === 'trial';
+      var canSuspend = s === 'active';
+      var canUnsuspend = s === 'suspended';
       return '<tr>' +
         '<td class="email-cell">' + esc(r.email) + '</td>' +
         '<td>' + esc(r.shop_name || '—') + '</td>' +
@@ -857,11 +862,14 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         '<td><span class="key-cell">' + esc(r.license_key) + '</span></td>' +
         '<td><span class="badge ' + (r.type === 'lifetime' ? 'b-lifetime' : 'b-trial') + '">' + esc(r.type) + '</span></td>' +
         '<td>' + (r.plan ? esc(ORDER_PLANS[r.plan] || r.plan) : '—') + '</td>' +
-        '<td><span class="badge ' + (s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : 'b-expired')) + '">' + s + '</span></td>' +
+        '<td><span class="badge ' + (s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : (s === 'suspended' ? 'b-suspended' : 'b-expired'))) + '">' + s + '</span></td>' +
         '<td class="date-cell">' + (r.type === 'trial' ? fmtDate(r.trial_ends_at) : '—') + '</td>' +
         '<td><div class="actions">' +
           (canExtend ? '<button class="btn btn-ghost btn-sm" data-act="extend" data-id="' + r.id + '">⏳ Extend</button>' : '') +
+          (canSuspend ? '<button class="btn btn-ghost btn-sm" data-act="suspend" data-id="' + r.id + '">⏸ Suspend</button>' : '') +
+          (canUnsuspend ? '<button class="btn btn-ghost btn-sm" data-act="unsuspend" data-id="' + r.id + '">▶️ Unsuspend</button>' : '') +
           (canRevoke ? '<button class="btn btn-danger btn-sm" data-act="revoke" data-id="' + r.id + '">🚫 Revoke</button>' : '') +
+          '<button class="btn btn-danger btn-sm" data-act="delete" data-id="' + r.id + '">🗑 Delete</button>' +
         '</div></td></tr>';
     }).join('');
     // bind action buttons
@@ -886,6 +894,24 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       el('extendField').style.display = 'none';
       el('actionConfirm').textContent = 'Revoke license';
       el('actionConfirm').className = 'btn btn-danger';
+    } else if (kind === 'suspend'){
+      el('actionTitle').textContent = '⏸ Suspend account';
+      el('actionDesc').innerHTML = 'Suspend <b>' + esc(row.email) + '</b>?<br>The account is marked suspended and a paid license stops applying from their next website-account login. You can unsuspend any time — nothing is deleted.';
+      el('extendField').style.display = 'none';
+      el('actionConfirm').textContent = 'Suspend account';
+      el('actionConfirm').className = 'btn btn-danger';
+    } else if (kind === 'unsuspend'){
+      el('actionTitle').textContent = '▶️ Unsuspend account';
+      el('actionDesc').innerHTML = 'Reactivate the license for <b>' + esc(row.email) + '</b>?';
+      el('extendField').style.display = 'none';
+      el('actionConfirm').textContent = 'Unsuspend';
+      el('actionConfirm').className = 'btn btn-primary';
+    } else if (kind === 'delete'){
+      el('actionTitle').textContent = '🗑 Delete account';
+      el('actionDesc').innerHTML = 'Delete <b>all license records</b> for <b>' + esc(row.email) + '</b>?<br>This is permanent and cannot be undone. The customer\'s license, plan and shop record will be removed. (Orders/referral history is kept. To remove their website login completely, also delete the user in Supabase → Authentication → Users.)';
+      el('extendField').style.display = 'none';
+      el('actionConfirm').textContent = 'Delete permanently';
+      el('actionConfirm').className = 'btn btn-danger';
     } else {
       el('actionTitle').textContent = '⏳ Extend trial';
       el('actionDesc').innerHTML = 'Set a new trial end date for <b>' + esc(row.email) + '</b>.';
@@ -907,6 +933,21 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       var r1 = await sb.from('licenses').update({ status: 'revoked' }).eq('id', pendingAction.row.id);
       ok = !r1.error;
       if (r1.error) alert('Failed: ' + r1.error.message);
+    } else if (pendingAction.kind === 'suspend'){
+      // account-level: suspend every license row for this email
+      var r3 = await sb.from('licenses').update({ status: 'suspended' }).eq('email', pendingAction.row.email);
+      ok = !r3.error;
+      if (r3.error) alert('Failed: ' + r3.error.message);
+    } else if (pendingAction.kind === 'unsuspend'){
+      var r4 = await sb.from('licenses').update({ status: 'active' }).eq('email', pendingAction.row.email).eq('status', 'suspended');
+      ok = !r4.error;
+      if (r4.error) alert('Failed: ' + r4.error.message);
+    } else if (pendingAction.kind === 'delete'){
+      var em = pendingAction.row.email, uid = pendingAction.row.user_id;
+      var r5 = await sb.from('licenses').delete().eq('email', em);
+      ok = !r5.error;
+      if (r5.error) alert('Failed: ' + r5.error.message);
+      if (ok && uid){ try { await sb.from('profiles').delete().eq('user_id', uid); } catch(e) {} }
     } else {
       var dv = el('extendDate').value;
       if (!dv){ alert('Please pick a date.'); btn.disabled = false; return; }
