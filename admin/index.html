@@ -354,7 +354,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
       <div class="card">
         <h2>Users &amp; licenses</h2>
         <div class="toolbar">
-          <input class="search" id="userSearch" placeholder="🔍 Search by email…">
+          <input class="search" id="userSearch" placeholder="🔍 Search email, shop, phone or key…">
           <select class="filter" id="typeFilter">
             <option value="">All types</option>
             <option value="trial">Trial</option>
@@ -369,9 +369,9 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
         </div>
         <div class="table-wrap"><table>
           <thead><tr>
-            <th>Email</th><th>Shop / Brand</th><th>Phone</th><th>Signed up</th><th>License key</th><th>Type</th><th>Status</th><th>Trial ends</th><th>Actions</th>
+            <th>Email</th><th>Shop / Brand</th><th>Phone</th><th>Signed up</th><th>License key</th><th>Type</th><th>Plan</th><th>Status</th><th>Trial ends</th><th>Actions</th>
           </tr></thead>
-          <tbody id="usersBody"><tr><td colspan="9" class="empty">Loading…</td></tr></tbody>
+          <tbody id="usersBody"><tr><td colspan="10" class="empty">Loading…</td></tr></tbody>
         </table></div>
       </div>
     </div>
@@ -386,17 +386,40 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
           <input type="email" id="newLicEmail" placeholder="customer@example.com">
         </div>
         <div class="field">
+          <label>Shop name</label>
+          <input type="text" id="newLicShop" placeholder="e.g. Khan General Store">
+        </div>
+        <div class="field">
+          <label>Phone / WhatsApp number</label>
+          <input type="tel" id="newLicPhone" placeholder="03XX-XXXXXXX">
+        </div>
+        <div class="field">
           <label>License type</label>
           <select id="newLicType">
             <option value="lifetime">Lifetime (paid)</option>
             <option value="trial">Trial (7 days)</option>
           </select>
         </div>
+        <div class="field" id="planField">
+          <label>Plan</label>
+          <select id="newLicPlan">
+            <option value="starter">🌱 Starter — Rs 25,000 / $90</option>
+            <option value="business" selected>💼 Business — Rs 40,000 / $145</option>
+            <option value="professional">🚀 Professional — Rs 80,000 / $290</option>
+            <option value="enterprise">🏢 Enterprise — Rs 150,000 / $545</option>
+          </select>
+        </div>
         <button class="btn btn-primary" id="createLicBtn">Generate license key</button>
         <div class="result-box" id="createResult">
           <div style="font-size:.85rem;color:var(--muted);margin-bottom:6px">License key generated:</div>
           <div class="k" id="createResultKey"></div>
+          <div id="createResultMeta" style="font-size:.9rem;color:var(--muted);margin:8px 0"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">
+            <button class="btn btn-ghost btn-sm" id="copyKeyBtn" type="button">📋 Copy key</button>
+            <a class="btn btn-ghost btn-sm" id="waKeyBtn" href="#" target="_blank" rel="noopener" style="display:none">📲 Send on WhatsApp</a>
+          </div>
           <p>Send this key to the customer on WhatsApp. It activates their software immediately.</p>
+          <p id="createWarn" style="display:none;color:#f5b73f"></p>
         </div>
       </div>
     </div>
@@ -812,7 +835,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     var tf = el('typeFilter').value;
     var sf = el('statusFilter').value;
     return allLicenses.filter(function(r){
-      if (q && String(r.email || '').toLowerCase().indexOf(q) < 0) return false;
+      if (q){ var hay = ((r.email || '') + ' ' + (r.shop_name || '') + ' ' + (r.phone || '') + ' ' + (r.license_key || '')).toLowerCase(); if (hay.indexOf(q) < 0) return false; }
       if (tf && r.type !== tf) return false;
       if (sf && licStatus(r) !== sf) return false;
       return true;
@@ -821,7 +844,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
 
   function renderUsers(){
     var rows = filteredRows();
-    if (!rows.length){ el('usersBody').innerHTML = '<tr><td colspan="9" class="empty">No matching records.</td></tr>'; return; }
+    if (!rows.length){ el('usersBody').innerHTML = '<tr><td colspan="10" class="empty">No matching records.</td></tr>'; return; }
     el('usersBody').innerHTML = rows.map(function(r){
       var s = licStatus(r);
       var canRevoke = s === 'active';
@@ -833,6 +856,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         '<td class="date-cell">' + fmtDate(r.created_at) + '</td>' +
         '<td><span class="key-cell">' + esc(r.license_key) + '</span></td>' +
         '<td><span class="badge ' + (r.type === 'lifetime' ? 'b-lifetime' : 'b-trial') + '">' + esc(r.type) + '</span></td>' +
+        '<td>' + (r.plan ? esc(ORDER_PLANS[r.plan] || r.plan) : '—') + '</td>' +
         '<td><span class="badge ' + (s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : 'b-expired')) + '">' + s + '</span></td>' +
         '<td class="date-cell">' + (r.type === 'trial' ? fmtDate(r.trial_ends_at) : '—') + '</td>' +
         '<td><div class="actions">' +
@@ -897,22 +921,66 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   }
 
   /* ---------- create license ---------- */
+  function waNumber(phone){
+    var d = String(phone || '').replace(/\D/g, '');
+    if (!d) return '';
+    if (d.indexOf('92') === 0) return d;
+    if (d.charAt(0) === '0') return '92' + d.slice(1);
+    if (d.length === 10) return '92' + d;
+    return d;
+  }
+
   async function createLicense(){
     var email = el('newLicEmail').value.trim().toLowerCase();
     var type = el('newLicType').value;
+    var shop = el('newLicShop').value.trim();
+    var phone = el('newLicPhone').value.trim();
+    var plan = (type === 'lifetime') ? el('newLicPlan').value : '';
     var btn = el('createLicBtn');
     if (!email || email.indexOf('@') < 0){ alert('Please enter a valid customer email.'); return; }
     btn.disabled = true; btn.textContent = 'Generating…';
     var key = genKey();
-    var payload = { email: email, license_key: key, type: type, status: 'active', user_id: null };
+    var payload = { email: email, license_key: key, type: type, status: 'active',
+                    plan: plan, shop_name: shop, phone: phone };
     if (type === 'trial') payload.trial_ends_at = new Date(Date.now() + 7*86400000).toISOString();
     else payload.trial_ends_at = null;
-    var res = await sb.from('licenses').insert(payload).select();
+    var needsSql = false, res;
+    // If this email already has a license row, upgrade THAT row (keeps its
+    // user_id, so the customer's dashboard + software keep working).
+    var existing = await sb.from('licenses').select('id').eq('email', email).limit(1);
+    var rowId = (!existing.error && existing.data && existing.data.length) ? existing.data[0].id : null;
+    async function save(pl){
+      if (rowId) return await sb.from('licenses').update(pl).eq('id', rowId).select();
+      var p2 = Object.assign({ user_id: null }, pl);
+      return await sb.from('licenses').insert(p2).select();
+    }
+    res = await save(payload);
+    if (res.error && /plan|shop_name|phone/.test(res.error.message || '')){
+      // New columns not in the table yet — save the key anyway, warn admin.
+      needsSql = true;
+      var basic = { email: email, license_key: key, type: type, status: 'active', trial_ends_at: payload.trial_ends_at };
+      res = await save(basic);
+    }
     btn.disabled = false; btn.textContent = 'Generate license key';
     if (res.error){ alert('Failed: ' + res.error.message); return; }
     el('createResultKey').textContent = key;
+    var meta = (rowId ? 'Existing license upgraded · ' : 'New license · ') +
+      (type === 'lifetime' ? (ORDER_PLANS[plan] || plan) + ' plan' : 'Trial (7 days)') +
+      (shop ? ' · ' + shop : '') + ' · ' + email;
+    el('createResultMeta').textContent = meta;
+    var wa = el('waKeyBtn');
+    var num = waNumber(phone);
+    if (num){
+      var msg = 'Assalam-o-Alaikum! Aapke shopcos soft ' + (type === 'lifetime' ? '(' + (ORDER_PLANS[plan] || plan) + ') lifetime' : 'trial') +
+        ' license ki key: ' + key + '\nSoftware mein ye key laga dein. Shukriya! — Team COS (shopcos.shop)';
+      wa.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg);
+      wa.style.display = '';
+    } else { wa.style.display = 'none'; }
+    var warn = el('createWarn');
+    if (needsSql){ warn.style.display = 'block'; warn.textContent = '⚠️ Key ban gayi hai, lekin plan / shop name / phone save nahi hue — pehle Supabase mein db/licenses-admin-upgrade.sql chalana baqi hai.'; }
+    else { warn.style.display = 'none'; }
     el('createResult').classList.add('show');
-    el('newLicEmail').value = '';
+    el('newLicEmail').value = ''; el('newLicShop').value = ''; el('newLicPhone').value = '';
     loadData();
   }
 
@@ -989,6 +1057,9 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         var ins = await sb.from('licenses').insert({ user_id: o.user_id, email: o.user_email, type: 'lifetime', status: 'active', license_key: key, trial_ends_at: null });
         if (ins.error) throw ins.error;
       }
+      // 1b. best-effort: record which plan was bought on the license row
+      // (ignored if the plan column has not been added yet — see db/licenses-admin-upgrade.sql)
+      try { await sb.from('licenses').update({ plan: o.plan }).eq('user_id', o.user_id); } catch(e) {}
       // 2. mark order activated
       var or = await sb.from('orders').update({ status: 'activated' }).eq('id', orderId);
       if (or.error) throw or.error;
@@ -1238,6 +1309,18 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   }
   function bindCreate(){
     el('createLicBtn').addEventListener('click', createLicense);
+    el('copyKeyBtn').addEventListener('click', function(){
+      var k = el('createResultKey').textContent;
+      if (k && navigator.clipboard){ navigator.clipboard.writeText(k).then(function(){
+        el('copyKeyBtn').textContent = '✅ Copied';
+        setTimeout(function(){ el('copyKeyBtn').textContent = '📋 Copy key'; }, 1500);
+      }); }
+    });
+    el('newLicType').addEventListener('change', function(){
+      var trial = el('newLicType').value === 'trial';
+      el('newLicPlan').disabled = trial;
+      el('planField').style.opacity = trial ? '.45' : '1';
+    });
   }
   function bindModal(){
     el('actionCancel').addEventListener('click', function(){ el('actionOv').classList.remove('open'); pendingAction = null; });
