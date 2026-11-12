@@ -944,13 +944,15 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
                     plan: plan, shop_name: shop, phone: phone };
     if (type === 'trial') payload.trial_ends_at = new Date(Date.now() + 7*86400000).toISOString();
     else payload.trial_ends_at = null;
-    var needsSql = false, res;
-    // If this email already has a license row, upgrade THAT row (keeps its
-    // user_id, so the customer's dashboard + software keep working).
-    var existing = await sb.from('licenses').select('id').eq('email', email).limit(1);
-    var rowId = (!existing.error && existing.data && existing.data.length) ? existing.data[0].id : null;
+    var needsSql = false, res, upgradedCount = 0;
     async function save(pl){
-      if (rowId) return await sb.from('licenses').update(pl).eq('id', rowId).select();
+      // Upgrade EVERY license row for this email — a website-signup row and a
+      // panel-created row can exist side by side, and updating only one of
+      // them leaves the other still showing "trial" in the customer's
+      // dashboard and software.
+      var up = await sb.from('licenses').update(pl).eq('email', email).select();
+      if (up.error) return up;
+      if (up.data && up.data.length){ upgradedCount = up.data.length; return up; }
       var p2 = Object.assign({ user_id: null }, pl);
       return await sb.from('licenses').insert(p2).select();
     }
@@ -964,7 +966,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     btn.disabled = false; btn.textContent = 'Generate license key';
     if (res.error){ alert('Failed: ' + res.error.message); return; }
     el('createResultKey').textContent = key;
-    var meta = (rowId ? 'Existing license upgraded · ' : 'New license · ') +
+    var meta = (upgradedCount ? 'Existing license upgraded · ' : 'New license · ') +
       (type === 'lifetime' ? (ORDER_PLANS[plan] || plan) + ' plan' : 'Trial (7 days)') +
       (shop ? ' · ' + shop : '') + ' · ' + email;
     el('createResultMeta').textContent = meta;
