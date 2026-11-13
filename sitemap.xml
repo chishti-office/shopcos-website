@@ -538,4 +538,22 @@
       <image:title>A couple paying their restaurant bill with a waiter holding a card terminal</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/how-to-send-bill-on-whatsapp.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog32-hero-whatsapp.jpg</image:loc>
+      <image:title>A hand holding a smartphone displaying the WhatsApp app screen</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog32-receipt-printer.jpg</image:loc>
+      <image:title>A cash register printing a receipt at a retail shop counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog32-chatting-phone.jpg</image:loc>
+      <image:title>A person holding a smartphone and chatting near a computer screen</image:title>
+    </image:image>
+  </url>
 </urlset>
