@@ -312,6 +312,15 @@
   </div>
 </section>
 
+<section id="daily-code" style="max-width:860px;margin:26px auto;padding:0 16px">
+  <div style="background:linear-gradient(135deg,#0d1b3e,#16295c);border:2px solid #e8af3c;border-radius:18px;padding:26px 22px;text-align:center;color:#fff;box-shadow:0 12px 32px rgba(6,12,30,.35)">
+    <div style="font-size:15px;letter-spacing:2px;color:#e8af3c;font-weight:700">🔑 TODAY'S FREE TRIAL CODE</div>
+    <div id="dailyCodeVal" style="font-size:54px;font-weight:900;letter-spacing:10px;margin:10px 0 2px;color:#fff">------</div>
+    <div id="dailyCodeDate" style="font-size:14px;opacity:.85"></div>
+    <p style="margin:12px auto 0;max-width:560px;font-size:15px;line-height:1.55;opacity:.92">Using the shopcos soft <b>7-day FREE trial</b>? Type today's code in the software to unlock it for today. The code is free and changes every day.<br><b style="color:#e8af3c">Paid plans never need a code.</b></p>
+  </div>
+</section>
+
 <!-- ============ COUNTER SETUP ============ -->
 <section class="counter-setup">
   <div class="container" style="display:flex;gap:36px;align-items:center;flex-wrap:wrap;padding:64px 20px 10px">
@@ -859,5 +868,14 @@
 <script src="script.js"></script>
 <script src="cart.js"></script>
 <script src="/mobile.js" defer></script>
+<script>
+(function(){
+  function dailyCodeFor(ds){var s='shopcos-daily-v1|'+ds,h=0x811c9dc5;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return String(100000+(h%900000));}
+  var d=new Date(),p=function(n){return String(n).padStart(2,'0');};
+  var ds=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+  var el=document.getElementById('dailyCodeVal'); if(el) el.textContent=dailyCodeFor(ds);
+  var dt=document.getElementById('dailyCodeDate'); if(dt) dt.textContent=d.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+})();
+</script>
 </body>
 </html>
