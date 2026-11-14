@@ -574,4 +574,22 @@
       <image:title>A man holding his head in frustration while looking at a laptop</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/clothing-shop-billing-software.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog34-hero-clothing-rack.jpg</image:loc>
+      <image:title>Colourful garments hanging on a rack inside a clothing shop</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog34-jeans-stack.jpg</image:loc>
+      <image:title>Folded jeans stacked by size on clothing shop shelves</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog34-counter-exchange.jpg</image:loc>
+      <image:title>A cashier helping a customer at a clothing shop counter</image:title>
+    </image:image>
+  </url>
 </urlset>
