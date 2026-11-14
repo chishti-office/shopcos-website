@@ -556,4 +556,22 @@
       <image:title>A person holding a smartphone and chatting near a computer screen</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/is-khata-book-app-safe.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog33-hero-broken-phone.jpg</image:loc>
+      <image:title>Hands holding a smartphone with a cracked screen against a yellow background</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog33-ledger-calculator.jpg</image:loc>
+      <image:title>Close-up of hands writing calculations in a notebook with a calculator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog33-frustrated-laptop.jpg</image:loc>
+      <image:title>A man holding his head in frustration while looking at a laptop</image:title>
+    </image:image>
+  </url>
 </urlset>
