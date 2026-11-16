@@ -592,4 +592,22 @@
       <image:title>A cashier helping a customer at a clothing shop counter</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/pos-software-for-pc.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog35-hero-pos-counter.jpg</image:loc>
+      <image:title>A point-of-sale computer, cash register and receipt printer set up on a shop counter</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog35-worker-computer.jpg</image:loc>
+      <image:title>A retail worker using a computer at a shop counter filled with various goods</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog35-laptop-terminal.jpg</image:loc>
+      <image:title>A cashier using a payment terminal and a laptop at a retail counter</image:title>
+    </image:image>
+  </url>
 </urlset>
