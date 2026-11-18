@@ -628,4 +628,22 @@
       <image:title>A point-of-sale terminal with a thermal paper roll against a blue background</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/tailor-shop-software.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog37-hero-tailor-machine.jpg</image:loc>
+      <image:title>A senior tailor working at a sewing machine in his workshop, surrounded by fabric</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog37-tailor-measuring-tape.jpg</image:loc>
+      <image:title>Close-up of a sewing machine with a measuring tape in a tailor's workshop</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog37-tailor-cutting-fabric.jpg</image:loc>
+      <image:title>A tailor skillfully cutting black fabric in a workshop, with a sewing machine on the table</image:title>
+    </image:image>
+  </url>
 </urlset>
