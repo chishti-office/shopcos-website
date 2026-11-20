@@ -646,4 +646,22 @@
       <image:title>A tailor skillfully cutting black fabric in a workshop, with a sewing machine on the table</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/how-to-earn-money-from-your-shop.html</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog38-hero-shop-counter.jpg</image:loc>
+      <image:title>Two men at a shop counter in a marketplace with payment signs and products displayed</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog38-stocked-shelves.jpg</image:loc>
+      <image:title>Warmly lit entrance of a small store with shelves stocked full at night</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog38-shopkeeper-pakistan.jpg</image:loc>
+      <image:title>A local shopkeeper assisting a young boy at a market stall in sunny Pakistan</image:title>
+    </image:image>
+  </url>
 </urlset>
