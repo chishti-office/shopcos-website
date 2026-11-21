@@ -15,30 +15,39 @@
       <span class="brand-name">shopcos <em>soft</em></span>
     </a>
     <div class="nav-cta">
-      <a class="btn btn-primary btn-sm" href="../index.html">← Back to Home</a>
+            <select class="nav-select" id="langSelect" aria-label="Language">
+        <option value="en">🌍 EN</option>
+        <option value="ur">🌍 اردو</option>
+        <option value="ar">🌍 العربية</option>
+        <option value="es">🌍 Español</option>
+        <option value="fr">🌍 Français</option>
+        <option value="de">🌍 Deutsch</option>
+      </select>
+      <a class="btn btn-primary btn-sm" href="../index.html" data-i18n="back_home">← Back to Home</a>
     </div>
   </div>
 </header>
 <main class="container" style="max-width:800px;padding:120px 20px 80px;text-align:center">
-  <h1>Contact Us</h1>
-  <p>We'd love to hear from you! Reach out for sales, support, or any question.</p>
+  <h1 data-i18n="ct_h1">Contact Us</h1>
+  <p data-i18n="ct_p1">We'd love to hear from you! Reach out for sales, support, or any question.</p>
   
   <div style="margin:40px 0">
     <p style="font-size:1.2rem">📧 <strong>chishtioffice2@gmail.com</strong></p>
-    <p style="font-size:1.2rem">💬 <a href="https://wa.me/923264025618" style="color:#ffd97a">WhatsApp: Chat with us</a></p>
-    <p>🏢 COS · Chishti Office Samundri<br>Samundri, Punjab, Pakistan</p>
+    <p style="font-size:1.2rem">💬 <a href="https://wa.me/923264025618" style="color:#ffd97a" data-i18n="ct_wa">WhatsApp: Chat with us</a></p>
+    <p data-i18n="ct_company">🏢 COS · Chishti Office Samundri<br>Samundri, Punjab, Pakistan</p>
   </div>
   
-  <p><em>We usually reply within a few hours (9 AM – 9 PM PKT).</em></p>
+  <p data-i18n="ct_reply"><em>We usually reply within a few hours (9 AM – 9 PM PKT).</em></p>
 </main>
 <footer>
   <div class="container">
     <div class="foot-base">
-      <span>© 2026 shopcos soft. All rights reserved.</span>
-      <span class="dev-credit"><img src="../img/cos-logo.png" alt="COS" style="height:24px;vertical-align:middle;margin-right:6px">Developed by <strong>COS</strong> · Chishti Office Samundri</span>
+      <span data-i18n="foot_rights">© 2026 shopcos soft. All rights reserved.</span>
+      <span class="dev-credit"><img src="../img/cos-logo.png" alt="COS" style="height:24px;vertical-align:middle;margin-right:6px"><span data-i18n="dev_credit">Developed by <strong>COS</strong> · Chishti Office Samundri</span></span>
     </div>
   </div>
 </footer>
+<script src="/i18n.js"></script>
 <script src="/mobile.js" defer></script>
 </body>
 </html>
