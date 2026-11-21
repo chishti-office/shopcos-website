@@ -163,29 +163,37 @@ a{color:inherit;text-decoration:none}
     </a>
     <div class="topbar-spacer"></div>
     <button class="btn btn-ghost sc-cart-btn" data-open-cart aria-label="Open cart" style="padding:10px 16px">🛒 <span class="cart-badge sc-cart-badge zero" id="cartCount">0</span></button>
-    <a href="../index.html" class="btn btn-ghost" style="padding:10px 16px">🏠 Home</a>
+        <select class="nav-select" id="langSelect" aria-label="Language" style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-family:var(--font-b)">
+      <option value="en">🌍 EN</option>
+      <option value="ur">🌍 اردو</option>
+      <option value="ar">🌍 العربية</option>
+      <option value="es">🌍 Español</option>
+      <option value="fr">🌍 Français</option>
+      <option value="de">🌍 Deutsch</option>
+    </select>
+    <a href="../index.html" class="btn btn-ghost" style="padding:10px 16px" data-i18n="co_home">🏠 Home</a>
   </div>
 </header>
 
 <main class="wrap">
   <div class="page-head">
-    <h1>Secure <span class="grad">Checkout</span></h1>
-    <p>One payment. Yours forever. No subscriptions.</p>
+    <h1 data-i18n="co_h1">Secure <span class="grad">Checkout</span></h1>
+    <p data-i18n="co_sub">One payment. Yours forever. No subscriptions.</p>
   </div>
 
   <div class="steps" id="stepsBar">
-    <div class="step active" data-n="1" data-s="plan">Plan</div>
-    <div class="step" data-n="2" data-s="account">Account</div>
-    <div class="step" data-n="3" data-s="payment">Payment</div>
-    <div class="step" data-n="4" data-s="done">Done</div>
+    <div class="step active" data-n="1" data-s="plan" data-i18n="co_step_plan">Plan</div>
+    <div class="step" data-n="2" data-s="account" data-i18n="co_step_account">Account</div>
+    <div class="step" data-n="3" data-s="payment" data-i18n="co_step_payment">Payment</div>
+    <div class="step" data-n="4" data-s="done" data-i18n="co_step_done">Done</div>
   </div>
 
   <div id="emptyCart" class="card" style="display:none">
     <div class="empty-state">
       <div class="big">🛒</div>
-      <h2>Your cart is empty</h2>
-      <p>Pick a lifetime plan to continue with checkout.</p>
-      <a href="../index.html#pricing" class="btn btn-primary">View Plans →</a>
+      <h2 data-i18n="co_empty_h">Your cart is empty</h2>
+      <p data-i18n="co_empty_p">Pick a lifetime plan to continue with checkout.</p>
+      <a href="../index.html#pricing" class="btn btn-primary" data-i18n="co_view_plans">View Plans →</a>
     </div>
   </div>
 
@@ -194,13 +202,13 @@ a{color:inherit;text-decoration:none}
     <!-- STEP 1: PLAN -->
     <div class="step-pane active" id="pane-plan">
       <div class="card">
-        <h2>1️⃣ Review your plan</h2>
-        <p class="sub">Confirm the license you're purchasing.</p>
+        <h2 data-i18n="co_plan_h">1️⃣ Review your plan</h2>
+        <p class="sub" data-i18n="co_plan_sub">Confirm the license you're purchasing.</p>
         <div class="order-item">
           <span class="tag" id="planTag">💼</span>
           <div class="info">
-            <h3><span id="planName">Business</span> Plan</h3>
-            <p>Lifetime license · Single shop · One-time payment</p>
+            <h3><span id="planName">Business</span> <span data-i18n="co_plan_word">Plan</span></h3>
+            <p data-i18n="co_plan_meta">Lifetime license · Single shop · One-time payment</p>
           </div>
           <div class="order-price">
             <div class="usd">$<span id="planUsd">145</span> <span style="font-size:1rem">USD</span></div>
@@ -208,15 +216,15 @@ a{color:inherit;text-decoration:none}
           </div>
         </div>
         <div class="total-row">
-          <span class="t">Total due today (one-time)</span>
+          <span class="t" data-i18n="co_total">Total due today (one-time)</span>
           <span class="v">$<span id="totalUsd">145</span><small>Rs <span id="totalPkr">40,000</span> PKR</small></span>
         </div>
         <div id="refDiscountNote" style="display:none;margin-top:14px;background:rgba(245,183,63,.09);border:1px solid rgba(245,183,63,.4);border-radius:12px;padding:12px 16px;font-size:.92rem">
-          🎁 <b>Referral discount applied — 10% OFF!</b> <span id="refDiscountDetail" style="color:var(--muted)"></span>
+          <span data-i18n="co_ref">🎁 <b>Referral discount applied — 10% OFF!</b></span> <span id="refDiscountDetail" style="color:var(--muted)"></span>
         </div>
         <div class="btn-row">
-          <a href="../index.html#pricing" class="btn btn-ghost">← Change plan</a>
-          <button class="btn btn-primary" id="toAccount">Continue →</button>
+          <a href="../index.html#pricing" class="btn btn-ghost" data-i18n="co_change">← Change plan</a>
+          <button class="btn btn-primary" id="toAccount" data-i18n="co_continue">Continue →</button>
         </div>
       </div>
     </div>
@@ -224,57 +232,57 @@ a{color:inherit;text-decoration:none}
     <!-- STEP 2: ACCOUNT -->
     <div class="step-pane" id="pane-account">
       <div class="card">
-        <h2>2️⃣ Your account</h2>
-        <p class="sub">Your license will be linked to this account.</p>
+        <h2 data-i18n="co_acct_h">2️⃣ Your account</h2>
+        <p class="sub" data-i18n="co_acct_sub">Your license will be linked to this account.</p>
         <div id="acctLoggedIn" style="display:none">
           <div class="order-item">
             <span class="tag">👤</span>
             <div class="info">
               <h3 id="acctEmailShow">—</h3>
-              <p>✅ You're signed in. Your license will be activated on this account.</p>
+              <p data-i18n="co_signed">✅ You're signed in. Your license will be activated on this account.</p>
             </div>
           </div>
           <div class="btn-row">
-            <button class="btn btn-ghost" id="backToPlan1">← Back</button>
-            <button class="btn btn-primary" id="toPayment">Continue to Payment →</button>
+            <button class="btn btn-ghost" id="backToPlan1" data-i18n="co_back">← Back</button>
+            <button class="btn btn-primary" id="toPayment" data-i18n="co_to_payment">Continue to Payment →</button>
           </div>
         </div>
         <div id="acctLoginForm">
-          <div class="note">🔒 Please <strong>log in or create an account</strong> to continue. Your license key is tied to your account.</div>
+          <div class="note" data-i18n="co_login_note">🔒 Please <strong>log in or create an account</strong> to continue. Your license key is tied to your account.</div>
           <div class="field">
-            <label>Email</label>
+            <label data-i18n="lbl_email">Email</label>
             <input type="email" id="coEmail" placeholder="you@example.com" autocomplete="email">
           </div>
           <div class="field">
-            <label>Password</label>
+            <label data-i18n="lbl_password">Password</label>
             <input type="password" id="coPass" placeholder="••••••••" autocomplete="current-password">
           </div>
           <div class="form-msg" id="coAuthMsg"></div>
           <div class="btn-row">
-            <button class="btn btn-ghost" id="backToPlan2">← Back</button>
-            <button class="btn btn-primary" id="coLoginBtn">Login</button>
+            <button class="btn btn-ghost" id="backToPlan2" data-i18n="co_back">← Back</button>
+            <button class="btn btn-primary" id="coLoginBtn" data-i18n="co_login_btn">Login</button>
           </div>
-          <div class="auth-toggle">New here? <a id="coGoSignup">Create a free account</a></div>
+          <div class="auth-toggle"><span data-i18n="co_new_here">New here?</span> <a id="coGoSignup" data-i18n="co_create_free">Create a free account</a></div>
           <div class="btn-row" style="margin-top:14px">
-            <button class="btn btn-ghost" id="coGoogleBtn">🔵 Continue with Google</button>
+            <button class="btn btn-ghost" id="coGoogleBtn" data-i18n="co_google">🔵 Continue with Google</button>
           </div>
         </div>
         <div id="acctSignupForm" style="display:none">
-          <div class="note">🎉 Create your free account — includes a <strong>7-day free trial</strong>, no card required.</div>
+          <div class="note" data-i18n="co_signup_note">🎉 Create your free account — includes a <strong>7-day free trial</strong>, no card required.</div>
           <div class="field">
-            <label>Email</label>
+            <label data-i18n="lbl_email">Email</label>
             <input type="email" id="coSuEmail" placeholder="you@example.com" autocomplete="email">
           </div>
           <div class="field">
-            <label>Password</label>
-            <input type="password" id="coSuPass" placeholder="Min. 6 characters" autocomplete="new-password">
+            <label data-i18n="lbl_password">Password</label>
+            <input type="password" id="coSuPass" placeholder="Min. 6 characters" autocomplete="new-password" data-i18n-ph="ph_min6">
           </div>
           <div class="form-msg" id="coSuMsg"></div>
           <div class="btn-row">
-            <button class="btn btn-ghost" id="backToPlan3">← Back</button>
-            <button class="btn btn-primary" id="coSignupBtn">Create Account</button>
+            <button class="btn btn-ghost" id="backToPlan3" data-i18n="co_back">← Back</button>
+            <button class="btn btn-primary" id="coSignupBtn" data-i18n="co_create_btn">Create Account</button>
           </div>
-          <div class="auth-toggle">Already have an account? <a id="coGoLogin">Login</a></div>
+          <div class="auth-toggle"><span data-i18n="co_have_acct">Already have an account?</span> <a id="coGoLogin" data-i18n="co_login_link">Login</a></div>
         </div>
       </div>
     </div>
@@ -282,91 +290,91 @@ a{color:inherit;text-decoration:none}
     <!-- STEP 3: PAYMENT -->
     <div class="step-pane" id="pane-payment">
       <div class="card">
-        <h2>3️⃣ Payment</h2>
-        <p class="sub">Choose how you'd like to pay <strong>$<span id="payUsd">145</span> USD</strong> <span style="color:var(--muted-2)">(Rs <span id="payPkr">40,000</span> PKR)</span>.</p>
+        <h2 data-i18n="co_pay_h">3️⃣ Payment</h2>
+        <p class="sub"><span data-i18n="co_pay_lead">Choose how you'd like to pay</span> <strong>$<span id="payUsd">145</span> USD</strong> <span style="color:var(--muted-2)">(Rs <span id="payPkr">40,000</span> PKR)</span>.</p>
 
         <div class="pay-tabs">
-          <div class="pay-tab active" data-pay="card"><span class="ic">💳</span><strong>Card</strong><small>Visa · Mastercard</small></div>
-          <div class="pay-tab" data-pay="mobile"><img src="../img/pay/easypaisa-logo.png" alt="Easypaisa" style="height:28px;object-fit:contain;margin-bottom:4px"><strong>Mobile Money</strong><small>Easypaisa · JazzCash</small></div>
-          <div class="pay-tab" data-pay="crypto"><span class="ic">🪙</span><strong>Crypto</strong><small>USDT · BTC</small></div>
-          <div class="pay-tab" data-pay="bank"><img src="../img/pay/meezan-logo.png" alt="Meezan Bank" style="height:28px;object-fit:contain;margin-bottom:4px"><strong>Bank Transfer</strong><small>Meezan Bank</small></div>
+          <div class="pay-tab active" data-pay="card"><span class="ic">💳</span><strong data-i18n="co_tab_card">Card</strong><small>Visa · Mastercard</small></div>
+          <div class="pay-tab" data-pay="mobile"><img src="../img/pay/easypaisa-logo.png" alt="Easypaisa" style="height:28px;object-fit:contain;margin-bottom:4px"><strong data-i18n="co_tab_mobile">Mobile Money</strong><small>Easypaisa · JazzCash</small></div>
+          <div class="pay-tab" data-pay="crypto"><span class="ic">🪙</span><strong data-i18n="co_tab_crypto">Crypto</strong><small>USDT · BTC</small></div>
+          <div class="pay-tab" data-pay="bank"><img src="../img/pay/meezan-logo.png" alt="Meezan Bank" style="height:28px;object-fit:contain;margin-bottom:4px"><strong data-i18n="co_tab_bank">Bank Transfer</strong><small>Meezan Bank</small></div>
         </div>
 
         <!-- CARD -->
         <div class="pay-pane active" id="pay-card">
-          <div class="note">💳 Pay securely by <strong>credit/debit card</strong> — best for international customers.</div>
+          <div class="note" data-i18n="co_card_note">💳 Pay securely by <strong>credit/debit card</strong> — best for international customers.</div>
           <div class="field">
-            <label>Card number</label>
+            <label data-i18n="lbl_cardnum">Card number</label>
             <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric">
           </div>
           <div style="display:flex;gap:10px">
             <div class="field" style="flex:1">
-              <label>Expiry</label>
+              <label data-i18n="lbl_expiry">Expiry</label>
               <input type="text" id="cardExp" placeholder="MM/YY" maxlength="5">
             </div>
             <div class="field" style="flex:1">
-              <label>CVC</label>
+              <label data-i18n="lbl_cvc">CVC</label>
               <input type="text" id="cardCvc" placeholder="123" maxlength="4" inputmode="numeric">
             </div>
           </div>
           <div class="field">
-            <label>Name on card</label>
-            <input type="text" id="cardName" placeholder="Your name">
+            <label data-i18n="lbl_cardname">Name on card</label>
+            <input type="text" id="cardName" placeholder="Your name" data-i18n-ph="ph_cardname">
           </div>
-          <div id="cardError" style="display:none;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.4);border-radius:10px;padding:12px;margin:12px 0;color:#ff8080;font-size:.88rem">⚠️ Something went wrong. Please choose another payment method.</div>
-          <button class="btn btn-primary" id="cardPayBtn" style="width:100%">💳 Pay $<span class="payUsdEcho">145</span></button>
-          <p class="file-hint" style="text-align:center;margin-top:10px">🔒 Secure payment</p>
+          <div id="cardError" style="display:none;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.4);border-radius:10px;padding:12px;margin:12px 0;color:#ff8080;font-size:.88rem" data-i18n="co_card_error">⚠️ Something went wrong. Please choose another payment method.</div>
+          <button class="btn btn-primary" id="cardPayBtn" style="width:100%"><span data-i18n="co_pay_btn">💳 Pay</span> $<span class="payUsdEcho">145</span></button>
+          <p class="file-hint" style="text-align:center;margin-top:10px" data-i18n="co_secure">🔒 Secure payment</p>
         </div>
 
         <!-- CRYPTO -->
         <div class="pay-pane" id="pay-crypto">
-          <div class="note">🪙 Send <strong><span class="payUsdEcho">145</span> USDT</strong> or <strong>BTC</strong> to the wallet below, then confirm.</div>
+          <div class="note" data-i18n="co_crypto_note">🪙 Send <strong><span class="payUsdEcho">145</span> USDT</strong> or <strong>BTC</strong> to the wallet below, then confirm.</div>
           <div style="display:flex;gap:10px;margin:12px 0">
             <button class="btn btn-sm subpay-tab active" data-subpay="usdt" style="flex:1"><img src="../img/pay/usdt-logo.png" alt="USDT" style="height:22px;object-fit:contain;vertical-align:middle"> USDT (TRC20)</button>
             <button class="btn btn-sm subpay-tab" data-subpay="btc" style="flex:1"><img src="../img/pay/btc-logo.png" alt="BTC" style="height:22px;object-fit:contain;vertical-align:middle"> BTC (Bitcoin)</button>
           </div>
           <div class="subpay-pane" id="subpay-usdt">
-            <div class="kv"><span class="k">Network</span><span class="v">Tron (TRC20)</span></div>
-            <div class="kv"><span class="k">Address</span><span class="v"><code id="usdtAddr">TPwbbScTUAKVnHTmavuFRfRQZ1nsG5PxUx</code> <button class="copy-btn" data-copy="usdtAddr">Copy</button></span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_network">Network</span><span class="v">Tron (TRC20)</span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_address">Address</span><span class="v"><code id="usdtAddr">TPwbbScTUAKVnHTmavuFRfRQZ1nsG5PxUx</code> <button class="copy-btn" data-copy="usdtAddr" data-i18n="co_copy">Copy</button></span></div>
             <div style="text-align:center;margin:16px 0">
               <img src="../img/pay/usdt-qr.png" alt="USDT QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
             </div>
           </div>
           <div class="subpay-pane" id="subpay-btc" style="display:none">
-            <div class="kv"><span class="k">Network</span><span class="v">Bitcoin</span></div>
-            <div class="kv"><span class="k">Address</span><span class="v"><code id="btcAddr">1PVGJcqNHvjbWTkuBhaMFpeAYzU9gmqmKz</code> <button class="copy-btn" data-copy="btcAddr">Copy</button></span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_network">Network</span><span class="v">Bitcoin</span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_address">Address</span><span class="v"><code id="btcAddr">1PVGJcqNHvjbWTkuBhaMFpeAYzU9gmqmKz</code> <button class="copy-btn" data-copy="btcAddr" data-i18n="co_copy">Copy</button></span></div>
             <div style="text-align:center;margin:16px 0">
               <img src="../img/pay/btc-qr.png" alt="BTC QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
             </div>
           </div>
-          <button class="btn btn-primary" id="cryptoDoneBtn" style="width:100%;margin-top:8px">✅ I've sent the payment</button>
+          <button class="btn btn-primary" id="cryptoDoneBtn" style="width:100%;margin-top:8px" data-i18n="co_sent">✅ I've sent the payment</button>
         </div>
 
         <!-- BANK -->
         <div class="pay-pane" id="pay-bank">
-          <div class="note">🏦 Transfer <strong>Rs <span class="payPkrEcho">40,000</span></strong> to the account below, then upload your receipt.</div>
-          <div class="kv"><span class="k">Bank</span><span class="v">Meezan Bank</span></div>
-          <div class="kv"><span class="k">Account title</span><span class="v">SYED MUHAMMAD RABIE SHAH</span></div>
-          <div class="kv"><span class="k">Account number</span><span class="v"><code id="bankAcct">98360107034722</code> <button class="copy-btn" data-copy="bankAcct">Copy</button></span></div>
-          <div class="kv"><span class="k">IBAN</span><span class="v"><code id="bankIban">PK53MEZN0098360107034722</code> <button class="copy-btn" data-copy="bankIban">Copy</button></span></div>
-          <div class="kv"><span class="k">Branch</span><span class="v">Samundri, Faisalabad</span></div>
+          <div class="note" data-i18n="co_bank_note">🏦 Transfer <strong>Rs <span class="payPkrEcho">40,000</span></strong> to the account below, then upload your receipt.</div>
+          <div class="kv"><span class="k" data-i18n="lbl_bank">Bank</span><span class="v">Meezan Bank</span></div>
+          <div class="kv"><span class="k" data-i18n="lbl_acct_title">Account title</span><span class="v">SYED MUHAMMAD RABIE SHAH</span></div>
+          <div class="kv"><span class="k" data-i18n="lbl_acct_num">Account number</span><span class="v"><code id="bankAcct">98360107034722</code> <button class="copy-btn" data-copy="bankAcct" data-i18n="co_copy">Copy</button></span></div>
+          <div class="kv"><span class="k" data-i18n="lbl_iban">IBAN</span><span class="v"><code id="bankIban">PK53MEZN0098360107034722</code> <button class="copy-btn" data-copy="bankIban" data-i18n="co_copy">Copy</button></span></div>
+          <div class="kv"><span class="k" data-i18n="lbl_branch">Branch</span><span class="v">Samundri, Faisalabad</span></div>
           <div style="text-align:center;margin:16px 0">
             <img src="../img/pay/meezan-qr.png" alt="Meezan Bank QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
-            <div style="font-size:.78rem;color:var(--muted);margin-top:6px">🏦 Scan with any bank app</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-top:6px" data-i18n="co_scan_bank">🏦 Scan with any bank app</div>
           </div>
           <div class="file-row">
-            <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px">📤 Upload payment receipt (screenshot / PDF)</label>
+            <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px" data-i18n="lbl_upload_bank">📤 Upload payment receipt (screenshot / PDF)</label>
             <input type="file" id="bankProof" accept="image/*,.pdf">
-            <div class="file-hint">JPG, PNG or PDF · max 5 MB</div>
+            <div class="file-hint" data-i18n="file_hint">JPG, PNG or PDF · max 5 MB</div>
           </div>
-          <button class="btn btn-primary" id="bankDoneBtn" style="width:100%">✅ I've sent the payment</button>
+          <button class="btn btn-primary" id="bankDoneBtn" style="width:100%" data-i18n="co_sent">✅ I've sent the payment</button>
         </div>
 
         <!-- MOBILE MONEY -->
         <div class="pay-pane" id="pay-mobile">
-          <div class="note">📱 Send <strong>Rs <span class="payPkrEcho">40,000</span></strong> via Easypaisa or JazzCash, then upload your receipt.</div>
+          <div class="note" data-i18n="co_mobile_note">📱 Send <strong>Rs <span class="payPkrEcho">40,000</span></strong> via Easypaisa or JazzCash, then upload your receipt.</div>
           <div class="field">
-            <label>Choose provider</label>
+            <label data-i18n="lbl_provider">Choose provider</label>
             <select id="mobileProvider">
               <option value="easypaisa">Easypaisa</option>
               <option value="jazzcash">JazzCash</option>
@@ -377,41 +385,41 @@ a{color:inherit;text-decoration:none}
             <button class="btn btn-sm subpay-tab" data-subpay="jazzcash" style="flex:1"><img src="../img/pay/jazzcash-logo.png" alt="JazzCash" style="height:22px;object-fit:contain;vertical-align:middle"> JazzCash</button>
           </div>
           <div class="subpay-pane" id="subpay-easypaisa">
-            <div class="kv"><span class="k">Easypaisa number</span><span class="v"><code id="epNum">03264025618</code> <button class="copy-btn" data-copy="epNum">Copy</button></span></div>
-            <div class="kv"><span class="k">Account title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_ep_num">Easypaisa number</span><span class="v"><code id="epNum">03264025618</code> <button class="copy-btn" data-copy="epNum" data-i18n="co_copy">Copy</button></span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_acct_title">Account title</span><span class="v">Syed Muhammad Rabie Shah</span></div>
             <div style="text-align:center;margin:16px 0">
               <img src="../img/pay/easypaisa-qr.png" alt="Easypaisa QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
-              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with Easypaisa app</div>
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px" data-i18n="co_scan_ep">📱 Scan with Easypaisa app</div>
             </div>
           </div>
           <div class="subpay-pane" id="subpay-jazzcash" style="display:none">
-            <div class="kv"><span class="k">JazzCash number</span><span class="v"><code id="jcNum">03264025618</code> <button class="copy-btn" data-copy="jcNum">Copy</button></span></div>
-            <div class="kv"><span class="k">Account title</span><span class="v">Chishti Official</span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_jc_num">JazzCash number</span><span class="v"><code id="jcNum">03264025618</code> <button class="copy-btn" data-copy="jcNum" data-i18n="co_copy">Copy</button></span></div>
+            <div class="kv"><span class="k" data-i18n="lbl_acct_title">Account title</span><span class="v">Chishti Official</span></div>
             <div style="text-align:center;margin:16px 0">
               <img src="../img/pay/jazzcash-qr.png" alt="JazzCash QR" style="width:170px;border-radius:12px;border:1px solid var(--border)">
-              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with JazzCash app</div>
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px" data-i18n="co_scan_jc">📱 Scan with JazzCash app</div>
             </div>
           </div>
           <div class="qr-row" style="display:none">
             <div style="text-align:center">
               <img src="../img/pay/jazzcash-qr.png" alt="JazzCash QR" style="width:150px;border-radius:12px;border:1px solid var(--border)">
-              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with JazzCash</div>
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px" data-i18n="co_scan_jc2">📱 Scan with JazzCash</div>
             </div>
             <div style="text-align:center">
               <img src="../img/pay/easypaisa-qr.png" alt="Easypaisa QR" style="width:150px;border-radius:12px;border:1px solid var(--border)">
-              <div style="font-size:.78rem;color:var(--muted);margin-top:6px">📱 Scan with Easypaisa</div>
+              <div style="font-size:.78rem;color:var(--muted);margin-top:6px" data-i18n="co_scan_ep2">📱 Scan with Easypaisa</div>
             </div>
           </div>
           <div class="file-row">
-            <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px">📤 Upload payment receipt (screenshot)</label>
+            <label style="font-size:.85rem;font-weight:600;color:var(--muted);display:block;margin-bottom:7px" data-i18n="lbl_upload_mobile">📤 Upload payment receipt (screenshot)</label>
             <input type="file" id="mobileProof" accept="image/*,.pdf">
-            <div class="file-hint">JPG, PNG or PDF · max 5 MB</div>
+            <div class="file-hint" data-i18n="file_hint">JPG, PNG or PDF · max 5 MB</div>
           </div>
-          <button class="btn btn-primary" id="mobileDoneBtn" style="width:100%">✅ I've sent the payment</button>
+          <button class="btn btn-primary" id="mobileDoneBtn" style="width:100%" data-i18n="co_sent">✅ I've sent the payment</button>
         </div>
 
         <div class="btn-row">
-          <button class="btn btn-ghost" id="backToAccount">← Back</button>
+          <button class="btn btn-ghost" id="backToAccount" data-i18n="co_back">← Back</button>
         </div>
       </div>
     </div>
@@ -421,21 +429,21 @@ a{color:inherit;text-decoration:none}
       <div class="card">
         <div class="confirm-hero">
           <div class="big">🎉</div>
-          <h2>Order received!</h2>
-          <p>Thank you for your purchase. Our team will verify your payment and activate your lifetime license — usually within a few hours.</p>
+          <h2 data-i18n="co_done_h">Order received!</h2>
+          <p data-i18n="co_done_p">Thank you for your purchase. Our team will verify your payment and activate your lifetime license — usually within a few hours.</p>
         </div>
         <div class="order-id-box">
-          <div class="lbl">Order ID</div>
+          <div class="lbl" data-i18n="lbl_order_id">Order ID</div>
           <div class="val" id="orderIdShow">—</div>
         </div>
-        <div style="text-align:center;margin-bottom:8px"><span class="status-badge pending" id="orderStatusShow">⏳ Pending verification</span></div>
-        <div class="kv"><span class="k">Plan</span><span class="v" id="donePlan">—</span></div>
-        <div class="kv"><span class="k">Amount</span><span class="v" id="doneAmount">—</span></div>
-        <div class="kv"><span class="k">Payment method</span><span class="v" id="doneMethod">—</span></div>
-        <div class="note" style="margin-top:18px">📩 You'll receive your <strong>license key by email</strong> once the payment is verified. You can also track the status anytime in your <a href="../dashboard/" style="color:var(--gold-lt);font-weight:600">dashboard</a>.</div>
+        <div style="text-align:center;margin-bottom:8px"><span class="status-badge pending" id="orderStatusShow" data-i18n="co_pending">⏳ Pending verification</span></div>
+        <div class="kv"><span class="k" data-i18n="lbl_plan">Plan</span><span class="v" id="donePlan">—</span></div>
+        <div class="kv"><span class="k" data-i18n="lbl_amount">Amount</span><span class="v" id="doneAmount">—</span></div>
+        <div class="kv"><span class="k" data-i18n="lbl_method">Payment method</span><span class="v" id="doneMethod">—</span></div>
+        <div class="note" style="margin-top:18px" data-i18n="co_done_note">📩 You'll receive your <strong>license key by email</strong> once the payment is verified. You can also track the status anytime in your <a href="../dashboard/" style="color:var(--gold-lt);font-weight:600">dashboard</a>.</div>
         <div class="btn-row">
-          <a href="../dashboard/" class="btn btn-primary">Go to Dashboard →</a>
-          <a href="../index.html" class="btn btn-ghost">← Back to Home</a>
+          <a href="../dashboard/" class="btn btn-primary" data-i18n="co_go_dash">Go to Dashboard →</a>
+          <a href="../index.html" class="btn btn-ghost" data-i18n="back_home">← Back to Home</a>
         </div>
       </div>
     </div>
@@ -443,13 +451,14 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <div class="foot">
-    <img src="../img/cos-logo.png" alt="COS"> Developed by <strong>COS</strong> · Chishti Office Samundri<br>
-    <span style="font-size:.75rem">🔒 Your payment details are never stored on our servers.</span>
+    <img src="../img/cos-logo.png" alt="COS"> <span data-i18n="dev_credit">Developed by <strong>COS</strong> · Chishti Office Samundri</span><br>
+    <span style="font-size:.75rem" data-i18n="co_foot_secure">🔒 Your payment details are never stored on our servers.</span>
   </div>
 </main>
 
 <div id="coToast"></div>
 
+<script src="/i18n.js"></script>
 <script src="../cart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
