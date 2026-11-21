@@ -97,6 +97,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
 .b-active{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
 .b-revoked{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
 .b-suspended{background:rgba(245,183,63,.13);color:#f5b73f;border:1px solid rgba(245,183,63,.4)}
+.b-review{background:rgba(212,175,55,.15);color:#d4af37;border:1px solid rgba(212,175,55,.45)}
 .b-expired{background:rgba(163,173,201,.13);color:var(--muted);border:1px solid rgba(163,173,201,.3)}
 .badge.green{background:rgba(52,211,153,.13);color:var(--green);border:1px solid rgba(52,211,153,.3)}
 .badge.red{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.35)}
@@ -257,6 +258,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     <div class="nav-link" data-sec="referrals"><span class="ico">🎁</span><span class="txt">Referrals</span></div>
     <div class="nav-link" data-sec="users"><span class="ico">👥</span><span class="txt">Users &amp; Licenses</span></div>
     <div class="nav-link" data-sec="create"><span class="ico">🔑</span><span class="txt">Create License</span></div>
+    <div class="nav-link" data-sec="requests"><span class="ico">📨</span><span class="txt">Activation Requests</span><span class="badge" id="reqBadge" style="display:none"></span></div>
     <div class="nav-link" data-sec="remote"><span class="ico">📢</span><span class="txt">Remote Config</span></div>
     <div class="nav-link" data-sec="notif"><span class="ico">🔔</span><span class="txt">Notifications</span><span class="badge" id="notifBadge" style="display:none"></span></div>
     <div class="nav-link" data-sec="outreach"><span class="ico">📣</span><span class="txt">Outreach</span></div>
@@ -332,6 +334,23 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
       </div>
     </div>
 
+    <!-- ACTIVATION REQUESTS -->
+    <div class="section" id="sec-requests">
+      <div class="card">
+        <h2>📨 Activation requests</h2>
+        <p style="color:var(--muted);font-size:.92rem;margin-bottom:18px">Software (Settings → Plan request) se aayi hui requests. <b>Approve</b> karne par us email ke saare license records <b>lifetime</b> ho jate hain — requested plan ke saath, aur category <b>Medical</b> ho to Medical bhi ACTIVE. Customer ke aglay website-account login par software ka wohi hissa khul jata hai.</p>
+        <div class="toolbar">
+          <button class="btn btn-ghost btn-sm" id="reqRefresh">↻ Refresh</button>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr>
+            <th>Email</th><th>Shop</th><th>Phone</th><th>Category</th><th>Plan</th><th>Date</th><th>Status</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="reqBody"><tr><td colspan="8" class="empty">Loading…</td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+
     <!-- REFERRALS -->
     <div class="section" id="sec-referrals">
       <div class="card">
@@ -354,6 +373,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
     <div class="section" id="sec-users">
       <div class="card">
         <h2>Users &amp; licenses</h2>
+        <p id="usersSummary" style="color:var(--muted);font-size:.92rem;margin-bottom:18px"></p>
         <div class="toolbar">
           <input class="search" id="userSearch" placeholder="🔍 Search email, shop, phone or key…">
           <select class="filter" id="typeFilter">
@@ -366,6 +386,7 @@ tbody tr:hover{background:rgba(255,255,255,.025)}
             <option value="active">Active</option>
             <option value="revoked">Revoked</option>
             <option value="suspended">Suspended</option>
+            <option value="review">Under review</option>
             <option value="expired">Expired</option>
           </select>
         </div>
@@ -722,6 +743,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   function licStatus(row){
     if (row.status === 'revoked') return 'revoked';
     if (row.status === 'suspended') return 'suspended';
+    if (row.status === 'review') return 'review';
     if (row.type === 'trial' && row.trial_ends_at && new Date(row.trial_ends_at) < new Date()) return 'expired';
     return 'active';
   }
@@ -764,7 +786,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
   function enterApp(user){
     hide('gate'); el('app').style.display = 'block';
     el('adminEmailShow').textContent = user.email;
-    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindRemote(); bindLogout(); bindReferrals();
+    bindNav(); bindToolbar(); bindCreate(); bindModal(); bindOrders(); bindRemote(); bindLogout(); bindReferrals(); bindRequests();
     loadData();
   }
 
@@ -813,6 +835,29 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     loadOrders();
   }
 
+  function renderUsersSummary(){
+    var summaryEl = el('usersSummary');
+    if (!summaryEl) return;
+    var byEmail = {};
+    allLicenses.forEach(function(r){
+      var em = r.email || '';
+      if (!byEmail[em]) byEmail[em] = [];
+      byEmail[em].push(r);
+    });
+    var emails = Object.keys(byEmail);
+    var nActive = 0, nTrial = 0, nSuspended = 0, nReview = 0;
+    emails.forEach(function(em){
+      var rows = byEmail[em];
+      if (rows.some(function(r){ return r.status === 'review'; })){ nReview++; return; }
+      if (rows.some(function(r){ return r.status === 'suspended'; })){ nSuspended++; return; }
+      var hasTrial = rows.some(function(r){ return r.type === 'trial'; });
+      var hasActiveLifetime = rows.some(function(r){ return r.type === 'lifetime' && r.status === 'active'; });
+      if (hasTrial && !hasActiveLifetime){ nTrial++; return; }
+      nActive++;
+    });
+    summaryEl.textContent = '👥 Accounts: ' + emails.length + ' · ✅ Active: ' + nActive + ' · 🎁 Trial: ' + nTrial + ' · ⏸ Suspended: ' + nSuspended + ' · 🔍 Under review: ' + nReview;
+  }
+
   function renderStats(){
     var now = new Date();
     var users = allLicenses.length;
@@ -822,12 +867,13 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     el('stLic').textContent = users;
     el('stTrials').textContent = trials;
     el('stPaid').textContent = paid;
+    renderUsersSummary();
   }
 
   function statusBadge(row){
     var s = licStatus(row);
-    var cls = s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : (s === 'suspended' ? 'b-suspended' : 'b-expired'));
-    return '<span class="badge ' + cls + '">' + s + '</span>';
+    var cls = s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : (s === 'suspended' ? 'b-suspended' : (s === 'review' ? 'b-review' : 'b-expired')));
+    return '<span class="badge ' + cls + '">' + (s === 'review' ? 'REVIEW' : s) + '</span>';
   }
 
   function badgeFor(row){
@@ -867,6 +913,8 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       var canExtend = r.type === 'trial';
       var canSuspend = s === 'active';
       var canUnsuspend = s === 'suspended';
+      var canReview = s === 'active';
+      var canUnreview = s === 'review';
       return '<tr>' +
         '<td class="email-cell">' + esc(r.email) + '</td>' +
         '<td>' + esc(r.shop_name || '—') + '</td>' +
@@ -875,7 +923,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         '<td><span class="key-cell">' + esc(r.license_key) + '</span></td>' +
         '<td><span class="badge ' + (r.type === 'lifetime' ? 'b-lifetime' : 'b-trial') + '">' + esc(r.type) + '</span></td>' +
         '<td>' + (r.plan ? esc(ORDER_PLANS[r.plan] || r.plan) : '—') + '</td>' +
-        '<td><span class="badge ' + (s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : (s === 'suspended' ? 'b-suspended' : 'b-expired'))) + '">' + s + '</span></td>' +
+        '<td><span class="badge ' + (s === 'active' ? 'b-active' : (s === 'revoked' ? 'b-revoked' : (s === 'suspended' ? 'b-suspended' : (s === 'review' ? 'b-review' : 'b-expired')))) + '">' + (s === 'review' ? 'REVIEW' : s) + '</span></td>' +
         '<td class="date-cell">' + (r.type === 'trial' ? fmtDate(r.trial_ends_at) : '—') + '</td>' +
         '<td><div class="actions">' +
           (canExtend ? '<button class="btn btn-ghost btn-sm" data-act="extend" data-id="' + r.id + '">⏳ Extend</button>' : '') +
@@ -883,6 +931,8 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
           '<button class="btn btn-ghost btn-sm" data-act="medical" data-id="' + r.id + '">' + (r.medical ? '💊 Medical: ON' : '💊 Medical: OFF') + '</button>' +
           (canSuspend ? '<button class="btn btn-ghost btn-sm" data-act="suspend" data-id="' + r.id + '">⏸ Suspend</button>' : '') +
           (canUnsuspend ? '<button class="btn btn-ghost btn-sm" data-act="unsuspend" data-id="' + r.id + '">▶️ Unsuspend</button>' : '') +
+          (canReview ? '<button class="btn btn-ghost btn-sm" data-act="review" data-id="' + r.id + '">🔍 Review</button>' : '') +
+          (canUnreview ? '<button class="btn btn-ghost btn-sm" data-act="unreview" data-id="' + r.id + '">✔ End review</button>' : '') +
           (canRevoke ? '<button class="btn btn-danger btn-sm" data-act="revoke" data-id="' + r.id + '">🚫 Revoke</button>' : '') +
           '<button class="btn btn-danger btn-sm" data-act="delete" data-id="' + r.id + '">🗑 Delete</button>' +
         '</div></td></tr>';
@@ -939,6 +989,18 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       el('extendField').style.display = 'none';
       el('actionConfirm').textContent = 'Unsuspend';
       el('actionConfirm').className = 'btn btn-primary';
+    } else if (kind === 'review'){
+      el('actionTitle').textContent = '🔍 Put account under review';
+      el('actionDesc').innerHTML = 'Mark <b>' + esc(row.email) + '</b> under review?<br>Their software keeps working normally, but a gold banner shows in their app asking them to contact COS until you end the review. Nothing is deleted or blocked.';
+      el('extendField').style.display = 'none';
+      el('actionConfirm').textContent = 'Put under review';
+      el('actionConfirm').className = 'btn btn-primary';
+    } else if (kind === 'unreview'){
+      el('actionTitle').textContent = '✔ End review';
+      el('actionDesc').innerHTML = 'Remove the review flag for <b>' + esc(row.email) + '</b>?<br>Their license goes back to active and the banner disappears on their next sync.';
+      el('extendField').style.display = 'none';
+      el('actionConfirm').textContent = 'End review';
+      el('actionConfirm').className = 'btn btn-primary';
     } else if (kind === 'delete'){
       el('actionTitle').textContent = '🗑 Delete account';
       el('actionDesc').innerHTML = 'Delete <b>all license records</b> for <b>' + esc(row.email) + '</b>?<br>This is permanent and cannot be undone. The customer\'s license, plan and shop record will be removed. (Orders/referral history is kept. To remove their website login completely, also delete the user in Supabase → Authentication → Users.)';
@@ -983,6 +1045,14 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       var r4 = await sb.from('licenses').update({ status: 'active' }).eq('email', pendingAction.row.email).eq('status', 'suspended');
       ok = !r4.error;
       if (r4.error) alert('Failed: ' + r4.error.message);
+    } else if (pendingAction.kind === 'review'){
+      var r7 = await sb.from('licenses').update({ status: 'review' }).eq('email', pendingAction.row.email).eq('status', 'active');
+      ok = !r7.error;
+      if (r7.error) alert('Failed: ' + r7.error.message);
+    } else if (pendingAction.kind === 'unreview'){
+      var r8 = await sb.from('licenses').update({ status: 'active' }).eq('email', pendingAction.row.email).eq('status', 'review');
+      ok = !r8.error;
+      if (r8.error) alert('Failed: ' + r8.error.message);
     } else if (pendingAction.kind === 'delete'){
       var em = pendingAction.row.email, uid = pendingAction.row.user_id;
       var r5 = await sb.from('licenses').delete().eq('email', em);
@@ -1251,7 +1321,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
       rcRows = res.data || [];
       renderRemoteConfigs();
     } catch(e) {
-      body.innerHTML = '<tr><td colspan="5" class="empty">⚠️ ' + escHtml(e.message) + '<br><small>Run db/remote-config-schema.sql in Supabase SQL editor first.</small></td></tr>';
+      body.innerHTML = '<tr><td colspan="5" class="empty">⚠️ ' + escHtml(e.message) + '<br><small>Run db/remote-config.sql in Supabase SQL editor first.</small></td></tr>';
     }
   }
 
@@ -1352,6 +1422,88 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     });
   }
 
+  /* ---------- activation requests ---------- */
+  var allRequests = [];
+
+  async function loadActivationRequests(){
+    var body = el('reqBody');
+    if (!body) return;
+    try {
+      var res = await sb.from('activation_requests').select('*').order('created_at', {ascending:false}).limit(100);
+      if (res.error) throw res.error;
+      allRequests = res.data || [];
+    } catch(e) {
+      allRequests = [];
+      body.innerHTML = '<tr><td colspan="8" class="empty">Could not load requests — run db/activation-requests.sql in Supabase first.</td></tr>';
+      return;
+    }
+    renderRequests();
+  }
+
+  function renderRequests(){
+    var body = el('reqBody');
+    var pend = allRequests.filter(function(r){ return r.status === 'pending'; });
+    var done = allRequests.filter(function(r){ return r.status !== 'pending'; });
+    var badge = el('reqBadge');
+    if (badge){ badge.style.display = pend.length ? '' : 'none'; badge.textContent = pend.length; }
+    var rows = pend.concat(done);
+    if (!rows.length){ body.innerHTML = '<tr><td colspan="8" class="empty">No activation requests yet.</td></tr>'; return; }
+    body.innerHTML = rows.map(function(r){
+      var st = r.status === 'approved' ? '<span class="badge green">✅ Approved</span>'
+        : r.status === 'rejected' ? '<span class="badge red">❌ Rejected</span>'
+        : '<span class="badge yellow">⏳ Pending</span>';
+      var acts = r.status === 'pending'
+        ? '<button class="btn btn-primary btn-sm" data-req-ok="' + r.id + '">✅ Approve</button> <button class="btn btn-danger btn-sm" data-req-no="' + r.id + '">❌ Reject</button>'
+        : '<span style="color:var(--muted);font-size:.85rem">' + fmtDate(r.decided_at || r.created_at) + '</span>';
+      return '<tr>' +
+        '<td class="email-cell">' + esc(r.email) + '</td>' +
+        '<td>' + esc(r.shop_name || '—') + '</td>' +
+        '<td>' + esc(r.phone || '—') + '</td>' +
+        '<td>' + (r.category === 'medical' ? '💊 Medical' : '🏪 General') + '</td>' +
+        '<td>' + esc(ORDER_PLANS[r.plan] || r.plan) + '</td>' +
+        '<td class="date-cell">' + fmtDate(r.created_at) + '</td>' +
+        '<td>' + st + '</td>' +
+        '<td style="white-space:nowrap">' + acts + '</td></tr>';
+    }).join('');
+  }
+
+  async function decideRequest(id, approve){
+    var r = null;
+    for (var i = 0; i < allRequests.length; i++){ if (String(allRequests[i].id) === String(id)){ r = allRequests[i]; break; } }
+    if (!r) return;
+    if (approve){
+      if (!confirm('Approve ' + (ORDER_PLANS[r.plan] || r.plan) + ' (' + (r.category === 'medical' ? 'Medical' : 'General') + ') for ' + r.email + '?\n\nIs account ke saare license records lifetime + ' + (ORDER_PLANS[r.plan] || r.plan) + ' ho jayenge' + (r.category === 'medical' ? ', Medical ACTIVE ke saath' : '') + '.')) return;
+      // Same by-email upgrade pattern as Create License / Medical toggle:
+      // EVERY license row for this email gets the plan + medical flag.
+      var payload = { plan: r.plan, type: 'lifetime', status: 'active', medical: r.category === 'medical' };
+      var up = await sb.from('licenses').update(payload).eq('email', r.email);
+      if (up.error && /medical/.test(up.error.message || '')){
+        // medical column not in the table yet — apply the plan anyway, warn.
+        var basic = { plan: r.plan, type: 'lifetime', status: 'active' };
+        up = await sb.from('licenses').update(basic).eq('email', r.email);
+        if (!up.error) alert('⚠️ Plan approve ho gaya, lekin Medical flag save nahi hua — Supabase mein db/licenses-medical.sql chalain.');
+      }
+      if (up.error){ alert('❌ License update failed: ' + up.error.message); return; }
+    } else {
+      if (!confirm('Reject this request from ' + r.email + '?')) return;
+    }
+    var st = await sb.from('activation_requests').update({ status: approve ? 'approved' : 'rejected', decided_at: new Date().toISOString() }).eq('id', r.id);
+    if (st.error){ alert('❌ Request update failed: ' + st.error.message + '\n\nPehle Supabase mein db/activation-requests.sql chalain.'); return; }
+    loadActivationRequests();
+    loadData();
+  }
+
+  function bindRequests(){
+    var rb = el('reqRefresh');
+    if (rb) rb.addEventListener('click', loadActivationRequests);
+    el('reqBody').addEventListener('click', function(e){
+      var ok = e.target.closest('[data-req-ok]');
+      var no = e.target.closest('[data-req-no]');
+      if (ok) decideRequest(ok.getAttribute('data-req-ok'), true);
+      else if (no) decideRequest(no.getAttribute('data-req-no'), false);
+    });
+  }
+
   /* ---------- bindings ---------- */
   var TITLES = {
     dashboard: ['Admin <span class="grad">Dashboard</span>', 'Overview of users and licenses.'],
@@ -1359,6 +1511,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
     referrals: ['Referrals &amp; <span class="grad">Rewards</span>', 'Invite tracking — Rs 2,000 reward per paid sale.'],
     users: ['Users &amp; <span class="grad">Licenses</span>', 'Search, filter and manage every account.'],
     create: ['Create <span class="grad">License</span>', 'Issue a new license key for a customer.'],
+    requests: ['Activation <span class="grad">Requests</span>', 'Software se aayi plan requests — approve karein to license usi hisaab se activate ho jata hai.'],
     remote: ['Remote <span class="grad">Config</span>', 'Push updates to shop software remotely.'],
     outreach: ['Outreach <span class="grad">Helper</span>', 'Dukano ko WhatsApp par message bhejein — ahista aur mehfooz tareeqe se.']
   };
@@ -1376,6 +1529,7 @@ t.sheetStubs=true}if(t.type=="array"){t.type="binary";var a=xk(e,t);t.type="arra
         el('pageSub').textContent = TITLES[sec][1].replace(/&amp;/g, '&');
         if (sec === 'outreach') orOnOpen();
         if (sec === 'referrals') loadAdminReferrals();
+        if (sec === 'requests') loadActivationRequests();
         window.scrollTo(0, 0);
       });
     }
