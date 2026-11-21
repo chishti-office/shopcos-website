@@ -142,6 +142,10 @@
       <select class="nav-select" id="langSelect" aria-label="Language">
         <option value="en">🌍 EN</option>
         <option value="ur">🌍 اردو</option>
+        <option value="ar">🌍 العربية</option>
+        <option value="es">🌍 Español</option>
+        <option value="fr">🌍 Français</option>
+        <option value="de">🌍 Deutsch</option>
       </select>
       <select class="nav-select" id="curSelect" aria-label="Currency">
         <option value="USD">💱 USD $</option>
@@ -170,6 +174,10 @@
       <select class="nav-select" id="langSelectM" aria-label="Language">
         <option value="en">🌍 EN</option>
         <option value="ur">🌍 اردو</option>
+        <option value="ar">🌍 العربية</option>
+        <option value="es">🌍 Español</option>
+        <option value="fr">🌍 Français</option>
+        <option value="de">🌍 Deutsch</option>
       </select>
       <select class="nav-select" id="curSelectM" aria-label="Currency">
         <option value="USD">💱 USD $</option>
@@ -182,7 +190,7 @@
         <option value="BDT">💱 BDT</option>
       </select>
     </div>
-    <a class="btn btn-primary" data-open-cart href="#">🛒 View Cart</a>
+    <a class="btn btn-primary" data-open-cart href="#" data-i18n="view_cart">🛒 View Cart</a>
   </div>
 </header>
 
@@ -207,13 +215,13 @@
       </div>
       <div class="social-proof reveal">
         <div class="proof-avatars"><span>🏪</span><span>💊</span><span>📱</span><span>👕</span><span>🍰</span></div>
-        <p><strong>Join 500+ shop owners</strong> who ditched the paper register</p>
+        <p data-i18n="proof_join"><strong>Join 500+ shop owners</strong> who ditched the paper register</p>
       </div>
       <div class="stats reveal">
-        <div class="stat"><span class="stat-num" data-count="15">15</span><span class="stat-plus">+</span><span class="stat-label">Powerful features</span></div>
-        <div class="stat"><span class="stat-num" data-count="100">100</span><span class="stat-plus">%</span><span class="stat-label">Offline capable</span></div>
-        <div class="stat"><span class="stat-num" data-count="7">7</span><span class="stat-label">Days free trial</span></div>
-        <div class="stat"><span class="stat-num">1</span><span class="stat-label">Lifetime payment</span></div>
+        <div class="stat"><span class="stat-num" data-count="15">15</span><span class="stat-plus">+</span><span class="stat-label" data-i18n="stat_features">Powerful features</span></div>
+        <div class="stat"><span class="stat-num" data-count="100">100</span><span class="stat-plus">%</span><span class="stat-label" data-i18n="stat_offline">Offline capable</span></div>
+        <div class="stat"><span class="stat-num" data-count="7">7</span><span class="stat-label" data-i18n="stat_trial">Days free trial</span></div>
+        <div class="stat"><span class="stat-num">1</span><span class="stat-label" data-i18n="stat_lifetime">Lifetime payment</span></div>
       </div>
     </div>
 
@@ -238,7 +246,7 @@
               <img class="ai-demo-avatar" src="img/shopcos-ai-avatar.webp" alt="shopcos AI">
               <div>
                 <strong>shopcos AI agent</strong>
-                <small><span class="ai-online-dot"></span> Online — aap ki dukaan ka hisab janta hai</small>
+                <small data-i18n="demo_status"><span class="ai-online-dot"></span> Online — aap ki dukaan ka hisab janta hai</small>
               </div>
             </div>
             <div class="phdemo-card">
@@ -246,37 +254,37 @@
                 <!-- messages injected by JS -->
               </div>
               <div class="phdemo-chips" aria-hidden="true">
-                <span class="phdemo-chip">📊 Aaj ka hisab</span>
-                <span class="phdemo-chip">💰 Aaj ki sale</span>
-                <span class="phdemo-chip">📒 Udhar list</span>
-                <span class="phdemo-chip">⚠️ Low stock</span>
-                <span class="phdemo-chip">🤖 Tum kaun ho?</span>
+                <span class="phdemo-chip" data-i18n="chip_hisab">📊 Aaj ka hisab</span>
+                <span class="phdemo-chip" data-i18n="chip_sale">💰 Aaj ki sale</span>
+                <span class="phdemo-chip" data-i18n="chip_udhar">📒 Udhar list</span>
+                <span class="phdemo-chip" data-i18n="chip_stock">⚠️ Low stock</span>
+                <span class="phdemo-chip" data-i18n="chip_who">🤖 Tum kaun ho?</span>
               </div>
               <div class="phdemo-inputbar" aria-hidden="true">
-                <span class="phdemo-attach">📷 Photo</span>
-                <span class="phdemo-pill">Yahan likhein...</span>
-                <span class="phdemo-send">➤ Bhejein</span>
+                <span class="phdemo-attach" data-i18n="demo_photo">📷 Photo</span>
+                <span class="phdemo-pill" data-i18n="demo_type">Yahan likhein...</span>
+                <span class="phdemo-send" data-i18n="demo_send">➤ Bhejein</span>
               </div>
             </div>
           </div>
         </div>
         <div class="ai-demo-foot phdemo-foot">
-          <button class="btn btn-primary btn-sm" id="aiDemoTry">Try it live →</button>
-          <span class="ai-demo-hint">⚡ 30-second demo</span>
+          <button class="btn btn-primary btn-sm" id="aiDemoTry" data-i18n="demo_try">Try it live →</button>
+          <span class="ai-demo-hint" data-i18n="demo_hint">⚡ 30-second demo</span>
         </div>
       </div>
       <!-- Floating device badges -->
       <div class="float-card fc-1">
         <span class="fc-ic">📱</span>
-        <div><strong>Phone</strong><small>Same data, everywhere</small></div>
+        <div><strong data-i18n="fc_phone">Phone</strong><small data-i18n="fc_phone_s">Same data, everywhere</small></div>
       </div>
       <div class="float-card fc-2">
         <span class="fc-ic">💻</span>
-        <div><strong>Computer</strong><small>100% offline billing</small></div>
+        <div><strong data-i18n="fc_pc">Computer</strong><small data-i18n="fc_pc_s">100% offline billing</small></div>
       </div>
       <div class="float-card fc-3">
         <span class="fc-ic good">☁️</span>
-        <div><strong>Cloud Sync</strong><small>Auto-sync when online</small></div>
+        <div><strong data-i18n="fc_cloud">Cloud Sync</strong><small data-i18n="fc_cloud_s">Auto-sync when online</small></div>
       </div>
     </div>
   </div>
@@ -286,27 +294,27 @@
     <div class="usecase-strip reveal">
       <div class="usecase-card reveal reveal-d1">
         <span class="uc-ic">💊</span>
-        <div><strong>Medical Store</strong><small>"Dolo ki expiry kab hai?"</small></div>
+        <div><strong data-i18n="uc_medical">Medical Store</strong><small data-i18n="uc_medical_q">"Dolo ki expiry kab hai?"</small></div>
       </div>
       <div class="usecase-card reveal reveal-d2">
         <span class="uc-ic">🏪</span>
-        <div><strong>Kiryana</strong><small>"Cheeni ka stock kitna?"</small></div>
+        <div><strong data-i18n="uc_kiryana">Kiryana</strong><small data-i18n="uc_kiryana_q">"Cheeni ka stock kitna?"</small></div>
       </div>
       <div class="usecase-card reveal reveal-d3">
         <span class="uc-ic">📱</span>
-        <div><strong>Mobile Shop</strong><small>"Aaj kitni sale hui?"</small></div>
+        <div><strong data-i18n="uc_mobile">Mobile Shop</strong><small data-i18n="uc_mobile_q">"Aaj kitni sale hui?"</small></div>
       </div>
       <div class="usecase-card reveal reveal-d4">
         <span class="uc-ic">🔌</span>
-        <div><strong>Electronics</strong><small>"Supplier ko kitna dena?"</small></div>
+        <div><strong data-i18n="uc_elec">Electronics</strong><small data-i18n="uc_elec_q">"Supplier ko kitna dena?"</small></div>
       </div>
       <div class="usecase-card reveal reveal-d5">
         <span class="uc-ic">👕</span>
-        <div><strong>Garments</strong><small>"Top selling item kaunsa?"</small></div>
+        <div><strong data-i18n="uc_garments">Garments</strong><small data-i18n="uc_garments_q">"Top selling item kaunsa?"</small></div>
       </div>
       <div class="usecase-card reveal reveal-d5">
         <span class="uc-ic">🍰</span>
-        <div><strong>Bakery</strong><small>"Kal ka profit batao"</small></div>
+        <div><strong data-i18n="uc_bakery">Bakery</strong><small data-i18n="uc_bakery_q">"Kal ka profit batao"</small></div>
       </div>
     </div>
   </div>
@@ -314,10 +322,10 @@
 
 <section id="daily-code" style="max-width:860px;margin:26px auto;padding:0 16px">
   <div style="background:linear-gradient(135deg,#0d1b3e,#16295c);border:2px solid #e8af3c;border-radius:18px;padding:26px 22px;text-align:center;color:#fff;box-shadow:0 12px 32px rgba(6,12,30,.35)">
-    <div style="font-size:15px;letter-spacing:2px;color:#e8af3c;font-weight:700">🔑 TODAY'S FREE TRIAL CODE</div>
+    <div style="font-size:15px;letter-spacing:2px;color:#e8af3c;font-weight:700" data-i18n="daily_h">🔑 TODAY'S FREE TRIAL CODE</div>
     <div id="dailyCodeVal" style="font-size:54px;font-weight:900;letter-spacing:10px;margin:10px 0 2px;color:#fff">------</div>
     <div id="dailyCodeDate" style="font-size:14px;opacity:.85"></div>
-    <p style="margin:12px auto 0;max-width:560px;font-size:15px;line-height:1.55;opacity:.92">Using the shopcos soft <b>7-day FREE trial</b>? Type today's code in the software to unlock it for today. The code is free and changes every day.<br><b style="color:#e8af3c">Paid plans never need a code.</b></p>
+    <p style="margin:12px auto 0;max-width:560px;font-size:15px;line-height:1.55;opacity:.92" data-i18n="daily_p">Using the shopcos soft <b>7-day FREE trial</b>? Type today's code in the software to unlock it for today. The code is free and changes every day.<br><b style="color:#e8af3c">Paid plans never need a code.</b></p>
   </div>
 </section>
 
@@ -326,12 +334,12 @@
   <div class="container" style="display:flex;gap:36px;align-items:center;flex-wrap:wrap;padding:64px 20px 10px">
     <figure style="flex:1 1 430px;margin:0;min-width:290px">
       <img src="img/shopcos-pos-billing.jpg" alt="shopcos soft billing screen on a POS terminal at a supermarket counter, with barcode scanner, keyboard, mouse, receipt printer and cash drawer" style="width:100%;height:auto;display:block;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.45)" loading="lazy">
-      <figcaption style="margin-top:10px;font-size:.8rem;color:var(--muted)">shopcos soft billing on a standard shop counter — scanner, receipt printer and cash drawer supported.</figcaption>
+      <figcaption style="margin-top:10px;font-size:.8rem;color:var(--muted)" data-i18n="counter_cap">shopcos soft billing on a standard shop counter — scanner, receipt printer and cash drawer supported.</figcaption>
     </figure>
     <div style="flex:1 1 320px;min-width:280px">
-      <span class="kicker">Your Counter, Upgraded</span>
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.1rem;line-height:1.2;color:#fff;margin:12px 0 14px">Runs on the counter you <span class="grad">already have</span></h2>
-      <p style="color:#d5d9e8;line-height:1.8;font-size:1.02rem;margin:0">shopcos soft turns an ordinary Windows PC or touch-screen POS into a complete billing counter. It works with standard barcode scanners, receipt printers and cash drawers, and keeps billing even when the internet goes down. It is software only — bring your own hardware, or add pieces as your shop grows.</p>
+      <span class="kicker" data-i18n="counter_kicker">Your Counter, Upgraded</span>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.1rem;line-height:1.2;color:#fff;margin:12px 0 14px" data-i18n="counter_h2">Runs on the counter you <span class="grad">already have</span></h2>
+      <p style="color:#d5d9e8;line-height:1.8;font-size:1.02rem;margin:0" data-i18n="counter_p">shopcos soft turns an ordinary Windows PC or touch-screen POS into a complete billing counter. It works with standard barcode scanners, receipt printers and cash drawers, and keeps billing even when the internet goes down. It is software only — bring your own hardware, or add pieces as your shop grows.</p>
     </div>
   </div>
 </section>
@@ -340,12 +348,12 @@
 <div class="ornament" aria-hidden="true"><span></span><i>✦</i><span></span></div>
 <section class="proof">
   <div class="container">
-    <p class="proof-label reveal">Trusted by shop owners in 31 countries</p>
+    <p class="proof-label reveal" data-i18n="proof_label">Trusted by shop owners in 31 countries</p>
   </div>
   <div class="marquee reveal">
     <div class="marquee-track">
-      <span>Kiryana Stores</span><i>✦</i><span>General Stores</span><i>✦</i><span>Super Marts</span><i>✦</i><span>Pharmacies</span><i>✦</i><span>Bakeries</span><i>✦</i><span>Mobile Shops</span><i>✦</i><span>Garments</span><i>✦</i><span>Hardware Stores</span><i>✦</i>
-      <span>Kiryana Stores</span><i>✦</i><span>General Stores</span><i>✦</i><span>Super Marts</span><i>✦</i><span>Pharmacies</span><i>✦</i><span>Bakeries</span><i>✦</i><span>Mobile Shops</span><i>✦</i><span>Garments</span><i>✦</i><span>Hardware Stores</span><i>✦</i>
+      <span data-i18n="mq_kiryana">Kiryana Stores</span><i>✦</i><span data-i18n="mq_general">General Stores</span><i>✦</i><span data-i18n="mq_super">Super Marts</span><i>✦</i><span data-i18n="mq_pharmacies">Pharmacies</span><i>✦</i><span data-i18n="mq_bakeries">Bakeries</span><i>✦</i><span data-i18n="mq_mobile">Mobile Shops</span><i>✦</i><span data-i18n="mq_garments">Garments</span><i>✦</i><span data-i18n="mq_hardware">Hardware Stores</span><i>✦</i>
+      <span data-i18n="mq_kiryana">Kiryana Stores</span><i>✦</i><span data-i18n="mq_general">General Stores</span><i>✦</i><span data-i18n="mq_super">Super Marts</span><i>✦</i><span data-i18n="mq_pharmacies">Pharmacies</span><i>✦</i><span data-i18n="mq_bakeries">Bakeries</span><i>✦</i><span data-i18n="mq_mobile">Mobile Shops</span><i>✦</i><span data-i18n="mq_garments">Garments</span><i>✦</i><span data-i18n="mq_hardware">Hardware Stores</span><i>✦</i>
     </div>
   </div>
 </section>
@@ -367,9 +375,9 @@
 <section class="features" id="features">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="kicker">Features</span>
-      <h2>Complete <span class="grad">Point of Sale Software</span><br>for Retail Shops Worldwide</h2>
-      <p>Fifteen tools, one screen, zero complexity — designed so any staff member can learn it in minutes.</p>
+      <span class="kicker" data-i18n="nav_features">Features</span>
+      <h2 data-i18n="feat_h2">Complete <span class="grad">Point of Sale Software</span><br>for Retail Shops Worldwide</h2>
+      <p data-i18n="feat_sub">Fifteen tools, one screen, zero complexity — designed so any staff member can learn it in minutes.</p>
     </div>
 
     <div class="bento">
@@ -378,47 +386,47 @@
         <div class="bento-ic grad-bg">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.2-2.6 5.6-.9.9-1.4 2-1.4 3.4H9c0-1.4-.5-2.5-1.4-3.4C6.2 13.2 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg>
         </div>
-        <h3>AI Smart Insights</h3>
-        <p>Your built-in business analyst. It predicts stock-outs from 30-day sales averages, flags risky debtors before they disappear, and warns about expiring products — all computed locally, no internet needed.</p>
-        <div class="bento-tags"><span>Stock-out prediction</span><span>Debtor alerts</span><span>Expiry warnings</span></div>
+        <h3 data-i18n="f_ai_h">AI Smart Insights</h3>
+        <p data-i18n="f_ai_p">Your built-in business analyst. It predicts stock-outs from 30-day sales averages, flags risky debtors before they disappear, and warns about expiring products — all computed locally, no internet needed.</p>
+        <div class="bento-tags"><span data-i18n="f_ai_t1">Stock-out prediction</span><span data-i18n="f_ai_t2">Debtor alerts</span><span data-i18n="f_ai_t3">Expiry warnings</span></div>
       </div>
       <!-- Large: Voice -->
       <div class="bento-card span-6 pattern-card reveal tilt reveal-d1">
         <div class="bento-ic grad-bg">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 19v3"/></svg>
         </div>
-        <h3>Voice Billing</h3>
-        <p>Just say it — "Sugar 2, Oil 1" — and the bill builds itself. Hands-free billing in Urdu or English, perfect for rush hours when your hands are full and the queue is long.</p>
-        <div class="bento-tags"><span>Urdu voice</span><span>English voice</span><span>Hands-free</span></div>
+        <h3 data-i18n="f_voice_h">Voice Billing</h3>
+        <p data-i18n="f_voice_p">Just say it — "Sugar 2, Oil 1" — and the bill builds itself. Hands-free billing in Urdu or English, perfect for rush hours when your hands are full and the queue is long.</p>
+        <div class="bento-tags"><span data-i18n="f_voice_t1">Urdu voice</span><span data-i18n="f_voice_t2">English voice</span><span data-i18n="f_voice_t3">Hands-free</span></div>
       </div>
       <!-- Small 1 -->
       <div class="bento-card span-3 reveal tilt reveal-d1">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v10H4z"/><path d="M4 10h16M8 7V5h8v2"/></svg></div>
-        <h3>Lightning Billing</h3>
-        <p>Barcode-scan billing with discounts, cash &amp; udhar sales in seconds.</p>
+        <h3 data-i18n="f_bill_h">Lightning Billing</h3>
+        <p data-i18n="f_bill_p">Barcode-scan billing with discounts, cash &amp; udhar sales in seconds.</p>
       </div>
       <!-- Small 2 -->
       <div class="bento-card span-3 reveal tilt reveal-d2">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>
-        <h3>Smart Stock</h3>
-        <p>Purchases, levels, expiry dates and low-stock alerts — automatic.</p>
+        <h3 data-i18n="f_stock_h">Smart Stock</h3>
+        <p data-i18n="f_stock_p">Purchases, levels, expiry dates and low-stock alerts — automatic.</p>
       </div>
       <!-- Small 3 -->
       <div class="bento-card span-3 reveal tilt reveal-d3">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v12H5z"/><path d="M5 8h14M9 12h6"/></svg></div>
-        <h3>Khata / Udhar</h3>
-        <p>Customer credit accounts with full history and balance tracking.</p>
+        <h3 data-i18n="f_khata_h">Khata / Udhar</h3>
+        <p data-i18n="f_khata_p">Customer credit accounts with full history and balance tracking.</p>
       </div>
       <!-- Small 4 -->
       <div class="bento-card span-3 reveal tilt reveal-d4">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 4-7"/></svg></div>
-        <h3>Reports &amp; Charts</h3>
-        <p>Sales charts, top-5 products, profit reports — print or export.</p>
+        <h3 data-i18n="f_reports_h">Reports &amp; Charts</h3>
+        <p data-i18n="f_reports_p">Sales charts, top-5 products, profit reports — print or export.</p>
       </div>
     </div>
 
     <div class="pill-row reveal">
-      <span>Barcode labels</span><span>Supplier accounts</span><span>Returns</span><span>Expenses</span><span>Day closing</span><span>Staff roles</span><span>Daily backup</span><span>Google Drive</span><span>Audit log</span>
+      <span data-i18n="pill_barcode">Barcode labels</span><span data-i18n="pill_supplier">Supplier accounts</span><span data-i18n="pill_returns">Returns</span><span data-i18n="pill_expenses">Expenses</span><span data-i18n="pill_dayclose">Day closing</span><span data-i18n="pill_staff">Staff roles</span><span data-i18n="pill_backup">Daily backup</span><span data-i18n="pill_drive">Google Drive</span><span data-i18n="pill_audit">Audit log</span>
     </div>
   </div>
 </section>
@@ -427,23 +435,23 @@
 <section class="shoptypes">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="kicker">Made for your business</span>
-      <h2>Perfect <span class="grad">Shop Software</span> for Every Business</h2>
-      <p class="sec-sub">From kiryana to pharmacy — if you sell it, shopcos soft handles it.</p>
+      <span class="kicker" data-i18n="types_kicker">Made for your business</span>
+      <h2 data-i18n="types_h2">Perfect <span class="grad">Shop Software</span> for Every Business</h2>
+      <p class="sec-sub" data-i18n="types_sub">From kiryana to pharmacy — if you sell it, shopcos soft handles it.</p>
     </div>
     <div class="type-grid reveal">
-      <a class="type-chip" href="blog/billing-software-kiryana-shops.html" style="text-decoration:none;color:inherit">🏪 Kiryana / General Store</a>
-      <a class="type-chip" href="blog/medical-store-software-pakistan.html" style="text-decoration:none;color:inherit">💊 Medical Store / Pharmacy</a>
-      <div class="type-chip">👕 Cloth / Garment Shop</div>
-      <div class="type-chip">💄 Cosmetics Shop</div>
-      <div class="type-chip">📱 Mobile Accessories</div>
-      <div class="type-chip">🔌 Electronics Shop</div>
-      <div class="type-chip">📚 Bookstore / Stationery</div>
-      <div class="type-chip">🍰 Bakery / Sweets</div>
-      <div class="type-chip">🔧 Hardware Store</div>
-      <div class="type-chip">👟 Shoes / Footwear</div>
-      <div class="type-chip">🧸 Toys & Gifts</div>
-      <div class="type-chip">✨ Any Retail Shop!</div>
+      <a class="type-chip" href="blog/billing-software-kiryana-shops.html" style="text-decoration:none;color:inherit" data-i18n="ty_kiryana">🏪 Kiryana / General Store</a>
+      <a class="type-chip" href="blog/medical-store-software-pakistan.html" style="text-decoration:none;color:inherit" data-i18n="ty_medical">💊 Medical Store / Pharmacy</a>
+      <div class="type-chip" data-i18n="ty_cloth">👕 Cloth / Garment Shop</div>
+      <div class="type-chip" data-i18n="ty_cosmetics">💄 Cosmetics Shop</div>
+      <div class="type-chip" data-i18n="ty_mobile">📱 Mobile Accessories</div>
+      <div class="type-chip" data-i18n="ty_elec">🔌 Electronics Shop</div>
+      <div class="type-chip" data-i18n="ty_books">📚 Bookstore / Stationery</div>
+      <div class="type-chip" data-i18n="ty_bakery">🍰 Bakery / Sweets</div>
+      <div class="type-chip" data-i18n="ty_hardware">🔧 Hardware Store</div>
+      <div class="type-chip" data-i18n="ty_shoes">👟 Shoes / Footwear</div>
+      <div class="type-chip" data-i18n="ty_toys">🧸 Toys & Gifts</div>
+      <div class="type-chip" data-i18n="ty_any">✨ Any Retail Shop!</div>
     </div>
   </div>
 </section>
@@ -452,34 +460,34 @@
 <section class="seo-content">
   <div class="container" style="max-width:900px">
     <div class="reveal">
-      <h2>Best Shop Software — Point of Sale (POS) Billing Software for Every Business Worldwide</h2>
-      <p>Looking for <strong>shop software</strong>? shopcos soft is the complete <strong>point of sale (POS) software</strong> designed for retailers in 31 countries. Whether you run a <a href="blog/grocery-store-pos-software.html">grocery store</a>, pharmacy, garment shop, mobile shop, electronics store, or any retail business — our <strong>billing software</strong> handles everything from fast barcode billing to customer credit management. Available in 28 currencies with multi-language support.</p>
+      <h2 data-i18n="seo_h2">Best Shop Software — Point of Sale (POS) Billing Software for Every Business Worldwide</h2>
+      <p data-i18n="seo_p1">Looking for <strong>shop software</strong>? shopcos soft is the complete <strong>point of sale (POS) software</strong> designed for retailers in 31 countries. Whether you run a <a href="blog/grocery-store-pos-software.html">grocery store</a>, pharmacy, garment shop, mobile shop, electronics store, or any retail business — our <strong>billing software</strong> handles everything from fast barcode billing to customer credit management. Available in 28 currencies with multi-language support.</p>
       
-      <h3>Point of Sale Software That Actually Works Offline</h3>
-      <p>Unlike cloud-based <strong>POS software</strong> that stops working without internet, shopcos soft runs 100% on your shop computer. Your <strong>shop billing software</strong> keeps working during power outages, internet disruptions, and slow connections. Every bill, every stock update, every credit entry — saved locally, always accessible. When internet returns, everything syncs to the cloud automatically.</p>
+      <h3 data-i18n="seo_h3_1">Point of Sale Software That Actually Works Offline</h3>
+      <p data-i18n="seo_p2">Unlike cloud-based <strong>POS software</strong> that stops working without internet, shopcos soft runs 100% on your shop computer. Your <strong>shop billing software</strong> keeps working during power outages, internet disruptions, and slow connections. Every bill, every stock update, every credit entry — saved locally, always accessible. When internet returns, everything syncs to the cloud automatically.</p>
       
-      <h3>Pharmacy Software with Batch & Expiry Tracking</h3>
-      <p>Running a pharmacy or medical store? Our <strong>pharmacy software</strong> tracks batch numbers, generic names, and expiry dates automatically. Get alerts before medicines expire, manage supplier accounts, and never lose money on dead stock again. The best <strong><a href="blog/medical-store-software-pakistan.html">medical store software</a></strong> for independent pharmacies — from Pakistan to Nigeria to the Philippines.</p>
+      <h3 data-i18n="seo_h3_2">Pharmacy Software with Batch & Expiry Tracking</h3>
+      <p data-i18n="seo_p3">Running a pharmacy or medical store? Our <strong>pharmacy software</strong> tracks batch numbers, generic names, and expiry dates automatically. Get alerts before medicines expire, manage supplier accounts, and never lose money on dead stock again. The best <strong><a href="blog/medical-store-software-pakistan.html">medical store software</a></strong> for independent pharmacies — from Pakistan to Nigeria to the Philippines.</p>
       
-      <h3>Credit Ledger Software — Customer Account Management Made Simple</h3>
-      <p>Stop losing money on unrecovered credit. Our <strong>shop credit management</strong> tracks every customer's balance, payment history, and credit limits. See who owes what at a glance, get AI-powered alerts for risky debtors, and recover every penny with professional ledger management. Called "khata/udhar" in South Asia — the concept works everywhere.</p>
+      <h3 data-i18n="seo_h3_3">Credit Ledger Software — Customer Account Management Made Simple</h3>
+      <p data-i18n="seo_p4">Stop losing money on unrecovered credit. Our <strong>shop credit management</strong> tracks every customer's balance, payment history, and credit limits. See who owes what at a glance, get AI-powered alerts for risky debtors, and recover every penny with professional ledger management. Called "khata/udhar" in South Asia — the concept works everywhere.</p>
       
-      <h3>Grocery Store Software with Smart Stock Control</h3>
-      <p><strong>Retail shop software</strong> needs to handle thousands of items. shopcos soft manages stock levels, purchase rates, expiry dates, and low-stock alerts automatically. The AI predicts stock-outs before they happen, so you never lose a sale — whether you sell rice in Karachi, medicine in Lagos, or electronics in Manila.</p>
+      <h3 data-i18n="seo_h3_4">Grocery Store Software with Smart Stock Control</h3>
+      <p data-i18n="seo_p5"><strong>Retail shop software</strong> needs to handle thousands of items. shopcos soft manages stock levels, purchase rates, expiry dates, and low-stock alerts automatically. The AI predicts stock-outs before they happen, so you never lose a sale — whether you sell rice in Karachi, medicine in Lagos, or electronics in Manila.</p>
       
-      <h3>Why shopcos soft is the World's Smartest Retail POS Software</h3>
+      <h3 data-i18n="seo_h3_5">Why shopcos soft is the World's Smartest Retail POS Software</h3>
       <ul>
-        <li><strong>One-time payment</strong> — no monthly fees, lifetime license</li>
-        <li><strong>31 countries, 28 currencies</strong> — truly international</li>
-        <li><strong>Multi-language</strong> — staff learns in one day</li>
-        <li><strong>Voice billing</strong> — speak items and the bill builds itself</li>
-        <li><strong>AI assistant</strong> — stock predictions, debtor alerts, profit analysis, smart reminders</li>
-        <li><strong>Staff privacy</strong> — workers never see buying rates or profits</li>
-        <li><strong>Works offline</strong> — no internet needed for daily operations</li>
-        <li><strong>Cloud sync</strong> — access your data from phone or computer, anywhere</li>
+        <li data-i18n="seo_li1"><strong>One-time payment</strong> — no monthly fees, lifetime license</li>
+        <li data-i18n="seo_li2"><strong>31 countries, 28 currencies</strong> — truly international</li>
+        <li data-i18n="seo_li3"><strong>Multi-language</strong> — staff learns in one day</li>
+        <li data-i18n="seo_li4"><strong>Voice billing</strong> — speak items and the bill builds itself</li>
+        <li data-i18n="seo_li5"><strong>AI assistant</strong> — stock predictions, debtor alerts, profit analysis, smart reminders</li>
+        <li data-i18n="seo_li6"><strong>Staff privacy</strong> — workers never see buying rates or profits</li>
+        <li data-i18n="seo_li7"><strong>Works offline</strong> — no internet needed for daily operations</li>
+        <li data-i18n="seo_li8"><strong>Cloud sync</strong> — access your data from phone or computer, anywhere</li>
       </ul>
-      <p>Join shop owners across 31 countries who switched from paper registers to shopcos soft — the <strong>best shop management software</strong> for small and medium retail businesses worldwide. Popular in Pakistan, India, Bangladesh, Nigeria, Kenya, Philippines, UAE, Saudi Arabia and beyond.</p>
-      <p>Running a shop in Pakistan? Read our simple guide to <a href="blog/fbr-e-invoicing-guide-pakistan-2026.html">FBR e-invoicing rules for small shops</a> — what applies to you, in plain words.</p>
+      <p data-i18n="seo_p6">Join shop owners across 31 countries who switched from paper registers to shopcos soft — the <strong>best shop management software</strong> for small and medium retail businesses worldwide. Popular in Pakistan, India, Bangladesh, Nigeria, Kenya, Philippines, UAE, Saudi Arabia and beyond.</p>
+      <p data-i18n="seo_p7">Running a shop in Pakistan? Read our simple guide to <a href="blog/fbr-e-invoicing-guide-pakistan-2026.html">FBR e-invoicing rules for small shops</a> — what applies to you, in plain words.</p>
     </div>
   </div>
 </section>
@@ -488,24 +496,24 @@
 <section class="how" id="how">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="kicker">Getting started</span>
-      <h2>Live in your shop in <span class="grad">10 minutes.</span></h2>
+      <span class="kicker" data-i18n="how_kicker">Getting started</span>
+      <h2 data-i18n="how_h2">Live in your shop in <span class="grad">10 minutes.</span></h2>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="step-num">1</div>
-        <h3>Download</h3>
-        <p>Get the setup for Windows — just double-click to install. A shopcos icon appears on your desktop.</p>
+        <h3 data-i18n="step1_h">Download</h3>
+        <p data-i18n="step1_p">Get the setup for Windows — just double-click to install. A shopcos icon appears on your desktop.</p>
       </div>
       <div class="step reveal">
         <div class="step-num">2</div>
-        <h3>Run on your shop PC</h3>
-        <p>Double-click to start. Your data stays on your own computer — private and fully offline.</p>
+        <h3 data-i18n="step2_h">Run on your shop PC</h3>
+        <p data-i18n="step2_p">Double-click to start. Your data stays on your own computer — private and fully offline.</p>
       </div>
       <div class="step reveal">
         <div class="step-num">3</div>
-        <h3>Start billing</h3>
-        <p>Add products, print your first bill, connect mobiles over shop Wi-Fi. Done.</p>
+        <h3 data-i18n="step3_h">Start billing</h3>
+        <p data-i18n="step3_p">Add products, print your first bill, connect mobiles over shop Wi-Fi. Done.</p>
       </div>
     </div>
   </div>
@@ -518,42 +526,42 @@
 <section class="downloads">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="kicker">Downloads</span>
-      <h2>Get shopcos soft <span class="grad">on your devices.</span></h2>
-      <p>Start your 7-day free trial today — no card required.</p>
+      <span class="kicker" data-i18n="dl_kicker">Downloads</span>
+      <h2 data-i18n="dl_h2">Get shopcos soft <span class="grad">on your devices.</span></h2>
+      <p data-i18n="dl_sub">Start your 7-day free trial today — no card required.</p>
     </div>
     <div class="dl-grid">
       <a href="https://github.com/chishti-office/shopcos-website/releases/download/v14/shopcos-soft-setup.exe" class="dl-card reveal reveal-d1">
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5L10.5 4.5v7H3zM11.5 4.3L21 3v8.5h-9.5zM3 13h7.5v7L3 18.5zM11.5 13H21v8l-9.5-1.3z"/></svg></div>
-        <h3>Windows <span class="ver-badge">v1.0.26</span></h3>
-        <p>Setup file — double-click to install on your shop PC. Desktop icon included.</p>
+        <h3 data-i18n="dl_win_h">Windows <span class="ver-badge">v1.0.26</span></h3>
+        <p data-i18n="dl_win_p">Setup file — double-click to install on your shop PC. Desktop icon included.</p>
         <div class="sys-req">
-          <span>💻 <strong>Requirements:</strong></span>
-          <span>🖥️ Windows 10/11 (64-bit)</span>
-          <span>🧠 RAM: 4 GB minimum (8 GB recommended)</span>
-          <span>💾 Storage: 500 MB free space</span>
-          <span>🌐 Internet: optional (offline works)</span>
+          <span data-i18n="dl_req_win">💻 <strong>Requirements:</strong></span>
+          <span data-i18n="dl_win_r1">🖥️ Windows 10/11 (64-bit)</span>
+          <span data-i18n="dl_win_r2">🧠 RAM: 4 GB minimum (8 GB recommended)</span>
+          <span data-i18n="dl_win_r3">💾 Storage: 500 MB free space</span>
+          <span data-i18n="dl_win_r4">🌐 Internet: optional (offline works)</span>
         </div>
-        <span class="dl-link">Download for Windows →</span>
+        <span class="dl-link" data-i18n="dl_win_link">Download for Windows →</span>
       </a>
       <a href="downloads/shopcos-soft.apk" class="dl-card reveal reveal-d2" download>
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
-        <h3>Android App <span class="ver-badge">v1.0.26</span></h3>
-        <p>Companion app for mobiles — connects to your shop PC over Wi-Fi.</p>
+        <h3 data-i18n="dl_and_h">Android App <span class="ver-badge">v1.0.26</span></h3>
+        <p data-i18n="dl_and_p">Companion app for mobiles — connects to your shop PC over Wi-Fi.</p>
         <div class="sys-req">
-          <span>📱 <strong>Requirements:</strong></span>
-          <span>⚙️ Android 8.0 or higher</span>
-          <span>🧠 RAM: 2 GB minimum</span>
-          <span>💾 Storage: 50 MB free space</span>
-          <span>📶 Same Wi-Fi as shop PC</span>
+          <span data-i18n="dl_req_and">📱 <strong>Requirements:</strong></span>
+          <span data-i18n="dl_and_r1">⚙️ Android 8.0 or higher</span>
+          <span data-i18n="dl_and_r2">🧠 RAM: 2 GB minimum</span>
+          <span data-i18n="dl_and_r3">💾 Storage: 50 MB free space</span>
+          <span data-i18n="dl_and_r4">📶 Same Wi-Fi as shop PC</span>
         </div>
-        <span class="dl-link">Download APK →</span>
+        <span class="dl-link" data-i18n="dl_and_link">Download APK →</span>
       </a>
       <a href="downloads/shopcos-soft-guide-book.pdf" class="dl-card reveal reveal-d3" download>
         <div class="bento-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
-        <h3>Guide Book</h3>
-        <p>Complete user guide (PDF) — learn every feature step by step.</p>
-        <span class="dl-link">Download Guide (PDF) →</span>
+        <h3 data-i18n="dl_guide_h">Guide Book</h3>
+        <p data-i18n="dl_guide_p">Complete user guide (PDF) — learn every feature step by step.</p>
+        <span class="dl-link" data-i18n="dl_guide_link">Download Guide (PDF) →</span>
       </a>
     </div>
   </div>
@@ -573,35 +581,35 @@
       <div class="price-card">
         <h3>Starter</h3>
         <div class="price" data-usd="90" data-pkr="25000"><span class="cur">$</span>90 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="25000">Rs 25,000 PKR</div>
-        <p class="price-note">Single shop · Lifetime license</p>
+        <p class="price-note" data-i18n="price_note">Single shop · Lifetime license</p>
         <ul class="check-list">
-          <li><strong>1 Admin</strong> — full access</li>
-          <li>All billing & stock features</li>
-          <li>100% offline + cloud sync</li>
-          <li>Daily auto-backup</li>
-          <li>WhatsApp support</li>
+          <li data-i18n="plan_admin1"><strong>1 Admin</strong> — full access</li>
+          <li data-i18n="st_all">All billing & stock features</li>
+          <li data-i18n="st_offline">100% offline + cloud sync</li>
+          <li data-i18n="st_backup">Daily auto-backup</li>
+          <li data-i18n="st_support">WhatsApp support</li>
         </ul>
         <button class="btn btn-ghost btn-lg btn-block" data-add-cart="starter" data-i18n="add_cart">🛒 Add to Cart</button>
       </div>
       <!-- TIER 2: BUSINESS -->
       <div class="price-card featured">
-        <div class="pop-badge">MOST POPULAR</div>
-        <div class="trial-chip">7-day FREE Trial — no card required</div>
+        <div class="pop-badge" data-i18n="pop_badge">MOST POPULAR</div>
+        <div class="trial-chip" data-i18n="trial_chip">7-day FREE Trial — no card required</div>
         <h3>Business</h3>
         <div class="price" data-usd="145" data-pkr="40000"><span class="cur">$</span>145 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="40000">Rs 40,000 PKR</div>
-        <p class="price-note">Single shop · Lifetime license</p>
+        <p class="price-note" data-i18n="price_note">Single shop · Lifetime license</p>
         <ul class="check-list">
-          <li><strong>1 Admin</strong> — full access</li>
-          <li><strong>1 Editor</strong> — products, stock, rates</li>
-          <li><strong>2 Users</strong> — billing only</li>
-          <li>Everything in Starter</li>
-          <li>Voice billing + AI insights</li>
-          <li>Google Drive backup</li>
-          <li>Priority WhatsApp support</li>
+          <li data-i18n="plan_admin1"><strong>1 Admin</strong> — full access</li>
+          <li data-i18n="biz_editor"><strong>1 Editor</strong> — products, stock, rates</li>
+          <li data-i18n="biz_users"><strong>2 Users</strong> — billing only</li>
+          <li data-i18n="everything_starter">Everything in Starter</li>
+          <li data-i18n="biz_voice_ai">Voice billing + AI insights</li>
+          <li data-i18n="biz_drive">Google Drive backup</li>
+          <li data-i18n="biz_priority">Priority WhatsApp support</li>
         </ul>
         <button class="btn btn-primary btn-lg btn-block" data-add-cart="business" data-i18n="add_cart">🛒 Add to Cart</button>
         <div class="pay-methods">
-          <span>We accept</span>
+          <span data-i18n="pay_accept">We accept</span>
           <div class="pay-pills"><em>Easypaisa</em><em>JazzCash</em><em>Bank Transfer</em><em>Google Pay</em><em>Crypto</em></div>
         </div>
       </div>
@@ -609,14 +617,14 @@
       <div class="price-card">
         <h3>Professional</h3>
         <div class="price" data-usd="290" data-pkr="80000"><span class="cur">$</span>290 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="80000" data-suffix=" · 290 USDT">Rs 80,000 PKR · 290 USDT</div>
-        <p class="price-note">Single shop · Lifetime license</p>
+        <p class="price-note" data-i18n="price_note">Single shop · Lifetime license</p>
         <ul class="check-list">
-          <li><strong>1 Admin</strong> — full access</li>
-          <li><strong>2 Editors</strong> — products, stock, rates</li>
-          <li><strong>10 Users</strong> — billing only</li>
-          <li>Everything in Business</li>
-          <li>Multi-terminal support</li>
-          <li>Advanced reports</li>
+          <li data-i18n="plan_admin1"><strong>1 Admin</strong> — full access</li>
+          <li data-i18n="pro_editor"><strong>2 Editors</strong> — products, stock, rates</li>
+          <li data-i18n="pro_users"><strong>10 Users</strong> — billing only</li>
+          <li data-i18n="everything_business">Everything in Business</li>
+          <li data-i18n="pro_multi">Multi-terminal support</li>
+          <li data-i18n="pro_reports">Advanced reports</li>
         </ul>
         <button class="btn btn-ghost btn-lg btn-block" data-add-cart="professional" data-i18n="add_cart">🛒 Add to Cart</button>
       </div>
@@ -624,14 +632,14 @@
       <div class="price-card">
         <h3>Enterprise</h3>
         <div class="price" data-usd="545" data-pkr="150000"><span class="cur">$</span>545 <span class="usd">USD</span></div><div class="price-pkr" data-pkr="150000">Rs 150,000 PKR</div>
-        <p class="price-note">Single shop · Lifetime license</p>
+        <p class="price-note" data-i18n="price_note">Single shop · Lifetime license</p>
         <ul class="check-list">
-          <li><strong>1 Admin</strong> — full access</li>
-          <li><strong>5 Editors</strong> — products, stock, rates</li>
-          <li><strong>Unlimited Users</strong> — billing only</li>
-          <li>Everything in Professional</li>
-          <li>Dedicated support</li>
-          <li>Custom training session</li>
+          <li data-i18n="plan_admin1"><strong>1 Admin</strong> — full access</li>
+          <li data-i18n="ent_editor"><strong>5 Editors</strong> — products, stock, rates</li>
+          <li data-i18n="ent_users"><strong>Unlimited Users</strong> — billing only</li>
+          <li data-i18n="everything_pro">Everything in Professional</li>
+          <li data-i18n="ent_support">Dedicated support</li>
+          <li data-i18n="ent_training">Custom training session</li>
         </ul>
         <button class="btn btn-ghost btn-lg btn-block" data-add-cart="enterprise" data-i18n="add_cart">🛒 Add to Cart</button>
       </div>
@@ -640,21 +648,21 @@
     <div class="role-grid reveal">
       <div class="role-card">
         <span class="role-ic">👑</span>
-        <h4>Admin</h4>
-        <p>Full access. Creates & removes Editors and Users. Manages everything.</p>
+        <h4 data-i18n="role_admin_h">Admin</h4>
+        <p data-i18n="role_admin_p">Full access. Creates & removes Editors and Users. Manages everything.</p>
       </div>
       <div class="role-card">
         <span class="role-ic">✏️</span>
-        <h4>Editor</h4>
-        <p>Add products, manage stock, set buying & sale rates. No AI chat, no admin access.</p>
+        <h4 data-i18n="role_editor_h">Editor</h4>
+        <p data-i18n="role_editor_p">Add products, manage stock, set buying & sale rates. No AI chat, no admin access.</p>
       </div>
       <div class="role-card">
         <span class="role-ic">🧾</span>
-        <h4>User</h4>
-        <p>Billing only (scanner). Sees sale rates & stock. Cannot add stock or see buying rates.</p>
+        <h4 data-i18n="role_user_h">User</h4>
+        <p data-i18n="role_user_p">Billing only (scanner). Sees sale rates & stock. Cannot add stock or see buying rates.</p>
       </div>
     </div>
-    <p style="text-align:center;margin-top:26px;font-size:15px;color:#5b6b80">Compare before you buy: <a href="blog/pos-software-cost-pakistan.html" style="color:#0b5cad;font-weight:600">What POS software really costs</a> · <a href="blog/monthly-subscription-vs-one-time-payment-pos-cost.html" style="color:#0b5cad;font-weight:600">Monthly subscription vs one-time payment</a></p>
+    <p style="text-align:center;margin-top:26px;font-size:15px;color:#5b6b80" data-i18n="compare_p">Compare before you buy: <a href="blog/pos-software-cost-pakistan.html" style="color:#0b5cad;font-weight:600">What POS software really costs</a> · <a href="blog/monthly-subscription-vs-one-time-payment-pos-cost.html" style="color:#0b5cad;font-weight:600">Monthly subscription vs one-time payment</a></p>
   </div>
 </section>
 
@@ -666,33 +674,33 @@
 <section class="faq" id="faq">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="kicker">FAQ</span>
-      <h2>Questions, <span class="grad">answered.</span></h2>
+      <span class="kicker" data-i18n="nav_faq">FAQ</span>
+      <h2 data-i18n="faq_h2">Questions, <span class="grad">answered.</span></h2>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal reveal-d1">
-        <button class="faq-q">Does it work without internet?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>Yes — 100%. Billing, stock, khata, reports, printing and even the AI all run locally on your shop PC. Internet is only needed for optional Google Drive backup and WhatsApp bill sharing.</p></div>
+        <button class="faq-q" data-i18n="faq1_q">Does it work without internet?<span class="faq-x">+</span></button>
+        <div class="faq-a"><p data-i18n="faq1_a">Yes — 100%. Billing, stock, khata, reports, printing and even the AI all run locally on your shop PC. Internet is only needed for optional Google Drive backup and WhatsApp bill sharing.</p></div>
       </div>
       <div class="faq-item reveal reveal-d2">
-        <button class="faq-q">How does the 7-day free trial work?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>Install the software and every feature unlocks automatically for 7 days — no card, no payment, no catch. After the trial, enter your lifetime license key (sent on WhatsApp after purchase) to continue.</p></div>
+        <button class="faq-q" data-i18n="faq2_q">How does the 7-day free trial work?<span class="faq-x">+</span></button>
+        <div class="faq-a"><p data-i18n="faq2_a">Install the software and every feature unlocks automatically for 7 days — no card, no payment, no catch. After the trial, enter your lifetime license key (sent on WhatsApp after purchase) to continue.</p></div>
       </div>
       <div class="faq-item reveal reveal-d3">
-        <button class="faq-q">Can my staff see buying rates or profits?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>Never. Staff accounts can only create bills. Buying rates, profit reports, expenses and the AI assistant are admin-only — the software enforces this at every level.</p></div>
+        <button class="faq-q" data-i18n="faq3_q">Can my staff see buying rates or profits?<span class="faq-x">+</span></button>
+        <div class="faq-a"><p data-i18n="faq3_a">Never. Staff accounts can only create bills. Buying rates, profit reports, expenses and the AI assistant are admin-only — the software enforces this at every level.</p></div>
       </div>
       <div class="faq-item reveal reveal-d4">
-        <button class="faq-q">What if my computer breaks? Is my data safe?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>The software takes an automatic backup every single day and keeps 30 days of history. Connect your own Google account once and backups also upload to your Google Drive automatically.</p></div>
+        <button class="faq-q" data-i18n="faq4_q">What if my computer breaks? Is my data safe?<span class="faq-x">+</span></button>
+        <div class="faq-a"><p data-i18n="faq4_a">The software takes an automatic backup every single day and keeps 30 days of history. Connect your own Google account once and backups also upload to your Google Drive automatically.</p></div>
       </div>
       <div class="faq-item reveal reveal-d5">
-        <button class="faq-q">Is the license really lifetime? Any renewal?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>Yes — plans start at <span data-usd-inline="90" data-pkr-inline="25000">$90</span> (Starter; Business $145, Professional $290, Enterprise $545 — or the equivalent in your currency), one-time per shop, and it's yours forever including free updates. The key validates once online, then the software works offline indefinitely.</p></div>
+        <button class="faq-q" data-i18n="faq5_q">Is the license really lifetime? Any renewal?<span class="faq-x">+</span></button>
+        <div class="faq-a"><p data-i18n="faq5_a">Yes — plans start at <span data-usd-inline="90" data-pkr-inline="25000">$90</span> (Starter; Business $145, Professional $290, Enterprise $545 — or the equivalent in your currency), one-time per shop, and it's yours forever including free updates. The key validates once online, then the software works offline indefinitely.</p></div>
       </div>
       <div class="faq-item reveal reveal-d5">
-        <button class="faq-q">How do I get support?<span class="faq-x">+</span></button>
-        <div class="faq-a"><p>Direct WhatsApp support is included with your license. Message us anytime and the COS team will help you — in Urdu or English, whichever you prefer.</p></div>
+        <button class="faq-q" data-i18n="faq6_q">How do I get support?<span class="faq-x">+</span></button>
+        <div class="faq-a"><p data-i18n="faq6_a">Direct WhatsApp support is included with your license. Message us anytime and the COS team will help you — in Urdu or English, whichever you prefer.</p></div>
       </div>
     </div>
   </div>
@@ -723,7 +731,7 @@
           <img src="img/shopcos-logo-transparent.png" alt="shopcos soft logo" class="brand-logo">
           <span class="brand-name">shopcos <em>soft</em></span>
         </a>
-        <p>Smart Shop Management Software — billing, stock, credit ledger and AI insights for the modern retail shop, in 31 countries.</p>
+        <p data-i18n="foot_p">Smart Shop Management Software — billing, stock, credit ledger and AI insights for the modern retail shop, in 31 countries.</p>
         <div class="foot-social">
           <a href="https://wa.me/923264025618" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88m8.42-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.47-8.41"/></svg></a>
           <a href="https://facebook.com/shopcossoft" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07"/></svg></a>
@@ -732,31 +740,31 @@
         </div>
       </div>
       <div class="foot-col">
-        <h4>Product</h4>
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="blog/">Blog</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <h4 data-i18n="foot_product">Product</h4>
+        <a href="#features" data-i18n="nav_features">Features</a>
+        <a href="#how" data-i18n="nav_how">How it works</a>
+        <a href="blog/" data-i18n="nav_blog">Blog</a>
+        <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
       </div>
       <div class="foot-col">
-        <h4>Company</h4>
-        <a href="about/">About Us</a>
-        <a href="contact/">Contact</a>
-        <a href="privacy/">Privacy Policy</a>
-        <a href="terms/">Terms of Service</a>
-        <a href="#pricing">Buy License</a>
+        <h4 data-i18n="foot_company">Company</h4>
+        <a href="about/" data-i18n="foot_about">About Us</a>
+        <a href="contact/" data-i18n="foot_contact">Contact</a>
+        <a href="privacy/" data-i18n="foot_privacy">Privacy Policy</a>
+        <a href="terms/" data-i18n="foot_terms">Terms of Service</a>
+        <a href="#pricing" data-i18n="foot_buy">Buy License</a>
       </div>
       <div class="foot-col">
-        <h4>Support</h4>
-        <a href="#faq">Help &amp; FAQ</a>
-        <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20support%20chahiye." target="_blank" rel="noopener">WhatsApp Support</a>
-        <a href="#pricing">Free Trial</a>
+        <h4 data-i18n="foot_support">Support</h4>
+        <a href="#faq" data-i18n="foot_help">Help &amp; FAQ</a>
+        <a href="https://wa.me/923264025618?text=Assalam-o-Alaikum!%20Mujhe%20support%20chahiye." target="_blank" rel="noopener" data-i18n="foot_wa">WhatsApp Support</a>
+        <a href="#pricing" data-i18n="foot_trial">Free Trial</a>
       </div>
     </div>
     <div class="foot-base">
-      <span>© 2026 shopcos soft. All rights reserved.</span>
-      <span class="dev-credit"><img src="img/cos-logo.png" alt="COS" style="height:24px;vertical-align:middle;margin-right:6px">Developed by <strong>COS</strong> · Chishti Office Samundri</span>
+      <span data-i18n="foot_rights">© 2026 shopcos soft. All rights reserved.</span>
+      <span class="dev-credit"><img src="img/cos-logo.png" alt="COS" style="height:24px;vertical-align:middle;margin-right:6px"><span data-i18n="dev_credit">Developed by <strong>COS</strong> · Chishti Office Samundri</span></span>
     </div>
   </div>
 </footer>
@@ -766,77 +774,77 @@
   <div class="auth-modal">
     <button class="auth-close" id="authClose">✕</button>
     <div class="auth-tabs">
-      <button class="auth-tab active" id="tabLogin">Login</button>
-      <button class="auth-tab" id="tabSignup">Sign Up</button>
+      <button class="auth-tab active" id="tabLogin" data-i18n="login">Login</button>
+      <button class="auth-tab" id="tabSignup" data-i18n="signup">Sign Up</button>
     </div>
     
     <!-- Login form -->
     <div class="auth-form" id="formLogin">
-      <h3>Welcome back! 👋</h3>
-      <input type="email" id="loginEmail" placeholder="Gmail address" class="auth-input">
-      <input type="password" id="loginPass" placeholder="Password" class="auth-input">
-      <p class="auth-sub" style="text-align:right;margin:-6px 0 8px"><a href="#" id="forgotLink">Forgot password?</a></p>
-      <button class="btn btn-primary auth-submit" id="doLogin">Login</button>
-      <div class="auth-divider">or</div>
+      <h3 data-i18n="auth_welcome">Welcome back! 👋</h3>
+      <input type="email" id="loginEmail" placeholder="Gmail address" class="auth-input" data-i18n-ph="ph_gmail">
+      <input type="password" id="loginPass" placeholder="Password" class="auth-input" data-i18n-ph="ph_password">
+      <p class="auth-sub" style="text-align:right;margin:-6px 0 8px"><a href="#" id="forgotLink" data-i18n="auth_forgot">Forgot password?</a></p>
+      <button class="btn btn-primary auth-submit" id="doLogin" data-i18n="login">Login</button>
+      <div class="auth-divider" data-i18n="auth_or">or</div>
       <button class="btn btn-google" id="googleLogin">
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-        Continue with Google
+        <span data-i18n="auth_google_in">Continue with Google</span>
       </button>
       <p class="auth-error" id="loginError"></p>
     </div>
     
     <!-- Signup form -->
     <div class="auth-form" id="formSignup" style="display:none">
-      <h3>Create your account 🎉</h3>
-      <input type="email" id="signupEmail" placeholder="Gmail address" class="auth-input">
-      <input type="password" id="signupPass" placeholder="Create password (min 6 characters)" class="auth-input">
-      <input type="text" id="signupShop" placeholder="Shop / brand name" class="auth-input">
-      <input type="tel" id="signupPhone" placeholder="Phone / WhatsApp number" class="auth-input">
-      <button class="btn btn-primary auth-submit" id="doSignup">Send OTP</button>
-      <div class="auth-divider">or</div>
+      <h3 data-i18n="auth_create_h">Create your account 🎉</h3>
+      <input type="email" id="signupEmail" placeholder="Gmail address" class="auth-input" data-i18n-ph="ph_gmail">
+      <input type="password" id="signupPass" placeholder="Create password (min 6 characters)" class="auth-input" data-i18n-ph="ph_create_pass">
+      <input type="text" id="signupShop" placeholder="Shop / brand name" class="auth-input" data-i18n-ph="ph_shop">
+      <input type="tel" id="signupPhone" placeholder="Phone / WhatsApp number" class="auth-input" data-i18n-ph="ph_phone">
+      <button class="btn btn-primary auth-submit" id="doSignup" data-i18n="auth_send_otp">Send OTP</button>
+      <div class="auth-divider" data-i18n="auth_or">or</div>
       <button class="btn btn-google" id="googleSignup">
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-        Sign up with Google
+        <span data-i18n="auth_google_up">Sign up with Google</span>
       </button>
       <p class="auth-error" id="signupError"></p>
     </div>
     
     <!-- OTP form -->
     <div class="auth-form" id="formOTP" style="display:none">
-      <h3>Check your Gmail! 📧</h3>
-      <p class="auth-sub">6-digit code bheja gaya hai:<br><strong id="otpEmail"></strong></p>
-      <input type="text" id="otpCode" placeholder="Enter 6-digit code" maxlength="6" class="auth-input otp-input">
-      <button class="btn btn-primary auth-submit" id="doVerify">Verify & Open Account</button>
-      <button class="btn btn-ghost auth-submit" id="resendOTP">Resend Code</button>
+      <h3 data-i18n="auth_otp_h">Check your Gmail! 📧</h3>
+      <p class="auth-sub"><span data-i18n="auth_otp_sub">6-digit code bheja gaya hai:</span><br><strong id="otpEmail"></strong></p>
+      <input type="text" id="otpCode" placeholder="Enter 6-digit code" maxlength="6" class="auth-input otp-input" data-i18n-ph="ph_otp">
+      <button class="btn btn-primary auth-submit" id="doVerify" data-i18n="auth_verify">Verify & Open Account</button>
+      <button class="btn btn-ghost auth-submit" id="resendOTP" data-i18n="auth_resend">Resend Code</button>
       <p class="auth-error" id="otpError"></p>
     </div>
     
     <!-- Forgot password -->
     <div class="auth-form" id="formForgot" style="display:none">
-      <h3>Reset password 🔑</h3>
-      <p class="auth-sub">Apna Gmail likhein — password reset link bhej denge.</p>
-      <input type="email" id="forgotEmail" placeholder="Gmail address" class="auth-input">
-      <button class="btn btn-primary auth-submit" id="doForgot">Send reset link</button>
-      <p class="auth-sub" style="margin-top:10px"><a href="#" id="backToLogin">← Back to login</a></p>
+      <h3 data-i18n="auth_forgot_h">Reset password 🔑</h3>
+      <p class="auth-sub" data-i18n="auth_forgot_sub">Apna Gmail likhein — password reset link bhej denge.</p>
+      <input type="email" id="forgotEmail" placeholder="Gmail address" class="auth-input" data-i18n-ph="ph_gmail">
+      <button class="btn btn-primary auth-submit" id="doForgot" data-i18n="auth_send_reset">Send reset link</button>
+      <p class="auth-sub" style="margin-top:10px"><a href="#" id="backToLogin" data-i18n="auth_back_login">← Back to login</a></p>
       <p class="auth-error" id="forgotError"></p>
     </div>
     
     <!-- Set new password (opened from email link) -->
     <div class="auth-form" id="formReset" style="display:none">
-      <h3>New password 🔑</h3>
-      <p class="auth-sub">Naya password likhein (min 6 characters).</p>
-      <input type="password" id="resetPass" placeholder="New password" class="auth-input">
-      <input type="password" id="resetPass2" placeholder="Confirm new password" class="auth-input">
-      <button class="btn btn-primary auth-submit" id="doResetPass">Set new password</button>
+      <h3 data-i18n="auth_reset_h">New password 🔑</h3>
+      <p class="auth-sub" data-i18n="auth_reset_sub">Naya password likhein (min 6 characters).</p>
+      <input type="password" id="resetPass" placeholder="New password" class="auth-input" data-i18n-ph="ph_new_pass">
+      <input type="password" id="resetPass2" placeholder="Confirm new password" class="auth-input" data-i18n-ph="ph_confirm_pass">
+      <button class="btn btn-primary auth-submit" id="doResetPass" data-i18n="auth_set_pass">Set new password</button>
       <p class="auth-error" id="resetError"></p>
     </div>
     
     <!-- Success -->
     <div class="auth-form" id="formSuccess" style="display:none">
-      <h3>Welcome! 🎉</h3>
-      <p class="auth-sub">Aapka account ban gaya!<br>7-day FREE trial shuru ho gaya hai.</p>
-      <p class="auth-key">License Key: <code id="userKey"></code></p>
-      <button class="btn btn-primary auth-submit" id="authDone">Start Using</button>
+      <h3 data-i18n="auth_success_h">Welcome! 🎉</h3>
+      <p class="auth-sub" data-i18n="auth_success_sub">Aapka account ban gaya!<br>7-day FREE trial shuru ho gaya hai.</p>
+      <p class="auth-key"><span data-i18n="auth_key_label">License Key:</span> <code id="userKey"></code></p>
+      <button class="btn btn-primary auth-submit" id="authDone" data-i18n="auth_start">Start Using</button>
     </div>
   </div>
 </div>
@@ -857,18 +865,18 @@
     <div class="aiw-title">
       <img class="aiw-avatar" src="img/shopcos-ai-avatar.webp" alt="shopcos AI">
       <div>
-        <strong>shopcos AI Assistant</strong>
-        <span class="aiw-status"><i></i> Online</span>
+        <strong data-i18n="chat_title">shopcos AI Assistant</strong>
+        <span class="aiw-status" data-i18n="chat_online"><i></i> Online</span>
       </div>
     </div>
     <button id="aiwClose" aria-label="Close chat">✕</button>
   </div>
   <div id="aiwMsgs"></div>
   <div class="aiw-chips" id="aiwChips">
-    <button data-q="price">💰 What's the price?</button>
-    <button data-q="trial">🆓 Free trial?</button>
-    <button data-q="apk">📱 Is APK available?</button>
-    <button data-q="medical">💊 For medical stores?</button>
+    <button data-q="price" data-i18n="chip_price">💰 What's the price?</button>
+    <button data-q="trial" data-i18n="chip_trial">🆓 Free trial?</button>
+    <button data-q="apk" data-i18n="chip_apk">📱 Is APK available?</button>
+    <button data-q="medical" data-i18n="chip_medical">💊 For medical stores?</button>
   </div>
   <div class="aiw-preview" id="aiwPreview" style="display:none">
     <img id="aiwPreviewImg" alt="Attached photo">
@@ -878,10 +886,11 @@
   <div class="aiw-inputbar">
     <button id="aiwAttach" aria-label="Photo bhejein / Attach a photo" title="📷 Photo bhejein — AI dekh kar jawab dega">📷</button>
     <input type="file" id="aiwFile" accept="image/*" hidden>
-    <input type="text" id="aiwInput" placeholder="Type your question..." maxlength="500" autocomplete="off">
+    <input type="text" id="aiwInput" placeholder="Type your question..." maxlength="500" autocomplete="off" data-i18n-ph="ph_chat">
     <button id="aiwSend" aria-label="Send">➤</button>
   </div>
 </div>
+<script src="i18n.js"></script>
 <script src="script.js"></script>
 <script src="cart.js"></script>
 <script src="/mobile.js" defer></script>
