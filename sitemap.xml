@@ -3,6 +3,7 @@
   <url>
     <loc>https://shopcos.shop/</loc>
     <image:image>
+      <url>
       <image:loc>https://shopcos.shop/img/shopcos-pos-billing.jpg</image:loc>
       <image:title>shopcos soft billing screen on a POS counter with touchscreen terminal, barcode scanner, cash drawer and receipt printer</image:title>
     </image:image>
@@ -313,6 +314,12 @@
   <url>
     <loc>https://shopcos.shop/privacy/</loc>
     <lastmod>2026-10-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://shopcos.shop/terms/</loc>
+    <lastmod>2026-11-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
