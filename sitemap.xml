@@ -3,7 +3,6 @@
   <url>
     <loc>https://shopcos.shop/</loc>
     <image:image>
-      <url>
       <image:loc>https://shopcos.shop/img/shopcos-pos-billing.jpg</image:loc>
       <image:title>shopcos soft billing screen on a POS counter with touchscreen terminal, barcode scanner, cash drawer and receipt printer</image:title>
     </image:image>
@@ -17,7 +16,7 @@
   </url>
   <url>
     <loc>https://shopcos.shop/blog/</loc>
-    <lastmod>2026-11-17</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -669,6 +668,24 @@
     <image:image>
       <image:loc>https://shopcos.shop/blog/img/blog38-shopkeeper-pakistan.jpg</image:loc>
       <image:title>A local shopkeeper assisting a young boy at a market stall in sunny Pakistan</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://shopcos.shop/blog/shop-management-software-pakistan.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog39-hero-shop-counter.jpg</image:loc>
+      <image:title>A cashier serving customers at a shop counter with products on the shelves behind</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog39-store-aisle.jpg</image:loc>
+      <image:title>A well-stocked store aisle packed with products on the shelves</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog39-counting-cash.jpg</image:loc>
+      <image:title>A person counting cash with a calculator and paperwork on a desk</image:title>
     </image:image>
   </url>
 </urlset>
