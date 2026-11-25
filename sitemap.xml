@@ -688,4 +688,22 @@
       <image:title>A person counting cash with a calculator and paperwork on a desk</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/billing-software-for-retail-shops.html</loc>
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog40-hero-boutique-counter.jpg</image:loc>
+      <image:title>Customer interacting with cashier at boutique counter with shopping bags</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog40-clothing-shelves.jpg</image:loc>
+      <image:title>Neatly organized shelves with folded clothes in a contemporary store</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog40-pos-touchscreen.jpg</image:loc>
+      <image:title>Two women making a payment at a convenience store using a touch screen POS system</image:title>
+    </image:image>
+  </url>
 </urlset>
