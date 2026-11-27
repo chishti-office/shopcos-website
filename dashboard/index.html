@@ -230,6 +230,9 @@ a{color:inherit;text-decoration:none}
 .pb-progress{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:10px;max-width:340px}
 .pb-progress i{display:block;height:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:99px;transition:width .5s}
 .pb-key{display:inline-block;margin-top:8px;font-size:.85rem;cursor:pointer}
+.pb-daily{margin-top:12px;font-size:.95rem}
+.pb-daily .key-code{font-size:1.05rem;letter-spacing:3px;cursor:pointer}
+.pb-daily-note{color:var(--muted);font-size:.85rem}
 
 /* ---------- upgrade ---------- */
 .btn-upgrade{background:var(--grad)!important;color:#1a1005!important;animation:btnPulse 2s ease-in-out infinite;border:none}
@@ -1293,6 +1296,14 @@ a{color:inherit;text-decoration:none}
     }, 150);
   }
 
+  function dailyCodeToday() {
+    var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); };
+    var ds = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate());
+    var s = 'shopcos-daily-v1|' + ds, h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return String(100000 + (h % 900000));
+  }
+
   function renderPlanBanner() {
     var b = document.getElementById('planBanner');
     var st = licenseState(license);
@@ -1317,10 +1328,13 @@ a{color:inherit;text-decoration:none}
       b.innerHTML = '<div class="pb-icon">🎁</div>' +
         '<div class="pb-text"><b>Trial Active — 💼 Business plan unlocked! ' + left + ' day' + (left === 1 ? '' : 's') + ' remaining</b>' +
         '<span class="pb-sub">Full Business features: 1 editor key + 2 salesman keys. Upgrade anytime to keep it forever.</span>' +
-        '<div class="pb-progress"><i style="width:' + pct + '%"></i></div></div>' +
+        '<div class="pb-progress"><i style="width:' + pct + '%"></i></div>' +
+        '<div class="pb-daily">🔑 Today\'s trial code: <span class="key-code" id="pbDailyCode" title="Click to copy">' + dailyCodeToday() + '</span> <span class="pb-daily-note">Type this code in the software to unlock it for today — a new code comes every day.</span></div></div>' +
         '<button class="btn btn-upgrade btn-sm" id="pbUpgradeBtn">⬆️ Upgrade to Lifetime</button>';
       b.style.display = 'flex';
       document.getElementById('pbUpgradeBtn').onclick = function(){ goUpgrade('trial'); };
+      var dcEl = document.getElementById('pbDailyCode');
+      if (dcEl) dcEl.onclick = function(){ var tx = '📋 Trial code copied!'; if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(dcEl.textContent).then(function(){ toast(tx); }, function(){ toast(tx); }); else toast(tx); };
       return;
     }
     if (license.type === 'lifetime' && license.status === 'active') {
