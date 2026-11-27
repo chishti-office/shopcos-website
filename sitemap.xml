@@ -706,4 +706,22 @@
       <image:title>Two women making a payment at a convenience store using a touch screen POS system</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://shopcos.shop/blog/pos-software-for-retail-shops.html</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog41-hero-checkout-counter.jpg</image:loc>
+      <image:title>Retail checkout counter with a touchscreen POS register and boxes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog41-barcode-scanning.jpg</image:loc>
+      <image:title>Person scanning a product barcode with a portable scanner in a store</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shopcos.shop/blog/img/blog41-mobile-payment-checkout.jpg</image:loc>
+      <image:title>Customers paying by mobile phone at a supermarket checkout with a cashier</image:title>
+    </image:image>
+  </url>
 </urlset>
