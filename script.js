@@ -232,6 +232,8 @@
     var user = null;
     try { user = JSON.parse(localStorage.getItem('shopcos_user')); } catch(e) {}
     if (user && user.email) {
+      loginBtn.removeAttribute('data-i18n');
+      signupBtn.removeAttribute('data-i18n');
       loginBtn.textContent = user.email.split('@')[0];
       loginBtn.onclick = function() { window.location.href = 'dashboard/'; };
       loginBtn.title = 'Go to Dashboard';
